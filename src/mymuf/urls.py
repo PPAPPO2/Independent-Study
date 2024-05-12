@@ -20,5 +20,5 @@ from wed import views
 urlpatterns = [
     path('', views.home),
     path('admin/', admin.site.urls),
-    path('after/',views.after)
+    path('login/',views.login)
 ]
