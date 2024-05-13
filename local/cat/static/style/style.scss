@@ -1,0 +1,163 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "fontset", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: "fontset";
+  src: url(./GenSekiGothic-B.ttc);
+}
+header,
+body {
+  height: 100%;
+}
+// 定義漸層顏色變數
+$gradient-colors: #ffffff, #6dd5fa, #2980b9;
+
+header {
+  background: linear-gradient(to right, $gradient-colors);
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  div.logo {
+    display: flex;
+    align-items: center;
+    flex: 3 1 400px;
+    padding: 0.75rem 1rem;
+    img.plg {
+      max-width: 12%;
+      height: auto;
+      vertical-align: middle;
+    }
+    img.t1 {
+      max-width: 18%;
+      height: auto;
+      vertical-align: middle;
+    }
+  }
+}
+nav {
+  flex: 2 1 400px;
+  ul {
+    display: flex;
+    list-style-type: none;
+    justify-content: space-around;
+    li {
+      a {
+        padding-right: 3rem;
+        color: hsl(225, 49%, 18%, 50%);
+        text-decoration: none;
+        font-size: 1.75rem;
+      }
+    }
+  }
+}
+
+.active {
+  color: white;
+}
+
+nav ul li a:hover {
+  color: rgb(255, 255, 255, 80%);
+  transition: 1s;
+}
+
+.standings {
+  background: #172243;
+  margin: 0rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  h2 {
+    color: #ffffff;
+    padding: 2rem;
+    font-size: 3rem;
+  }
+}
+
+.table-title {
+  margin: 2rem;
+  h3 {
+    font-size: 1.5rem;
+    padding: 0rem 2rem;
+  }
+  a {
+    padding-left: 3rem;
+    color: hsl(225, 49%, 18%, 50%);
+    text-decoration: none;
+    font-size: 1rem;
+  }
+  a:hover {
+    color: #2980b9;
+    transition: 1s;
+  }
+}
+
+.table-body {
+  width: 85%;
+  margin: auto;
+  td.teams-name {
+    color: RGB(127, 127, 127);
+    width: 35%;
+    a {
+      display: inline-block;
+      color: hsl(225, 49%, 18%, 50%);
+      text-decoration: none;
+      font-size: 1.25rem;
+      vertical-align: middle;
+    }
+    a:hover {
+      color: #172243;
+      transition: 1s;
+    }
+    .logo {
+      display: inline-block;
+      height: 50px;
+      vertical-align: middle;
+      margin-right: 2rem;
+    }
+  }
+
+  table {
+    border-spacing: 0;
+    width: 100%;
+  }
+  td {
+    padding: 1.5rem;
+    font-size: 1.25rem;
+  }
+  tr {
+    text-align: center;
+  }
+  th {
+    font-size: 1.5rem;
+    padding: 1.5rem;
+  }
+  table tbody tr:nth-child(odd) {
+    //奇數列背景顏色
+    background-color: #eee;
+  }
+  table thead {
+    background-color: #172243;
+    color: white;
+  }
+
+  //對四個角的要素做調整
+  table thead th:first-child {
+    border-radius: 5px 0 0 0;
+  }
+  table thead th:last-child {
+    border-radius: 0 5px 0 0;
+  }
+  table tbody tr:last-child td:first-child {
+    border-radius: 0 0 0 5px;
+  }
+
+  table tbody tr:last-child td:last-child {
+    border-radius: 0 0 5px 0;
+  }
+}

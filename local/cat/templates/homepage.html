@@ -1,0 +1,284 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="XiaoN" />
+    <meta name="robots" content="index,follow " />
+    <meta name="description" content="" />
+    <title>Taiwan Basketball Professional League</title>
+    <link rel="stylesheet" href="{%static 'style/style.css' %}" />
+    <link rel="stylesheet" href="{%static 'style/style.scss' %}" />
+    <!--icon-->
+    <!--link rel="shortcut icon" href="./.png" /-->
+    <!--link rel="bookmark" href="./.png" /-->
+  </head>
+  <body>
+    <!--標題-->
+    <header>
+      <div class="logo">
+        <img src="{%static 'icon/plg.png' %}" alt="PLG Logo" class="plg" />
+        <img src="{%static 'icon/t1.png'%}" alt="t1 Logo" class="t1" />
+      </div>
+      <!--導覽列-->
+      <nav>
+        <ul>
+          <li>
+            <a href="#" class="active">戰績</a>
+          </li>
+          <li>
+            <a href="">數據</a>
+          </li>
+          <li>
+            <a href="">賽程</a>
+          </li>
+          <li>
+            <a href="">球隊</a>
+          </li>
+          <li>
+            <a href="">消息</a>
+          </li>
+          <li>
+            <a href="{% url 'login' %}">登入</a>
+          </li>
+        </ul>
+      </nav>
+      c
+    </header>
+    <!--主要內容-->
+    <main>
+      <div class="standings">
+        <h2>STANDINGS & RANKINGS</h2>
+      </div>
+
+      <div class="table-title">
+        <h3>PLG 例行賽</h3>
+        <a href="#">show more⭢</a>
+      </div>
+      <div class="table-body">
+        <table>
+          <thead>
+            <th>排名</th>
+            <th>球隊</th>
+            <th>已賽 GP</th>
+            <th>勝場 W</th>
+            <th>敗場 L</th>
+            <th>勝率</th>
+            <th>勝差</th>
+            <th>連續紀錄</th>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td class="teams-name">
+                <a href="">
+                  <img
+                    class="logo"
+                    src="{%static 'icon/領航員.png'%}"
+                  />桃園璞園領航員&emsp;</a
+                >
+              </td>
+              <td>36</td>
+              <td>23</td>
+              <td>13</td>
+              <td>64%</td>
+              <td>-</td>
+              <td>W2</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td class="teams-name">
+                <a href="">
+                  <img
+                    class="logo"
+                    src="{%static 'icon/夢想家.png'%}"
+                  />福爾摩沙夢想家&emsp;</a
+                >
+              </td>
+              <td>37</td>
+              <td>23</td>
+              <td>14</td>
+              <td>62%</td>
+              <td>0.5</td>
+              <td>L2</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td class="teams-name">
+                <a href="">
+                  <img
+                    class="logo"
+                    src="{%static 'icon/國王.png'%}"
+                  />新北國王&emsp;&emsp;&emsp;&emsp;</a
+                >
+              </td>
+              <td>36</td>
+              <td>20</td>
+              <td>16</td>
+              <td>56%</td>
+              <td>3</td>
+              <td>W3</td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td class="teams-name">
+                <a href="">
+                  <img
+                    class="logo"
+                    src="{%static 'icon/攻城獅.png'%}"
+                  />新竹御頂攻城獅&emsp;</a
+                >
+              </td>
+              <td>37</td>
+              <td>18</td>
+              <td>19</td>
+              <td>49%</td>
+              <td>5.5</td>
+              <td>L3</td>
+            </tr>
+            <tr>
+              <td>5</td>
+              <td class="teams-name">
+                <a href="">
+                  <img
+                    class="logo"
+                    src="{%static 'icon/富邦.png'%}"
+                  />臺北富邦勇士&emsp;&emsp;</a
+                >
+              </td>
+              <td>37</td>
+              <td>17</td>
+              <td>20</td>
+              <td>46%</td>
+              <td>6.5</td>
+              <td>L1</td>
+            </tr>
+            <tr>
+              <td>6</td>
+              <td class="teams-name">
+                <a href="">
+                  <img
+                    class="logo"
+                    src="{%static 'icon/鋼鐵人.png'%}"
+                  />高雄17直播鋼鐵人</a
+                >
+              </td>
+              <td>37</td>
+              <td>9</td>
+              <td>28</td>
+              <td>24%</td>
+              <td>14.5</td>
+              <td>L3</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="table-title">
+        <h3>T1 例行賽戰績</h3>
+        <a href="#">show more⭢</a>
+      </div>
+
+      <div class="table-body">
+        <table>
+          <thead>
+            <th>排名</th>
+            <th>球隊</th>
+            <th>已賽 GP</th>
+            <th>勝場 W</th>
+            <th>敗場 L</th>
+            <th>勝率</th>
+            <th>勝差</th>
+            <th>連續紀錄</th>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td class="teams-name">
+                <a href="">
+                  <img class="logo" src="{%static 'icon/特功.png'%}" />
+                  新北中信特攻</a
+                >
+              </td>
+              <td>28</td>
+              <td>19</td>
+              <td>9</td>
+              <td>67.9%</td>
+              <td>-</td>
+              <td>W2</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td class="teams-name">
+                <a href="">
+                  <img
+                    class="logo"
+                    src="{%static 'icon/雲豹.png'%}"
+                  />台啤永豐雲豹</a
+                >
+              </td>
+              <td>28</td>
+              <td>18</td>
+              <td>10</td>
+              <td>64%</td>
+              <td>1</td>
+              <td>W1</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td class="teams-name">
+                <a href="">
+                  <img
+                    class="logo"
+                    src="{%static 'icon/海神.png'%}"
+                  />高雄全家海神</a
+                >
+              </td>
+              <td>28</td>
+              <td>15</td>
+              <td>13</td>
+              <td>54%</td>
+              <td>4</td>
+              <td>L2</td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td class="teams-name">
+                <a href="">
+                  <img
+                    class="logo"
+                    src="{%static 'icon/戰神.png'%}"
+                  />臺北戰神&emsp;&emsp;
+                </a>
+              </td>
+              <td>28</td>
+              <td>11</td>
+              <td>17</td>
+              <td>39%</td>
+              <td>8</td>
+              <td>W5</td>
+            </tr>
+            <tr>
+              <td>5</td>
+              <td class="teams-name">
+                <a href="">
+                  <img
+                    class="logo"
+                    src="{%static 'icon/台鋼.png'%}"
+                  />台南台鋼獵鷹</a
+                >
+              </td>
+              <td>28</td>
+              <td>7</td>
+              <td>21</td>
+              <td>25%</td>
+              <td>12</td>
+              <td>L5</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </main>
+  </body>
+</html>
