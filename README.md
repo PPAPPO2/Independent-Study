@@ -1,2 +1,1 @@
-# Independent-Study
-大三專題
+# senior_project
