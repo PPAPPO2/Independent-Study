@@ -13,6 +13,6 @@ class TeamStanding(models.Model):
     pct = models.CharField(max_length=10)
     games_behind = models.CharField(max_length=10)
     wins_losses_streak = models.CharField(max_length=3)
-
-    def __str__(self):
-        return self.team_name
+    
+    class Meta:
+        ordering = ['rank']
