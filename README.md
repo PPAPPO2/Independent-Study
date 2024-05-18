@@ -1,6 +1,3 @@
 # senior_project
 
-test
-hello my name is nick.
-hello my name is eason.
-uuuuuu
+24/5/18 新增 /management/commands 擴充功能(爬蟲程式放這); 新增自動更新teamstandings
