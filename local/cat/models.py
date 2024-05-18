@@ -14,5 +14,6 @@ class TeamStanding(models.Model):
     games_behind = models.CharField(max_length=10)
     wins_losses_streak = models.CharField(max_length=3)
     
+    # 用 rank 做排序
     class Meta:
         ordering = ['rank']
