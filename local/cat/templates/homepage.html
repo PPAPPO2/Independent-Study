@@ -69,108 +69,23 @@
             <th>連續紀錄</th>
           </thead>
           <tbody>
+            {% for standing in standings %}
             <tr>
-              <td>1</td>
-              <td class="teams-name">
-                <a href="">
-                  <img
-                    class="logo"
-                    src="{%static 'icon/領航員.png'%}"
-                  />桃園璞園領航員&emsp;</a
-                >
-              </td>
-              <td>36</td>
-              <td>23</td>
-              <td>13</td>
-              <td>64%</td>
-              <td>-</td>
-              <td>W2</td>
+                <td>{{ standing.rank }}</td>
+                <td class="teams-name">
+                    <a href="">
+                        <img class="logo" src="{% static 'icon/'|add:standing.team_name|add:'.png' %}" />
+                        {{ standing.team_name }}&emsp;
+                    </a>
+                </td>
+                <td>{{ standing.games_played }}</td>
+                <td>{{ standing.wins }}</td>
+                <td>{{ standing.losses }}</td>
+                <td>{{ standing.pct }}</td>
+                <td>{{ standing.games_behind }}</td>
+                <td>{{ standing.wins_losses_streak }}</td>
             </tr>
-            <tr>
-              <td>2</td>
-              <td class="teams-name">
-                <a href="">
-                  <img
-                    class="logo"
-                    src="{%static 'icon/夢想家.png'%}"
-                  />福爾摩沙夢想家&emsp;</a
-                >
-              </td>
-              <td>37</td>
-              <td>23</td>
-              <td>14</td>
-              <td>62%</td>
-              <td>0.5</td>
-              <td>L2</td>
-            </tr>
-            <tr>
-              <td>3</td>
-              <td class="teams-name">
-                <a href="">
-                  <img
-                    class="logo"
-                    src="{%static 'icon/國王.png'%}"
-                  />新北國王&emsp;&emsp;&emsp;&emsp;</a
-                >
-              </td>
-              <td>36</td>
-              <td>20</td>
-              <td>16</td>
-              <td>56%</td>
-              <td>3</td>
-              <td>W3</td>
-            </tr>
-            <tr>
-              <td>4</td>
-              <td class="teams-name">
-                <a href="">
-                  <img
-                    class="logo"
-                    src="{%static 'icon/攻城獅.png'%}"
-                  />新竹御頂攻城獅&emsp;</a
-                >
-              </td>
-              <td>37</td>
-              <td>18</td>
-              <td>19</td>
-              <td>49%</td>
-              <td>5.5</td>
-              <td>L3</td>
-            </tr>
-            <tr>
-              <td>5</td>
-              <td class="teams-name">
-                <a href="">
-                  <img
-                    class="logo"
-                    src="{%static 'icon/富邦.png'%}"
-                  />臺北富邦勇士&emsp;&emsp;</a
-                >
-              </td>
-              <td>37</td>
-              <td>17</td>
-              <td>20</td>
-              <td>46%</td>
-              <td>6.5</td>
-              <td>L1</td>
-            </tr>
-            <tr>
-              <td>6</td>
-              <td class="teams-name">
-                <a href="">
-                  <img
-                    class="logo"
-                    src="{%static 'icon/鋼鐵人.png'%}"
-                  />高雄17直播鋼鐵人</a
-                >
-              </td>
-              <td>37</td>
-              <td>9</td>
-              <td>28</td>
-              <td>24%</td>
-              <td>14.5</td>
-              <td>L3</td>
-            </tr>
+            {% endfor %}
           </tbody>
         </table>
       </div>
