@@ -1,67 +1,58 @@
 from django.db import models
+from django.db.models.base import Model
 
 # Create your models here.
 
+
+class TeamStandingModel(models.Model):
+    rank = models.IntegerField()
+    team_name = models.CharField(max_length=10)
+    games_played = models.IntegerField()
+    wins = models.IntegerField()
+    losses = models.IntegerField()
+
+    pct = models.CharField(max_length=10)
+    games_behind = models.CharField(max_length=10)
+    wins_losses_streak = models.CharField(max_length=3)
+
+    class Meta:
+        abstract = True
+
+
+
 # 球隊排名模型
-class TeamStanding20_21(models.Model):
-    rank = models.IntegerField()
-    team_name = models.CharField(max_length=10)
-    games_played = models.IntegerField()
-    wins = models.IntegerField()
-    losses = models.IntegerField()
+class TeamStanding20_21(TeamStandingModel):
 
-    pct = models.CharField(max_length=10)
-    games_behind = models.CharField(max_length=10)
-    wins_losses_streak = models.CharField(max_length=3)
-    
-    # 用 rank 做排序
-    class Meta:
-        ordering = ['rank']
+    pass
 
-class TeamStanding21_22(models.Model):
-    rank = models.IntegerField()
-    team_name = models.CharField(max_length=10)
-    games_played = models.IntegerField()
-    wins = models.IntegerField()
-    losses = models.IntegerField()
 
-    pct = models.CharField(max_length=10)
-    games_behind = models.CharField(max_length=10)
-    wins_losses_streak = models.CharField(max_length=3)
-    
-    # 用 rank 做排序
-    class Meta:
-        ordering = ['rank']
+class TeamStanding21_22(TeamStandingModel):
+    pass
 
-class TeamStanding22_23(models.Model):
-    rank = models.IntegerField()
-    team_name = models.CharField(max_length=10)
-    games_played = models.IntegerField()
-    wins = models.IntegerField()
-    losses = models.IntegerField()
 
-    pct = models.CharField(max_length=10)
-    games_behind = models.CharField(max_length=10)
-    wins_losses_streak = models.CharField(max_length=3)
-    
-    # 用 rank 做排序
-    class Meta:
-        ordering = ['rank']
+class TeamStanding22_23(TeamStandingModel):
+    pass
 
-class TeamStanding23_24(models.Model):
-    rank = models.IntegerField()
-    team_name = models.CharField(max_length=10)
-    games_played = models.IntegerField()
-    wins = models.IntegerField()
-    losses = models.IntegerField()
 
-    pct = models.CharField(max_length=10)
-    games_behind = models.CharField(max_length=10)
-    wins_losses_streak = models.CharField(max_length=3)
-    
-    # 用 rank 做排序
-    class Meta:
-        ordering = ['rank']
+class TeamStanding23_24(TeamStandingModel):
+    pass
+
+
+class T1_TeamStanding23_24(TeamStandingModel):
+    pass
+
+
+class T1_TeamStanding22_23(TeamStandingModel):
+    pass
+
+
+class T1_TeamStanding21_22(TeamStandingModel):
+    pass
+
+
+class T1_TeamStanding20_21(TeamStandingModel):
+    pass
+
 
 # 球員整賽季模型
 class Season_Players_Performance_22_23(models.Model):
@@ -91,7 +82,8 @@ class Season_Players_Performance_22_23(models.Model):
     fouls = models.DecimalField(max_digits=10, decimal_places=2)
 
     class Meta:
-        ordering = ['-points']
+        ordering = ["-points"]
+
 
 class Season_Players_Performance_21_22(models.Model):
 
@@ -120,7 +112,8 @@ class Season_Players_Performance_21_22(models.Model):
     fouls = models.DecimalField(max_digits=10, decimal_places=2)
 
     class Meta:
-        ordering = ['-points']
+        ordering = ["-points"]
+
 
 class Season_Players_Performance_20_21(models.Model):
 
@@ -149,7 +142,8 @@ class Season_Players_Performance_20_21(models.Model):
     fouls = models.DecimalField(max_digits=10, decimal_places=2)
 
     class Meta:
-        ordering = ['-points']
+        ordering = ["-points"]
+
 
 class Season_Players_Performance_23_24(models.Model):
 
@@ -178,4 +172,4 @@ class Season_Players_Performance_23_24(models.Model):
     fouls = models.DecimalField(max_digits=10, decimal_places=2)
 
     class Meta:
-        ordering = ['-points']
+        ordering = ["-points"]
