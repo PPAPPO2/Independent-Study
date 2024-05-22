@@ -7,6 +7,7 @@ from .models import T1_TeamStanding23_24
 def index(request):
     standings = TeamStanding23_24.objects.all().order_by("rank")
     t1_standings = T1_TeamStanding23_24.objects.all().order_by("rank")
+    AMO = AMO
 
     team_name_mapping = {
         "勇士": "臺北富邦勇士",
