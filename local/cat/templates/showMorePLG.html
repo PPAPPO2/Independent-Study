@@ -1,0 +1,51 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="XiaoN" />
+    <meta name="robots" content="index,follow " />
+    <meta name="description" content="" />
+    <title>Taiwan Basketball Professional League</title>
+    <link rel="stylesheet" href="{%static 'style/style.css' %}" />
+    <link rel="stylesheet" href="{%static 'style/style.scss' %}" />
+    <!--icon-->
+    <!--link rel="shortcut icon" href="./.png" /-->
+    <!--link rel="bookmark" href="./.png" /-->
+  </head>
+  <body>
+    <!--標題-->
+    <header>
+      <div class="logo">
+        <img src="{%static 'icon/plg.png' %}" alt="PLG Logo" class="plg" />
+        <img src="{%static 'icon/t1.png'%}" alt="t1 Logo" class="t1" />
+      </div>
+      <!--導覽列-->
+      <nav>
+        <ul>
+          <li>
+            <a href="{% url 'index' %}" class="active">戰績</a>
+          </li>
+          <li>
+            <a href="">數據</a>
+          </li>
+          <li>
+            <a href="">賽程</a>
+          </li>
+          <li>
+            <a href="">球隊</a>
+          </li>
+          <li>
+            <a href="">消息</a>
+          </li>
+          <li>
+            <a href="{% url 'login' %}">登入</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <!--主要內容-->
+    <main></main>
+  </body>
+</html>
