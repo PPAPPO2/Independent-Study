@@ -18,7 +18,7 @@ class Command(BaseCommand):
         response = requests.get(url, headers=headers)
         # 將響應內容從JSON格式轉換為Python字典
         data = json.loads(response.text)
-        print(data)
+
         # 刪除現有的T1_TeamStanding21_22模型實例
         T1_TeamStanding21_22.objects.all().delete()
 

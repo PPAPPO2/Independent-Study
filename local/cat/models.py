@@ -8,15 +8,25 @@ class Season_Players_Performance(models.Model):
     team = models.CharField(max_length=10)
     games_played = models.IntegerField()
     minutes = models.TimeField()
-    field_goals_two = models.DecimalField(max_digits=10, decimal_places=2)
-    field_goals_two_attempts = models.DecimalField(max_digits=10, decimal_places=2)
+    #總出手
+    All_goals = models.DecimalField(max_digits=10, decimal_places=2,default=0) #要加
+    #總命中
+    All_goals_made = models.DecimalField(max_digits=10, decimal_places=2,default=0) #要加
+    #總命中率
+    All_goals_pct = models.DecimalField(max_digits=10, decimal_places=2,default=0) #要加
+    #兩分
+    field_goals_two = models.DecimalField(max_digits=10, decimal_places=2)#要加
+    field_goals_two_made = models.DecimalField(max_digits= 10,decimal_places=2,default=0)
     field_goals_two_pct = models.DecimalField(max_digits=10, decimal_places=2)
-    field_goals_three = models.DecimalField(max_digits=10, decimal_places=2)
-    field_goals_three_attempts = models.DecimalField(max_digits=10, decimal_places=2)
+    #三分
+    field_goals_three = models.DecimalField(max_digits=10, decimal_places=2,default=0)#要加
+    field_goals_three_made = models.DecimalField(max_digits=10, decimal_places=2,default=0)
     field_goals_three_pct = models.DecimalField(max_digits=10, decimal_places=2)
-    free_throws = models.DecimalField(max_digits=10, decimal_places=2)
+    #罰球
+    free_throws = models.DecimalField(max_digits=10, decimal_places=2)#要加
     free_throws_attempts = models.DecimalField(max_digits=10, decimal_places=2)
     free_throws_pct = models.DecimalField(max_digits=10, decimal_places=2)
+    #其他
     points = models.DecimalField(max_digits=10, decimal_places=2)
     offensive_rebounds = models.DecimalField(max_digits=10, decimal_places=2)
     defensive_rebounds = models.DecimalField(max_digits=10, decimal_places=2)
@@ -106,4 +116,43 @@ class T1_Season_Players_Performance_21_22(Season_Players_Performance):
 class T1_Season_Players_Performance_22_23(Season_Players_Performance):
     pass
 class T1_Season_Players_Performance_23_24(Season_Players_Performance):
+    pass
+
+class Season_teams_Performance(models.Model):
+    team = models.CharField(max_length=10)
+    gp = models.CharField(max_length=10)
+    minutes = models.TimeField()
+    #總出手、命中、命中率 #要加
+    All_goals_made = models.DecimalField(max_digits=10, decimal_places=2,default=0) 
+    All_goals = models.DecimalField(max_digits=10, decimal_places=2,default=0) 
+    All_goals_pct = models.DecimalField(max_digits=10, decimal_places=2,default=0) 
+    #兩分
+    field_goals_two_made = models.DecimalField(max_digits= 10,decimal_places=2,default=0)
+    field_goals_two = models.DecimalField(max_digits=10, decimal_places=2)#要加
+    field_goals_two_pct = models.DecimalField(max_digits=10, decimal_places=2)
+    #三分
+    field_goals_three_made = models.DecimalField(max_digits=10, decimal_places=2,default=0)
+    field_goals_three = models.DecimalField(max_digits=10, decimal_places=2,default=0)#要加 
+    field_goals_three_pct = models.DecimalField(max_digits=10, decimal_places=2)
+    #罰球
+    free_throws = models.DecimalField(max_digits=10, decimal_places=2)#要加
+    free_throws_attempts = models.DecimalField(max_digits=10, decimal_places=2)
+    free_throws_pct = models.DecimalField(max_digits=10, decimal_places=2)
+    #其他
+    points = models.DecimalField(max_digits=10, decimal_places=2)
+    offensive_rebounds = models.DecimalField(max_digits=10, decimal_places=2)
+    defensive_rebounds = models.DecimalField(max_digits=10, decimal_places=2)
+    rebounds = models.DecimalField(max_digits=10, decimal_places=2)
+    assists = models.DecimalField(max_digits=10, decimal_places=2)
+    steals = models.DecimalField(max_digits=10, decimal_places=2)
+    blocks = models.DecimalField(max_digits=10, decimal_places=2)
+    turnovers = models.DecimalField(max_digits=10, decimal_places=2)
+    fouls = models.DecimalField(max_digits=10, decimal_places=2)
+    class Meta:
+       abstract = True
+class T1_Season_teams_Performance_23_24(Season_teams_Performance):
+    pass
+class T1_Season_teams_Performance_22_23(Season_teams_Performance):
+    pass
+class T1_Season_teams_Performance_21_22(Season_teams_Performance):
     pass
