@@ -72,13 +72,11 @@
             <tr>
               <td>{{ standing.rank }}</td>
               <td class="teams-name">
-                <a href="">
-                  <img
-                    class="logo"
-                    src="{% static 'icon/'|add:standing.team_name|add:'.png' %}"
-                  />
-                  {{ standing.team_name }};
-                </a>
+                <img
+                  class="teamlogo"
+                  src="{% static 'icon/'|add:standing.team_name|add:'.png' %}"
+                />
+                <a href=""> {{ standing.team_name }} </a>
               </td>
               <td>{{ standing.games_played }}</td>
               <td>{{ standing.wins }}</td>
@@ -114,13 +112,11 @@
             <tr>
               <td>{{ standing.rank }}</td>
               <td class="teams-name">
-                <a href="">
-                  <img
-                    class="logo"
-                    src="{% static 'icon/'|add:standing.team_name|add:'.png' %}"
-                  />
-                  {{ standing.team_name }};
-                </a>
+                <img
+                  class="teamlogo"
+                  src="{% static 'icon/'|add:standing.team_name|add:'.png' %}"
+                />
+                <a href=""> {{ standing.team_name }} </a>
               </td>
               <td>{{ standing.games_played }}</td>
               <td>{{ standing.wins }}</td>
