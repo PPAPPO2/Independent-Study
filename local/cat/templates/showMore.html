@@ -10,7 +10,7 @@
     <title>Taiwan Basketball Professional League</title>
     <link rel="stylesheet" href="{%static 'style/style.css' %}" />
     <link rel="stylesheet" href="{%static 'style/style.scss' %}" />
-    <link rel="javascript" href="{%static 'style/showMore.js' %}" />
+
     <!--icon-->
     <!--link rel="shortcut icon" href="./.png" /-->
     <!--link rel="bookmark" href="./.png" /-->
@@ -47,13 +47,46 @@
       </nav>
     </header>
     <!--主要內容-->
-    <main>
+    <main data-static-url="{% static 't1Json/' %}">
       <select id="seasonSelect">
-        <option value="2021-22">2021-22球季</option>
-        <option value="2022-23">2022-23球季</option>
-        <option value="2023-24" selected>2023-24球季</option>
+        <option value="2021-22">2021-22</option>
+        <option value="2022-23">2022-23</option>
+        <option value="2023-24" selected>2023-24</option>
       </select>
-      <select id="teamSelect"></select>
+      <label for="teamSelect">選擇球隊:</label>
+      <select id="teamSelect" multiple></select>
+      <div class="table-body">
+        <table>
+          <thead>
+            <th>球隊</th>
+            <th>得分</th>
+            <th>投籃命中</th>
+            <th>投籃出手</th>
+            <th>投籃命中率</th>
+            <th>二分命中</th>
+            <th>二分出手</th>
+            <th>二分命中率</th>
+            <th>三分命中</th>
+            <th>三分出手</th>
+            <th>三分命中率</th>
+            <th>罰球命中</th>
+            <th>罰球出手</th>
+            <th>罰球命中率</th>
+            <th>進攻籃板</th>
+            <th>防守籃板</th>
+            <th>籃板</th>
+            <th>助攻</th>
+            <th>抄截</th>
+            <th>阻攻</th>
+            <th>失誤</th>
+            <th>犯規</th>
+          </thead>
+          <tbody id="tableBody">
+            <!-- 表格內容將由JavaScript動態添加 -->
+          </tbody>
+        </table>
+      </div>
     </main>
+    <script src="{%static 'style/showMore.js' %}"></script>
   </body>
 </html>
