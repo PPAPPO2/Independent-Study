@@ -28,6 +28,6 @@ def index(request):
 def login(request):
     return render(request, "login.html")
 
-def showMorePLG(request):
-    return render(request, "showMorePLG.html")
+def showMore(request):
+    return render(request, "showMore.html")
 
