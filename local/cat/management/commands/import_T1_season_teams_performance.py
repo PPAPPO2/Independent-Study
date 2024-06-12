@@ -13,7 +13,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **kwargs):
         # 爬取JSON檔案的URL
-        url = 'https://api.t1league.basketball/season/1/stages/2/teams'
+        url = 'https://api.t1league.basketball/season/4/stages/13/teams'
         headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36'}
 
         # 發送GET請求並獲取響應
@@ -21,7 +21,7 @@ class Command(BaseCommand):
         # 將響應內容從JSON格式轉換為Python字典
         data = json.loads(response.text)
         # 刪除現有的T1_TeamStanding21_22模型實例
-        T1_Season_teams_Performance_21_22.objects.all().delete()
+        T1_Season_teams_Performance_23_24.objects.all().delete()
         def get_time(seconds):
             return str(timedelta(seconds=int(seconds)))
         # 遍歷JSON數據
@@ -30,7 +30,7 @@ class Command(BaseCommand):
             for FINAL_data in averages:
                 FINAL_data = averages["all"]["FINAL"]
             #創建一個T1_TeamStanding21_22模型實例
-            T1_Season_teams_Performance_21_22.objects.create(
+            T1_Season_teams_Performance_23_24.objects.create(
             team = FINAL_data["team_name_alt"],
             gp = FINAL_data["gp"],
             minutes=get_time(FINAL_data["seconds"]),# 使用自定義函數轉換時間格式
