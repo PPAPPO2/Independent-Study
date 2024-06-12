@@ -44,17 +44,16 @@
           </li>
         </ul>
       </nav>
-      c
     </header>
     <!--主要內容-->
     <main>
       <div class="standings">
-        <h2>STANDINGS & RANKINGS</h2>
+        <h2>RANKINGS</h2>
       </div>
 
       <div class="table-title">
         <h3>PLG 例行賽</h3>
-        <a href="#">show more⭢</a>
+        <a href="{% url 'showMorePLG' %}">show more⭢</a>
       </div>
       <div class="table-body">
         <table>
@@ -71,19 +70,22 @@
           <tbody>
             {% for standing in standings %}
             <tr>
-                <td>{{ standing.rank }}</td>
-                <td class="teams-name">
-                    <a href="">
-                        <img class="logo" src="{% static 'icon/'|add:standing.team_name|add:'.png' %}" />
-                        {{ standing.team_name }}&emsp;
-                    </a>
-                </td>
-                <td>{{ standing.games_played }}</td>
-                <td>{{ standing.wins }}</td>
-                <td>{{ standing.losses }}</td>
-                <td>{{ standing.pct }}</td>
-                <td>{{ standing.games_behind }}</td>
-                <td>{{ standing.wins_losses_streak }}</td>
+              <td>{{ standing.rank }}</td>
+              <td class="teams-name">
+                <a href="">
+                  <img
+                    class="logo"
+                    src="{% static 'icon/'|add:standing.team_name|add:'.png' %}"
+                  />
+                  {{ standing.team_name }};
+                </a>
+              </td>
+              <td>{{ standing.games_played }}</td>
+              <td>{{ standing.wins }}</td>
+              <td>{{ standing.losses }}</td>
+              <td>{{ standing.pct }}</td>
+              <td>{{ standing.games_behind }}</td>
+              <td>{{ standing.wins_losses_streak }}</td>
             </tr>
             {% endfor %}
           </tbody>
@@ -110,19 +112,22 @@
           <tbody>
             {% for standing in t1_standings %}
             <tr>
-                <td>{{ standing.rank }}</td>
-                <td class="teams-name">
-                    <a href="">
-                        <img class="logo" src="{% static 'icon/'|add:standing.team_name|add:'.png' %}" />
-                        {{ standing.team_name }}&emsp;
-                    </a>
-                </td>
-                <td>{{ standing.games_played }}</td>
-                <td>{{ standing.wins }}</td>
-                <td>{{ standing.losses }}</td>
-                <td>{{ standing.pct }}</td>
-                <td>{{ standing.games_behind }}</td>
-                <td>{{ standing.wins_losses_streak }}</td>
+              <td>{{ standing.rank }}</td>
+              <td class="teams-name">
+                <a href="">
+                  <img
+                    class="logo"
+                    src="{% static 'icon/'|add:standing.team_name|add:'.png' %}"
+                  />
+                  {{ standing.team_name }};
+                </a>
+              </td>
+              <td>{{ standing.games_played }}</td>
+              <td>{{ standing.wins }}</td>
+              <td>{{ standing.losses }}</td>
+              <td>{{ standing.pct }}</td>
+              <td>{{ standing.games_behind }}</td>
+              <td>{{ standing.wins_losses_streak }}</td>
             </tr>
             {% endfor %}
           </tbody>

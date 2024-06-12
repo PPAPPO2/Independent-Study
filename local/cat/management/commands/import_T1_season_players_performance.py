@@ -33,7 +33,7 @@ class Command(BaseCommand):
             #創建一個T1_TeamStanding21_22模型實例
             T1_Season_Players_Performance_23_24.objects.create(
             player = rosters["name_alt"],
-            jersey = rosters["jersey"],
+            jersey =  rosters["jersey"],
             team = rosters["team_name_alt"],
             games_played = rosters["gp"],
             minutes=get_time(rosters["seconds"]),# 使用自定義函數轉換時間格式
