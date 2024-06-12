@@ -2,7 +2,7 @@
 import requests
 from bs4 import BeautifulSoup
 from django.core.management.base import BaseCommand
-from cat.models import TeamStanding20_21, TeamStanding21_22, TeamStanding22_23, TeamStanding23_24
+from cat.models import TeamStanding20_21, TeamStanding21_22, TeamStanding22_23, TeamStanding23_24,
 
 class Command(BaseCommand):
     help = 'Fetch and import team standings from P.League+'

@@ -6,8 +6,6 @@ class Season_Players_Performance(models.Model):
     player = models.CharField(max_length=10)
     jersey = models.IntegerField()
     team = models.CharField(max_length=10)
-    games_played = models.IntegerField()
-    minutes = models.TimeField()
     #總出手
     All_goals = models.DecimalField(max_digits=10, decimal_places=2,default=0) #要加
     #總命中
