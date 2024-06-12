@@ -96,12 +96,21 @@ nav ul li a:hover {
 }
 
 .table-body {
-  width: 85%;
+  width: 80%;
   margin: auto;
 }
 .table-body td.teams-name {
   color: RGB(127, 127, 127);
-  width: 35%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+.table-body td.teams-name img.teamlogo {
+  flex: 3 1 400px;
+  max-width: 20%;
+  height: auto;
+  vertical-align: middle;
+  margin-right: 2rem;
 }
 .table-body td.teams-name a {
   display: inline-block;
@@ -109,31 +118,28 @@ nav ul li a:hover {
   text-decoration: none;
   font-size: 1.25rem;
   vertical-align: middle;
+  margin-left: 0;
 }
 .table-body td.teams-name a:hover {
   color: #172243;
   transition: 1s;
-}
-.table-body td.teams-name .logo {
-  display: inline-block;
-  height: 50px;
-  vertical-align: middle;
-  margin-right: 2rem;
 }
 .table-body table {
   border-spacing: 0;
   width: 100%;
 }
 .table-body td {
-  padding: 1.5rem;
+  justify-content: center;
+  padding: 1rem 3rem;
   font-size: 1.25rem;
 }
 .table-body tr {
   text-align: center;
 }
 .table-body th {
+  justify-content: center;
   font-size: 1.5rem;
-  padding: 1.5rem;
+  padding: 1.5rem 0rem;
 }
 .table-body table tbody tr:nth-child(odd) {
   background-color: #eee;
