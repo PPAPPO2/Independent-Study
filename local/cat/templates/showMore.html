@@ -10,6 +10,7 @@
     <title>Taiwan Basketball Professional League</title>
     <link rel="stylesheet" href="{%static 'style/style.css' %}" />
     <link rel="stylesheet" href="{%static 'style/style.scss' %}" />
+    <link rel="javascript" href="{%static 'style/showMore.js' %}" />
     <!--icon-->
     <!--link rel="shortcut icon" href="./.png" /-->
     <!--link rel="bookmark" href="./.png" /-->
@@ -46,6 +47,13 @@
       </nav>
     </header>
     <!--主要內容-->
-    <main></main>
+    <main>
+      <select id="seasonSelect">
+        <option value="2021-22">2021-22球季</option>
+        <option value="2022-23">2022-23球季</option>
+        <option value="2023-24" selected>2023-24球季</option>
+      </select>
+      <select id="teamSelect"></select>
+    </main>
   </body>
 </html>
