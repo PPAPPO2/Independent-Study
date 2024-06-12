@@ -80,6 +80,7 @@ document.addEventListener("DOMContentLoaded", function () {
         filteredData.forEach((teamData) => {
           const row = document.createElement("tr");
           Object.keys(teamData).forEach((key) => {
+            if (key === "teamId") return; // 忽略 teamId 不顯示在網頁上
             const cell = document.createElement("td");
             const columnHeader = columnMapping[key] || key;
             cell.textContent = teamData[columnHeader];
