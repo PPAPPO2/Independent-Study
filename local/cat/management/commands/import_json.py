@@ -12,7 +12,7 @@ class Command(BaseCommand):
             (T1_Season_teams_Performance_21_22, 'teams_performance_21_22.json'),
             (T1_Season_teams_Performance_22_23, 'teams_performance_22_23.json'),
             (T1_Season_teams_Performance_23_24, 'teams_performance_23_24.json'),
-            (T1_Season_Players_Performance_21_22,'Players_performance_21_22.json'),
+            #(T1_Season_Players_Performance_21_22,'Players_performance_21_22.json'),
             (T1_Season_Players_Performance_22_23,'Players_performance_22_23.json'),
             (T1_Season_Players_Performance_23_24,'Players_performance_23_24.json')
         ]
