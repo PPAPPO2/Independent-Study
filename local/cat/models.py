@@ -6,6 +6,7 @@ class Season_Players_Performance(models.Model):
     player = models.CharField(max_length=10)
     jersey = models.IntegerField()
     team = models.CharField(max_length=10)
+    points = models.DecimalField(max_digits=10, decimal_places=2)
     #總命中
     All_goals_made = models.DecimalField(max_digits=10, decimal_places=2,default=0) #要加
     #總出手
@@ -25,7 +26,7 @@ class Season_Players_Performance(models.Model):
     free_throws = models.DecimalField(max_digits=10, decimal_places=2)#要加
     free_throws_pct = models.DecimalField(max_digits=10, decimal_places=2)
     #其他
-    points = models.DecimalField(max_digits=10, decimal_places=2)
+    
     offensive_rebounds = models.DecimalField(max_digits=10, decimal_places=2)
     defensive_rebounds = models.DecimalField(max_digits=10, decimal_places=2)
     rebounds = models.DecimalField(max_digits=10, decimal_places=2)
@@ -118,6 +119,7 @@ class T1_Season_Players_Performance_23_24(Season_Players_Performance):
 
 class Season_teams_Performance(models.Model):
     team = models.CharField(max_length=10)
+    points = models.DecimalField(max_digits=10, decimal_places=2)
     #總出手、命中、命中率 #要加
     All_goals_made = models.DecimalField(max_digits=10, decimal_places=2,default=0) 
     All_goals = models.DecimalField(max_digits=10, decimal_places=2,default=0) 
@@ -135,7 +137,7 @@ class Season_teams_Performance(models.Model):
     free_throws = models.DecimalField(max_digits=10, decimal_places=2)#要加
     free_throws_pct = models.DecimalField(max_digits=10, decimal_places=2)
     #其他
-    points = models.DecimalField(max_digits=10, decimal_places=2)
+    
     offensive_rebounds = models.DecimalField(max_digits=10, decimal_places=2)
     defensive_rebounds = models.DecimalField(max_digits=10, decimal_places=2)
     rebounds = models.DecimalField(max_digits=10, decimal_places=2)
