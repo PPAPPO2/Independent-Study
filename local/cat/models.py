@@ -152,3 +152,13 @@ class T1_Season_teams_Performance_22_23(Season_teams_Performance):
     pass
 class T1_Season_teams_Performance_21_22(Season_teams_Performance):
     pass
+
+
+class P_Season_teams_Performance_23_24(Season_teams_Performance):
+    pass
+class P_Season_teams_Performance_22_23(Season_teams_Performance):
+    pass
+class P_Season_teams_Performance_21_22(Season_teams_Performance):
+    pass
+class P_Season_teams_Performance_20_21(Season_teams_Performance):
+    pass
