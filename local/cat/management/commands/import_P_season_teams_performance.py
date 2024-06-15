@@ -4,6 +4,7 @@ from django.core.management.base import BaseCommand
 from cat.models import P_Season_teams_Performance_20_21, P_Season_teams_Performance_21_22, P_Season_teams_Performance_22_23, P_Season_teams_Performance_23_24
 import pandas as pd
 import json
+import re
 class Command(BaseCommand):
 
     # 命令的簡短說明
@@ -39,7 +40,7 @@ class Command(BaseCommand):
         temp = json.loads(data)
 
         # 刪除現有的P_TeamStanding模型實例
-        # P_Season_teams_Performance_21_22.objects.all().delete()
+        P_Season_teams_Performance_23_24.objects.all().delete()
 
         #創建一個P_TeamStandingxx_xx模型
         # 遍歷JSON數據
@@ -53,6 +54,13 @@ class Command(BaseCommand):
                     pass
             return data
         temp = [convert_to_float(item) for item in temp]
+
+        # 提取球隊名稱前面的數字
+        def extract_team_name(raw_name):
+            match = re.search(r'\d+(.*)', raw_name)  # 匹配以數字開頭後面所有文字
+            if match:
+                return match.group(1).strip()
+            return raw_name  # 如果沒有匹配到，返回原始名稱
         
         for FINAL_data in temp:
             # 總命中數
@@ -68,7 +76,7 @@ class Command(BaseCommand):
 
             #創建一個T1_TeamStanding模型實例
             P_Season_teams_Performance_23_24.objects.create(
-            team = FINAL_data["球隊"],
+            team = extract_team_name(FINAL_data['球隊']),
 
             All_goals_made = round(FINAL_data["兩分命中"]+FINAL_data["三分命中"],1),
             All_goals = round(FINAL_data["兩分出手"]+FINAL_data["三分出手"], 1),

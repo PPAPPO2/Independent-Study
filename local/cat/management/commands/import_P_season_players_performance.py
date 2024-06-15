@@ -2,7 +2,7 @@
 import requests
 from bs4 import BeautifulSoup
 from django.core.management.base import BaseCommand
-from cat.models import Season_Players_Performance_20_21, Season_Players_Performance_21_22, Season_Players_Performance_22_23, Season_Players_Performance_23_24
+from cat.models import P_Season_Players_Performance_20_21, P_Season_Players_Performance_21_22, P_Season_Players_Performance_22_23, P_Season_Players_Performance_23_24
 from datetime import datetime
 from decimal import Decimal
 
@@ -17,7 +17,7 @@ class Command(BaseCommand):
         data = [th.text.strip('\n').split() for th in soup.find_all('tr')]
         temp = data[1:]
         # 清空現有數據
-        Season_Players_Performance_23_24.objects.all().delete()
+        P_Season_Players_Performance_23_24.objects.all().delete()
 
         def get_time(time_str):
             try:
@@ -28,7 +28,7 @@ class Command(BaseCommand):
             return temp
         
         for row in temp:
-            Season_Players_Performance_23_24.objects.create(
+            P_Season_Players_Performance_23_24.objects.create(
                 player = row[0],
                 jersey = int(row[1]),
                 team = row[2],

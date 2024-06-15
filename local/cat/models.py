@@ -115,6 +115,7 @@ class T1_Season_Players_Performance_22_23(Season_Players_Performance):
 class T1_Season_Players_Performance_23_24(Season_Players_Performance):
     pass
 
+# 賽季球隊數據
 class Season_teams_Performance(models.Model):
     team = models.CharField(max_length=10)
     points = models.DecimalField(max_digits=10, decimal_places=2)

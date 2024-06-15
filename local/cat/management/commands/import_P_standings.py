@@ -2,7 +2,7 @@
 import requests
 from bs4 import BeautifulSoup
 from django.core.management.base import BaseCommand
-from cat.models import TeamStanding20_21, TeamStanding21_22, TeamStanding22_23, TeamStanding23_24,
+from cat.models import P_TeamStanding20_21, P_TeamStanding21_22, P_TeamStanding22_23, P_TeamStanding23_24
 
 class Command(BaseCommand):
     help = 'Fetch and import team standings from P.League+'
@@ -15,7 +15,7 @@ class Command(BaseCommand):
         soup = BeautifulSoup(response.text, "html.parser")
         data = [th.text for th in soup.find_all('tr')]
         # 清空現有數據
-        TeamStanding23_24.objects.all().delete()
+        P_TeamStanding23_24.objects.all().delete()
 
         # 爬取並存儲數據
         data = [th.text for th in soup.find_all('tr')]
@@ -26,7 +26,7 @@ class Command(BaseCommand):
             body = body + [temp_body]
 
         for row in body:
-            TeamStanding23_24.objects.create(
+            P_TeamStanding23_24.objects.create(
                 rank = int(row[0]),
                 team_name = row[1],
                 games_played = int(row[2]),
