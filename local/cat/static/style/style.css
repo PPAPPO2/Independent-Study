@@ -159,4 +159,104 @@ nav ul li a:hover {
 }
 .table-body table tbody tr:last-child td:last-child {
   border-radius: 0 0 5px 0;
+}
+
+.season-team-select {
+  display: flex;
+  align-items: center;
+  margin: 1rem;
+}
+.season-team-select .season-select,
+.season-team-select .team-select-container {
+  margin-right: 1rem;
+}
+.season-team-select label {
+  font-weight: bold;
+  margin-right: 1rem;
+}
+.season-team-select select,
+.season-team-select input[type=text] {
+  padding: 0.5rem 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+.season-team-select select {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23333"><path d="M7 10l5 5 5-5z"/></svg>');
+  background-repeat: no-repeat;
+  background-position: right 5px center;
+  padding-right: 30px;
+}
+.season-team-select .team-select-container {
+  display: flex;
+  align-items: center;
+}
+.season-team-select .team-select-container .team-select {
+  margin-right: 10px;
+}
+.season-team-select .team-select-container .dropdown {
+  position: relative;
+  display: inline-block;
+}
+.season-team-select .team-select-container .dropdown .dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  max-height: 200px;
+  overflow-y: auto;
+}
+.season-team-select .team-select-container .dropdown .dropdown-content label {
+  display: block;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+.season-team-select .team-select-container .dropdown .dropdown-content label:hover {
+  background-color: #f1f1f1;
+  color: #103dc3;
+}
+.season-team-select .team-select-container .confirm-btn {
+  padding: 8px 16px;
+  background-color: #172243;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.table-container {
+  width: 85%;
+  margin: auto;
+  overflow-x: auto;
+}
+
+.showMoreTable {
+  width: 100%;
+  min-width: 800px;
+  border-spacing: 0;
+}
+.showMoreTable td {
+  justify-content: center;
+  padding: 1rem 1.5rem;
+  font-size: 1rem;
+}
+.showMoreTable tr {
+  text-align: center;
+}
+.showMoreTable th {
+  justify-content: center;
+  padding: 1rem 0.25rem;
+  font-size: 1rem;
+}
+.showMoreTable tbody tr:nth-child(odd) {
+  background-color: #eee;
+}
+.showMoreTable thead {
+  background-color: #172243;
+  color: white;
 }/*# sourceMappingURL=style.css.map */
