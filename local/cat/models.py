@@ -57,20 +57,18 @@ class TeamStandingModel(models.Model):
 
 
 # 球隊排名模型
-class TeamStanding20_21(TeamStandingModel):
+class P_TeamStanding20_21(TeamStandingModel):
+    pass
 
+class P_TeamStanding21_22(TeamStandingModel):
     pass
 
 
-class TeamStanding21_22(TeamStandingModel):
+class P_TeamStanding22_23(TeamStandingModel):
     pass
 
 
-class TeamStanding22_23(TeamStandingModel):
-    pass
-
-
-class TeamStanding23_24(TeamStandingModel):
+class P_TeamStanding23_24(TeamStandingModel):
     pass
 
 
@@ -91,21 +89,21 @@ class T1_TeamStanding20_21(TeamStandingModel):
 
 
 # 球員整賽季模型
-class Season_Players_Performance_22_23(Season_Players_Performance):
+class P_Season_Players_Performance_22_23(Season_Players_Performance):
 
     pass
 
 
 
-class Season_Players_Performance_21_22(Season_Players_Performance):
+class P_Season_Players_Performance_21_22(Season_Players_Performance):
 
     pass
 
 
-class Season_Players_Performance_20_21(Season_Players_Performance):
+class P_Season_Players_Performance_20_21(Season_Players_Performance):
 
     pass
-class Season_Players_Performance_23_24(Season_Players_Performance):
+class P_Season_Players_Performance_23_24(Season_Players_Performance):
 
     pass
 

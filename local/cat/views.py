@@ -1,11 +1,11 @@
 from django.shortcuts import render
-from .models import TeamStanding23_24
+from .models import P_TeamStanding23_24
 from .models import T1_TeamStanding23_24
 
 
 # Create your views here.
 def index(request):
-    standings = TeamStanding23_24.objects.all().order_by("rank")
+    standings = P_TeamStanding23_24.objects.all().order_by("rank")
     t1_standings = T1_TeamStanding23_24.objects.all().order_by("rank")
     # AMO = AMO
 
