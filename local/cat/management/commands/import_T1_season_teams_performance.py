@@ -13,7 +13,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **kwargs):
         # 爬取JSON檔案的URL
-        url = 'https://api.t1league.basketball/season/4/stages/13/teams'
+        url = 'https://api.t1league.basketball/season/1/stages/2/teams'
         headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36'}
 
         # 發送GET請求並獲取響應
@@ -21,21 +21,29 @@ class Command(BaseCommand):
         # 將響應內容從JSON格式轉換為Python字典
         data = json.loads(response.text)
         # 刪除現有的T1_TeamStanding21_22模型實例
-        T1_Season_teams_Performance_23_24.objects.all().delete()
+        T1_Season_teams_Performance_21_22.objects.all().delete()
 
         # 遍歷JSON數據
         for team in data:
             averages = team["averages"]
             for FINAL_data in averages:
                 FINAL_data = averages["all"]["FINAL"]
+            total_made = FINAL_data["two_m"] + FINAL_data["trey_m"]
+            total_attempts = FINAL_data["two_a"] + FINAL_data["trey_a"] + total_made
+            
+            # 防止除零錯誤
+            if total_attempts == 0:
+                All_goals_pct = 0
+            else:
+                All_goals_pct = round(total_made / total_attempts, 2)
             #創建一個T1_TeamStanding21_22模型實例
-            T1_Season_teams_Performance_23_24.objects.create(
+            T1_Season_teams_Performance_21_22.objects.create(
             team = FINAL_data["team_name_alt"],
 
             All_goals_made = round(FINAL_data["two_m"]+FINAL_data["trey_m"],1),
             All_goals = round(FINAL_data["two_m"]+FINAL_data["two_a"]+FINAL_data["trey_m"]+FINAL_data["trey_a"],1),
-            All_goals_pct = FINAL_data["two_pct"]+FINAL_data["trey_pct"],
-            #兩分球數據
+            All_goals_pct = All_goals_pct,
+                #兩分球數據
             field_goals_two_made = round(FINAL_data["two_m"],1),
             field_goals_two = round(FINAL_data["two_m"]+FINAL_data["two_a"],1),
             field_goals_two_pct = FINAL_data["two_pct"],
