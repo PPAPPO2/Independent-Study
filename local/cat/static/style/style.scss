@@ -168,3 +168,119 @@ nav ul li a:hover {
     border-radius: 0 0 5px 0;
   }
 }
+
+//show more頁面
+.season-team-select {
+  display: flex;
+  align-items: center;
+  margin: 1rem;
+
+  .season-select,
+  .team-select-container {
+    margin-right: 1rem;
+  }
+
+  label {
+    font-weight: bold;
+    margin-right: 1rem;
+  }
+
+  select,
+  input[type="text"] {
+    padding: 0.5rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+  }
+
+  select {
+    appearance: none;
+    //下拉符號
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23333"><path d="M7 10l5 5 5-5z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right 5px center;
+    padding-right: 30px;
+  }
+
+  .team-select-container {
+    display: flex;
+    align-items: center;
+
+    .team-select {
+      margin-right: 10px;
+    }
+
+    .dropdown {
+      position: relative;
+      display: inline-block;
+
+      .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+        z-index: 1;
+        max-height: 200px;
+        overflow-y: auto;
+      }
+
+      .dropdown-content label {
+        display: block;
+        padding: 8px 12px;
+        cursor: pointer;
+
+        &:hover {
+          background-color: #f1f1f1;
+          color: #103dc3;
+        }
+      }
+    }
+
+    .confirm-btn {
+      padding: 8px 16px;
+      background-color: #172243;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+  }
+}
+.table-container {
+  width: 85%;
+  margin: auto;
+  overflow-x: auto; // 設置水平捲動
+}
+
+.showMoreTable {
+  width: 100%;
+  min-width: 800px; // 設置最小寬度
+  border-spacing: 0;
+
+  td {
+    justify-content: center;
+    padding: 1rem 1.5rem;
+    font-size: 1rem;
+  }
+
+  tr {
+    text-align: center;
+  }
+
+  th {
+    justify-content: center;
+    padding: 1rem 0.25rem;
+    font-size: 1rem;
+  }
+
+  tbody tr:nth-child(odd) {
+    // 奇數列背景顏色
+    background-color: #eee;
+  }
+
+  thead {
+    background-color: #172243;
+    color: white;
+  }
+}

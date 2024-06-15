@@ -12,7 +12,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **kwargs):
         # 爬取JSON檔案的URL
-        url = 'https://api.t1league.basketball/season/2/stages/7/rosters'
+        url = 'https://api.t1league.basketball/season/4/stages/13/rosters'
         headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36'}
 
         # 發送GET請求並獲取響應
@@ -21,21 +21,32 @@ class Command(BaseCommand):
         data = json.loads(response.text)
 
         # 刪除現有的T1_Season_Players_Performance模型實例
-        T1_Season_Players_Performance_22_23.objects.all().delete()
+        T1_Season_Players_Performance_23_24.objects.all().delete()
 
         with connection.cursor() as cursor:
-            cursor.execute("DELETE FROM sqlite_sequence WHERE name = 'cat_t1_season_players_performance_22_23';")
+            cursor.execute("DELETE FROM sqlite_sequence WHERE name = 'cat_t1_season_players_performance_23_24';")
         # 遍歷JSON數據
         for roster in data:
             rosters = roster["average"]
-            #創建一個T1_Season_Players_Performance模型實例
-            T1_Season_Players_Performance_22_23.objects.create(
+            # 計算總命中數和總出手數
+            total_made = rosters["two_m"] + rosters["trey_m"]
+            total_attempts = rosters["two_a"] + rosters["trey_a"] + total_made
+            
+            # 防止除零錯誤
+            if total_attempts == 0:
+                All_goals_pct = 0
+            else:
+                All_goals_pct = round(total_made / total_attempts, 2)
+
+            # 創建一個T1_Season_Players_Performance模型實例
+            T1_Season_Players_Performance_23_24.objects.create(
                 player=rosters["name_alt"],
                 jersey=rosters["jersey"],
                 team=rosters["team_name_alt"],
-                All_goals_made=round(rosters["two_m"] + rosters["trey_m"], 1),
-                All_goals=round(rosters["two_m"] + rosters["two_a"] + rosters["trey_m"] + rosters["trey_a"], 1),
-                All_goals_pct=rosters['two_pct'] + rosters['trey_pct'],
+                points=round(rosters["points"], 1),
+                All_goals_made=round(total_made, 1),
+                All_goals=round(total_attempts, 1),
+                All_goals_pct=All_goals_pct,
                 # 兩分球數據
                 field_goals_two_made=round(rosters["two_m"], 1),
                 field_goals_two=round(rosters["two_m"] + rosters["two_a"], 1),
@@ -49,7 +60,6 @@ class Command(BaseCommand):
                 free_throws=round(rosters["ft_m"] + rosters["ft_a"], 1),
                 free_throws_pct=rosters['ft_pct'],
                 # 其他數據
-                points=round(rosters["points"], 1),
                 offensive_rebounds=round(rosters["reb_o"], 1),
                 defensive_rebounds=round(rosters["reb_d"], 1),
                 rebounds=round(rosters["reb"], 1),
@@ -59,6 +69,5 @@ class Command(BaseCommand):
                 turnovers=round(rosters["turnover"], 1),
                 fouls=round(rosters["pfoul"], 1),
             )
-
 
         self.stdout.write(self.style.SUCCESS('Successfully fetched and imported team standings from T1'))
