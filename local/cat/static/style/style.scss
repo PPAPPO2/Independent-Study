@@ -168,3 +168,36 @@ nav ul li a:hover {
     border-radius: 0 0 5px 0;
   }
 }
+
+.showMoreTable {
+  width: 80%;
+  margin: auto;
+  overflow-x: auto; //使表格在溢出時可捲動
+  display: block;
+  table {
+    border-spacing: 0;
+    width: 100%;
+    min-width: 800px;
+  }
+  td {
+    justify-content: center;
+    padding: 1rem 1.5rem;
+    font-size: 1rem;
+  }
+  tr {
+    text-align: center;
+  }
+  th {
+    justify-content: center;
+    padding: 1rem 0rem;
+    font-size: 1rem;
+  }
+  table tbody tr:nth-child(odd) {
+    //奇數列背景顏色
+    background-color: #eee;
+  }
+  table thead {
+    background-color: #172243;
+    color: white;
+  }
+}
