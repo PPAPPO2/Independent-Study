@@ -18,10 +18,10 @@ class Command(BaseCommand):
         # 定義需要轉換的表
         tables = [
             # P teams performance
-            (P_Season_teams_Performance_20_21, 'P_teams_performance_20_21.json'),
-            (P_Season_teams_Performance_21_22, 'P_teams_performance_21_22.json'),
-            (P_Season_teams_Performance_22_23, 'P_teams_performance_22_23.json'),
-            (P_Season_teams_Performance_23_24, 'P_teams_performance_23_24.json'),
+            # (P_Season_teams_Performance_20_21, 'P_teams_performance_20_21.json'),
+            # (P_Season_teams_Performance_21_22, 'P_teams_performance_21_22.json'),
+            # (P_Season_teams_Performance_22_23, 'P_teams_performance_22_23.json'),
+            # (P_Season_teams_Performance_23_24, 'P_teams_performance_23_24.json'),
             # P players performance
             (P_Season_Players_Performance_20_21,'P_Players_performance_20_21.json'),
             (P_Season_Players_Performance_21_22,'P_Players_performance_21_22.json'),
