@@ -1,9 +1,11 @@
 [
     {
-        "id": 64,
+        "id": 181,
         "player": "鑀倫",
         "jersey": 19,
         "team": "高雄17直播鋼鐵人",
+        "game_played": 9,
+        "minutes": "00:33:58",
         "points": "19.60",
         "All_goals_made": "12.90",
         "All_goals": "16.30",
@@ -27,10 +29,12 @@
         "fouls": "2.90"
     },
     {
-        "id": 65,
+        "id": 182,
         "player": "奧帝",
         "jersey": 25,
         "team": "新北國王",
+        "game_played": 7,
+        "minutes": "00:33:52",
         "points": "16.70",
         "All_goals_made": "10.40",
         "All_goals": "13.30",
@@ -54,10 +58,12 @@
         "fouls": "3.40"
     },
     {
-        "id": 66,
+        "id": 183,
         "player": "特壞",
         "jersey": 6,
         "team": "新竹街口攻城獅",
+        "game_played": 18,
+        "minutes": "00:41:01",
         "points": "20.40",
         "All_goals_made": "12.00",
         "All_goals": "17.60",
@@ -81,10 +87,12 @@
         "fouls": "1.60"
     },
     {
-        "id": 67,
+        "id": 184,
         "player": "楊敬敏",
         "jersey": 6,
         "team": "新北國王",
+        "game_played": 39,
+        "minutes": "00:28:32",
         "points": "14.80",
         "All_goals_made": "8.20",
         "All_goals": "12.20",
@@ -108,10 +116,12 @@
         "fouls": "1.30"
     },
     {
-        "id": 68,
+        "id": 185,
         "player": "林俊吉",
         "jersey": 11,
         "team": "福爾摩沙台新夢想家",
+        "game_played": 40,
+        "minutes": "00:28:19",
         "points": "13.80",
         "All_goals_made": "7.80",
         "All_goals": "11.20",
@@ -135,10 +145,12 @@
         "fouls": "1.90"
     },
     {
-        "id": 69,
+        "id": 186,
         "player": "李德威",
         "jersey": 26,
         "team": "福爾摩沙台新夢想家",
+        "game_played": 39,
+        "minutes": "00:21:20",
         "points": "6.20",
         "All_goals_made": "3.90",
         "All_goals": "6.80",
@@ -162,10 +174,12 @@
         "fouls": "3.00"
     },
     {
-        "id": 70,
+        "id": 187,
         "player": "陳振傑",
         "jersey": 0,
         "team": "福爾摩沙台新夢想家",
+        "game_played": 23,
+        "minutes": "00:15:11",
         "points": "6.20",
         "All_goals_made": "4.70",
         "All_goals": "5.80",
@@ -189,10 +203,12 @@
         "fouls": "0.60"
     },
     {
-        "id": 71,
+        "id": 188,
         "player": "張耕淯",
         "jersey": 29,
         "team": "臺北富邦勇士",
+        "game_played": 8,
+        "minutes": "00:05:07",
         "points": "2.20",
         "All_goals_made": "1.00",
         "All_goals": "1.20",
@@ -216,10 +232,12 @@
         "fouls": "0.60"
     },
     {
-        "id": 72,
+        "id": 189,
         "player": "王柏智",
         "jersey": 11,
         "team": "高雄17直播鋼鐵人",
+        "game_played": 20,
+        "minutes": "00:15:37",
         "points": "4.80",
         "All_goals_made": "3.00",
         "All_goals": "4.50",
@@ -243,10 +261,12 @@
         "fouls": "1.60"
     },
     {
-        "id": 73,
+        "id": 190,
         "player": "楊盛硯",
         "jersey": 18,
         "team": "福爾摩沙台新夢想家",
+        "game_played": 12,
+        "minutes": "00:03:18",
         "points": "0.60",
         "All_goals_made": "0.70",
         "All_goals": "0.80",
@@ -270,10 +290,12 @@
         "fouls": "0.20"
     },
     {
-        "id": 74,
+        "id": 191,
         "player": "吳松蔚",
         "jersey": 30,
         "team": "福爾摩沙台新夢想家",
+        "game_played": 7,
+        "minutes": "00:02:41",
         "points": "0.40",
         "All_goals_made": "0.60",
         "All_goals": "0.60",
@@ -297,10 +319,12 @@
         "fouls": "0.00"
     },
     {
-        "id": 75,
+        "id": 192,
         "player": "高國豪",
         "jersey": 4,
         "team": "新竹街口攻城獅",
+        "game_played": 30,
+        "minutes": "00:37:13",
         "points": "14.90",
         "All_goals_made": "8.70",
         "All_goals": "13.90",
@@ -324,10 +348,12 @@
         "fouls": "2.50"
     },
     {
-        "id": 76,
+        "id": 193,
         "player": "李家瑞",
         "jersey": 12,
         "team": "新竹街口攻城獅",
+        "game_played": 37,
+        "minutes": "00:15:11",
         "points": "4.90",
         "All_goals_made": "3.50",
         "All_goals": "5.40",
@@ -351,10 +377,12 @@
         "fouls": "1.50"
     },
     {
-        "id": 77,
+        "id": 194,
         "player": "成力煥",
         "jersey": 21,
         "team": "桃園領航猿",
+        "game_played": 34,
+        "minutes": "00:14:57",
         "points": "3.30",
         "All_goals_made": "2.50",
         "All_goals": "3.70",
@@ -378,10 +406,12 @@
         "fouls": "1.60"
     },
     {
-        "id": 78,
+        "id": 195,
         "player": "蕭順議",
         "jersey": 11,
         "team": "新竹街口攻城獅",
+        "game_played": 30,
+        "minutes": "00:25:53",
         "points": "9.10",
         "All_goals_made": "4.20",
         "All_goals": "7.20",
@@ -405,10 +435,12 @@
         "fouls": "3.30"
     },
     {
-        "id": 79,
+        "id": 196,
         "player": "宋宇軒",
         "jersey": 5,
         "team": "新竹街口攻城獅",
+        "game_played": 23,
+        "minutes": "00:09:53",
         "points": "3.70",
         "All_goals_made": "1.70",
         "All_goals": "3.00",
@@ -432,10 +464,12 @@
         "fouls": "0.80"
     },
     {
-        "id": 80,
+        "id": 197,
         "player": "林力仁",
         "jersey": 72,
         "team": "新北國王",
+        "game_played": 20,
+        "minutes": "00:05:38",
         "points": "2.00",
         "All_goals_made": "2.10",
         "All_goals": "2.80",
@@ -459,10 +493,12 @@
         "fouls": "0.70"
     },
     {
-        "id": 81,
+        "id": 198,
         "player": "田浩",
         "jersey": 9,
         "team": "新竹街口攻城獅",
+        "game_played": 28,
+        "minutes": "00:24:19",
         "points": "6.10",
         "All_goals_made": "3.90",
         "All_goals": "5.60",
@@ -486,10 +522,12 @@
         "fouls": "2.60"
     },
     {
-        "id": 82,
+        "id": 199,
         "player": "盧哲毅",
         "jersey": 15,
         "team": "高雄17直播鋼鐵人",
+        "game_played": 5,
+        "minutes": "00:05:59",
         "points": "0.80",
         "All_goals_made": "1.40",
         "All_goals": "1.60",
@@ -513,10 +551,12 @@
         "fouls": "0.80"
     },
     {
-        "id": 83,
+        "id": 200,
         "player": "賴廷恩",
         "jersey": 0,
         "team": "臺北富邦勇士",
+        "game_played": 38,
+        "minutes": "00:14:16",
         "points": "4.00",
         "All_goals_made": "3.30",
         "All_goals": "4.40",
@@ -540,10 +580,12 @@
         "fouls": "0.80"
     },
     {
-        "id": 84,
+        "id": 201,
         "player": "周桂羽",
         "jersey": 8,
         "team": "臺北富邦勇士",
+        "game_played": 38,
+        "minutes": "00:21:27",
         "points": "6.90",
         "All_goals_made": "3.90",
         "All_goals": "5.60",
@@ -567,10 +609,12 @@
         "fouls": "1.60"
     },
     {
-        "id": 85,
+        "id": 202,
         "player": "林孟學",
         "jersey": 13,
         "team": "臺北富邦勇士",
+        "game_played": 26,
+        "minutes": "00:07:19",
         "points": "1.90",
         "All_goals_made": "0.90",
         "All_goals": "1.60",
@@ -594,10 +638,12 @@
         "fouls": "0.80"
     },
     {
-        "id": 86,
+        "id": 203,
         "player": "曾祥鈞",
         "jersey": 21,
         "team": "臺北富邦勇士",
+        "game_played": 33,
+        "minutes": "00:26:31",
         "points": "11.20",
         "All_goals_made": "5.60",
         "All_goals": "9.20",
@@ -621,10 +667,12 @@
         "fouls": "2.30"
     },
     {
-        "id": 87,
+        "id": 204,
         "player": "林書緯",
         "jersey": 1,
         "team": "新北國王",
+        "game_played": 36,
+        "minutes": "00:31:43",
         "points": "11.90",
         "All_goals_made": "8.80",
         "All_goals": "12.00",
@@ -648,10 +696,12 @@
         "fouls": "1.80"
     },
     {
-        "id": 88,
+        "id": 205,
         "player": "張伯維",
         "jersey": 77,
         "team": "高雄17直播鋼鐵人",
+        "game_played": 34,
+        "minutes": "00:17:07",
         "points": "4.20",
         "All_goals_made": "3.40",
         "All_goals": "4.70",
@@ -675,10 +725,12 @@
         "fouls": "1.80"
     },
     {
-        "id": 89,
+        "id": 206,
         "player": "郭少傑",
         "jersey": 24,
         "team": "新竹街口攻城獅",
+        "game_played": 37,
+        "minutes": "00:14:02",
         "points": "4.00",
         "All_goals_made": "3.20",
         "All_goals": "3.90",
@@ -702,10 +754,12 @@
         "fouls": "1.20"
     },
     {
-        "id": 90,
+        "id": 207,
         "player": "林志傑",
         "jersey": 12,
         "team": "臺北富邦勇士",
+        "game_played": 29,
+        "minutes": "00:20:45",
         "points": "7.70",
         "All_goals_made": "6.00",
         "All_goals": "7.30",
@@ -729,10 +783,12 @@
         "fouls": "1.20"
     },
     {
-        "id": 91,
+        "id": 208,
         "player": "蔡文誠",
         "jersey": 14,
         "team": "臺北富邦勇士",
+        "game_played": 39,
+        "minutes": "00:11:42",
         "points": "4.40",
         "All_goals_made": "2.80",
         "All_goals": "4.50",
@@ -756,10 +812,12 @@
         "fouls": "1.00"
     },
     {
-        "id": 92,
+        "id": 209,
         "player": "石博恩",
         "jersey": 23,
         "team": "臺北富邦勇士",
+        "game_played": 31,
+        "minutes": "00:12:05",
         "points": "4.40",
         "All_goals_made": "3.50",
         "All_goals": "4.90",
@@ -783,10 +841,12 @@
         "fouls": "1.70"
     },
     {
-        "id": 93,
+        "id": 210,
         "player": "吳家駿",
         "jersey": 3,
         "team": "福爾摩沙台新夢想家",
+        "game_played": 38,
+        "minutes": "00:18:42",
         "points": "5.00",
         "All_goals_made": "3.10",
         "All_goals": "4.80",
@@ -810,10 +870,12 @@
         "fouls": "1.30"
     },
     {
-        "id": 94,
+        "id": 211,
         "player": "林耀宗",
         "jersey": 7,
         "team": "福爾摩沙台新夢想家",
+        "game_played": 22,
+        "minutes": "00:07:50",
         "points": "1.60",
         "All_goals_made": "1.00",
         "All_goals": "1.70",
@@ -837,10 +899,12 @@
         "fouls": "0.90"
     },
     {
-        "id": 95,
+        "id": 212,
         "player": "陳冠全",
         "jersey": 30,
         "team": "桃園領航猿",
+        "game_played": 35,
+        "minutes": "00:20:07",
         "points": "5.20",
         "All_goals_made": "3.80",
         "All_goals": "5.60",
@@ -864,10 +928,12 @@
         "fouls": "1.70"
     },
     {
-        "id": 96,
+        "id": 213,
         "player": "施晉堯",
         "jersey": 28,
         "team": "桃園領航猿",
+        "game_played": 34,
+        "minutes": "00:28:04",
         "points": "9.20",
         "All_goals_made": "6.80",
         "All_goals": "9.30",
@@ -891,10 +957,12 @@
         "fouls": "2.90"
     },
     {
-        "id": 97,
+        "id": 214,
         "player": "邱柏璋",
         "jersey": 6,
         "team": "高雄17直播鋼鐵人",
+        "game_played": 20,
+        "minutes": "00:13:12",
         "points": "3.70",
         "All_goals_made": "2.00",
         "All_goals": "4.40",
@@ -918,10 +986,12 @@
         "fouls": "1.60"
     },
     {
-        "id": 98,
+        "id": 215,
         "player": "關達祐",
         "jersey": 6,
         "team": "桃園領航猿",
+        "game_played": 24,
+        "minutes": "00:10:25",
         "points": "3.30",
         "All_goals_made": "2.20",
         "All_goals": "3.30",
@@ -945,10 +1015,12 @@
         "fouls": "1.20"
     },
     {
-        "id": 99,
+        "id": 216,
         "player": "悟空",
         "jersey": 3,
         "team": "高雄17直播鋼鐵人",
+        "game_played": 14,
+        "minutes": "00:29:23",
         "points": "16.60",
         "All_goals_made": "9.60",
         "All_goals": "12.00",
@@ -972,10 +1044,12 @@
         "fouls": "2.90"
     },
     {
-        "id": 100,
+        "id": 217,
         "player": "周儀翔",
         "jersey": 0,
         "team": "高雄17直播鋼鐵人",
+        "game_played": 7,
+        "minutes": "00:28:31",
         "points": "6.00",
         "All_goals_made": "5.20",
         "All_goals": "7.30",
@@ -999,10 +1073,12 @@
         "fouls": "2.10"
     },
     {
-        "id": 101,
+        "id": 218,
         "player": "瓊斯",
         "jersey": 2,
         "team": "臺北富邦勇士",
+        "game_played": 4,
+        "minutes": "00:32:17",
         "points": "10.80",
         "All_goals_made": "8.20",
         "All_goals": "11.20",
@@ -1026,10 +1102,12 @@
         "fouls": "1.80"
     },
     {
-        "id": 102,
+        "id": 219,
         "player": "牧倫斯",
         "jersey": 5,
         "team": "新北國王",
+        "game_played": 29,
+        "minutes": "00:33:27",
         "points": "21.90",
         "All_goals_made": "12.50",
         "All_goals": "16.90",
@@ -1053,10 +1131,12 @@
         "fouls": "1.70"
     },
     {
-        "id": 103,
+        "id": 220,
         "player": "克拉索夫",
         "jersey": 55,
         "team": "高雄17直播鋼鐵人",
+        "game_played": 13,
+        "minutes": "00:40:45",
         "points": "21.10",
         "All_goals_made": "8.20",
         "All_goals": "14.00",
@@ -1080,10 +1160,12 @@
         "fouls": "1.90"
     },
     {
-        "id": 104,
+        "id": 221,
         "player": "太樂",
         "jersey": 3,
         "team": "新竹街口攻城獅",
+        "game_played": 11,
+        "minutes": "00:31:34",
         "points": "17.60",
         "All_goals_made": "10.60",
         "All_goals": "18.90",
@@ -1107,10 +1189,12 @@
         "fouls": "3.60"
     },
     {
-        "id": 105,
+        "id": 222,
         "player": "鈦強",
         "jersey": 9,
         "team": "高雄17直播鋼鐵人",
+        "game_played": 5,
+        "minutes": "00:44:14",
         "points": "33.40",
         "All_goals_made": "16.40",
         "All_goals": "24.00",
@@ -1134,10 +1218,12 @@
         "fouls": "2.60"
     },
     {
-        "id": 106,
+        "id": 223,
         "player": "路易士",
         "jersey": 35,
         "team": "高雄17直播鋼鐵人",
+        "game_played": 14,
+        "minutes": "00:38:07",
         "points": "16.50",
         "All_goals_made": "7.90",
         "All_goals": "13.40",
@@ -1161,10 +1247,12 @@
         "fouls": "3.10"
     },
     {
-        "id": 107,
+        "id": 224,
         "player": "曼尼高",
         "jersey": 55,
         "team": "新北國王",
+        "game_played": 31,
+        "minutes": "00:36:39",
         "points": "18.30",
         "All_goals_made": "10.80",
         "All_goals": "17.70",
@@ -1188,10 +1276,12 @@
         "fouls": "3.00"
     },
     {
-        "id": 108,
+        "id": 225,
         "player": "陳范柏彥",
         "jersey": 1,
         "team": "臺北富邦勇士",
+        "game_played": 20,
+        "minutes": "00:09:10",
         "points": "4.00",
         "All_goals_made": "2.80",
         "All_goals": "3.70",
@@ -1215,10 +1305,12 @@
         "fouls": "0.90"
     },
     {
-        "id": 109,
+        "id": 226,
         "player": "強森",
         "jersey": 5,
         "team": "臺北富邦勇士",
+        "game_played": 27,
+        "minutes": "00:38:14",
         "points": "21.50",
         "All_goals_made": "11.00",
         "All_goals": "14.80",
@@ -1242,10 +1334,12 @@
         "fouls": "2.40"
     },
     {
-        "id": 110,
+        "id": 227,
         "player": "呂宗霖",
         "jersey": 7,
         "team": "臺北富邦勇士",
+        "game_played": 10,
+        "minutes": "00:07:31",
         "points": "1.00",
         "All_goals_made": "0.60",
         "All_goals": "1.10",
@@ -1269,10 +1363,12 @@
         "fouls": "0.80"
     },
     {
-        "id": 111,
+        "id": 228,
         "player": "謝宗融",
         "jersey": 15,
         "team": "臺北富邦勇士",
+        "game_played": 35,
+        "minutes": "00:11:19",
         "points": "2.50",
         "All_goals_made": "1.10",
         "All_goals": "2.30",
@@ -1296,10 +1392,12 @@
         "fouls": "2.00"
     },
     {
-        "id": 112,
+        "id": 229,
         "player": "簡廷兆",
         "jersey": 24,
         "team": "臺北富邦勇士",
+        "game_played": 25,
+        "minutes": "00:13:44",
         "points": "5.60",
         "All_goals_made": "3.50",
         "All_goals": "5.10",
@@ -1323,10 +1421,12 @@
         "fouls": "0.40"
     },
     {
-        "id": 113,
+        "id": 230,
         "player": "米勒",
         "jersey": 13,
         "team": "福爾摩沙台新夢想家",
+        "game_played": 5,
+        "minutes": "00:39:43",
         "points": "17.80",
         "All_goals_made": "12.80",
         "All_goals": "15.40",
@@ -1350,10 +1450,12 @@
         "fouls": "2.60"
     },
     {
-        "id": 114,
+        "id": 231,
         "player": "波因特",
         "jersey": 15,
         "team": "福爾摩沙台新夢想家",
+        "game_played": 15,
+        "minutes": "00:33:10",
         "points": "19.20",
         "All_goals_made": "10.10",
         "All_goals": "15.50",
@@ -1377,10 +1479,12 @@
         "fouls": "2.50"
     },
     {
-        "id": 115,
+        "id": 232,
         "player": "盧冠良",
         "jersey": 28,
         "team": "福爾摩沙台新夢想家",
+        "game_played": 39,
+        "minutes": "00:23:57",
         "points": "7.60",
         "All_goals_made": "5.90",
         "All_goals": "7.80",
@@ -1404,10 +1508,12 @@
         "fouls": "1.40"
     },
     {
-        "id": 116,
+        "id": 233,
         "player": "周柏臣",
         "jersey": 88,
         "team": "福爾摩沙台新夢想家",
+        "game_played": 26,
+        "minutes": "00:16:02",
         "points": "2.60",
         "All_goals_made": "1.80",
         "All_goals": "2.60",
@@ -1431,10 +1537,12 @@
         "fouls": "1.60"
     },
     {
-        "id": 117,
+        "id": 234,
         "player": "李威廷",
         "jersey": 4,
         "team": "新北國王",
+        "game_played": 7,
+        "minutes": "00:06:05",
         "points": "1.70",
         "All_goals_made": "1.70",
         "All_goals": "2.70",
@@ -1458,10 +1566,12 @@
         "fouls": "0.30"
     },
     {
-        "id": 118,
+        "id": 235,
         "player": "蘇士軒",
         "jersey": 17,
         "team": "新北國王",
+        "game_played": 34,
+        "minutes": "00:15:36",
         "points": "4.90",
         "All_goals_made": "3.10",
         "All_goals": "5.10",
@@ -1485,10 +1595,12 @@
         "fouls": "1.20"
     },
     {
-        "id": 119,
+        "id": 236,
         "player": "高承恩",
         "jersey": 22,
         "team": "新北國王",
+        "game_played": 3,
+        "minutes": "00:02:17",
         "points": "2.30",
         "All_goals_made": "1.70",
         "All_goals": "1.70",
@@ -1512,10 +1624,12 @@
         "fouls": "0.70"
     },
     {
-        "id": 120,
+        "id": 237,
         "player": "姜廣謙",
         "jersey": 2,
         "team": "新竹街口攻城獅",
+        "game_played": 18,
+        "minutes": "00:07:40",
         "points": "1.90",
         "All_goals_made": "1.40",
         "All_goals": "2.00",
@@ -1539,10 +1653,12 @@
         "fouls": "0.50"
     },
     {
-        "id": 121,
+        "id": 238,
         "player": "曾柏喻",
         "jersey": 7,
         "team": "新竹街口攻城獅",
+        "game_played": 38,
+        "minutes": "00:21:10",
         "points": "5.40",
         "All_goals_made": "3.30",
         "All_goals": "5.30",
@@ -1566,10 +1682,12 @@
         "fouls": "0.90"
     },
     {
-        "id": 122,
+        "id": 239,
         "player": "伊波卡",
         "jersey": 7,
         "team": "新竹街口攻城獅",
+        "game_played": 36,
+        "minutes": "00:15:54",
         "points": "5.30",
         "All_goals_made": "2.50",
         "All_goals": "5.20",
@@ -1593,10 +1711,12 @@
         "fouls": "2.10"
     },
     {
-        "id": 123,
+        "id": 240,
         "player": "呂奇旻",
         "jersey": 23,
         "team": "新竹街口攻城獅",
+        "game_played": 30,
+        "minutes": "00:09:17",
         "points": "1.20",
         "All_goals_made": "1.70",
         "All_goals": "2.30",
@@ -1620,10 +1740,12 @@
         "fouls": "1.20"
     },
     {
-        "id": 124,
+        "id": 241,
         "player": "阿提諾",
         "jersey": 31,
         "team": "新竹街口攻城獅",
+        "game_played": 28,
+        "minutes": "00:36:59",
         "points": "19.60",
         "All_goals_made": "9.80",
         "All_goals": "18.00",
@@ -1647,10 +1769,12 @@
         "fouls": "3.40"
     },
     {
-        "id": 125,
+        "id": 242,
         "player": "丁恩迪",
         "jersey": 1,
         "team": "桃園領航猿",
+        "game_played": 19,
+        "minutes": "00:13:44",
         "points": "3.60",
         "All_goals_made": "1.70",
         "All_goals": "3.20",
@@ -1674,10 +1798,12 @@
         "fouls": "2.30"
     },
     {
-        "id": 126,
+        "id": 243,
         "player": "林子洧",
         "jersey": 10,
         "team": "桃園領航猿",
+        "game_played": 7,
+        "minutes": "00:05:14",
         "points": "1.40",
         "All_goals_made": "1.40",
         "All_goals": "2.30",
@@ -1701,10 +1827,12 @@
         "fouls": "0.40"
     },
     {
-        "id": 127,
+        "id": 244,
         "player": "桑尼",
         "jersey": 13,
         "team": "桃園領航猿",
+        "game_played": 26,
+        "minutes": "00:28:50",
         "points": "17.10",
         "All_goals_made": "8.70",
         "All_goals": "13.70",
@@ -1728,10 +1856,12 @@
         "fouls": "2.30"
     },
     {
-        "id": 128,
+        "id": 245,
         "player": "張鎮衙",
         "jersey": 27,
         "team": "桃園領航猿",
+        "game_played": 33,
+        "minutes": "00:14:50",
         "points": "5.00",
         "All_goals_made": "4.10",
         "All_goals": "4.60",
@@ -1755,10 +1885,12 @@
         "fouls": "1.20"
     },
     {
-        "id": 129,
+        "id": 246,
         "player": "白曜誠",
         "jersey": 30,
         "team": "桃園領航猿",
+        "game_played": 40,
+        "minutes": "00:25:34",
         "points": "5.50",
         "All_goals_made": "4.20",
         "All_goals": "6.20",
@@ -1782,10 +1914,12 @@
         "fouls": "2.10"
     },
     {
-        "id": 130,
+        "id": 247,
         "player": "沃許本",
         "jersey": 42,
         "team": "桃園領航猿",
+        "game_played": 26,
+        "minutes": "00:33:12",
         "points": "21.30",
         "All_goals_made": "9.80",
         "All_goals": "15.50",
@@ -1809,10 +1943,12 @@
         "fouls": "1.80"
     },
     {
-        "id": 131,
+        "id": 248,
         "player": "鐵米",
         "jersey": 0,
         "team": "高雄17直播鋼鐵人",
+        "game_played": 22,
+        "minutes": "00:35:51",
         "points": "20.50",
         "All_goals_made": "11.30",
         "All_goals": "16.00",
@@ -1836,10 +1972,12 @@
         "fouls": "2.30"
     },
     {
-        "id": 132,
+        "id": 249,
         "player": "林柏豪",
         "jersey": 1,
         "team": "高雄17直播鋼鐵人",
+        "game_played": 11,
+        "minutes": "00:09:55",
         "points": "2.90",
         "All_goals_made": "2.30",
         "All_goals": "3.50",
@@ -1863,10 +2001,12 @@
         "fouls": "0.60"
     },
     {
-        "id": 133,
+        "id": 250,
         "player": "張傑瑋",
         "jersey": 0,
         "team": "高雄17直播鋼鐵人",
+        "game_played": 32,
+        "minutes": "00:12:16",
         "points": "4.40",
         "All_goals_made": "2.60",
         "All_goals": "4.10",
@@ -1890,10 +2030,12 @@
         "fouls": "1.30"
     },
     {
-        "id": 134,
+        "id": 251,
         "player": "鉑伊",
         "jersey": 16,
         "team": "高雄17直播鋼鐵人",
+        "game_played": 1,
+        "minutes": "00:30:34",
         "points": "16.00",
         "All_goals_made": "8.00",
         "All_goals": "17.00",
@@ -1917,10 +2059,12 @@
         "fouls": "2.00"
     },
     {
-        "id": 135,
+        "id": 252,
         "player": "林郅為",
         "jersey": 18,
         "team": "高雄17直播鋼鐵人",
+        "game_played": 8,
+        "minutes": "00:09:28",
         "points": "1.40",
         "All_goals_made": "0.50",
         "All_goals": "3.60",
@@ -1944,10 +2088,12 @@
         "fouls": "1.40"
     },
     {
-        "id": 136,
+        "id": 253,
         "player": "林書豪",
         "jersey": 7,
         "team": "高雄17直播鋼鐵人",
+        "game_played": 19,
+        "minutes": "00:37:15",
         "points": "26.30",
         "All_goals_made": "12.40",
         "All_goals": "19.70",
@@ -1971,10 +2117,12 @@
         "fouls": "3.20"
     },
     {
-        "id": 137,
+        "id": 254,
         "player": "卡拉曼",
         "jersey": 35,
         "team": "福爾摩沙台新夢想家",
+        "game_played": 13,
+        "minutes": "00:31:38",
         "points": "20.90",
         "All_goals_made": "12.90",
         "All_goals": "19.40",
@@ -1998,10 +2146,12 @@
         "fouls": "3.10"
     },
     {
-        "id": 138,
+        "id": 255,
         "player": "陳則語",
         "jersey": 26,
         "team": "新竹街口攻城獅",
+        "game_played": 4,
+        "minutes": "00:05:20",
         "points": "2.20",
         "All_goals_made": "1.20",
         "All_goals": "2.00",
@@ -2025,10 +2175,12 @@
         "fouls": "1.80"
     },
     {
-        "id": 139,
+        "id": 256,
         "player": "艾爾斯",
         "jersey": 4,
         "team": "桃園領航猿",
+        "game_played": 27,
+        "minutes": "00:30:10",
         "points": "15.90",
         "All_goals_made": "8.40",
         "All_goals": "11.60",
@@ -2052,10 +2204,12 @@
         "fouls": "3.00"
     },
     {
-        "id": 140,
+        "id": 257,
         "player": "孫思堯",
         "jersey": 20,
         "team": "高雄17直播鋼鐵人",
+        "game_played": 21,
+        "minutes": "00:13:18",
         "points": "3.90",
         "All_goals_made": "1.80",
         "All_goals": "3.00",
@@ -2079,10 +2233,12 @@
         "fouls": "1.40"
     },
     {
-        "id": 141,
+        "id": 258,
         "player": "李家慷",
         "jersey": 12,
         "team": "桃園領航猿",
+        "game_played": 13,
+        "minutes": "00:21:34",
         "points": "5.10",
         "All_goals_made": "4.20",
         "All_goals": "5.80",
@@ -2106,10 +2262,12 @@
         "fouls": "2.00"
     },
     {
-        "id": 142,
+        "id": 259,
         "player": "林金榜",
         "jersey": 19,
         "team": "新北國王",
+        "game_played": 30,
+        "minutes": "00:13:36",
         "points": "3.00",
         "All_goals_made": "2.30",
         "All_goals": "4.30",
@@ -2133,10 +2291,12 @@
         "fouls": "2.10"
     },
     {
-        "id": 143,
+        "id": 260,
         "player": "塞瑟夫",
         "jersey": 32,
         "team": "臺北富邦勇士",
+        "game_played": 21,
+        "minutes": "00:35:57",
         "points": "16.10",
         "All_goals_made": "8.20",
         "All_goals": "11.70",
@@ -2160,10 +2320,12 @@
         "fouls": "2.30"
     },
     {
-        "id": 144,
+        "id": 261,
         "player": "張宗憲",
         "jersey": 3,
         "team": "臺北富邦勇士",
+        "game_played": 33,
+        "minutes": "00:25:36",
         "points": "10.20",
         "All_goals_made": "5.90",
         "All_goals": "11.00",
@@ -2187,10 +2349,12 @@
         "fouls": "1.50"
     },
     {
-        "id": 145,
+        "id": 262,
         "player": "辛特力",
         "jersey": 17,
         "team": "臺北富邦勇士",
+        "game_played": 28,
+        "minutes": "00:38:13",
         "points": "23.30",
         "All_goals_made": "13.10",
         "All_goals": "17.70",
@@ -2214,10 +2378,12 @@
         "fouls": "2.80"
     },
     {
-        "id": 146,
+        "id": 263,
         "player": "林正",
         "jersey": 25,
         "team": "桃園領航猿",
+        "game_played": 31,
+        "minutes": "00:12:14",
         "points": "2.90",
         "All_goals_made": "1.80",
         "All_goals": "3.40",
@@ -2241,10 +2407,12 @@
         "fouls": "1.90"
     },
     {
-        "id": 147,
+        "id": 264,
         "player": "戴維斯",
         "jersey": 50,
         "team": "新北國王",
+        "game_played": 38,
+        "minutes": "00:24:28",
         "points": "10.30",
         "All_goals_made": "5.70",
         "All_goals": "7.40",
@@ -2268,10 +2436,12 @@
         "fouls": "3.00"
     },
     {
-        "id": 148,
+        "id": 265,
         "player": "錢肯尼",
         "jersey": 23,
         "team": "福爾摩沙台新夢想家",
+        "game_played": 31,
+        "minutes": "00:32:34",
         "points": "9.40",
         "All_goals_made": "6.40",
         "All_goals": "9.90",
@@ -2295,10 +2465,12 @@
         "fouls": "2.50"
     },
     {
-        "id": 149,
+        "id": 266,
         "player": "林明毅",
         "jersey": 3,
         "team": "新竹街口攻城獅",
+        "game_played": 9,
+        "minutes": "00:10:25",
         "points": "1.40",
         "All_goals_made": "1.30",
         "All_goals": "1.70",
@@ -2322,10 +2494,12 @@
         "fouls": "0.40"
     },
     {
-        "id": 150,
+        "id": 267,
         "player": "李愷諺",
         "jersey": 9,
         "team": "新北國王",
+        "game_played": 33,
+        "minutes": "00:26:53",
         "points": "8.90",
         "All_goals_made": "5.50",
         "All_goals": "8.40",
@@ -2349,10 +2523,12 @@
         "fouls": "2.30"
     },
     {
-        "id": 151,
+        "id": 268,
         "player": "陳俊男",
         "jersey": 3,
         "team": "新北國王",
+        "game_played": 36,
+        "minutes": "00:14:57",
         "points": "3.60",
         "All_goals_made": "2.40",
         "All_goals": "4.20",
@@ -2376,10 +2552,12 @@
         "fouls": "1.40"
     },
     {
-        "id": 152,
+        "id": 269,
         "player": "楊興治",
         "jersey": 13,
         "team": "新北國王",
+        "game_played": 23,
+        "minutes": "00:08:18",
         "points": "1.60",
         "All_goals_made": "0.70",
         "All_goals": "1.40",
@@ -2403,10 +2581,12 @@
         "fouls": "1.20"
     },
     {
-        "id": 153,
+        "id": 270,
         "player": "簡祐哲",
         "jersey": 10,
         "team": "新北國王",
+        "game_played": 37,
+        "minutes": "00:17:30",
         "points": "6.00",
         "All_goals_made": "4.30",
         "All_goals": "5.60",
@@ -2430,10 +2610,12 @@
         "fouls": "1.50"
     },
     {
-        "id": 154,
+        "id": 271,
         "player": "林仕軒",
         "jersey": 2,
         "team": "新北國王",
+        "game_played": 9,
+        "minutes": "00:05:47",
         "points": "1.70",
         "All_goals_made": "0.90",
         "All_goals": "1.30",
@@ -2457,10 +2639,12 @@
         "fouls": "0.40"
     },
     {
-        "id": 155,
+        "id": 272,
         "player": "洪楷傑",
         "jersey": 11,
         "team": "臺北富邦勇士",
+        "game_played": 40,
+        "minutes": "00:20:59",
         "points": "6.90",
         "All_goals_made": "4.70",
         "All_goals": "5.90",
@@ -2484,10 +2668,12 @@
         "fouls": "1.90"
     },
     {
-        "id": 156,
+        "id": 273,
         "player": "李睿麒",
         "jersey": 1,
         "team": "新北國王",
+        "game_played": 5,
+        "minutes": "00:06:11",
         "points": "1.00",
         "All_goals_made": "1.20",
         "All_goals": "1.80",
@@ -2511,10 +2697,12 @@
         "fouls": "0.40"
     },
     {
-        "id": 157,
+        "id": 274,
         "player": "曾于豪",
         "jersey": 15,
         "team": "新北國王",
+        "game_played": 5,
+        "minutes": "00:12:25",
         "points": "3.60",
         "All_goals_made": "1.60",
         "All_goals": "3.00",
@@ -2538,10 +2726,12 @@
         "fouls": "2.60"
     },
     {
-        "id": 158,
+        "id": 275,
         "player": "聶歐瑪",
         "jersey": 25,
         "team": "新北國王",
+        "game_played": 23,
+        "minutes": "00:10:52",
         "points": "1.30",
         "All_goals_made": "0.60",
         "All_goals": "1.80",
@@ -2565,10 +2755,12 @@
         "fouls": "1.90"
     },
     {
-        "id": 159,
+        "id": 276,
         "player": "張文平",
         "jersey": 10,
         "team": "臺北富邦勇士",
+        "game_played": 10,
+        "minutes": "00:08:08",
         "points": "2.20",
         "All_goals_made": "2.30",
         "All_goals": "2.60",
@@ -2592,10 +2784,12 @@
         "fouls": "0.60"
     },
     {
-        "id": 160,
+        "id": 277,
         "player": "林宜輝",
         "jersey": 36,
         "team": "新竹街口攻城獅",
+        "game_played": 7,
+        "minutes": "00:16:08",
         "points": "3.40",
         "All_goals_made": "2.70",
         "All_goals": "4.00",
@@ -2619,10 +2813,12 @@
         "fouls": "1.10"
     },
     {
-        "id": 161,
+        "id": 278,
         "player": "朱雲豪",
         "jersey": 8,
         "team": "新竹街口攻城獅",
+        "game_played": 27,
+        "minutes": "00:27:03",
         "points": "8.10",
         "All_goals_made": "6.00",
         "All_goals": "7.40",
@@ -2646,10 +2842,12 @@
         "fouls": "2.30"
     },
     {
-        "id": 162,
+        "id": 279,
         "player": "黃泓瀚",
         "jersey": 22,
         "team": "桃園領航猿",
+        "game_played": 37,
+        "minutes": "00:19:51",
         "points": "4.50",
         "All_goals_made": "3.00",
         "All_goals": "4.50",
@@ -2673,10 +2871,12 @@
         "fouls": "2.10"
     },
     {
-        "id": 163,
+        "id": 280,
         "player": "陳昱瑞",
         "jersey": 2,
         "team": "桃園領航猿",
+        "game_played": 30,
+        "minutes": "00:11:38",
         "points": "2.00",
         "All_goals_made": "1.70",
         "All_goals": "2.50",
@@ -2700,10 +2900,12 @@
         "fouls": "1.30"
     },
     {
-        "id": 164,
+        "id": 281,
         "player": "盧峻翔",
         "jersey": 69,
         "team": "桃園領航猿",
+        "game_played": 39,
+        "minutes": "00:31:24",
         "points": "14.30",
         "All_goals_made": "10.20",
         "All_goals": "14.60",
@@ -2727,10 +2929,12 @@
         "fouls": "2.00"
     },
     {
-        "id": 165,
+        "id": 282,
         "player": "吳永盛",
         "jersey": 6,
         "team": "福爾摩沙台新夢想家",
+        "game_played": 38,
+        "minutes": "00:24:32",
         "points": "6.20",
         "All_goals_made": "5.60",
         "All_goals": "7.70",
@@ -2754,10 +2958,12 @@
         "fouls": "2.60"
     },
     {
-        "id": 166,
+        "id": 283,
         "player": "簡浩",
         "jersey": 21,
         "team": "福爾摩沙台新夢想家",
+        "game_played": 25,
+        "minutes": "00:20:53",
         "points": "6.40",
         "All_goals_made": "5.30",
         "All_goals": "5.80",
@@ -2781,10 +2987,12 @@
         "fouls": "0.90"
     },
     {
-        "id": 167,
+        "id": 284,
         "player": "吉爾貝克",
         "jersey": 34,
         "team": "福爾摩沙台新夢想家",
+        "game_played": 37,
+        "minutes": "00:30:31",
         "points": "17.10",
         "All_goals_made": "6.60",
         "All_goals": "11.60",
@@ -2808,10 +3016,12 @@
         "fouls": "3.50"
     },
     {
-        "id": 168,
+        "id": 285,
         "player": "王振原",
         "jersey": 8,
         "team": "福爾摩沙台新夢想家",
+        "game_played": 6,
+        "minutes": "00:02:56",
         "points": "2.00",
         "All_goals_made": "0.80",
         "All_goals": "1.00",
@@ -2835,10 +3045,12 @@
         "fouls": "0.00"
     },
     {
-        "id": 169,
+        "id": 286,
         "player": "呂政儒",
         "jersey": 13,
         "team": "高雄17直播鋼鐵人",
+        "game_played": 36,
+        "minutes": "00:26:58",
         "points": "8.40",
         "All_goals_made": "7.20",
         "All_goals": "8.30",
@@ -2862,10 +3074,12 @@
         "fouls": "2.30"
     },
     {
-        "id": 170,
+        "id": 287,
         "player": "藍少甫",
         "jersey": 23,
         "team": "高雄17直播鋼鐵人",
+        "game_played": 28,
+        "minutes": "00:17:01",
         "points": "5.20",
         "All_goals_made": "3.70",
         "All_goals": "5.20",
@@ -2889,10 +3103,12 @@
         "fouls": "1.90"
     },
     {
-        "id": 171,
+        "id": 288,
         "player": "林均濠",
         "jersey": 11,
         "team": "高雄17直播鋼鐵人",
+        "game_played": 7,
+        "minutes": "00:02:03",
         "points": "0.60",
         "All_goals_made": "0.40",
         "All_goals": "0.40",
@@ -2916,10 +3132,12 @@
         "fouls": "0.30"
     },
     {
-        "id": 172,
+        "id": 289,
         "player": "鄭德維",
         "jersey": 12,
         "team": "高雄17直播鋼鐵人",
+        "game_played": 2,
+        "minutes": "00:01:48",
         "points": "1.50",
         "All_goals_made": "0.50",
         "All_goals": "0.50",
@@ -2943,10 +3161,12 @@
         "fouls": "0.50"
     },
     {
-        "id": 173,
+        "id": 290,
         "player": "陳又瑋",
         "jersey": 4,
         "team": "高雄17直播鋼鐵人",
+        "game_played": 37,
+        "minutes": "00:34:43",
         "points": "9.40",
         "All_goals_made": "6.40",
         "All_goals": "9.60",
@@ -2970,10 +3190,12 @@
         "fouls": "2.00"
     },
     {
-        "id": 174,
+        "id": 291,
         "player": "王律翔",
         "jersey": 8,
         "team": "高雄17直播鋼鐵人",
+        "game_played": 39,
+        "minutes": "00:25:47",
         "points": "8.50",
         "All_goals_made": "5.90",
         "All_goals": "7.80",
@@ -2997,10 +3219,12 @@
         "fouls": "2.10"
     },
     {
-        "id": 175,
+        "id": 292,
         "player": "辛巴",
         "jersey": 35,
         "team": "新竹街口攻城獅",
+        "game_played": 6,
+        "minutes": "00:36:03",
         "points": "18.30",
         "All_goals_made": "7.50",
         "All_goals": "11.80",
@@ -3024,10 +3248,12 @@
         "fouls": "2.30"
     },
     {
-        "id": 176,
+        "id": 293,
         "player": "福斯特",
         "jersey": 2,
         "team": "福爾摩沙台新夢想家",
+        "game_played": 1,
+        "minutes": "00:27:00",
         "points": "16.00",
         "All_goals_made": "9.00",
         "All_goals": "11.00",
@@ -3051,10 +3277,12 @@
         "fouls": "4.00"
     },
     {
-        "id": 177,
+        "id": 294,
         "player": "洪志善",
         "jersey": 24,
         "team": "新北國王",
+        "game_played": 22,
+        "minutes": "00:15:12",
         "points": "4.70",
         "All_goals_made": "3.70",
         "All_goals": "4.20",
@@ -3078,10 +3306,12 @@
         "fouls": "1.00"
     },
     {
-        "id": 178,
+        "id": 295,
         "player": "麥卡洛",
         "jersey": 5,
         "team": "福爾摩沙台新夢想家",
+        "game_played": 8,
+        "minutes": "00:30:49",
         "points": "18.90",
         "All_goals_made": "12.20",
         "All_goals": "19.40",
@@ -3105,10 +3335,12 @@
         "fouls": "3.40"
     },
     {
-        "id": 179,
+        "id": 296,
         "player": "班尼特",
         "jersey": 20,
         "team": "新竹街口攻城獅",
+        "game_played": 17,
+        "minutes": "00:39:42",
         "points": "22.60",
         "All_goals_made": "14.40",
         "All_goals": "18.40",
@@ -3132,10 +3364,12 @@
         "fouls": "3.00"
     },
     {
-        "id": 180,
+        "id": 297,
         "player": "哈里斯",
         "jersey": 3,
         "team": "高雄17直播鋼鐵人",
+        "game_played": 2,
+        "minutes": "00:34:23",
         "points": "18.50",
         "All_goals_made": "11.50",
         "All_goals": "18.00",

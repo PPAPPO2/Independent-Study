@@ -1,11 +1,16 @@
 from django.db import models
-from django.db.models.base import Model
+from django.core.exceptions import ValidationError
 
 # Create your models here.
 class Season_Players_Performance(models.Model):
     player = models.CharField(max_length=10)
     jersey = models.IntegerField()
     team = models.CharField(max_length=10)
+
+    # 新增球員出賽場次 & 出賽時間
+    game_played = models.IntegerField(default=0)
+    minutes = models.CharField(max_length=5, default='00:00')
+
     points = models.DecimalField(max_digits=10, decimal_places=2)
     #總命中
     All_goals_made = models.DecimalField(max_digits=10, decimal_places=2,default=0) #要加
