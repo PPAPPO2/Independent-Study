@@ -12,7 +12,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **kwargs):
         # 爬取JSON檔案的URL
-        year = '2023-24'
+        year = '2020-21'
         url = f'https://pleagueofficial.com/stat-team/{year}/2#record'
         headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36'}
 
@@ -40,7 +40,7 @@ class Command(BaseCommand):
         temp = json.loads(data)
 
         # 刪除現有的P_TeamStanding模型實例
-        P_Season_teams_Performance_23_24.objects.all().delete()
+        P_Season_teams_Performance_20_21.objects.all().delete()
 
         #創建一個P_TeamStandingxx_xx模型
         # 遍歷JSON數據
@@ -75,7 +75,7 @@ class Command(BaseCommand):
                 All_goals_pct = round(total_made / total_attempts, 2)
 
             #創建一個T1_TeamStanding模型實例
-            P_Season_teams_Performance_23_24.objects.create(
+            P_Season_teams_Performance_20_21.objects.create(
             team = extract_team_name(FINAL_data['球隊']),
 
             All_goals_made = round(FINAL_data["兩分命中"]+FINAL_data["三分命中"],1),
@@ -84,11 +84,11 @@ class Command(BaseCommand):
             #兩分球數據
             field_goals_two_made = round(FINAL_data["兩分命中"],1),
             field_goals_two = round(FINAL_data["兩分出手"],1),
-            field_goals_two_pct = FINAL_data["兩分%"],
+            field_goals_two_pct = round(float(FINAL_data["兩分%"])/100,2),
             #三分球數據
             field_goals_three_made = round(FINAL_data["三分命中"],1),
             field_goals_three= round(FINAL_data["三分出手"], 1),
-            field_goals_three_pct = FINAL_data["三分%"],
+            field_goals_three_pct = round(float(FINAL_data["三分%"])/100,2),
             #罰球數據
             free_throws_made = round(FINAL_data["罰球命中"],1),
             free_throws = round(FINAL_data["罰球出手"],1),

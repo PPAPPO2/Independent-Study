@@ -1,8 +1,9 @@
+import datetime
 import requests
 from django.core.management.base import BaseCommand
 from cat.models import T1_Season_Players_Performance_23_24,T1_Season_Players_Performance_22_23,T1_Season_Players_Performance_21_22
 import json
-from datetime import timedelta
+from datetime import datetime, timedelta
 from django.db import connection
 
 class Command(BaseCommand):
@@ -12,7 +13,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **kwargs):
         # 爬取JSON檔案的URL
-        url = 'https://api.t1league.basketball/season/4/stages/13/rosters'
+        url = 'https://api.t1league.basketball/season/1/stages/2/rosters'
         headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36'}
 
         # 發送GET請求並獲取響應
@@ -21,10 +22,20 @@ class Command(BaseCommand):
         data = json.loads(response.text)
 
         # 刪除現有的T1_Season_Players_Performance模型實例
-        T1_Season_Players_Performance_23_24.objects.all().delete()
-
+        T1_Season_Players_Performance_22_23.objects.all().delete()
+        def get_time(seconds):
+            if isinstance(seconds, (int, float)):
+                time_delta = timedelta(seconds=seconds)
+                minutes, seconds = divmod(int(time_delta.total_seconds()), 60)
+                return f"{minutes:02d}:{seconds:02d}"
+            else:
+                try:
+                    return datetime.strptime(seconds, "%M:%S").time().strftime("%M:%S")
+                except ValueError:
+                    # 如果轉換失敗，返回原始值或者一個默認值
+                    return seconds  # 或者返回 "00:00"
         with connection.cursor() as cursor:
-            cursor.execute("DELETE FROM sqlite_sequence WHERE name = 'cat_t1_season_players_performance_23_24';")
+            cursor.execute("DELETE FROM sqlite_sequence WHERE name = 'cat_t1_season_players_performance_21_22';")
         # 遍歷JSON數據
         for roster in data:
             rosters = roster["average"]
@@ -39,11 +50,13 @@ class Command(BaseCommand):
                 All_goals_pct = round(total_made / total_attempts, 2)
 
             # 創建一個T1_Season_Players_Performance模型實例
-            T1_Season_Players_Performance_23_24.objects.create(
+            T1_Season_Players_Performance_21_22.objects.create(
                 player=rosters["name_alt"],
                 jersey=rosters["jersey"],
                 team=rosters["team_name_alt"],
                 points=round(rosters["points"], 1),
+                game_played = rosters["gp"],
+                minutes = get_time(rosters["seconds"]),
                 All_goals_made=round(total_made, 1),
                 All_goals=round(total_attempts, 1),
                 All_goals_pct=All_goals_pct,

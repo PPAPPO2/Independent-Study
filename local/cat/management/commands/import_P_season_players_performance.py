@@ -7,11 +7,11 @@ from datetime import datetime
 from decimal import Decimal
 import pandas as pd
 import json
-
+from django.db import connection
 class Command(BaseCommand):
     
     def handle(self, *args, **kwargs):
-        year = '2023-24'
+        year = '2020-21'
         url = f'https://pleagueofficial.com/stat-player/{year}/2#record'
         headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36'}
 
@@ -38,7 +38,7 @@ class Command(BaseCommand):
         # 將響應內容從JSON格式轉換為Python字典
         temp = json.loads(data)
         # 清空現有數據
-        P_Season_Players_Performance_23_24.objects.all().delete()
+        P_Season_Players_Performance_20_21.objects.all().delete()
 
         def convert_to_float(data):
             for key, value in data.items():
@@ -56,7 +56,8 @@ class Command(BaseCommand):
                 temp = time_str+'00'
                 temp = datetime.strptime(temp, '%M:%S').time()
             return temp
-        
+        with connection.cursor() as cursor:
+            cursor.execute("DELETE FROM sqlite_sequence WHERE name = 'cat_p_season_players_performance_20_21';")
 # 遍歷JSON數據
         for rosters in temp:
             # 計算總命中數和總出手數
@@ -70,7 +71,7 @@ class Command(BaseCommand):
                 All_goals_pct = round(total_made / total_attempts, 2)
 
             # 創建一個T1_Season_Players_Performance模型實例
-            P_Season_Players_Performance_23_24.objects.create(
+            P_Season_Players_Performance_20_21.objects.create(
                 player=rosters["球員"],
                 jersey=rosters["背號"],
                 team=rosters["球隊"],
@@ -83,15 +84,15 @@ class Command(BaseCommand):
                 # 兩分球數據
                 field_goals_two_made=round(rosters["兩分命中"], 1),
                 field_goals_two=round(rosters["兩分出手"] + rosters["兩分命中"], 1),
-                field_goals_two_pct=rosters['兩分%'],
+                field_goals_two_pct = round(float(rosters['兩分%']) / 100, 2),
                 # 三分球數據
                 field_goals_three_made=round(rosters["三分命中"], 1),
                 field_goals_three=round(rosters["三分出手"] + rosters["三分命中"], 1),
-                field_goals_three_pct=rosters['三分%'],
+                field_goals_three_pct=round(float(rosters['三分%'])/100,2),
                 # 罰球數據
                 free_throws_made=round(rosters["罰球命中"], 1),
                 free_throws=round(rosters["罰球出手"] + rosters["罰球命中"], 1),
-                free_throws_pct=rosters['罰球%'],
+                free_throws_pct=round(float(rosters['罰球%'])/100,2),
                 # 其他數據
                 offensive_rebounds=round(rosters["攻板"], 1),
                 defensive_rebounds=round(rosters["防板"], 1),
