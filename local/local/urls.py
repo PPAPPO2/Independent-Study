@@ -26,4 +26,4 @@ urlpatterns = [
     path('cat/', include('cat.urls')), # cat/ 轉發請求到模塊 cat.urls
     path('', RedirectView.as_view(url='/cat/')), # 重新導向 URL 127.0.0.1:8000/cat/
     path('accounts/', include('django.contrib.auth.urls')), # 導向到 accunts
-] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) # 啟用靜態文件的提供
+]  + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)# 啟用靜態文件的提供
