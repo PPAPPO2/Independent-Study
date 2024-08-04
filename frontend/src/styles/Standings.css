@@ -1,0 +1,108 @@
+header {
+  background: linear-gradient(to right, #ffffff, #6dd5fa, #2980b9);
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+header div.logo {
+  display: flex;
+  align-items: center;
+  flex: 3 1 400px;
+  padding: 0.75rem 1rem;
+}
+header div.logo img.plg {
+  max-width: 12%;
+  height: auto;
+  vertical-align: middle;
+}
+
+.standings {
+  background: #172243;
+  margin: 0rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  padding: 1rem;
+  font-size: 2rem;
+}
+
+a {
+  padding-left: 2rem;
+  color: hsla(225, 49%, 18%, 0.5);
+  text-decoration: none;
+  font-size: 1rem;
+}
+
+a:hover {
+  color: #2980b9;
+  transition: 1s;
+}
+
+.table-title {
+  margin: 1em 0rem 0rem 2rem;
+}
+
+.table-body {
+  width: 85%;
+  margin: auto;
+}
+.table-body td.teams-name {
+  color: rgba(0, 0, 0, 0.726);
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+.table-body td.teams-name img.team-logo {
+  flex: 3 1 400px;
+  max-width: 20%;
+  height: auto;
+  vertical-align: middle;
+  margin-right: 2rem;
+}
+
+tbody {
+  border-spacing: 0;
+  width: 100%;
+}
+
+td {
+  justify-content: center;
+  padding: 1rem 3rem;
+  font-size: 1.25rem;
+}
+
+tr {
+  text-align: center;
+}
+
+th {
+  justify-content: center;
+  font-size: 1.5rem;
+  padding: 1.5rem 0rem;
+}
+
+table tbody tr:nth-child(odd) {
+  background-color: #eee;
+}
+
+table thead {
+  background-color: #172243;
+  color: white;
+}
+
+table thead th:first-child {
+  border-radius: 5px 0 0 0;
+}
+
+table thead th:last-child {
+  border-radius: 0 5px 0 0;
+}
+
+table tbody tr:last-child td:first-child {
+  border-radius: 0 0 0 5px;
+}
+
+table tbody tr:last-child td:last-child {
+  border-radius: 0 0 5px 0;
+}/*# sourceMappingURL=Standings.css.map */

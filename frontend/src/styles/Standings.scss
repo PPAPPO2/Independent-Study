@@ -1,0 +1,102 @@
+// 定義漸層顏色變數
+$gradient-colors: #ffffff, #6dd5fa, #2980b9;
+
+header {
+  background: linear-gradient(to right, $gradient-colors);
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  div.logo {
+    display: flex;
+    align-items: center;
+    flex: 3 1 400px;
+    padding: 0.75rem 1rem;
+    img.plg {
+      max-width: 12%;
+      height: auto;
+      vertical-align: middle;
+    }
+  }
+}
+
+.standings {
+  background: #172243;
+  margin: 0rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  padding: 1rem;
+  font-size: 2rem;
+}
+a {
+  padding-left: 2rem;
+  color: hsl(225, 49%, 18%, 50%);
+  text-decoration: none;
+  font-size: 1rem;
+}
+a:hover {
+  color: #2980b9;
+  transition: 1s;
+}
+.table-title {
+  margin: 1em 0rem 0rem 2rem;
+}
+
+.table-body {
+  width: 85%;
+  margin: auto;
+  td.teams-name {
+    color: rgba(0, 0, 0, 0.726);
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    img.team-logo {
+      flex: 3 1 400px;
+      max-width: 20%;
+      height: auto;
+      vertical-align: middle;
+      margin-right: 2rem;
+    }
+  }
+}
+
+tbody {
+  border-spacing: 0;
+  width: 100%;
+}
+td {
+  justify-content: center;
+  padding: 1rem 3rem;
+  font-size: 1.25rem;
+}
+tr {
+  text-align: center;
+}
+th {
+  justify-content: center;
+  font-size: 1.5rem;
+  padding: 1.5rem 0rem;
+}
+table tbody tr:nth-child(odd) {
+  //奇數列背景顏色
+  background-color: #eee;
+}
+table thead {
+  background-color: #172243;
+  color: white;
+}
+//對四個角的要素做調整
+table thead th:first-child {
+  border-radius: 5px 0 0 0;
+}
+table thead th:last-child {
+  border-radius: 0 5px 0 0;
+}
+table tbody tr:last-child td:first-child {
+  border-radius: 0 0 0 5px;
+}
+
+table tbody tr:last-child td:last-child {
+  border-radius: 0 0 5px 0;
+}
