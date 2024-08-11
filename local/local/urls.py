@@ -20,10 +20,17 @@ from django.conf.urls import include
 from django.views.generic import RedirectView
 from django.conf import settings
 from django.conf.urls.static import static
+import os
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('cat/', include('cat.urls')), # cat/ 轉發請求到模塊 cat.urls
-    path('', RedirectView.as_view(url='/cat/')), # 重新導向 URL 127.0.0.1:8000/cat/
-    path('accounts/', include('django.contrib.auth.urls')), # 導向到 accunts
-]  + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)# 啟用靜態文件的提供
+    path('cat/', include('cat.urls')),  # cat/ 轉發請求到模塊 cat.urls
+    path('', RedirectView.as_view(url='/cat/')),  # 重新導向 URL 127.0.0.1:8000/cat/
+    path('accounts/', include('django.contrib.auth.urls')),  # 導向到 accounts
+]
+
+# 啟用靜態文件的提供
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
+# 新增處理 /images/ 的路徑
+urlpatterns += static('/images/', document_root=os.path.join(settings.BASE_DIR, 'frontend', 'public', 'images'))

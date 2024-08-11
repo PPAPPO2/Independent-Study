@@ -38,27 +38,27 @@ const Standings = () => {
   const getTeamIcon = (teamName) => {
     switch (teamName) {
       case "桃園璞園領航猿":
-        return `/static/images/icon/桃園璞園領航猿.png`;
+        return `/images/icon/${encodeURIComponent("桃園璞園領航猿.png")}`;
       case "福爾摩沙夢想家":
-        return `/static/images/icon/福爾摩沙夢想家.png`;
+        return `/images/icon/福爾摩沙夢想家.png`;
       case "新北國王":
-        return `/static/images/icon/新北國王.png`;
+        return `/images/icon/新北國王.png`;
       case "新竹御頂攻城獅":
-        return `/static/images/icon/新竹御頂攻城獅.png`;
+        return `/images/icon/新竹御頂攻城獅.png`;
       case "臺北富邦勇士":
-        return `/static/images/icon/臺北富邦勇士.png`;
+        return `/images/icon/臺北富邦勇士.png`;
       case "高雄17直播鋼鐵人":
-        return `/static/images/icon/高雄17直播鋼鐵人.png`;
+        return `/images/icon/高雄17直播鋼鐵人.png`;
       case "新北中信特攻":
-        return `/static/images/icon/新北中信特攻.png`;
+        return `/images/icon/新北中信特攻.png`;
       case "台啤永豐雲豹":
-        return `/static/images/icon/台啤永豐雲豹.png`;
+        return `/images/icon/台啤永豐雲豹.png`;
       case "高雄全家海神":
-        return `/static/images/icon/高雄全家海神.png`;
+        return `/images/icon/高雄全家海神.png`;
       case "臺北戰神":
-        return `/static/images/icon/臺北戰神.png`;
+        return `/images/icon/臺北戰神.png`;
       case "臺南台鋼獵鷹":
-        return `/static/images/icon/臺南台鋼獵鷹.png`;
+        return `/images/icon/臺南台鋼獵鷹.png`;
       default:
         return "";
     }
