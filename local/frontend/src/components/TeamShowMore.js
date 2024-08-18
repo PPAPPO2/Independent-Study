@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
+import "../styles/ShowMore.css";
 
-const staticUrl = "/static/Standings";
+const staticUrl = "/static/Standings/TeamData/";
 
 const ShowMore = () => {
   const [season, setSeason] = useState("2023-24");
@@ -136,48 +137,57 @@ const ShowMore = () => {
   };
 
   return (
-    <div>
-      <select value={season} onChange={handleSeasonChange}>
-        <option value="2023-24">2023-24</option>
-        <option value="2022-23">2022-23</option>
-        <option value="2021-22">2021-22</option>
-        <option value="2020-21">2020-21</option>
-      </select>
+    <div className="show-more-container">
+      <div className="season-team-select">
+        <select
+          value={season}
+          onChange={handleSeasonChange}
+          className="season-select"
+        >
+          <option value="2023-24">2023-24</option>
+          <option value="2022-23">2022-23</option>
+          <option value="2021-22">2021-22</option>
+          <option value="2020-21">2020-21</option>
+        </select>
 
-      <div>
-        {teams[season].map((team) => (
-          <label key={team.id}>
-            <input
-              type="checkbox"
-              value={team.id}
-              checked={selectedTeams.includes(team.id.toString())}
-              onChange={() => handleTeamSelectChange(team.id.toString())}
-            />
-            {team.name}
-          </label>
-        ))}
+        <div className="team-select-container">
+          {teams[season].map((team) => (
+            <label key={team.id}>
+              <input
+                type="checkbox"
+                value={team.id}
+                checked={selectedTeams.includes(team.id.toString())}
+                onChange={() => handleTeamSelectChange(team.id.toString())}
+                className="team-select"
+              />
+              {team.name}
+            </label>
+          ))}
+        </div>
       </div>
 
-      <table>
-        <thead>
-          <tr>
-            {Object.keys(columnMapping).map((key) => (
-              <th key={key} onClick={() => sortTable(columnMapping[key])}>
-                {key}
-              </th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {data.map((teamData, index) => (
-            <tr key={index}>
+      <div className="table-container">
+        <table className="showMoreTable">
+          <thead>
+            <tr>
               {Object.keys(columnMapping).map((key) => (
-                <td key={key}>{teamData[columnMapping[key]]}</td>
+                <th key={key} onClick={() => sortTable(columnMapping[key])}>
+                  {key}
+                </th>
               ))}
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {data.map((teamData, index) => (
+              <tr key={index}>
+                {Object.keys(columnMapping).map((key) => (
+                  <td key={key}>{teamData[columnMapping[key]]}</td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };

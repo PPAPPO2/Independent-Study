@@ -113,8 +113,10 @@ const Standings = () => {
     <div>
       <h2 class="standings">RANKINGS</h2>
       <h2 class="table-title">PLG 例行賽</h2>
+      <a href="./showmore">showmore⭢</a>
       {renderTable(plgStandings)}
       <h2 class="table-title">T1 例行賽</h2>
+      <a href="./showmore">showmore⭢</a>
       {renderTable(t1Standings)}
     </div>
   );
