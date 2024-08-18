@@ -20,13 +20,17 @@ from django.conf.urls import include
 from django.views.generic import RedirectView
 from django.conf import settings
 from django.conf.urls.static import static
+from django.urls import path, re_path
+from django.views.generic import TemplateView
+
 import os
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('cat/', include('cat.urls')),  # cat/ 轉發請求到模塊 cat.urls
     path('', RedirectView.as_view(url='/cat/')),  # 重新導向 URL 127.0.0.1:8000/cat/
-    path('accounts/', include('django.contrib.auth.urls')),  # 導向到 accounts
+    path('accounts/', include('django.contrib.auth.urls')),
+    re_path(r'^.*$', TemplateView.as_view(template_name='index.html')),  # 這個路由將所有未匹配到的路由轉發到你的React應用
 ]
 
 # 啟用靜態文件的提供
