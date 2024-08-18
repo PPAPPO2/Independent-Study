@@ -38,7 +38,7 @@ const Standings = () => {
   const getTeamIcon = (teamName) => {
     switch (teamName) {
       case "桃園璞園領航猿":
-        return `/images/icon/${encodeURIComponent("桃園璞園領航猿.png")}`;
+        return `/images/icon/桃園璞園領航猿.png`;
       case "福爾摩沙夢想家":
         return `/images/icon/福爾摩沙夢想家.png`;
       case "新北國王":
