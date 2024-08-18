@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-const staticUrl = "/static/Standings/TeamData";
+const staticUrl = "/static/Standings";
 
 const ShowMore = () => {
   const [season, setSeason] = useState("2023-24");
