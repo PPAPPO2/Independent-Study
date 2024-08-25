@@ -10,13 +10,14 @@ def index(request):
 
 # 加載模型
 model_path = os.path.join(os.path.dirname(__file__), 'models', 'random_forest_model.pkl')
-model = joblib.load(model_path)
+with open(model_path, 'rb') as f:
+    model = joblib.load(f)
 
 def predict_win_probability(request):
     if request.method == 'GET':
         # 讀取數據
         file_path = os.path.join(os.path.dirname(__file__), 'models', 'combined_data.csv')
-        data = pd.read_csv(file_path)
+        data = pd.read_csv(file_path,encoding='utf-8')
 
         # 分割資料集，將資料集分為特徵 X 和標籤 y
         data['result'] = (data['points'] > data['points'].shift(-1)).astype(int)
@@ -55,6 +56,6 @@ def predict_win_probability(request):
         win_probability = simulated_predictions.mean()
 
         # 返回 JSON 響應
-        return JsonResponse({'win_probability': f'{win_probability * 100:.2f}%'})
+        return JsonResponse({'win_probability': f'{win_probability * 100:.2f}%'}, json_dumps_params={'ensure_ascii': False})
     else:
         return JsonResponse({'error': 'Invalid request method'}, status=400)
