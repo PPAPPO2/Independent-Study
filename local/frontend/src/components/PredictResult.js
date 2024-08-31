@@ -4,7 +4,7 @@ function PredictResult() {
     const [winProbability, setWinProbability] = useState(null);
 
     useEffect(() => {
-        fetch('/cat/predict/')
+        fetch('/mlServer/predict/')
             .then(response => response.json())
             .then(data => {
                 setWinProbability(data.win_probability);
