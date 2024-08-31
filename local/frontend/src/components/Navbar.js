@@ -15,12 +15,12 @@ const Navbar = () => {
       <nav>
         <ul>
           <li>
-            <Link to="/" className="active">
+            <Link to="/cat" className="active">
               戰績
             </Link>
           </li>
           <li>
-            <Link to="/statistics">數據</Link>
+            <Link to="/cat/showmore">數據</Link>
           </li>
           <li>
             <Link to="/schedule">賽程</Link>
@@ -29,7 +29,7 @@ const Navbar = () => {
             <Link to="/teams">球隊</Link>
           </li>
           <li>
-            <Link to="/news">消息</Link>
+            <Link to="/cat/predict/">預測</Link>
           </li>
           <li>
             <Link to="/login">登入</Link>
