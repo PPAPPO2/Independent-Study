@@ -5,10 +5,11 @@
 }
 .show-more-container .season-team-select .season-select,
 .show-more-container .season-team-select .team-select-container {
-  margin-right: 1rem;
+  margin-right: 2rem;
 }
 .show-more-container .season-team-select label {
   font-weight: bold;
+  font-size: 1.1rem;
   margin-right: 1rem;
 }
 .show-more-container .season-team-select select,
@@ -29,41 +30,14 @@
 }
 .show-more-container .season-team-select .team-select-container {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
 }
-.show-more-container .season-team-select .team-select-container .team-select {
+.show-more-container .season-team-select .team-select-container label {
+  flex: 0 0 15%;
   margin-right: 10px;
-}
-.show-more-container .season-team-select .team-select-container .dropdown {
-  position: relative;
-  display: inline-block;
-}
-.show-more-container .season-team-select .team-select-container .dropdown .dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f9f9f9;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-  z-index: 1;
-  max-height: 200px;
-  overflow-y: auto;
-}
-.show-more-container .season-team-select .team-select-container .dropdown .dropdown-content label {
-  display: block;
-  padding: 8px 12px;
-  cursor: pointer;
-}
-.show-more-container .season-team-select .team-select-container .dropdown .dropdown-content label:hover {
-  background-color: #f1f1f1;
-  color: #103dc3;
-}
-.show-more-container .season-team-select .team-select-container .confirm-btn {
-  padding: 8px 16px;
-  background-color: #172243;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
+  margin-bottom: 0.5rem;
+  white-space: nowrap;
 }
 .show-more-container .table-container {
   width: 85%;
@@ -79,6 +53,9 @@
   justify-content: center;
   padding: 1rem 1.5rem;
   font-size: 1rem;
+  word-wrap: break-word;
+  white-space: normal;
+  width: 150px;
 }
 .show-more-container .showMoreTable tr {
   text-align: center;
@@ -94,4 +71,10 @@
 .show-more-container .showMoreTable thead {
   background-color: #172243;
   color: white;
+}
+.show-more-container .showMoreTable td:first-child,
+.show-more-container .showMoreTable th:first-child {
+  width: 150px;
+  min-width: 150px;
+  max-width: 150px;
 }/*# sourceMappingURL=ShowMore.css.map */
