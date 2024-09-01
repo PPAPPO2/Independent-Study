@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import "../styles/Navbar.css";
 
 import plgLogo from "../logo/plg.png";
@@ -15,24 +15,42 @@ const Navbar = () => {
       <nav>
         <ul>
           <li>
-            <Link to="/cat" className="active">
+            <NavLink to="/cat" end activeClassName="active">
               戰績
-            </Link>
+            </NavLink>
+          </li>
+          <li className="dropdown">
+            <NavLink
+              to="/cat/showmore"
+              className="dropbtn"
+              activeClassName="active"
+            >
+              數據
+            </NavLink>
+            <div className="dropdown-content">
+              <NavLink to="/cat/showmore">球隊數據</NavLink>
+              <NavLink to="/cat/players">球員數據</NavLink>
+            </div>
           </li>
           <li>
-            <Link to="/cat/showmore">數據</Link>
+            <NavLink to="/schedule" activeClassName="active">
+              賽程
+            </NavLink>
           </li>
           <li>
-            <Link to="/schedule">賽程</Link>
+            <NavLink to="/teams" activeClassName="active">
+              球隊
+            </NavLink>
           </li>
           <li>
-            <Link to="/teams">球隊</Link>
+            <NavLink to="/cat/predict/" activeClassName="active">
+              預測
+            </NavLink>
           </li>
           <li>
-            <Link to="/cat/predict/">預測</Link>
-          </li>
-          <li>
-            <Link to="/login">登入</Link>
+            <NavLink to="/login" activeClassName="active">
+              登入
+            </NavLink>
           </li>
         </ul>
       </nav>

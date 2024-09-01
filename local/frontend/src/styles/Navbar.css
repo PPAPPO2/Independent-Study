@@ -55,11 +55,47 @@ nav ul li a {
   font-size: 1.5rem;
 }
 
-.active {
-  color: white;
+nav ul li a.active {
+  color: #ffffff;
+  border-radius: 5px;
 }
 
 nav ul li a:hover {
   color: rgba(255, 255, 255, 0.8);
   transition: 1s;
+}
+
+/* Dropdown styles */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: white;
+  min-width: 100px;
+  z-index: 1;
+  border-radius: 10px;
+  top: 100%;
+}
+.dropdown-content a {
+  color: #172243;
+  padding: 1rem;
+  text-decoration: none;
+  display: block;
+  font-size: 1rem;
+  font-weight: bold;
+}
+.dropdown-content a:hover {
+  transition: 1s;
+  color: #2980b9;
+}
+.dropdown-content a.active {
+  color: #2980b9;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
 }/*# sourceMappingURL=Navbar.css.map */
