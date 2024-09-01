@@ -4,6 +4,9 @@ from django.core.exceptions import ValidationError
 # Create your models here.
 class Season_Players_Performance(models.Model):
     player = models.CharField(max_length=10)
+
+    pos = models.CharField(max_length=10, default='')  # 新增欄位
+
     jersey = models.IntegerField()
     team = models.CharField(max_length=10)
 
