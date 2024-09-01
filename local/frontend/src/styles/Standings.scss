@@ -44,7 +44,8 @@ a:hover {
 }
 
 .table-body {
-  width: 85%;
+  border-spacing: 0;
+  width: 80%;
   margin: auto;
   td.teams-name {
     color: rgba(0, 0, 0, 0.726);
@@ -61,10 +62,6 @@ a:hover {
   }
 }
 
-tbody {
-  border-spacing: 0;
-  width: 100%;
-}
 td {
   justify-content: center;
   padding: 1rem 3rem;

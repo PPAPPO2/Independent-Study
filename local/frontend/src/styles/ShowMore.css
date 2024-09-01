@@ -47,7 +47,6 @@
 .show-more-container .showMoreTable {
   width: 100%;
   min-width: 800px;
-  border-spacing: 0;
 }
 .show-more-container .showMoreTable td {
   justify-content: center;
@@ -74,7 +73,12 @@
 }
 .show-more-container .showMoreTable td:first-child,
 .show-more-container .showMoreTable th:first-child {
-  width: 150px;
-  min-width: 150px;
-  max-width: 150px;
+  color: #eee;
+  width: 160px;
+  min-width: 160px;
+  max-width: 160px;
+  position: sticky;
+  left: 0;
+  background-color: #172243;
+  z-index: 1;
 }/*# sourceMappingURL=ShowMore.css.map */

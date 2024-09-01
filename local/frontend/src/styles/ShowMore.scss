@@ -55,7 +55,7 @@
   .showMoreTable {
     width: 100%;
     min-width: 800px; // 設置最小寬度
-    border-spacing: 0;
+    //border-spacing: 0; 註腳就會產生白線
 
     td {
       justify-content: center;
@@ -88,9 +88,14 @@
     // 修改 "球隊" 欄位的寬度
     td:first-child,
     th:first-child {
-      width: 150px; // 設定 "球隊" 欄位的寬度為200px，根據需要調整
-      min-width: 150px; // 確保即使表格重新渲染，寬度依然保持
-      max-width: 150px; // 確保即使表格重新渲染，寬度依然保持
+      color: #eee;
+      width: 160px; // 設定 "球隊" 欄位的寬度為200px，根據需要調整
+      min-width: 160px; // 確保即使表格重新渲染，寬度依然保持
+      max-width: 160px; // 確保即使表格重新渲染，寬度依然保持
+      position: sticky;
+      left: 0;
+      background-color: #172243; // 確保固定的欄位背景與其他欄位一致
+      z-index: 1; // 確保固定的欄位在最上層
     }
   }
 }

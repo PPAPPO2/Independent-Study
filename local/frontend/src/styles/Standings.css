@@ -44,7 +44,8 @@ a:hover {
 }
 
 .table-body {
-  width: 85%;
+  border-spacing: 0;
+  width: 80%;
   margin: auto;
 }
 .table-body td.teams-name {
@@ -59,11 +60,6 @@ a:hover {
   height: auto;
   vertical-align: middle;
   margin-right: 2rem;
-}
-
-tbody {
-  border-spacing: 0;
-  width: 100%;
 }
 
 td {
