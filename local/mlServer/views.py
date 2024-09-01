@@ -1,61 +1,59 @@
-import os
-import pandas as pd
-import numpy as np
 from django.shortcuts import render
-import joblib
 from django.http import JsonResponse
-
-def index(request):
-    return render(request, "index.html")
-
-# 加載模型
-model_path = os.path.join(os.path.dirname(__file__), 'models', 'random_forest_model.pkl')
-with open(model_path, 'rb') as f:
-    model = joblib.load(f)
+from .models import GameRecord
+import numpy as np
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.ensemble import RandomForestClassifier
 
 def predict_win_probability(request):
     if request.method == 'GET':
-        # 讀取數據
-        file_path = os.path.join(os.path.dirname(__file__), 'models', 'combined_data.csv')
-        data = pd.read_csv(file_path,encoding='utf-8')
+        # 從 GET 請求中獲取隊伍名稱
+        team1 = request.GET.get('team1')
+        team2 = request.GET.get('team2')
+        
+        if not team1 or not team2:
+            return JsonResponse({'error': '隊伍名稱無效'}, status=400)
+        
+        # 從資料庫中讀取特定比賽的數據
+        queryset = GameRecord.objects.filter(match__in=[f'{team1} vs. {team2}', f'{team2} vs. {team1}']).values()
+        dataSet = pd.DataFrame(list(queryset))  # 轉換成 DataFrame
 
-        # 分割資料集，將資料集分為特徵 X 和標籤 y
-        data['result'] = (data['points'] > data['points'].shift(-1)).astype(int)
-        X = data.drop(columns=['result'])
+        # 確保數據存在
+        if dataSet.empty:
+            return JsonResponse({'error': '沒有找到相關的比賽數據'}, status=404)
 
-        # 隨機生成 1000 份比賽數據
+        # 添加勝負標籤
+        dataSet['result'] = np.where(dataSet['team'] == team1, 
+                                     (dataSet['points'] > dataSet['points'].shift(-1)), 
+                                     (dataSet['points'] < dataSet['points'].shift(1)))
+
+        # 只保留 Home 隊的數據
+        dataSet = dataSet[dataSet['team'] == 'Home']
+
+        # 移除不必要的列
+        X = dataSet.drop(columns=['team', 'match', 'result'])
+        y = dataSet['result']
+
+        # 分割為訓練集和測試集
+        X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
+
+        # 訓練隨機森林模型
+        model = RandomForestClassifier(n_estimators=100, random_state=42, class_weight='balanced')
+        model.fit(X_train, y_train)
+
+        # 隨機生成比賽數據
         num_simulations = 1000
-        simulated_data = {
-            'points': np.random.normal(X['points'].mean(), X['points'].std(), num_simulations),
-            'turnover': np.random.normal(X['turnover'].mean(), X['turnover'].std(), num_simulations),
-            'ast': np.random.normal(X['ast'].mean(), X['ast'].std(), num_simulations),
-            'blk': np.random.normal(X['blk'].mean(), X['blk'].std(), num_simulations),
-            'reb_d': np.random.normal(X['reb_d'].mean(), X['reb_d'].std(), num_simulations),
-            'reb_o': np.random.normal(X['reb_o'].mean(), X['reb_o'].std(), num_simulations),
-            'pfoul': np.random.normal(X['pfoul'].mean(), X['pfoul'].std(), num_simulations),
-            'stl': np.random.normal(X['stl'].mean(), X['stl'].std(), num_simulations),
-            'reb': np.random.normal(X['reb'].mean(), X['reb'].std(), num_simulations),
-            'two': np.random.normal(X['two'].mean(), X['two'].std(), num_simulations),
-            'two_m_two': np.random.normal(X['two_m_two'].mean(), X['two_m_two'].std(), num_simulations),
-            'twop': np.random.normal(X['twop'].mean(), X['twop'].std(), num_simulations),
-            'trey': np.random.normal(X['trey'].mean(), X['trey'].std(), num_simulations),
-            'treyp': np.random.normal(X['treyp'].mean(), X['treyp'].std(), num_simulations),
-            'ft': np.random.normal(X['ft'].mean(), X['ft'].std(), num_simulations),
-            'ftp': np.random.normal(X['ftp'].mean(), X['ftp'].std(), num_simulations),
-            'two_m': np.random.normal(X['two_m'].mean(), X['two_m'].std(), num_simulations),
-            'trey_m': np.random.normal(X['trey_m'].mean(), X['trey_m'].std(), num_simulations),
-            'ft_m': np.random.normal(X['ft_m'].mean(), X['ft_m'].std(), num_simulations)
-        }
+        simulated_data = {col: np.random.normal(X[col].mean(), X[col].std(), num_simulations) for col in X.columns}
 
         simulated_df = pd.DataFrame(simulated_data)
 
         # 使用模型進行預測
         simulated_predictions = model.predict(simulated_df)
 
-        # 計算新北國王勝利的概率
+        # 計算隊伍1（主隊）勝利的概率
         win_probability = simulated_predictions.mean()
 
-        # 返回 JSON 響應
         return JsonResponse({'win_probability': f'{win_probability * 100:.2f}%'}, json_dumps_params={'ensure_ascii': False})
     else:
         return JsonResponse({'error': 'Invalid request method'}, status=400)
