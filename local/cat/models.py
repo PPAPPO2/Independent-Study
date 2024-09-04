@@ -8,6 +8,7 @@ class Season_Players_Performance(models.Model):
     pos = models.CharField(max_length=10, default='')  # 新增欄位
 
     jersey = models.IntegerField()
+    position = models.CharField(max_length=10, default='0') 
     team = models.CharField(max_length=10)
 
     # 新增球員出賽場次 & 出賽時間
