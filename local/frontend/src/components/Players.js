@@ -1,12 +1,25 @@
 import React, { useEffect, useState } from "react";
+import Select from "react-select"; // 引入 react-select
 import "../styles/Players.css";
 
-const staticUrl = "/static/Standings/PlayerData/";
 const Players = () => {
-  //const [pData, setPData] = useState([]);
-  //const [t1Data, setT1Data] = useState([]);
+  const [pData, setPData] = useState([]);
+  const [t1Data, setT1Data] = useState([]);
   const [selectedYear, setSelectedYear] = useState("23_24"); // 預設年份
   const [combinedData, setCombinedData] = useState([]);
+  const [filteredData, setFilteredData] = useState([]);
+  const [teamOptions, setTeamOptions] = useState([]); // 動態更新的球隊選項
+
+  // 篩選條件
+  const [selectedPosition, setSelectedPosition] = useState(""); // 位置
+  const [selectedTeams, setSelectedTeams] = useState([]); // 複選球隊
+  const [sortColumn, setSortColumn] = useState(""); // 排序欄位
+  const [isAscending, setIsAscending] = useState(true); // 升序或降序
+
+  // 分頁相關
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10;
+
   const columnMapping = {
     球員: "player",
     背號: "jersey",
@@ -37,12 +50,64 @@ const Players = () => {
     犯規: "fouls",
   };
 
+  // 根據年份更新球隊選項
+  useEffect(() => {
+    const teamOptionsByYear = {
+      "23_24": [
+        { value: "臺北富邦勇士", label: "勇士" },
+        { value: "新北國王", label: "國王" },
+        { value: "高雄17直播鋼鐵人", label: "鋼鐵人" },
+        { value: "桃園璞園領航猿", label: "領航猿" },
+        { value: "福爾摩沙夢想家", label: "夢想家" },
+        { value: "新竹御頂攻城獅", label: "攻城獅" },
+        { value: "新北中信特攻", label: "特攻" },
+        { value: "台啤永豐雲豹", label: "雲豹" },
+        { value: "臺北戰神", label: "戰神" },
+        { value: "高雄全家海神", label: "海神" },
+        { value: "臺南台鋼獵鷹", label: "獵鷹" },
+      ],
+      "22_23": [
+        { value: "臺北富邦勇士", label: "勇士" },
+        { value: "桃園領航猿", label: "領航猿" },
+        { value: "福爾摩沙台新夢想家", label: "夢想家" },
+        { value: "新竹街口攻城獅", label: "攻城獅" },
+        { value: "新北國王", label: "國王" },
+        { value: "高雄17直播鋼鐵人", label: "鋼鐵人" },
+        { value: "新北中信特攻", label: "特攻" },
+        { value: "臺南台鋼獵鷹", label: "獵鷹" },
+        { value: "臺中太陽", label: "太陽" },
+        { value: "高雄全家海神", label: "海神" },
+        { value: "台啤永豐雲豹", label: "雲豹" },
+        { value: "台灣啤酒英熊", label: "英熊" },
+      ],
+      "21_22": [
+        { value: "臺北富邦勇士", label: "勇士" },
+        { value: "桃園領航猿", label: "領航猿" },
+        { value: "福爾摩沙台新夢想家", label: "夢想家" },
+        { value: "新竹街口攻城獅", label: "攻城獅" },
+        { value: "新北國王", label: "國王" },
+        { value: "高雄17直播鋼鐵人", label: "鋼鐵人" },
+        { value: "新北中信特攻", label: "特攻" },
+        { value: "台灣啤酒英熊", label: "英熊" },
+        { value: "臺中太陽", label: "太陽" },
+        { value: "高雄全家海神", label: "海神" },
+        { value: "臺南台鋼獵鷹", label: "獵鷹" },
+      ],
+      "20_21": [
+        { value: "臺北富邦勇士", label: "勇士" },
+        { value: "桃園領航猿", label: "領航猿" },
+        { value: "福爾摩沙台新夢想家", label: "夢想家" },
+        { value: "新竹街口攻城獅", label: "攻城獅" },
+      ],
+    };
+    setTeamOptions(teamOptionsByYear[selectedYear] || []); // 根據年份設置選項
+  }, [selectedYear]);
+
   useEffect(() => {
     const fetchData = async () => {
       let combinedDataArray = [];
 
       try {
-        // 試著讀取 PLG 資料
         const plgResponse = await fetch(
           `/static/Standings/PlayerData/P_Players_performance_${selectedYear}.json`
         );
@@ -58,7 +123,6 @@ const Players = () => {
       }
 
       try {
-        // 試著讀取 T1 資料
         const t1Response = await fetch(
           `/static/Standings/PlayerData/T1_Players_performance_${selectedYear}.json`
         );
@@ -74,17 +138,60 @@ const Players = () => {
       }
 
       setCombinedData(combinedDataArray); // 更新合併後的資料
+      setFilteredData(combinedDataArray); // 初始化篩選後的資料
     };
     fetchData();
   }, [selectedYear]);
 
-  // 獲取表頭 (排除掉id)
-  const tableHeaders = Object.keys(columnMapping);
+  // 篩選資料
+  useEffect(() => {
+    let filtered = combinedData;
 
-  // 處理年份選擇變更
-  const handleYearChange = (event) => {
-    setSelectedYear(event.target.value);
+    if (selectedPosition) {
+      filtered = filtered.filter(
+        (player) => player.position === selectedPosition
+      );
+    }
+
+    if (selectedTeams.length > 0) {
+      filtered = filtered.filter((player) =>
+        selectedTeams.some((team) => team.value === player.team)
+      );
+    }
+
+    setFilteredData(filtered);
+  }, [selectedPosition, selectedTeams, combinedData]);
+
+  // 排序資料
+  const handleSort = (column) => {
+    const sortedData = [...filteredData];
+    const isNumber = !isNaN(sortedData[0]?.[columnMapping[column]]);
+
+    sortedData.sort((a, b) => {
+      if (isNumber) {
+        return isAscending
+          ? a[columnMapping[column]] - b[columnMapping[column]]
+          : b[columnMapping[column]] - a[columnMapping[column]];
+      }
+      return isAscending
+        ? a[columnMapping[column]].localeCompare(b[columnMapping[column]])
+        : b[columnMapping[column]].localeCompare(a[columnMapping[column]]);
+    });
+
+    setFilteredData(sortedData);
+    setIsAscending(!isAscending); // 切換升序/降序
+    setSortColumn(column);
   };
+
+  // 分頁處理
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = filteredData.slice(indexOfFirstItem, indexOfLastItem);
+
+  const totalPages = Math.ceil(filteredData.length / itemsPerPage);
+
+  // 變更分頁
+  const handlePageChange = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
     <div className="Players">
@@ -94,11 +201,12 @@ const Players = () => {
             ? "PLG 20-21 League Roster"
             : `PLG & T1 ${selectedYear.replace("_", "-")} League Roster`}
         </h2>
-        <h1></h1>
+
+        {/* 年份篩選 */}
         <div className="year-selector">
           <select
             id="year-select"
-            onChange={handleYearChange}
+            onChange={(e) => setSelectedYear(e.target.value)}
             value={selectedYear}
           >
             <option value="23_24">2023-24</option>
@@ -107,24 +215,69 @@ const Players = () => {
             <option value="20_21">2020-21</option>
           </select>
         </div>
+
+        {/* 篩選器 */}
+        <div className="position-selector">
+          {/* 位置篩選 */}
+          <select
+            id="position-select"
+            onChange={(e) => setSelectedPosition(e.target.value)}
+            value={selectedPosition}
+          >
+            <option value="">所有位置</option>
+            <option value="G">G</option>
+            <option value="F">F</option>
+            <option value="C">C</option>
+          </select>
+
+          {/* 球隊篩選器 (react-select 多選) */}
+          <div className="team-selector">
+            <Select
+              options={teamOptions}
+              isMulti
+              value={selectedTeams}
+              onChange={(selected) => setSelectedTeams(selected || [])}
+              placeholder="選擇球隊"
+              className="team-select"
+            />
+          </div>
+        </div>
+
+        {/* 分頁 & 表格 */}
         <table className="datatable">
           <thead>
             <tr>
-              {tableHeaders.map((header) => (
-                <th key={header}>{header}</th>
+              {Object.keys(columnMapping).map((header) => (
+                <th key={header} onClick={() => handleSort(header)}>
+                  {header}{" "}
+                  {sortColumn === header ? (isAscending ? "↑" : "↓") : ""}
+                </th>
               ))}
             </tr>
           </thead>
           <tbody>
-            {combinedData.map((player, index) => (
+            {currentItems.map((player, index) => (
               <tr key={index}>
-                {tableHeaders.map((header) => (
+                {Object.keys(columnMapping).map((header) => (
                   <td key={header}>{player[columnMapping[header]]}</td>
                 ))}
               </tr>
             ))}
           </tbody>
         </table>
+
+        {/* 分頁控件 */}
+        <div className="pagination">
+          {[...Array(totalPages)].map((_, i) => (
+            <button
+              key={i}
+              onClick={() => handlePageChange(i + 1)}
+              className={currentPage === i + 1 ? "active" : ""}
+            >
+              {i + 1}
+            </button>
+          ))}
+        </div>
       </div>
     </div>
   );

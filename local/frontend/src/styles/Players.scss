@@ -1,6 +1,13 @@
 .Players {
   .table-container {
-    .year-selector {
+    .year-selector,
+    .position-selector,
+    .team-selector {
+      display: inline-block;
+      vertical-align: top;
+      padding: 0.5rem;
+      margin-right: 1rem;
+
       select,
       input[type="text"] {
         padding: 0.5rem 1rem;
@@ -8,45 +15,60 @@
         border-radius: 4px;
         font-size: 1rem;
       }
+
       select {
         appearance: none;
-        //下拉符號
         background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23333"><path d="M7 10l5 5 5-5z"/></svg>');
         background-repeat: no-repeat;
         background-color: #f8f8f8;
         background-position: right 5px center;
         padding-right: 30px;
-        margin: 1rem 0rem;
+        margin: 1rem 0;
       }
+
       select:focus {
         outline: none;
-        border-color: #020202; /* 聚焦時的邊框顏色 */
+        border-color: #020202;
       }
     }
+
+    // 將篩選器放在同一行
+    .filter-container {
+      display: flex;
+      justify-content: space-between; // 調整間距
+      align-items: center; // 垂直居中
+
+      .year-selector,
+      .position-selector,
+      .team-selector {
+        flex: 1; // 保持相等的寬度
+      }
+    }
+
     h2 {
       text-align: center;
-      margin: 1rem 1rem 0.25rem;
-      color: black;
+      margin: 0rem 0rem 0.25rem;
+      padding: 1rem 0rem;
+      color: white;
+      background-color: #172243;
     }
-    h1 {
-      margin: 1rem 0rem 1rem;
-      border-bottom: 3px solid rgb(211, 210, 210); // 在標題下方增加深色邊線
-    }
+
     width: 85%;
     margin: auto;
-    overflow-x: auto; // 設置水平捲動
+    overflow-x: auto;
   }
+
   .datatable {
     width: 100%;
-    min-width: 800px; // 設置最小寬度
+    min-width: 800px;
 
     td {
       justify-content: center;
       padding: 1rem 1.5rem;
       font-size: 1rem;
-      word-wrap: break-word; // 允許文字換行
-      white-space: normal; // 讓文字正常換行
-      width: 150px; // 調整球隊名稱欄位的寬度
+      word-wrap: break-word;
+      white-space: normal;
+      width: 150px;
     }
 
     tr {
@@ -67,32 +89,54 @@
       background-color: #172243;
       color: white;
     }
-    // 修改 "球員" 欄位的寬度
+
     td:first-child,
     th:first-child {
       color: #eee;
-      width: 120px; // 設定 "球隊" 欄位的寬度為200px，根據需要調整
-      min-width: 120px; // 確保即使表格重新渲染，寬度依然保持
-      max-width: 120px; // 確保即使表格重新渲染，寬度依然保持
+      width: 120px;
+      min-width: 120px;
+      max-width: 120px;
       position: sticky;
       left: 0;
-      background-color: #172243; // 確保固定的欄位背景與其他欄位一致
-      z-index: 1; // 確保固定的欄位在最上層
+      background-color: #172243;
+      z-index: 1;
     }
-    // 修改 "球隊" 欄位的寬度
+
     td:nth-child(4),
     th:nth-child(4) {
       min-width: 160px;
-      max-width: 16px;
-      left: 0;
+      max-width: 160px;
     }
-    // 修改 "場均上場" 欄位的寬度
+
     td:nth-child(6),
     th:nth-child(6) {
       width: 130px;
       min-width: 130px;
       max-width: 130px;
-      left: 0;
+    }
+  }
+  .pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+
+    button {
+      margin: 0 5px;
+      padding: 0.5rem 1rem;
+      border: 1px solid #ccc;
+      background-color: #f8f8f8;
+      cursor: pointer;
+
+      &.active {
+        background-color: #172243;
+        color: white;
+        border-color: #172243;
+      }
+
+      &:hover {
+        background-color: #0d1a33;
+        color: white;
+      }
     }
   }
 }

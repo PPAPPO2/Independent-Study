@@ -1,17 +1,30 @@
-@charset "UTF-8";
 .Players .table-container {
   width: 85%;
   margin: auto;
   overflow-x: auto;
 }
+.Players .table-container .year-selector,
+.Players .table-container .position-selector,
+.Players .table-container .team-selector {
+  display: inline-block;
+  vertical-align: top;
+  padding: 0.5rem;
+  margin-right: 1rem;
+}
 .Players .table-container .year-selector select,
-.Players .table-container .year-selector input[type=text] {
+.Players .table-container .year-selector input[type=text],
+.Players .table-container .position-selector select,
+.Players .table-container .position-selector input[type=text],
+.Players .table-container .team-selector select,
+.Players .table-container .team-selector input[type=text] {
   padding: 0.5rem 1rem;
   border: 1px solid #ccc;
   border-radius: 4px;
   font-size: 1rem;
 }
-.Players .table-container .year-selector select {
+.Players .table-container .year-selector select,
+.Players .table-container .position-selector select,
+.Players .table-container .team-selector select {
   -webkit-appearance: none;
      -moz-appearance: none;
           appearance: none;
@@ -20,20 +33,30 @@
   background-color: #f8f8f8;
   background-position: right 5px center;
   padding-right: 30px;
-  margin: 1rem 0rem;
+  margin: 1rem 0;
 }
-.Players .table-container .year-selector select:focus {
+.Players .table-container .year-selector select:focus,
+.Players .table-container .position-selector select:focus,
+.Players .table-container .team-selector select:focus {
   outline: none;
-  border-color: #020202; /* 聚焦時的邊框顏色 */
+  border-color: #020202;
+}
+.Players .table-container .filter-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.Players .table-container .filter-container .year-selector,
+.Players .table-container .filter-container .position-selector,
+.Players .table-container .filter-container .team-selector {
+  flex: 1;
 }
 .Players .table-container h2 {
   text-align: center;
-  margin: 1rem 1rem 0.25rem;
-  color: black;
-}
-.Players .table-container h1 {
-  margin: 1rem 0rem 1rem;
-  border-bottom: 3px solid rgb(211, 210, 210);
+  margin: 0rem 0rem 0.25rem;
+  padding: 1rem 0rem;
+  color: white;
+  background-color: #172243;
 }
 .Players .datatable {
   width: 100%;
@@ -76,13 +99,32 @@
 .Players .datatable td:nth-child(4),
 .Players .datatable th:nth-child(4) {
   min-width: 160px;
-  max-width: 16px;
-  left: 0;
+  max-width: 160px;
 }
 .Players .datatable td:nth-child(6),
 .Players .datatable th:nth-child(6) {
   width: 130px;
   min-width: 130px;
   max-width: 130px;
-  left: 0;
+}
+.Players .pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+}
+.Players .pagination button {
+  margin: 0 5px;
+  padding: 0.5rem 1rem;
+  border: 1px solid #ccc;
+  background-color: #f8f8f8;
+  cursor: pointer;
+}
+.Players .pagination button.active {
+  background-color: #172243;
+  color: white;
+  border-color: #172243;
+}
+.Players .pagination button:hover {
+  background-color: #0d1a33;
+  color: white;
 }/*# sourceMappingURL=Players.css.map */
