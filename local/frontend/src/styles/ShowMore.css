@@ -27,6 +27,7 @@
   background-repeat: no-repeat;
   background-position: right 5px center;
   padding-right: 30px;
+  background-color: #f8f8f8;
 }
 .show-more-container .season-team-select .team-select-container {
   display: flex;

@@ -1,0 +1,88 @@
+@charset "UTF-8";
+.Players .table-container {
+  width: 85%;
+  margin: auto;
+  overflow-x: auto;
+}
+.Players .table-container .year-selector select,
+.Players .table-container .year-selector input[type=text] {
+  padding: 0.5rem 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+.Players .table-container .year-selector select {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23333"><path d="M7 10l5 5 5-5z"/></svg>');
+  background-repeat: no-repeat;
+  background-color: #f8f8f8;
+  background-position: right 5px center;
+  padding-right: 30px;
+  margin: 1rem 0rem;
+}
+.Players .table-container .year-selector select:focus {
+  outline: none;
+  border-color: #020202; /* 聚焦時的邊框顏色 */
+}
+.Players .table-container h2 {
+  text-align: center;
+  margin: 1rem 1rem 0.25rem;
+  color: black;
+}
+.Players .table-container h1 {
+  margin: 1rem 0rem 1rem;
+  border-bottom: 3px solid rgb(211, 210, 210);
+}
+.Players .datatable {
+  width: 100%;
+  min-width: 800px;
+}
+.Players .datatable td {
+  justify-content: center;
+  padding: 1rem 1.5rem;
+  font-size: 1rem;
+  word-wrap: break-word;
+  white-space: normal;
+  width: 150px;
+}
+.Players .datatable tr {
+  text-align: center;
+}
+.Players .datatable th {
+  justify-content: center;
+  padding: 1rem 0.25rem;
+  font-size: 1rem;
+}
+.Players .datatable tbody tr:nth-child(odd) {
+  background-color: #eee;
+}
+.Players .datatable thead {
+  background-color: #172243;
+  color: white;
+}
+.Players .datatable td:first-child,
+.Players .datatable th:first-child {
+  color: #eee;
+  width: 120px;
+  min-width: 120px;
+  max-width: 120px;
+  position: sticky;
+  left: 0;
+  background-color: #172243;
+  z-index: 1;
+}
+.Players .datatable td:nth-child(4),
+.Players .datatable th:nth-child(4) {
+  min-width: 160px;
+  max-width: 16px;
+  left: 0;
+}
+.Players .datatable td:nth-child(6),
+.Players .datatable th:nth-child(6) {
+  width: 130px;
+  min-width: 130px;
+  max-width: 130px;
+  left: 0;
+}/*# sourceMappingURL=Players.css.map */

@@ -1,16 +1,19 @@
 import React, { useEffect, useState } from "react";
-import "../styles/ShowMore.css";
+import "../styles/Players.css";
 
 const staticUrl = "/static/Standings/PlayerData/";
 const Players = () => {
-  const [pData, setPData] = useState([]);
-  const [t1Data, setT1Data] = useState([]);
+  //const [pData, setPData] = useState([]);
+  //const [t1Data, setT1Data] = useState([]);
+  const [selectedYear, setSelectedYear] = useState("23_24"); // 預設年份
+  const [combinedData, setCombinedData] = useState([]);
   const columnMapping = {
     球員: "player",
     背號: "jersey",
+    位置: "position",
     球隊: "team",
     出賽: "game_played",
-    上場時間: "minutes",
+    場均上場時間: "minutes",
     得分: "points",
     投籃命中: "All_goals_made",
     投籃出手: "All_goals",
@@ -33,96 +36,96 @@ const Players = () => {
     失誤: "turnovers",
     犯規: "fouls",
   };
+
   useEffect(() => {
-    // 讀取 P 聯盟的球員資料
-    fetch("/static/Standings/PlayerData/P_Players_performance_23_24.json")
-      .then((response) => response.json())
-      .then((data) => setPData(data))
-      .catch((error) => console.error("Error fetching P data:", error));
+    const fetchData = async () => {
+      let combinedDataArray = [];
 
-    // 讀取 T1 聯盟的球員資料
-    fetch("/static/Standings/PlayerData/T1_Players_performance_23_24.json")
-      .then((response) => response.json())
-      .then((data) => setT1Data(data))
-      .catch((error) => console.error("Error fetching T1 data:", error));
-  }, []);
+      try {
+        // 試著讀取 PLG 資料
+        const plgResponse = await fetch(
+          `/static/Standings/PlayerData/P_Players_performance_${selectedYear}.json`
+        );
+        if (plgResponse.ok) {
+          const plgData = await plgResponse.json();
+          combinedDataArray = [...combinedDataArray, ...plgData];
+        }
+      } catch (error) {
+        console.error(
+          `Error fetching PLG data for year ${selectedYear}:`,
+          error
+        );
+      }
+
+      try {
+        // 試著讀取 T1 資料
+        const t1Response = await fetch(
+          `/static/Standings/PlayerData/T1_Players_performance_${selectedYear}.json`
+        );
+        if (t1Response.ok) {
+          const t1Data = await t1Response.json();
+          combinedDataArray = [...combinedDataArray, ...t1Data];
+        }
+      } catch (error) {
+        console.error(
+          `Error fetching T1 data for year ${selectedYear}:`,
+          error
+        );
+      }
+
+      setCombinedData(combinedDataArray); // 更新合併後的資料
+    };
+    fetchData();
+  }, [selectedYear]);
+
+  // 獲取表頭 (排除掉id)
+  const tableHeaders = Object.keys(columnMapping);
+
+  // 處理年份選擇變更
+  const handleYearChange = (event) => {
+    setSelectedYear(event.target.value);
+  };
+
   return (
-    <div>
-      <h2>PLG 球員數據</h2>
-      <table border="1">
-        <thead>
-          <tr>
-            <th>球員</th>
-            <th>背號</th>
-            <th>球隊</th>
-            <th>場次</th>
-            <th>分鐘</th>
-            <th>得分</th>
-            <th>投籃命中</th>
-            <th>投籃出手</th>
-            <th>投籃命中率</th>
-            <th>助攻</th>
-            <th>抄截</th>
-            <th>籃板</th>
-          </tr>
-        </thead>
-        <tbody>
-          {pData.map((player) => (
-            <tr key={player.id}>
-              <td>{player.player}</td>
-              <td>{player.jersey}</td>
-              <td>{player.team}</td>
-              <td>{player.game_played}</td>
-              <td>{player.minutes}</td>
-              <td>{player.points}</td>
-              <td>{player.All_goals_made}</td>
-              <td>{player.All_goals}</td>
-              <td>{player.All_goals_pct}</td>
-              <td>{player.assists}</td>
-              <td>{player.steals}</td>
-              <td>{player.rebounds}</td>
+    <div className="Players">
+      <div className="table-container">
+        <h2>
+          {selectedYear === "20_21"
+            ? "PLG 20-21 League Roster"
+            : `PLG & T1 ${selectedYear.replace("_", "-")} League Roster`}
+        </h2>
+        <h1></h1>
+        <div className="year-selector">
+          <select
+            id="year-select"
+            onChange={handleYearChange}
+            value={selectedYear}
+          >
+            <option value="23_24">2023-24</option>
+            <option value="22_23">2022-23</option>
+            <option value="21_22">2021-22</option>
+            <option value="20_21">2020-21</option>
+          </select>
+        </div>
+        <table className="datatable">
+          <thead>
+            <tr>
+              {tableHeaders.map((header) => (
+                <th key={header}>{header}</th>
+              ))}
             </tr>
-          ))}
-        </tbody>
-      </table>
-
-      <h2>T1 球員數據</h2>
-      <table border="1">
-        <thead>
-          <tr>
-            <th>球員</th>
-            <th>背號號碼</th>
-            <th>球隊</th>
-            <th>場次</th>
-            <th>分鐘</th>
-            <th>得分</th>
-            <th>投籃命中</th>
-            <th>投籃出手</th>
-            <th>投籃命中率</th>
-            <th>助攻</th>
-            <th>抄截</th>
-            <th>籃板</th>
-          </tr>
-        </thead>
-        <tbody>
-          {t1Data.map((player) => (
-            <tr key={player.id}>
-              <td>{player.player}</td>
-              <td>{player.jersey}</td>
-              <td>{player.team}</td>
-              <td>{player.game_played}</td>
-              <td>{player.minutes}</td>
-              <td>{player.points}</td>
-              <td>{player.All_goals_made}</td>
-              <td>{player.All_goals}</td>
-              <td>{player.All_goals_pct}</td>
-              <td>{player.assists}</td>
-              <td>{player.steals}</td>
-              <td>{player.rebounds}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {combinedData.map((player, index) => (
+              <tr key={index}>
+                {tableHeaders.map((header) => (
+                  <td key={header}>{player[columnMapping[header]]}</td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };
