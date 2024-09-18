@@ -10,7 +10,7 @@ class Season_Players_Performance(models.Model):
 
     # 新增球員出賽場次 & 出賽時間
     game_played = models.IntegerField(default=0)
-    minutes = models.CharField(max_length=5, default='00:00')
+    minutes = models.CharField(max_length=5, default='00:00:00')
 
     points = models.DecimalField(max_digits=10, decimal_places=2)
     #總命中
