@@ -169,3 +169,12 @@ class P_Season_teams_Performance_21_22(Season_teams_Performance):
     pass
 class P_Season_teams_Performance_20_21(Season_teams_Performance):
     pass
+
+class Schedule(models.Model):
+    team_home = models.CharField(max_length=100)
+    team_away = models.CharField(max_length=100)
+    game_date = models.DateTimeField()
+    location = models.CharField(max_length=200)
+
+    def __str__(self):
+        return f"日期：{self.game_date}, {self.team_home} vs {self.team_away} 在 {self.location}"
