@@ -1,35 +1,40 @@
 .Players {
-  .table-container {
-    .year-selector,
-    .position-selector,
-    .team-selector {
-      display: inline-block;
-      vertical-align: top;
-      padding: 0.5rem;
-      margin-right: 1rem;
+  .year-selector,
+  .position-selector,
+  .team-selector {
+    display: inline-block;
+    vertical-align: top;
+    padding: 0.5rem;
+    margin-right: 1rem;
 
-      select,
-      input[type="text"] {
-        padding: 0.5rem 1rem;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        font-size: 1rem;
-      }
+    select,
+    input[type="text"] {
+      padding: 0.5rem 1rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 1rem;
+    }
 
-      select {
-        appearance: none;
-        background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23333"><path d="M7 10l5 5 5-5z"/></svg>');
-        background-repeat: no-repeat;
-        background-color: #f8f8f8;
-        background-position: right 5px center;
-        padding-right: 30px;
-        margin: 1rem 0;
-      }
+    select {
+      appearance: none;
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23333"><path d="M7 10l5 5 5-5z"/></svg>');
+      background-repeat: no-repeat;
+      background-color: #f8f8f8;
+      background-position: right 5px center;
+      padding-right: 30px;
+      margin: 1rem 0;
+    }
+    .react-select__control {
+      background-repeat: no-repeat;
+      background-color: #f8f8f8;
+      background-position: right 5px center;
+      //padding-right: 30px;
+      margin: 1rem 0;
+    }
 
-      select:focus {
-        outline: none;
-        border-color: #020202;
-      }
+    select:focus {
+      outline: none;
+      border-color: #020202;
     }
 
     // 將篩選器放在同一行
@@ -44,20 +49,46 @@
         flex: 1; // 保持相等的寬度
       }
     }
+  }
+  .pagination {
+    //選頁按鈕
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
 
-    h2 {
-      text-align: center;
-      margin: 0rem 0rem 0.25rem;
-      padding: 1rem 0rem;
-      color: white;
-      background-color: #172243;
+    button {
+      margin: 0 5px;
+      padding: 0.5rem 1rem;
+      border: 1px solid #ccc;
+      background-color: #f8f8f8;
+      cursor: pointer;
+
+      &.active {
+        background-color: #172243;
+        color: white;
+        border-color: #172243;
+      }
+
+      &:hover {
+        background-color: #0d1a33;
+        color: white;
+      }
     }
+  }
 
+  h2 {
+    text-align: center;
+    margin: 0rem 0rem 0.25rem;
+    padding: 1rem 0rem;
+    color: white;
+    background-color: #172243;
+  }
+  //表格
+  .table-container {
     width: 85%;
     margin: auto;
     overflow-x: auto;
   }
-
   .datatable {
     width: 100%;
     min-width: 800px;
@@ -113,30 +144,6 @@
       width: 130px;
       min-width: 130px;
       max-width: 130px;
-    }
-  }
-  .pagination {
-    display: flex;
-    justify-content: center;
-    margin-top: 1rem;
-
-    button {
-      margin: 0 5px;
-      padding: 0.5rem 1rem;
-      border: 1px solid #ccc;
-      background-color: #f8f8f8;
-      cursor: pointer;
-
-      &.active {
-        background-color: #172243;
-        color: white;
-        border-color: #172243;
-      }
-
-      &:hover {
-        background-color: #0d1a33;
-        color: white;
-      }
     }
   }
 }

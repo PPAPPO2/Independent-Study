@@ -13,7 +13,7 @@ const ShowMore = () => {
   const teams = {
     "2023-24": [
       { id: 1, name: "臺北富邦勇士" },
-      { id: 2, name: "桃園璞園領航員" },
+      { id: 2, name: "桃園璞園領航猿" },
       { id: 3, name: "福爾摩沙夢想家" },
       { id: 4, name: "新竹御頂攻城獅" },
       { id: 5, name: "新北國王" },
@@ -26,7 +26,7 @@ const ShowMore = () => {
     ],
     "2022-23": [
       { id: 1, name: "臺北富邦勇士" },
-      { id: 2, name: "桃園璞園領航員" },
+      { id: 2, name: "桃園璞園領航猿" },
       { id: 3, name: "福爾摩沙夢想家" },
       { id: 19, name: "新竹攻城獅" },
       { id: 5, name: "新北國王" },
@@ -40,7 +40,7 @@ const ShowMore = () => {
     ],
     "2021-22": [
       { id: 1, name: "臺北富邦勇士" },
-      { id: 15, name: "桃園領航員" },
+      { id: 15, name: "桃園領航猿" },
       { id: 17, name: "福爾摩沙台新夢想家" },
       { id: 16, name: "新竹街口攻城獅" },
       { id: 5, name: "新北國王" },
@@ -53,7 +53,7 @@ const ShowMore = () => {
     ],
     "2020-21": [
       { id: 1, name: "臺北富邦勇士" },
-      { id: 15, name: "桃園領航員" },
+      { id: 15, name: "桃園領航猿" },
       { id: 17, name: "福爾摩沙台新夢想家" },
       { id: 16, name: "新竹街口攻城獅" },
     ],
@@ -138,6 +138,11 @@ const ShowMore = () => {
 
   return (
     <div className="show-more-container">
+      <h2>
+        {season === "20_21"
+          ? "PLG 20-21 League Roster"
+          : `PLG & T1 ${season.replace("20", "")} League Roster`}
+      </h2>
       <div className="season-team-select">
         <select
           value={season}

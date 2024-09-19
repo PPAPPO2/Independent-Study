@@ -56,7 +56,7 @@
   .showMoreTable {
     width: 100%;
     min-width: 800px; // 設置最小寬度
-    //border-spacing: 0; 註腳就會產生白線
+    //border-spacing: 0; 註解就會產生白線
 
     td {
       justify-content: center;
@@ -98,5 +98,12 @@
       background-color: #172243; // 確保固定的欄位背景與其他欄位一致
       z-index: 1; // 確保固定的欄位在最上層
     }
+  }
+  h2 {
+    text-align: center;
+    margin: 0rem 0rem 2rem;
+    padding: 1rem 0rem;
+    color: white;
+    background-color: #172243;
   }
 }

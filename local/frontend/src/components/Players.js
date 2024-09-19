@@ -195,54 +195,53 @@ const Players = () => {
 
   return (
     <div className="Players">
+      <h2>
+        {selectedYear === "20_21"
+          ? "PLG 20-21 League Roster"
+          : `PLG & T1 ${selectedYear.replace("_", "-")} League Roster`}
+      </h2>
+      {/* 年份篩選 */}
+      <div className="year-selector">
+        <select
+          id="year-select"
+          onChange={(e) => setSelectedYear(e.target.value)}
+          value={selectedYear}
+        >
+          <option value="23_24">2023-24</option>
+          <option value="22_23">2022-23</option>
+          <option value="21_22">2021-22</option>
+          <option value="20_21">2020-21</option>
+        </select>
+      </div>
+
+      {/* 篩選器 */}
+      <div className="position-selector">
+        {/* 位置篩選 */}
+        <select
+          id="position-select"
+          onChange={(e) => setSelectedPosition(e.target.value)}
+          value={selectedPosition}
+        >
+          <option value="">所有位置</option>
+          <option value="G">G</option>
+          <option value="F">F</option>
+          <option value="C">C</option>
+        </select>
+
+        {/* 球隊篩選器 (react-select 多選) */}
+        <div className="team-selector">
+          <Select
+            options={teamOptions}
+            isMulti
+            value={selectedTeams}
+            onChange={(selected) => setSelectedTeams(selected || [])}
+            placeholder="選擇球隊"
+            className="team-select"
+            classNamePrefix="react-select"
+          />
+        </div>
+      </div>
       <div className="table-container">
-        <h2>
-          {selectedYear === "20_21"
-            ? "PLG 20-21 League Roster"
-            : `PLG & T1 ${selectedYear.replace("_", "-")} League Roster`}
-        </h2>
-
-        {/* 年份篩選 */}
-        <div className="year-selector">
-          <select
-            id="year-select"
-            onChange={(e) => setSelectedYear(e.target.value)}
-            value={selectedYear}
-          >
-            <option value="23_24">2023-24</option>
-            <option value="22_23">2022-23</option>
-            <option value="21_22">2021-22</option>
-            <option value="20_21">2020-21</option>
-          </select>
-        </div>
-
-        {/* 篩選器 */}
-        <div className="position-selector">
-          {/* 位置篩選 */}
-          <select
-            id="position-select"
-            onChange={(e) => setSelectedPosition(e.target.value)}
-            value={selectedPosition}
-          >
-            <option value="">所有位置</option>
-            <option value="G">G</option>
-            <option value="F">F</option>
-            <option value="C">C</option>
-          </select>
-
-          {/* 球隊篩選器 (react-select 多選) */}
-          <div className="team-selector">
-            <Select
-              options={teamOptions}
-              isMulti
-              value={selectedTeams}
-              onChange={(selected) => setSelectedTeams(selected || [])}
-              placeholder="選擇球隊"
-              className="team-select"
-            />
-          </div>
-        </div>
-
         {/* 分頁 & 表格 */}
         <table className="datatable">
           <thead>
@@ -265,19 +264,18 @@ const Players = () => {
             ))}
           </tbody>
         </table>
-
-        {/* 分頁控件 */}
-        <div className="pagination">
-          {[...Array(totalPages)].map((_, i) => (
-            <button
-              key={i}
-              onClick={() => handlePageChange(i + 1)}
-              className={currentPage === i + 1 ? "active" : ""}
-            >
-              {i + 1}
-            </button>
-          ))}
-        </div>
+      </div>
+      {/* 分頁控件 */}
+      <div className="pagination">
+        {[...Array(totalPages)].map((_, i) => (
+          <button
+            key={i}
+            onClick={() => handlePageChange(i + 1)}
+            className={currentPage === i + 1 ? "active" : ""}
+          >
+            {i + 1}
+          </button>
+        ))}
       </div>
     </div>
   );

@@ -82,4 +82,11 @@
   left: 0;
   background-color: #172243;
   z-index: 1;
+}
+.show-more-container h2 {
+  text-align: center;
+  margin: 0rem 0rem 2rem;
+  padding: 1rem 0rem;
+  color: white;
+  background-color: #172243;
 }/*# sourceMappingURL=ShowMore.css.map */
