@@ -5,55 +5,101 @@ import numpy as np
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
+import joblib
+import os
+
+MODEL_FILE = 'trained_model.pkl'
+clf = None
+team_avg_stats = None 
+X_columns = None
+
+def train_model():
+    global clf, team_avg_stats, X_columns
+    if os.path.exists(MODEL_FILE):
+
+        clf = joblib.load(MODEL_FILE)
+
+        team_avg_stats = joblib.load('team_avg_stats.pkl')
+        X_columns = joblib.load('X_columns.pkl')
+    else:
+        queryset = GameRecord.objects.all().values()
+        df = pd.DataFrame(list(queryset))
+        
+        if df.empty:
+            raise ValueError('沒有比賽數據。')
+
+        df[['home_team_name', 'away_team_name']] = df['match'].str.split(' vs. ', expand=True)
+
+        df['team_name'] = df.apply(
+            lambda row: row['home_team_name'] if row['team'] == 'Home' else row['away_team_name'],
+            axis=1
+        )
+
+        home_data = df[df['team'] == 'Home'].copy()
+        away_data = df[df['team'] == 'Away'].copy()
+
+        home_data = home_data.add_prefix('home_')
+        away_data = away_data.add_prefix('away_')
+
+        merged_data = pd.merge(home_data, away_data, left_on='home_match', right_on='away_match')
+
+        merged_data['home_win'] = (merged_data['home_points'] > merged_data['away_points']).astype(int)
+
+        numeric_cols = merged_data.select_dtypes(include=['number']).columns.tolist()
+        if 'home_win' in numeric_cols:
+            numeric_cols.remove('home_win') 
+
+        X = merged_data[numeric_cols]
+        y = merged_data['home_win']
+
+        X_columns = X.columns.tolist()
+
+        X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+        clf = RandomForestClassifier(random_state=42)
+        clf.fit(X_train, y_train)
+
+        numeric_cols_df = df.select_dtypes(include=['number']).columns.tolist()
+        team_avg_stats = df.groupby('team_name')[numeric_cols_df].mean()
+
+        joblib.dump(clf, MODEL_FILE)
+        joblib.dump(team_avg_stats, 'team_avg_stats.pkl')
+        joblib.dump(X_columns, 'X_columns.pkl')
+
+train_model()
 
 def predict_win_probability(request):
     if request.method == 'GET':
-        # 從 GET 請求中獲取隊伍名稱
+        global clf, team_avg_stats, X_columns
+
         team1 = request.GET.get('team1')
         team2 = request.GET.get('team2')
         
         if not team1 or not team2:
-            return JsonResponse({'error': '隊伍名稱無效'}, status=400)
+            return JsonResponse({'error': '查無此隊伍'}, status=400)
         
-        # 從資料庫中讀取特定比賽的數據
-        queryset = GameRecord.objects.filter(match__in=[f'{team1} vs. {team2}', f'{team2} vs. {team1}']).values()
-        dataSet = pd.DataFrame(list(queryset))  # 轉換成 DataFrame
+        if team1 not in team_avg_stats.index or team2 not in team_avg_stats.index:
+            return JsonResponse({'error': '查無數據'}, status=400)
 
-        # 確保數據存在
-        if dataSet.empty:
-            return JsonResponse({'error': '沒有找到相關的比賽數據'}, status=404)
+        home_team_stats = team_avg_stats.loc[team1].add_prefix('home_')
+        away_team_stats = team_avg_stats.loc[team2].add_prefix('away_')
 
-        # 添加勝負標籤
-        dataSet['result'] = np.where(dataSet['team'] == team1, 
-                                     (dataSet['points'] > dataSet['points'].shift(-1)), 
-                                     (dataSet['points'] < dataSet['points'].shift(1)))
+        game_features = pd.concat([home_team_stats, away_team_stats]).to_frame().T
+        game_features = game_features[X_columns] 
 
-        # 只保留 Home 隊的數據
-        dataSet = dataSet[dataSet['team'] == 'Home']
+        game_features = game_features.fillna(0)
 
-        # 移除不必要的列
-        X = dataSet.drop(columns=['team', 'match', 'result'])
-        y = dataSet['result']
+        # prediction = clf.predict(game_features)
+        win_prob = clf.predict_proba(game_features)[0][1]
+        win_prob_percent = f'{win_prob * 100:.2f}%'
 
-        # 分割為訓練集和測試集
-        X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
+        # if prediction[0] == 1:
+        #     result = f'預測結果：主隊 ({team1}) 將獲勝。'
+        # else:
+        #     result = f'預測結果：客隊 ({team2}) 將獲勝。'
 
-        # 訓練隨機森林模型
-        model = RandomForestClassifier(n_estimators=100, random_state=42, class_weight='balanced')
-        model.fit(X_train, y_train)
-
-        # 隨機生成比賽數據
-        num_simulations = 1000
-        simulated_data = {col: np.random.normal(X[col].mean(), X[col].std(), num_simulations) for col in X.columns}
-
-        simulated_df = pd.DataFrame(simulated_data)
-
-        # 使用模型進行預測
-        simulated_predictions = model.predict(simulated_df)
-
-        # 計算隊伍1（主隊）勝利的概率
-        win_probability = simulated_predictions.mean()
-
-        return JsonResponse({'win_probability': f'{win_probability * 100:.2f}%'}, json_dumps_params={'ensure_ascii': False})
+        return JsonResponse({
+            # 'prediction': result,
+            'win_probability': win_prob_percent
+        }, json_dumps_params={'ensure_ascii': False})
     else:
         return JsonResponse({'error': 'Invalid request method'}, status=400)
