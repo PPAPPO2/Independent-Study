@@ -1,40 +1,32 @@
 .Players {
-  .year-selector,
-  .position-selector,
-  .team-selector {
-    display: inline-block;
-    vertical-align: top;
+  .selector {
+    display: flex;
+    gap: 2rem; /* 讓篩選器之間保持間距 */
     padding: 0.5rem;
-    margin-right: 1rem;
-
-    select,
-    input[type="text"] {
+    margin: 2rem 0rem 1rem 3rem;
+    select {
       padding: 0.5rem 1rem;
       border: 1px solid #ccc;
       border-radius: 4px;
       font-size: 1rem;
-    }
-
-    select {
-      appearance: none;
-      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23333"><path d="M7 10l5 5 5-5z"/></svg>');
-      background-repeat: no-repeat;
       background-color: #f8f8f8;
       background-position: right 5px center;
-      padding-right: 30px;
-      margin: 1rem 0;
+      appearance: none;
+      background-repeat: no-repeat;
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23333"><path d="M7 10l5 5 5-5z"/></svg>');
+      width: 8%; //篩選器寬度保持一致
+    }
+
+    .react-select__placeholder {
+      color: black; /* 設定選擇球隊的 placeholder 文字顏色為黑色 */
     }
     .react-select__control {
-      background-repeat: no-repeat;
-      background-color: #f8f8f8;
-      background-position: right 5px center;
-      //padding-right: 30px;
-      margin: 1rem 0;
+      background-color: #f8f8f8; /* 設定 placeholder 的背景顏色 */
     }
 
-    select:focus {
-      outline: none;
-      border-color: #020202;
+    .react-select__option--is-focused {
+      background-color: #f8f8f8; /* 設定選中時的背景顏色 */
+      color: #172243; /* 文字顏色 */
     }
 
     // 將篩選器放在同一行
@@ -75,7 +67,12 @@
       }
     }
   }
-
+  .sort-arrow {
+    //span箭頭設定
+    margin-left: 5px;
+    color: white;
+    font-size: 10px;
+  }
   h2 {
     text-align: center;
     margin: 0rem 0rem 0.25rem;
@@ -98,7 +95,6 @@
       padding: 1rem 1.5rem;
       font-size: 1rem;
       word-wrap: break-word;
-      white-space: normal;
       width: 150px;
     }
 

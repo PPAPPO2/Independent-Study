@@ -1,65 +1,42 @@
-.Players .year-selector,
-.Players .position-selector,
-.Players .team-selector {
-  display: inline-block;
-  vertical-align: top;
+@charset "UTF-8";
+.Players .selector {
+  display: flex;
+  gap: 2rem; /* 讓篩選器之間保持間距 */
   padding: 0.5rem;
-  margin-right: 1rem;
+  margin: 2rem 0rem 1rem 3rem;
 }
-.Players .year-selector select,
-.Players .year-selector input[type=text],
-.Players .position-selector select,
-.Players .position-selector input[type=text],
-.Players .team-selector select,
-.Players .team-selector input[type=text] {
+.Players .selector select {
   padding: 0.5rem 1rem;
   border: 1px solid #ccc;
   border-radius: 4px;
   font-size: 1rem;
-}
-.Players .year-selector select,
-.Players .position-selector select,
-.Players .team-selector select {
+  background-color: #f8f8f8;
+  background-position: right 5px center;
   -webkit-appearance: none;
      -moz-appearance: none;
           appearance: none;
+  background-repeat: no-repeat;
   background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23333"><path d="M7 10l5 5 5-5z"/></svg>');
-  background-repeat: no-repeat;
-  background-color: #f8f8f8;
-  background-position: right 5px center;
-  padding-right: 30px;
-  margin: 1rem 0;
+  width: 8%;
 }
-.Players .year-selector .react-select__control,
-.Players .position-selector .react-select__control,
-.Players .team-selector .react-select__control {
-  background-repeat: no-repeat;
-  background-color: #f8f8f8;
-  background-position: right 5px center;
-  margin: 1rem 0;
+.Players .selector .react-select__placeholder {
+  color: black; /* 設定選擇球隊的 placeholder 文字顏色為黑色 */
 }
-.Players .year-selector select:focus,
-.Players .position-selector select:focus,
-.Players .team-selector select:focus {
-  outline: none;
-  border-color: #020202;
+.Players .selector .react-select__control {
+  background-color: #f8f8f8; /* 設定 placeholder 的背景顏色 */
 }
-.Players .year-selector .filter-container,
-.Players .position-selector .filter-container,
-.Players .team-selector .filter-container {
+.Players .selector .react-select__option--is-focused {
+  background-color: #f8f8f8; /* 設定選中時的背景顏色 */
+  color: #172243; /* 文字顏色 */
+}
+.Players .selector .filter-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-.Players .year-selector .filter-container .year-selector,
-.Players .year-selector .filter-container .position-selector,
-.Players .year-selector .filter-container .team-selector,
-.Players .position-selector .filter-container .year-selector,
-.Players .position-selector .filter-container .position-selector,
-.Players .position-selector .filter-container .team-selector,
-.Players .team-selector .filter-container .year-selector,
-.Players .team-selector .filter-container .position-selector,
-.Players .team-selector .filter-container .team-selector {
+.Players .selector .filter-container .year-selector,
+.Players .selector .filter-container .position-selector,
+.Players .selector .filter-container .team-selector {
   flex: 1;
 }
 .Players .pagination {
@@ -83,6 +60,11 @@
   background-color: #0d1a33;
   color: white;
 }
+.Players .sort-arrow {
+  margin-left: 5px;
+  color: white;
+  font-size: 10px;
+}
 .Players h2 {
   text-align: center;
   margin: 0rem 0rem 0.25rem;
@@ -104,7 +86,6 @@
   padding: 1rem 1.5rem;
   font-size: 1rem;
   word-wrap: break-word;
-  white-space: normal;
   width: 150px;
 }
 .Players .datatable tr {

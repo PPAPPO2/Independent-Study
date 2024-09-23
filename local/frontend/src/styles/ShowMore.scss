@@ -2,48 +2,33 @@
   .season-team-select {
     display: flex;
     align-items: center;
-    margin: 1rem;
-
-    .season-select,
-    .team-select-container {
+    margin: 2rem 0rem 1rem 3rem;
+    padding: 0.5rem;
+    .season-select {
       margin-right: 2rem;
     }
-
-    label {
-      font-weight: bold;
-      font-size: 1.1rem;
-      margin-right: 1rem;
-    }
-
-    select,
-    input[type="text"] {
+    select {
       padding: 0.5rem 1rem;
       border: 1px solid #ccc;
       border-radius: 4px;
       font-size: 1rem;
-    }
-
-    select {
-      appearance: none;
-      //下拉符號
-      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23333"><path d="M7 10l5 5 5-5z"/></svg>');
-      background-repeat: no-repeat;
-      background-position: right 5px center;
-      padding-right: 30px;
       background-color: #f8f8f8;
+      background-position: right 5px center;
+      appearance: none;
+      background-repeat: no-repeat;
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23333"><path d="M7 10l5 5 5-5z"/></svg>');
+      width: 8%; //篩選器寬度保持一致
+    }
+    .react-select__placeholder {
+      color: black; /* 設定選擇球隊的 placeholder 文字顏色為黑色 */
+    }
+    .react-select__control {
+      background-color: #f8f8f8; /* 設定 placeholder 的背景顏色 */
     }
 
-    .team-select-container {
-      display: flex;
-      flex-wrap: wrap; // 允許換行以顯示更多球隊
-      align-items: center;
-
-      label {
-        flex: 0 0 15%; // 每個label佔據15%的寬度，這樣每行可以顯示5個球隊
-        margin-right: 10px;
-        margin-bottom: 0.5rem; // 添加下邊距以增加行間距
-        white-space: nowrap; // 防止球隊名稱換行
-      }
+    .react-select__option--is-focused {
+      background-color: #f8f8f8; /* 設定選中時的背景顏色 */
+      color: #172243; /* 文字顏色 */
     }
   }
 
@@ -96,7 +81,7 @@
       position: sticky;
       left: 0;
       background-color: #172243; // 確保固定的欄位背景與其他欄位一致
-      z-index: 1; // 確保固定的欄位在最上層
+      //z-index: 1; // 確保固定的欄位在最上層
     }
   }
   h2 {
@@ -105,5 +90,11 @@
     padding: 1rem 0rem;
     color: white;
     background-color: #172243;
+  }
+  .sort-arrow {
+    //span箭頭設定
+    margin-left: 5px;
+    color: white;
+    font-size: 10px;
   }
 }

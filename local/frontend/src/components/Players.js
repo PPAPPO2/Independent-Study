@@ -201,10 +201,13 @@ const Players = () => {
           : `PLG & T1 ${selectedYear.replace("_", "-")} League Roster`}
       </h2>
       {/* 年份篩選 */}
-      <div className="year-selector">
+      <div className="selector">
         <select
           id="year-select"
-          onChange={(e) => setSelectedYear(e.target.value)}
+          onChange={(e) => {
+            setSelectedYear(e.target.value);
+            setCurrentPage(1);
+          }}
           value={selectedYear}
         >
           <option value="23_24">2023-24</option>
@@ -212,14 +215,13 @@ const Players = () => {
           <option value="21_22">2021-22</option>
           <option value="20_21">2020-21</option>
         </select>
-      </div>
-
-      {/* 篩選器 */}
-      <div className="position-selector">
         {/* 位置篩選 */}
         <select
           id="position-select"
-          onChange={(e) => setSelectedPosition(e.target.value)}
+          onChange={(e) => {
+            setSelectedPosition(e.target.value);
+            setCurrentPage(1); // 每當選擇位置時，重置頁數到第一頁
+          }}
           value={selectedPosition}
         >
           <option value="">所有位置</option>
@@ -228,18 +230,19 @@ const Players = () => {
           <option value="C">C</option>
         </select>
 
-        {/* 球隊篩選器 (react-select 多選) */}
-        <div className="team-selector">
-          <Select
-            options={teamOptions}
-            isMulti
-            value={selectedTeams}
-            onChange={(selected) => setSelectedTeams(selected || [])}
-            placeholder="選擇球隊"
-            className="team-select"
-            classNamePrefix="react-select"
-          />
-        </div>
+        {/* 球隊篩選器 (多選) */}
+        <Select
+          options={teamOptions}
+          isMulti
+          value={selectedTeams}
+          onChange={(selected) => {
+            setSelectedTeams(selected || []);
+            setCurrentPage(1); //每當選擇球隊時，重置頁數到第一頁
+          }}
+          placeholder="選擇球隊"
+          className="team-select"
+          classNamePrefix="react-select"
+        />
       </div>
       <div className="table-container">
         {/* 分頁 & 表格 */}
@@ -249,7 +252,13 @@ const Players = () => {
               {Object.keys(columnMapping).map((header) => (
                 <th key={header} onClick={() => handleSort(header)}>
                   {header}{" "}
-                  {sortColumn === header ? (isAscending ? "↑" : "↓") : ""}
+                  {sortColumn === header ? (
+                    isAscending ? (
+                      <span className="sort-arrow">▲</span>
+                    ) : (
+                      <span className="sort-arrow">▼</span>
+                    )
+                  ) : null}
                 </th>
               ))}
             </tr>

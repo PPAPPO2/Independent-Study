@@ -1,44 +1,36 @@
+@charset "UTF-8";
 .show-more-container .season-team-select {
   display: flex;
   align-items: center;
-  margin: 1rem;
+  margin: 2rem 0rem 1rem 3rem;
+  padding: 0.5rem;
 }
-.show-more-container .season-team-select .season-select,
-.show-more-container .season-team-select .team-select-container {
+.show-more-container .season-team-select .season-select {
   margin-right: 2rem;
 }
-.show-more-container .season-team-select label {
-  font-weight: bold;
-  font-size: 1.1rem;
-  margin-right: 1rem;
-}
-.show-more-container .season-team-select select,
-.show-more-container .season-team-select input[type=text] {
+.show-more-container .season-team-select select {
   padding: 0.5rem 1rem;
   border: 1px solid #ccc;
   border-radius: 4px;
   font-size: 1rem;
-}
-.show-more-container .season-team-select select {
+  background-color: #f8f8f8;
+  background-position: right 5px center;
   -webkit-appearance: none;
      -moz-appearance: none;
           appearance: none;
-  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23333"><path d="M7 10l5 5 5-5z"/></svg>');
   background-repeat: no-repeat;
-  background-position: right 5px center;
-  padding-right: 30px;
-  background-color: #f8f8f8;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23333"><path d="M7 10l5 5 5-5z"/></svg>');
+  width: 8%;
 }
-.show-more-container .season-team-select .team-select-container {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
+.show-more-container .season-team-select .react-select__placeholder {
+  color: black; /* 設定選擇球隊的 placeholder 文字顏色為黑色 */
 }
-.show-more-container .season-team-select .team-select-container label {
-  flex: 0 0 15%;
-  margin-right: 10px;
-  margin-bottom: 0.5rem;
-  white-space: nowrap;
+.show-more-container .season-team-select .react-select__control {
+  background-color: #f8f8f8; /* 設定 placeholder 的背景顏色 */
+}
+.show-more-container .season-team-select .react-select__option--is-focused {
+  background-color: #f8f8f8; /* 設定選中時的背景顏色 */
+  color: #172243; /* 文字顏色 */
 }
 .show-more-container .table-container {
   width: 85%;
@@ -81,7 +73,6 @@
   position: sticky;
   left: 0;
   background-color: #172243;
-  z-index: 1;
 }
 .show-more-container h2 {
   text-align: center;
@@ -89,4 +80,9 @@
   padding: 1rem 0rem;
   color: white;
   background-color: #172243;
+}
+.show-more-container .sort-arrow {
+  margin-left: 5px;
+  color: white;
+  font-size: 10px;
 }/*# sourceMappingURL=ShowMore.css.map */

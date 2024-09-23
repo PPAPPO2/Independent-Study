@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import Select from "react-select";
 import "../styles/ShowMore.css";
 
 const staticUrl = "/static/Standings/TeamData/";
@@ -93,12 +94,8 @@ const ShowMore = () => {
     setSelectedTeams([]);
   };
 
-  const handleTeamSelectChange = (teamId) => {
-    setSelectedTeams((prev) =>
-      prev.includes(teamId)
-        ? prev.filter((id) => id !== teamId)
-        : [...prev, teamId]
-    );
+  const handleTeamSelectChange = (selected) => {
+    setSelectedTeams(selected ? selected.map((team) => team.value) : []);
   };
 
   const updateTable = () => {
@@ -136,12 +133,18 @@ const ShowMore = () => {
     setData(sortedData);
   };
 
+  // 設定 teamOptions 的格式，供 react-select 使用
+  const teamOptions = teams[season].map((team) => ({
+    value: team.id.toString(),
+    label: team.name,
+  }));
+
   return (
     <div className="show-more-container">
       <h2>
-        {season === "20_21"
-          ? "PLG 20-21 League Roster"
-          : `PLG & T1 ${season.replace("20", "")} League Roster`}
+        {season === "2020-21"
+          ? "PLG 20-21 Teams Stats"
+          : `PLG & T1 ${season.replace("20", "")} Teams Stats`}
       </h2>
       <div className="season-team-select">
         <select
@@ -155,20 +158,18 @@ const ShowMore = () => {
           <option value="2020-21">2020-21</option>
         </select>
 
-        <div className="team-select-container">
-          {teams[season].map((team) => (
-            <label key={team.id}>
-              <input
-                type="checkbox"
-                value={team.id}
-                checked={selectedTeams.includes(team.id.toString())}
-                onChange={() => handleTeamSelectChange(team.id.toString())}
-                className="team-select"
-              />
-              {team.name}
-            </label>
-          ))}
-        </div>
+        {/* 使用 react-select 來實現多選球隊功能 */}
+        <Select
+          options={teamOptions}
+          isMulti
+          value={teamOptions.filter((team) =>
+            selectedTeams.includes(team.value)
+          )}
+          onChange={handleTeamSelectChange}
+          placeholder="選擇球隊"
+          className="team-select"
+          classNamePrefix="react-select"
+        />
       </div>
 
       <div className="table-container">
@@ -177,7 +178,14 @@ const ShowMore = () => {
             <tr>
               {Object.keys(columnMapping).map((key) => (
                 <th key={key} onClick={() => sortTable(columnMapping[key])}>
-                  {key}
+                  {key}{" "}
+                  {currentSortColumn === columnMapping[key] ? (
+                    isAscending ? (
+                      <span className="sort-arrow">▲</span>
+                    ) : (
+                      <span className="sort-arrow">▼</span>
+                    )
+                  ) : null}
                 </th>
               ))}
             </tr>
