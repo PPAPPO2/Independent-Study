@@ -42,12 +42,11 @@
 .Players .selector input {
   background-color: #f8f8f8;
   color: black;
+  border: 1px solid #ccc;
+  font-size: 1rem;
   border-radius: 4px;
   padding: 0.5rem;
-  border: 1px solid #ccc;
-}
-.Players .selector input .placeholder {
-  color: black;
+  width: 10%;
 }
 .Players .pagination {
   display: flex;

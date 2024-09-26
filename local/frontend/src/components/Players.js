@@ -253,7 +253,7 @@ const Players = () => {
         {/* 搜尋球員 */}
         <input
           type="text"
-          placeholder="搜尋球員名稱"
+          placeholder="搜尋球員姓名"
           value={searchTerm}
           onChange={(e) => {
             setSearchTerm(e.target.value); // 每次輸入都更新搜尋字串
@@ -293,15 +293,39 @@ const Players = () => {
       </div>
       {/* 分頁控件 */}
       <div className="pagination">
-        {[...Array(totalPages)].map((_, i) => (
-          <button
-            key={i}
-            onClick={() => handlePageChange(i + 1)}
-            className={currentPage === i + 1 ? "active" : ""}
-          >
-            {i + 1}
-          </button>
-        ))}
+        {/* 上一頁 */}
+        <button
+          onClick={() => handlePageChange(currentPage - 1)}
+          disabled={currentPage === 1} // 禁用上一頁按鈕，如果已在第一頁
+        >
+          {"◀"}
+        </button>
+
+        {/* 計算分頁範圍 */}
+        {[...Array(totalPages)].map((_, i) => {
+          const startPage = Math.floor((currentPage - 1) / 5) * 5 + 1;
+          const endPage = Math.min(startPage + 4, totalPages); // 顯示五個頁碼，或者到最後一頁
+          if (i + 1 >= startPage && i + 1 <= endPage) {
+            return (
+              <button
+                key={i}
+                onClick={() => handlePageChange(i + 1)}
+                className={currentPage === i + 1 ? "active" : ""}
+              >
+                {i + 1}
+              </button>
+            );
+          }
+          return null;
+        })}
+
+        {/* 下一頁 */}
+        <button
+          onClick={() => handlePageChange(currentPage + 1)}
+          disabled={currentPage === totalPages} // 禁用下一頁按鈕，如果已在最後一頁
+        >
+          {"▶"}
+        </button>
       </div>
     </div>
   );
