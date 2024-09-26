@@ -96,15 +96,19 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 STATIC_URL = '/static/'
-
+STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'frontend', 'build', 'static'),
     os.path.join(BASE_DIR, 'frontend', 'public'),
+    os.path.join(BASE_DIR,'local','static')
+
 ]
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
 FILE_CHARSET = 'utf-8'
 DEFAULT_CHARSET = 'utf-8'
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_REDIRECT_URL = '/'
+
