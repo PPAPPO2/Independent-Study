@@ -23,15 +23,15 @@ const News = () => {
     },
     {
       id: 4,
-      title: "新聞網站 3",
-      url: "https://example.com",
-      img: "https://via.placeholder.com/150",
+      title: "TPBL 選秀結果",
+      url: "https://www.instagram.com/p/C9wiCTxzXM1/",
+      img: "https://pgw.udn.com.tw/gw/photo.php?u=https://uc.udn.com.tw/photo/2024/07/23/1/30098059.jpg&x=0&y=0&sw=0&sh=0&exp=3600",
     },
     {
       id: 5,
-      title: "新聞網站 4",
-      url: "https://example.com",
-      img: "https://via.placeholder.com/150",
+      title: "PLG 選秀結果",
+      url: "https://www.instagram.com/p/C9UoAU1TWLE/?img_index=2",
+      img: "https://img.ltn.com.tw/Upload/sports/page/800/2024/07/12/phpimO8CE.jpg",
     },
     {
       id: 6,
@@ -60,21 +60,24 @@ const News = () => {
   ];
 
   return (
-    <div className="news-grid">
-      {newsLinks.map((link) => (
-        <a
-          href={link.url}
-          target="_blank"
-          rel="noopener noreferrer"
-          key={link.id}
-          className="news-card"
-        >
-          <div className="news-image">
-            <img src={link.img} alt={link.title} />
-          </div>
-          <div className="news-title">{link.title}</div>
-        </a>
-      ))}
+    <div className="news-container ">
+      <h1>精選新聞</h1>
+      <div className="news-grid">
+        {newsLinks.map((link) => (
+          <a
+            href={link.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            key={link.id}
+            className="news-card"
+          >
+            <div className="news-image">
+              <img src={link.img} alt={link.title} />
+            </div>
+            <div className="news-title">{link.title}</div>
+          </a>
+        ))}
+      </div>
     </div>
   );
 };
