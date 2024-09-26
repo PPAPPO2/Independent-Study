@@ -11,6 +11,7 @@ const Players = () => {
   const [teamOptions, setTeamOptions] = useState([]); // 動態更新的球隊選項
 
   // 篩選條件
+  const [searchTerm, setSearchTerm] = useState(""); // 搜尋條件
   const [selectedPosition, setSelectedPosition] = useState(""); // 位置
   const [selectedTeams, setSelectedTeams] = useState([]); // 複選球隊
   const [sortColumn, setSortColumn] = useState(""); // 排序欄位
@@ -147,12 +148,19 @@ const Players = () => {
   useEffect(() => {
     let filtered = combinedData;
 
+    // 搜尋球員名稱
+    if (searchTerm) {
+      filtered = filtered.filter((player) =>
+        player.player.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+    }
+    //位置
     if (selectedPosition) {
       filtered = filtered.filter(
         (player) => player.position === selectedPosition
       );
     }
-
+    //球隊
     if (selectedTeams.length > 0) {
       filtered = filtered.filter((player) =>
         selectedTeams.some((team) => team.value === player.team)
@@ -160,7 +168,7 @@ const Players = () => {
     }
 
     setFilteredData(filtered);
-  }, [selectedPosition, selectedTeams, combinedData]);
+  }, [selectedPosition, selectedTeams, combinedData, searchTerm]);
 
   // 排序資料
   const handleSort = (column) => {
@@ -187,7 +195,6 @@ const Players = () => {
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = filteredData.slice(indexOfFirstItem, indexOfLastItem);
-
   const totalPages = Math.ceil(filteredData.length / itemsPerPage);
 
   // 變更分頁
@@ -242,6 +249,16 @@ const Players = () => {
           placeholder="選擇球隊"
           className="team-select"
           classNamePrefix="react-select"
+        />
+        {/* 搜尋球員 */}
+        <input
+          type="text"
+          placeholder="搜尋球員名稱"
+          value={searchTerm}
+          onChange={(e) => {
+            setSearchTerm(e.target.value); // 每次輸入都更新搜尋字串
+            setCurrentPage(1); // 每次搜尋時重置頁數
+          }}
         />
       </div>
       <div className="table-container">

@@ -27,7 +27,7 @@
 }
 .Players .selector .react-select__option--is-focused {
   background-color: #f8f8f8; /* 設定選中時的背景顏色 */
-  color: #172243; /* 文字顏色 */
+  color: black; /* 文字顏色 */
 }
 .Players .selector .filter-container {
   display: flex;
@@ -38,6 +38,16 @@
 .Players .selector .filter-container .position-selector,
 .Players .selector .filter-container .team-selector {
   flex: 1;
+}
+.Players .selector input {
+  background-color: #f8f8f8;
+  color: black;
+  border-radius: 4px;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+}
+.Players .selector input .placeholder {
+  color: black;
 }
 .Players .pagination {
   display: flex;
