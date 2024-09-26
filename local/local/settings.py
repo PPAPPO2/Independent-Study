@@ -100,8 +100,8 @@ STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesSto
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'frontend', 'build', 'static'),
-    os.path.join(BASE_DIR, 'frontend', 'public'),
-    os.path.join(BASE_DIR,'local','static')
+    os.path.join(BASE_DIR, 'frontend', 'public')
+    
 
 ]
 
