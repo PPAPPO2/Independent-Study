@@ -38,7 +38,7 @@ const Navbar = () => {
             </NavLink>
           </li>
           <li>
-            <NavLink to="/news" activeClassName="active">
+            <NavLink to="/cat/news" activeClassName="active">
               消息
             </NavLink>
           </li>
