@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import "../styles/Navbar.css";
 
 import plgLogo from "../logo/plg.png";
-import t1Logo from "../logo/t1.png";
+import t1Logo from "../logo/tpbl.png";
 
 const Navbar = () => {
   return (
@@ -38,8 +38,8 @@ const Navbar = () => {
             </NavLink>
           </li>
           <li>
-            <NavLink to="/teams" activeClassName="active">
-              球隊
+            <NavLink to="/news" activeClassName="active">
+              消息
             </NavLink>
           </li>
           <li>

@@ -5,6 +5,7 @@ import Standings from "./components/Standings";
 import ShowMore from "./components/TeamShowMore";
 import PredictResult from "./components/PredictResult";
 import Players from "./components/Players";
+import News from "./components/News";
 
 const App = () => {
   return (
@@ -16,6 +17,7 @@ const App = () => {
           <Route path="/cat/showmore" element={<ShowMore />} />
           <Route path="/cat/predict" element={<PredictResult />} />
           <Route path="/cat/players" element={<Players />} />
+          <Route path="/cat/news" element={<News />} />
         </Routes>
       </div>
     </Router>
