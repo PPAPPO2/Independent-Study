@@ -2,7 +2,7 @@
 import requests
 from bs4 import BeautifulSoup
 from django.core.management.base import BaseCommand
-from cat.models import  P_Season_Players_Palyoff_Performance_22_23, P_Season_Players_Playoff_Performance_23_24
+from cat.models import  P_Season_Players_Final_Performance_22_23, P_Season_Players_Final_Performance_23_24
 from datetime import datetime,timedelta
 from decimal import Decimal
 import pandas as pd
@@ -12,8 +12,8 @@ from django.db import connection
 class Command(BaseCommand):
     
     def handle(self, *args, **kwargs):
-        year = '2022-23'
-        url = f'https://pleagueofficial.com/stat-player/{year}/3#record'
+        year = '2023-24'
+        url = f'https://pleagueofficial.com/stat-player/{year}/4#record'
         headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36'}
 
         # 發送GET請求並獲取響應
@@ -39,7 +39,7 @@ class Command(BaseCommand):
         # 將響應內容從JSON格式轉換為Python字典
         temp = json.loads(data)
         # 清空現有數據
-        P_Season_Players_Palyoff_Performance_22_23.objects.all().delete()
+        P_Season_Players_Final_Performance_23_24.objects.all().delete()
 
         def convert_to_float(data):
             for key, value in data.items():
@@ -84,7 +84,7 @@ class Command(BaseCommand):
                 All_goals_pct = round(total_made / total_attempts, 2)
 
             # 創建一個T1_Season_Players_Performance模型實例
-            P_Season_Players_Palyoff_Performance_22_23.objects.create(
+            P_Season_Players_Final_Performance_23_24.objects.create(
                 player=rosters["球員"],
                 jersey=rosters["背號"],
                 team=rosters["球隊"],

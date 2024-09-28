@@ -179,63 +179,41 @@ class Schedule(models.Model):
     def __str__(self):
         return f"日期：{self.game_date}, {self.team_home} vs {self.team_away} 在 {self.location}"
     
-class Season_Playoff_Players_Performance(models.Model):
-    player = models.CharField(max_length=10)
-    jersey = models.IntegerField()
-    position = models.CharField(max_length=10, default='0') 
-    team = models.CharField(max_length=10)
-
-    # 新增球員出賽場次 & 出賽時間
-    game_played = models.IntegerField(default=0)
-    minutes = models.CharField(max_length=5, default='00:00:00')
-
-    points = models.DecimalField(max_digits=10, decimal_places=2)
-    #總命中
-    All_goals_made = models.DecimalField(max_digits=10, decimal_places=2,default=0) #要加
-    #總出手
-    All_goals = models.DecimalField(max_digits=10, decimal_places=2,default=0) #要加
-    #總命中率
-    All_goals_pct = models.DecimalField(max_digits=10, decimal_places=2,default=0) #要加
-    #兩分
-    field_goals_two_made = models.DecimalField(max_digits= 10,decimal_places=2,default=0)
-    field_goals_two = models.DecimalField(max_digits=10, decimal_places=2)#要加
-    field_goals_two_pct = models.DecimalField(max_digits=10, decimal_places=2)
-    #三分
-    field_goals_three_made = models.DecimalField(max_digits=10, decimal_places=2,default=0)
-    field_goals_three = models.DecimalField(max_digits=10, decimal_places=2,default=0)#要加
-    field_goals_three_pct = models.DecimalField(max_digits=10, decimal_places=2)
-    #罰球
-    free_throws_made = models.DecimalField(max_digits=10, decimal_places=2)
-    free_throws = models.DecimalField(max_digits=10, decimal_places=2)#要加
-    free_throws_pct = models.DecimalField(max_digits=10, decimal_places=2)
-    #其他
-    
-    offensive_rebounds = models.DecimalField(max_digits=10, decimal_places=2)
-    defensive_rebounds = models.DecimalField(max_digits=10, decimal_places=2)
-    rebounds = models.DecimalField(max_digits=10, decimal_places=2)
-    assists = models.DecimalField(max_digits=10, decimal_places=2)
-    steals = models.DecimalField(max_digits=10, decimal_places=2)
-    blocks = models.DecimalField(max_digits=10, decimal_places=2)
-    turnovers = models.DecimalField(max_digits=10, decimal_places=2)
-    fouls = models.DecimalField(max_digits=10, decimal_places=2)
-    class Meta:
-       abstract = True
-class T1_Season_Playoff_Players_Performance_23_24(Season_Playoff_Players_Performance):
+class T1_Season_Playoff_Players_Performance_23_24(Season_Players_Performance):
     pass
-class T1_Season_Playoff_Players_Performance_22_23(Season_Playoff_Players_Performance):
+class T1_Season_Playoff_Players_Performance_22_23(Season_Players_Performance):
     pass
-class T1_Season_Playoff_Players_Performance_21_22(Season_Playoff_Players_Performance):
+class T1_Season_Players_Final_Performance_23_24(Season_Players_Performance):
+    pass
+class T1_Season_Players_Final_Performance_22_23(Season_Players_Performance):
     pass
 
-class P_Season_Players_Playoff_Performance_23_24(Season_Playoff_Players_Performance):
+
+class P_Season_Players_Playoff_Performance_23_24(Season_Players_Performance):
     pass
-class P_Season_Players_Palyoff_Performance_22_23(Season_Playoff_Players_Performance):
+class P_Season_Players_Palyoff_Performance_22_23(Season_Players_Performance):
     pass
-class P_Season_Players_Palyoff_Performance_21_22(Season_Playoff_Players_Performance):
+class P_Season_Players_Final_Performance_23_24(Season_Players_Performance):
     pass
-class P_Season_Players_Palyoff_Performance_20_21(Season_Playoff_Players_Performance):
+class P_Season_Players_Final_Performance_22_23(Season_Players_Performance):
     pass
 
 
 
+class T1_Season_Teams_Final_Performance_22_23(Season_teams_Performance):
+    pass
+class T1_Season_Teams_Final_Performance_23_24(Season_teams_Performance):
+    pass
+class T1_Season_Teams_Playoff_Performance_22_23(Season_teams_Performance):
+    pass
+class T1_Season_Teams_Playoff_Performance_23_24(Season_teams_Performance):
+    pass
 
+class P_Season_Teams_Playoff_Performance_22_23(Season_teams_Performance):
+    pass
+class P_Season_Teams_Playoff_Performance_23_24(Season_teams_Performance):
+    pass
+class P_Season_Teams_Final_Performance_22_23(Season_teams_Performance):
+    pass
+class P_Season_Teams_Final_Performance_23_24(Season_teams_Performance):
+    pass

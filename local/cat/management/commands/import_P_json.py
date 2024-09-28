@@ -2,7 +2,7 @@ import json
 import os
 from django.conf import settings  # 導入 settings
 from django.core.management.base import BaseCommand
-from cat.models import P_Season_teams_Performance_20_21,P_Season_teams_Performance_21_22, P_Season_teams_Performance_22_23, P_Season_teams_Performance_23_24,P_Season_Players_Performance_20_21,P_Season_Players_Performance_21_22, P_Season_Players_Performance_22_23, P_Season_Players_Performance_23_24
+from cat.models import P_Season_Teams_Playoff_Performance_22_23,P_Season_Teams_Playoff_Performance_23_24,P_Season_Teams_Final_Performance_23_24,P_Season_Teams_Final_Performance_22_23,P_Season_Players_Palyoff_Performance_22_23, P_Season_Players_Playoff_Performance_23_24,P_Season_Players_Final_Performance_22_23, P_Season_Players_Final_Performance_23_24,P_Season_teams_Performance_20_21,P_Season_teams_Performance_21_22, P_Season_teams_Performance_22_23, P_Season_teams_Performance_23_24,P_Season_Players_Performance_20_21,P_Season_Players_Performance_21_22, P_Season_Players_Performance_22_23, P_Season_Players_Performance_23_24
 from datetime import time
 from decimal import Decimal
 
@@ -23,10 +23,19 @@ class Command(BaseCommand):
              #(P_Season_teams_Performance_22_23, 'P_teams_performance_22_23.json'),
              #(P_Season_teams_Performance_23_24, 'P_teams_performance_23_24.json'),
             #P players performance
-            (P_Season_Players_Performance_20_21,'P_Players_performance_20_21.json'),
-            (P_Season_Players_Performance_21_22,'P_Players_performance_21_22.json'),
-            (P_Season_Players_Performance_22_23,'P_Players_performance_22_23.json'),
-            (P_Season_Players_Performance_23_24,'P_Players_performance_23_24.json'),
+            #(P_Season_Players_Performance_20_21,'P_Players_performance_20_21.json'),
+            #(P_Season_Players_Performance_21_22,'P_Players_performance_21_22.json'),
+            #(P_Season_Players_Performance_22_23,'P_Players_performance_22_23.json'),
+            #(P_Season_Players_Performance_23_24,'P_Players_performance_23_24.json'),
+            (P_Season_Teams_Playoff_Performance_22_23,'P_Season_Teams_Playoff_Performance_22_23.json'),
+            (P_Season_Teams_Playoff_Performance_23_24,'P_Season_Teams_Playoff_Performance_23_24.json'),
+            (P_Season_Teams_Final_Performance_22_23,'P_Season_Teams_Final_Performance_22_23.json'),
+            (P_Season_Teams_Final_Performance_23_24,'P_Season_Teams_Final_Performance_23_24.json'),
+            (P_Season_Players_Final_Performance_22_23,'P_Season_Players_Final_Performance_22_23.json'),
+            (P_Season_Players_Final_Performance_23_24,'P_Season_Players_Final_Performance_23_24.json'),
+            (P_Season_Players_Palyoff_Performance_22_23,'P_Season_Players_Palyoff_Performance_22_23.json'),
+            (P_Season_Players_Playoff_Performance_23_24,'P_Season_Players_Playoff_Performance_23_24.json')
+            
         ]
 
         for model, json_file_name in tables:
