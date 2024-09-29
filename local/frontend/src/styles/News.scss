@@ -4,55 +4,87 @@
   align-items: center;
   flex-direction: column; /* 將內容垂直排列 */
   padding: 40px 0; /* 增加上下內邊距 */
-  min-height: 100vh; /* 使容器佔滿整個視窗 */
-  h1 {
+  .month-selector {
+    display: flex;
+    justify-content: center; /* 確保按鈕與標題居中對齊 */
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+
+  .month-selector h1 {
+    margin: 0 1rem; /* 增加標題與按鈕的間距 */
     font-size: 2.5rem;
     color: #172243;
-    margin-bottom: 2rem;
   }
-}
 
-.news-grid {
-  display: grid;
-  grid-template-columns: repeat(
-    auto-fill,
-    minmax(300px, 1fr)
-  ); /* 自動適應列數 */
-  gap: 20px; /* 格子之間的間距 */
-  width: 80%; /* 容器寬度 */
-  max-width: 1200px; /* 設定最大寬度 */
-}
+  .month-selector button {
+    background-color: #ffffff;
+    font-size: large;
+    color: #172243;
+    border: none;
+    padding: 0.75rem;
+    border-radius: 8px;
+    cursor: pointer;
+    visibility: visible; /* 默認可見 */
+    opacity: 1; /* 默認不透明 */
+    transition: opacity 0.3s ease-in-out, visibility 0s 0.3s;
+  }
 
-.news-card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-decoration: none;
-  background-color: #ffffff;
-  border-radius: 8px;
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1); /* 提升陰影效果 */
-  transition: transform 0.3s, box-shadow 0.3s; /* 改善卡片懸浮效果 */
-  padding: 1rem;
-  overflow: hidden; /* 防止內容溢出 */
-}
+  .month-selector button.hidden {
+    visibility: hidden; /* 隱藏按鈕但保留佔位 */
+    opacity: 0; /* 透明度為0 */
+  }
 
-.news-card:hover {
-  transform: translateY(-10px); /* 懸浮時卡片上移 */
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15); /* 懸浮時增加陰影 */
-}
+  .month-selector button:hover {
+    background-color: #172243;
+    color: #ffffff;
+  }
+  .news-empty {
+    font-size: 1.5rem;
+    color: #666;
+    text-align: center;
+    margin-top: 1rem; /* 減少與月份選擇器的間距 */
+    margin-bottom: 1rem; /* 減少下方留白 */
+  }
 
-.news-image img {
-  width: 100%;
-  height: 200px; /* 調整圖片高度 */
-  object-fit: cover; /* 確保圖片不會變形 */
-  border-top-left-radius: 8px;
-  border-top-right-radius: 8px;
-}
+  .news-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px; /* 格子之間的間距 */
+    width: 80%; /* 容器寬度 */
+    max-width: 1200px; /* 設定最大寬度 */
+    .news-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-decoration: none;
+      background-color: #ffffff;
+      border-radius: 8px;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1); /* 提升陰影效果 */
+      transition: transform 0.3s, box-shadow 0.3s; /* 改善卡片懸浮效果 */
+      padding: 1rem;
+      overflow: hidden; /* 防止內容溢出 */
+    }
 
-.news-title {
-  padding: 15px;
-  font-size: 1.2rem; /* 增加字體大小 */
-  color: #172243;
-  text-align: center;
-  font-weight: 600; /* 增加字體粗細 */
+    .news-card:hover {
+      transform: translateY(-10px); /* 懸浮時卡片上移 */
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15); /* 懸浮時增加陰影 */
+    }
+
+    .news-image img {
+      width: 100%;
+      height: 200px; /* 調整圖片高度 */
+      object-fit: cover; /* 確保圖片不會變形 */
+      border-top-left-radius: 8px;
+      border-top-right-radius: 8px;
+    }
+
+    .news-title {
+      padding: 15px;
+      font-size: 1.2rem; /* 增加字體大小 */
+      color: #172243;
+      text-align: center;
+      font-weight: 600; /* 增加字體粗細 */
+    }
+  }
 }

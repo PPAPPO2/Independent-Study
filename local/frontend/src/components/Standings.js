@@ -112,11 +112,9 @@ const Standings = () => {
   return (
     <div>
       <h2 class="standings">RANKINGS</h2>
-      <h2 class="table-title">PLG 例行賽</h2>
-      <a href="../cat/showmore">showmore⭢</a>
+      <h2 class="table-title">❰ PLG 例行賽 ❱</h2>
       {renderTable(plgStandings)}
-      <h2 class="table-title">T1 例行賽</h2>
-      <a href="../cat/showmore">showmore⭢</a>
+      <h2 class="table-title">❰ T1 例行賽 ❱</h2>
       {renderTable(t1Standings)}
     </div>
   );

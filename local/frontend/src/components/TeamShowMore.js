@@ -5,8 +5,8 @@ import "../styles/ShowMore.css";
 const staticUrl = "/static/Standings/TeamData/";
 
 const ShowMore = () => {
-  const [season, setSeason] = useState("2023-24");
-  const [selectedTeams, setSelectedTeams] = useState([]);
+  const [season, setSeason] = useState("2023-24"); //預設年分
+  const [selectedTeams, setSelectedTeams] = useState([]); //預設全選
   const [data, setData] = useState([]);
   const [isAscending, setIsAscending] = useState(true);
   const [currentSortColumn, setCurrentSortColumn] = useState(null);
@@ -86,16 +86,37 @@ const ShowMore = () => {
   };
 
   useEffect(() => {
-    updateTable();
-  }, [season, selectedTeams]);
+    // 這裡只在組件加載時執行一次
+    const allTeams = teams[season].map((team) => team.id.toString());
+    setSelectedTeams(allTeams);
+    setIsAllSelected(true); // 設置全選狀態為 true // 初次進入時全選所有球隊
+  }, []);
 
+  useEffect(() => {
+    updateTable(); // 每次 selectedTeams 改變時更新表格
+  }, [selectedTeams]); // 依賴 selectedTeams 來自動更新表格
+
+  // 2. 修改 handleSeasonChange，自動全選球隊
   const handleSeasonChange = (e) => {
-    setSeason(e.target.value);
-    setSelectedTeams([]);
+    const newSeason = e.target.value;
+    setSeason(newSeason);
+    // 自動全選當前年份的所有球隊
+    const allTeams = teams[newSeason].map((team) => team.id.toString());
+    setSelectedTeams(allTeams);
+    setIsAllSelected(true); // 設置全選狀態為 true
   };
-
+  // 新增一個狀態來追蹤是否是全選狀態
+  const [isAllSelected, setIsAllSelected] = useState(false);
   const handleTeamSelectChange = (selected) => {
-    setSelectedTeams(selected ? selected.map((team) => team.value) : []);
+    if (selected && selected.some((team) => team.value === "all")) {
+      // 如果選擇了 "全選"，則選擇所有球隊
+      const allTeams = teams[season].map((team) => team.id.toString());
+      setSelectedTeams(allTeams);
+      setIsAllSelected(true); // 設置全選狀態為 true
+    } else {
+      setSelectedTeams(selected ? selected.map((team) => team.value) : []);
+      setIsAllSelected(false); // 設置全選取消態為 false
+    }
   };
 
   const updateTable = () => {
@@ -134,17 +155,20 @@ const ShowMore = () => {
   };
 
   // 設定 teamOptions 的格式，供 react-select 使用
-  const teamOptions = teams[season].map((team) => ({
-    value: team.id.toString(),
-    label: team.name,
-  }));
+  const teamOptions = [
+    { value: "all", label: "全選球隊" },
+    ...teams[season].map((team) => ({
+      value: team.id.toString(),
+      label: team.name,
+    })),
+  ];
 
   return (
     <div className="show-more-container">
       <h2>
         {season === "2020-21"
-          ? "PLG 20-21 Teams Stats"
-          : `PLG & T1 ${season.replace("20", "")} Teams Stats`}
+          ? "❰ PLG 20-21 Teams Stats ❱"
+          : `❰ PLG & T1 ${season.replace("20", "")} Teams Stats ❱`}
       </h2>
       <div className="season-team-select">
         <select
@@ -162,9 +186,11 @@ const ShowMore = () => {
         <Select
           options={teamOptions}
           isMulti
-          value={teamOptions.filter((team) =>
-            selectedTeams.includes(team.value)
-          )}
+          value={
+            isAllSelected
+              ? [{ value: "all", label: "全選球隊" }] // 當全選時顯示「全選球隊」
+              : teamOptions.filter((team) => selectedTeams.includes(team.value))
+          }
           onChange={handleTeamSelectChange}
           placeholder="選擇球隊"
           className="team-select"
