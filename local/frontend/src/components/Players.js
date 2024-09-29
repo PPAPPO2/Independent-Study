@@ -204,8 +204,8 @@ const Players = () => {
     <div className="Players">
       <h2>
         {selectedYear === "20_21"
-          ? "PLG 20-21 League Roster"
-          : `PLG & T1 ${selectedYear.replace("_", "-")} League Roster`}
+          ? "❰ PLG 20-21 League Roster ❱"
+          : `❰ PLG & T1 ${selectedYear.replace("_", "-")} League Roster ❱`}
       </h2>
       {/* 年份篩選 */}
       <div className="selector">
