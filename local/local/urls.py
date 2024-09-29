@@ -30,7 +30,8 @@ urlpatterns = [
     path('mlServer/', include('mlServer.urls')),  # mlServer/ 轉發請求到模塊 mlServer.urls
     path('', RedirectView.as_view(url='/cat/')),  # 重新導向 URL 127.0.0.1:8000/cat/
     path('accounts/', include('django.contrib.auth.urls')),  # 導向到 accounts
-    # re_path(r'^.*$', TemplateView.as_view(template_name='index.html'))  # 這行加了圖片會跑不出來
+    re_path(r'^.*$', TemplateView.as_view(template_name='index.html')),
+    
 ]
 
 # 啟用靜態文件的提供

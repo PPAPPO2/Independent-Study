@@ -9,4 +9,5 @@ router.register(r'schedules', ScheduleViewSet)
 urlpatterns = [
     path('', views.index, name='index'),
     path('', include(router.urls)),
+    
 ]
