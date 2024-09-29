@@ -3,42 +3,32 @@
   justify-content: center; /* 使九宮格居中 */
   align-items: center;
   flex-direction: column; /* 將內容垂直排列 */
-  padding: 40px 0; /* 增加上下內邊距 */
   .month-selector {
+    width: 100%;
     display: flex;
     justify-content: center; /* 確保按鈕與標題居中對齊 */
     align-items: center;
-    margin-bottom: 1rem;
-  }
-
-  .month-selector h1 {
-    margin: 0 1rem; /* 增加標題與按鈕的間距 */
-    font-size: 2.5rem;
-    color: #172243;
-  }
-
-  .month-selector button {
-    background-color: #ffffff;
-    font-size: large;
-    color: #172243;
-    border: none;
-    padding: 0.75rem;
-    border-radius: 8px;
-    cursor: pointer;
-    visibility: visible; /* 默認可見 */
-    opacity: 1; /* 默認不透明 */
-    transition: opacity 0.3s ease-in-out, visibility 0s 0.3s;
-  }
-
-  .month-selector button.hidden {
-    visibility: hidden; /* 隱藏按鈕但保留佔位 */
-    opacity: 0; /* 透明度為0 */
-  }
-
-  .month-selector button:hover {
     background-color: #172243;
-    color: #ffffff;
+    h1 {
+      margin: 0 1rem; /* 增加標題與按鈕的間距 */
+      font-size: 2rem;
+      color: #ffffff;
+      text-align: center;
+      margin: 1rem;
+    }
+    span {
+      //span箭頭設定
+      cursor: pointer;
+      margin-left: 5px;
+      color: white;
+      font-size: 1.5rem;
+      &:hover {
+        color: #80c2ff;
+        transition: 1s; // 當鼠標懸停時改變箭頭顏色
+      }
+    }
   }
+
   .news-empty {
     font-size: 1.5rem;
     color: #666;
@@ -48,6 +38,7 @@
   }
 
   .news-grid {
+    margin-top: 1rem;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 20px; /* 格子之間的間距 */

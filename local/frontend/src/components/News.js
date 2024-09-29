@@ -121,13 +121,12 @@ const News = () => {
     <div className="news-container">
       {/* 月份選擇器 */}
       <div className="month-selector">
-        {currentMonth > 9 && <button onClick={handlePreviousMonth}>◀</button>}
+        {currentMonth > 9 && <span onClick={handlePreviousMonth}>◀</span>}
         <h1>{currentMonth}月 精選新聞</h1>
         {newsData[currentMonth + 1]?.length > 0 ? (
-          <button onClick={handleNextMonth}>▶</button>
+          <span onClick={handleNextMonth}>▶</span>
         ) : null}
       </div>
-
       {/* 無資料顯示 */}
       {newsData[currentMonth].length === 0 ? (
         <div className="news-empty">資料尚未更新</div>

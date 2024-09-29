@@ -1,89 +1,78 @@
 .top-bar {
-    background-color: #172243; /* 背景色 */
-    color: #ffffff; /* 文字顏色 */
-    text-align: center; /* 文字居中 */
-    padding: 1rem; /* 調整內距 */
-    font-size: 35px; /* 調整字體大小 */
-    font-weight: bold; /* 加粗 */
-    margin-bottom: 20px; /* 和日曆間隔 */
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  background-color: #172243;
+  color: #ffffff;
+  text-align: center;
+  padding: 1rem;
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.top-bar .arrow {
+  cursor: pointer;
+  margin: 0 20px;
+  font-size: 2rem;
+  color: white;
+}
+.top-bar .arrow:hover {
+  color: #2980b9;
+  transition: 1s;
+}
 
-  }
-  
-  .top-bar .arrow {
-    cursor: pointer;
-    margin: 0 20px; /* 調整左右間距 */
-    font-size: 50px; /* 調整箭頭大小 */
-    color: white; /* 調整箭頭顏色 */
-  }
-  
-  .top-bar .arrow:hover {
-    color: #2980b9; /* 懸停時箭頭變色 */
-    transition: 1s;
-  }
-  
-  
 .calendar-container {
-    /* display: inline-block; */
-    width: 80%; /* 控制日曆的寬度，讓它不佔滿整個頁面 */
-    margin: 0 auto; /* 讓日曆在頁面中間 */
-  }
-.fc-col-header-cell {
-    background-color: #002d62; /* 設置深色背景 */
-    color: #ffffff; /* 設置文字顏色為白色，確保對比度夠高 */
-    font-weight: bold; /* 讓文字加粗，讓星期顯示更明顯 */
-    text-align: center; /* 置中顯示文字 */
-  }
-  
-.fc-col-header-cell-cushion {
-    color: #ffffff !important; /* 確保星期顯示文字的顏色始終為白色 */
-  }
-/* 調整標題樣式 */
-.fc-toolbar-title {
-    font-size: 1.8em;   /* 調整字體大小 */
-    font-weight: bold;  /* 讓字體加粗 */
-    color: #002d62;     /* 修改文字顏色 */
-    display: inline-block;
-    margin: 0 10px;     /* 調整標題的邊距 */
-  }
-  
-  /* 調整箭頭按鈕樣式 */
-.fc-button {
-    background-color: transparent !important;  /* 移除按鈕背景色 */
-    border: none!important;                   /* 移除邊框 */
-    font-size: 1.8em!important;               /* 調整箭頭大小 */
-    color: #002d62!important;                 /* 調整箭頭顏色 */
-    padding: 0 10px;                /* 調整按鈕的間距 */
-  }
-  
-.fc-button:hover {
-    color: #80c2ff !important;  /* 當鼠標懸停時改變箭頭顏色 */
-  }
-  
-  /* 讓工具欄保持一行 */
-.fc-toolbar {
-    display: flex;
-    justify-content: center; /* 讓工具欄中的元素居中 */
-    align-items: center;
-  }
-.fc-daygrid-day {
-    background-color: #ffffff; /* 修改為你想要的顏色 */
-  }
-
-.fc-daygrid-day-events {
-    display: flex!important;
-    flex-direction: column!important;
-    justify-content: center!important; /* 垂直居中 */
-    align-items: center!important;     /* 水平居中 */
-    height: 100%!important;            /* 撐滿可用空間 */
+  width: 80%;
+  min-width: 60%;
+  margin: 0 auto;
 }
-
-.fc-event {
-    display: flex!important;
-    justify-content: center!important;  /* 水平居中 */
-    align-items: center!important;      /* 垂直居中 */
-    margin-bottom: 5px!important;       /* 事件之間的間距 */
-    width: 100%!important;              /* 事件的寬度撐滿容器 */
+.calendar-container .fc-col-header-cell {
+  background-color: #002d62;
+  color: #ffffff;
+  font-weight: bold;
+  text-align: center;
 }
+.calendar-container .fc-col-header-cell-cushion {
+  font-size: 1.25rem;
+  margin: 1rem 0rem;
+  color: #ffffff !important;
+}
+.calendar-container .fc-toolbar-title {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #002d62;
+  display: inline-block;
+  margin: 0 10px;
+}
+.calendar-container .fc-button {
+  background-color: transparent !important;
+  border: none !important;
+  font-size: 1.8em !important;
+  color: #002d62 !important;
+  padding: 0 10px;
+}
+.calendar-container .fc-button:hover {
+  color: #80c2ff !important;
+}
+.calendar-container .fc-toolbar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.calendar-container .fc-daygrid-day {
+  background-color: #ffffff;
+}
+.calendar-container .fc-daygrid-day-events {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  align-items: center !important;
+  height: 100% !important;
+}
+.calendar-container .fc-event {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  margin-bottom: 5px !important;
+  width: 100% !important;
+}/*# sourceMappingURL=Schedule.css.map */
