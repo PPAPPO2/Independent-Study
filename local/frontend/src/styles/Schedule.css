@@ -72,5 +72,18 @@
     background-color: #ffffff; /* 修改為你想要的顏色 */
   }
 
+.fc-daygrid-day-events {
+    display: flex!important;
+    flex-direction: column!important;
+    justify-content: center!important; /* 垂直居中 */
+    align-items: center!important;     /* 水平居中 */
+    height: 100%!important;            /* 撐滿可用空間 */
+}
 
-  
+.fc-event {
+    display: flex!important;
+    justify-content: center!important;  /* 水平居中 */
+    align-items: center!important;      /* 垂直居中 */
+    margin-bottom: 5px!important;       /* 事件之間的間距 */
+    width: 100%!important;              /* 事件的寬度撐滿容器 */
+}
