@@ -2,6 +2,7 @@ import csv
 from datetime import datetime
 from django.core.management.base import BaseCommand
 from cat.models import Schedule  # 確保替換為正確的應用程式名稱
+import pytz
 
 class Command(BaseCommand):
     help = '匯入籃球賽程資料到資料庫'
@@ -24,7 +25,7 @@ class Command(BaseCommand):
                     
                     # 將比賽時間轉換為 datetime 對象
                     game_time = datetime.strptime(game_time_str, '%Y-%m-%d %H:%M')
-
+                    
                     # 建立 Schedule 實例
                     schedule = Schedule(
                         team_home=home_team,

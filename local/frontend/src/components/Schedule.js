@@ -106,7 +106,13 @@ const Schedule = () => {
             return ""; // 不顯示內建的日曆標題
           }}
           // 修改這裡的 eventContent 來顯示 LOGO 和場地信息
-          eventContent={(eventInfo) => (
+          eventContent={(eventInfo) => {
+            const gameTime = new Date(eventInfo.event.start);
+            const hours = gameTime.getHours().toString().padStart(2, "0");
+            const minutes = gameTime.getMinutes().toString().padStart(2, "0");
+            const timeString = `${hours}:${minutes}`; // 格式化為 HH:MM
+
+            return(
             <div>
               <img
                 src={getTeamIcon(eventInfo.event.extendedProps.team_home)}
@@ -119,9 +125,11 @@ const Schedule = () => {
                 style={{ width: "50px", height: "50px", marginLeft: "10px" }}
               />
               <br />
+              <b>{timeString}</b>
+              <br />
               <b>{eventInfo.event.extendedProps.location}</b>
             </div>
-          )}
+          )}}
           ref={(calendar) => {
             calendarApi = calendar?.getApi(); // 取得 FullCalendar API，方便控制上下月份切換
           }}
