@@ -30,7 +30,6 @@ urlpatterns = [
     path('mlServer/', include('mlServer.urls')),  # mlServer/ 轉發請求到模塊 mlServer.urls
     path('', RedirectView.as_view(url='/cat/')),  # 重新導向 URL 127.0.0.1:8000/cat/
     path('accounts/', include('django.contrib.auth.urls')),  # 導向到 accounts
-    re_path(r'^.*$', TemplateView.as_view(template_name='index.html')),
     
 ]
 
@@ -39,3 +38,4 @@ urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 # 新增處理 /images/ 的路徑
 urlpatterns += static('/images/', document_root=os.path.join(settings.BASE_DIR, 'frontend', 'public', 'images'))
+urlpatterns += re_path(r'^.*$', TemplateView.as_view(template_name='index.html')),
