@@ -27,6 +27,7 @@ INSTALLED_APPS = [
     'mlServer',
     'rest_framework',
     'corsheaders',
+    'webpack_loader',
 ]
 
 MIDDLEWARE = [
@@ -108,10 +109,8 @@ STATIC_URL = '/static/'
 STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'frontend', 'build', 'static'),
-   # os.path.join(BASE_DIR, 'frontend', 'public')
-    
-
+    os.path.join(BASE_DIR, 'static'), # 指向 css、js
+    os.path.join(BASE_DIR, 'frontend', 'build', 'static'), #指向 球隊、球員數據
 ]
 
 FILE_CHARSET = 'utf-8'
@@ -121,3 +120,9 @@ DEFAULT_CHARSET = 'utf-8'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_REDIRECT_URL = '/'
 
+WEBPACK_LOADER = {
+    'DEFAULT': {
+        'BUNDLE_DIR_NAME': 'static/',  # 對應 Webpack 輸出的路徑
+        'STATS_FILE': os.path.join(BASE_DIR, 'webpack-stats.json'),  # webpack-bundle-tracker 生成的文件
+    }
+}
