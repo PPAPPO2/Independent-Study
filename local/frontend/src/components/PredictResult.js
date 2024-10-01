@@ -38,7 +38,7 @@ function PredictWinProbability() {
 
   return (
     <div class="predict">
-      <h1>比賽勝率預測超派測試</h1>
+      <h1>比賽勝率預測</h1>
       <form>
         <label htmlFor="team1">選擇主隊:</label>
         <select id="team1" value={team1} onChange={handleTeam1Change}>
