@@ -80,7 +80,8 @@ const Schedule = () => {
           plugins={[dayGridPlugin]}
           initialView="dayGridMonth"
           events={events} // 這裡是賽程資料
-          aspectRatio={1.5}
+          // aspectRatio={2.5}
+          height="auto"
           headerToolbar={{
             left: "",
             center: "",
