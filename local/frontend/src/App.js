@@ -1,14 +1,13 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
 import Standings from "./components/Standings";
 import ShowMore from "./components/TeamShowMore";
 import PredictResult from "./components/PredictResult";
 import Players from "./components/Players";
 import News from "./components/News";
 import Schedule from "./components/Schedule";
-
-
 
 const App = () => {
   return (
@@ -23,6 +22,7 @@ const App = () => {
           <Route path="/cat/news" element={<News />} />
           <Route path="/cat/schedule" element={<Schedule />} />
         </Routes>
+        <Footer />
       </div>
     </Router>
   );
