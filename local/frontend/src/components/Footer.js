@@ -4,29 +4,11 @@ const Footer = () => {
   return (
     <footer className="footer">
       <div className="footer-content">
-        <p>© 2024 My Basketball League. All rights reserved.</p>
-        <p>Privacy Policy | Terms of Service | Contact Us</p>
+        <h3>致力於提供最新的臺灣籃球賽事資訊與分析</h3>
+        <p>聯絡方式丨✉ t110ab0715@ntut.org.tw 丨☎︎ 09xx359226丨好想畢業</p>
       </div>
-      <div className="footer-social">
-        <a
-          href="https://facebook.com"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Facebook
-        </a>{" "}
-        |
-        <a
-          href="https://instagram.com"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Instagram
-        </a>{" "}
-        |
-        <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">
-          Twitter
-        </a>
+      <div className="footer-under">
+        <p>Copyright © 北科大資財四乙 2024 All rights reserved.</p>
       </div>
     </footer>
   );

@@ -2,28 +2,19 @@
   background-color: #172243;
   color: white;
   text-align: center;
-  padding: 2rem;
-  margin-top: 8rem;
+  margin-top: 10rem;
   position: relative;
   bottom: 0;
   width: 100%;
-
-  .footer-content {
-    margin-bottom: 10px;
+  .footer-content h3 {
+    padding: 1rem 0rem 0.25rem;
   }
 
-  .footer p {
-    margin: 5px 0;
-    font-size: 14px;
-  }
-
-  .footer-social a {
-    color: #80c2ff;
-    text-decoration: none;
-    margin: 0 10px;
-  }
-
-  .footer-social a:hover {
-    color: #2980b9;
+  .footer-under p {
+    font-size: 0.75rem;
+    margin-top: 1rem;
+    padding: 0.5rem;
+    background-color: #1f2e5a;
+    border-top: 1px solid rgba(255, 255, 255, 0.151); // 1px 寬的實線，顏色為黑色
   }
 }

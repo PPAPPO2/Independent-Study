@@ -9,13 +9,15 @@ const Navbar = () => {
   return (
     <header>
       <div className="logo">
-        <img src={plgLogo} alt="PLG Logo" className="plg" />
-        <img src={t1Logo} alt="T1 Logo" className="t1" />
+        <NavLink to="/cat">
+          <img src={plgLogo} alt="PLG Logo" className="plg" />
+          <img src={t1Logo} alt="T1 Logo" className="t1" />
+        </NavLink>
       </div>
       <nav>
         <ul>
           <li>
-            <NavLink to="/cat" end activeClassName="active">
+            <NavLink to="/cat/standings" end activeClassName="active">
               戰績
             </NavLink>
           </li>
