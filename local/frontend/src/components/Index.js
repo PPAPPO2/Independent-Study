@@ -1,10 +1,30 @@
 import React, { useState } from "react";
+import { NavLink } from "react-router-dom";
 import { useSpring, animated } from "react-spring";
+import { useInView } from "react-intersection-observer"; // 引入 useInView
 import "../styles/Index.css";
 const Index = () => {
-  const fadeIn = useSpring({
-    from: { opacity: 0 },
-    to: { opacity: 1 },
+  // 使用 useInView 來監控 section 是否進入視口
+  const [ref1, inView1] = useInView({ triggerOnce: true });
+  const [ref2, inView2] = useInView({ triggerOnce: true });
+  const [ref3, inView3] = useInView({ triggerOnce: true });
+
+  // 當 section 進入視口時，才觸發動畫
+  const fadeIn1 = useSpring({
+    opacity: inView1 ? 1 : 0,
+    transform: inView1 ? "translateY(0)" : "translateY(20px)",
+    config: { duration: 1000 },
+  });
+
+  const fadeIn2 = useSpring({
+    opacity: inView2 ? 1 : 0,
+    transform: inView2 ? "translateY(0)" : "translateY(20px)",
+    config: { duration: 1000 },
+  });
+
+  const fadeIn3 = useSpring({
+    opacity: inView3 ? 1 : 0,
+    transform: inView3 ? "translateY(0)" : "translateY(20px)",
     config: { duration: 1000 },
   });
 
@@ -72,6 +92,9 @@ const Index = () => {
 
   return (
     <div className="home-container">
+      {/* <div className="welcome">
+        <h1>hi</h1>
+      </div> */}
       <div className="content-box left-to-right">
         <img
           src={"/images/icon/LeftToRight.png"}
@@ -79,14 +102,18 @@ const Index = () => {
           className="content-image"
         />
         <div className="content-text">
-          <h2>因為喜歡籃球</h2>
-          <p>描述</p>
+          <h2>兩個聯盟資訊不連貫？</h2>
+          <p>歡迎，這裡將會解決你所遇到的問題</p>
+          <p>提供更視覺化的數據分析</p>
+          <p>還能夠預測下場比賽的勝負！</p>
         </div>
       </div>
       <div className="content-box right-to-left">
         <div className="content-text">
-          <h2>因為喜歡籃球</h2>
-          <p>描述</p>
+          <h2>提供給你最即時的消息！</h2>
+          <p>除了數據分析</p>
+          <p>我們還將賽程整合於行事曆</p>
+          <p>並且精選了每月的臺灣籃球大小事</p>
         </div>
         <img
           src={"/images/icon/RightToLeft.png"}
@@ -94,8 +121,8 @@ const Index = () => {
           className="content-image"
         />
       </div>
-      <div className="section">
-        <animated.div style={fadeIn}>
+      <div ref={ref1} className="section">
+        <animated.div style={fadeIn1}>
           <h1>01</h1>
           <h2>臺灣職籃網頁</h2>
 
@@ -124,8 +151,8 @@ const Index = () => {
           </div>
         </animated.div>
       </div>
-      <div className="team">
-        <animated.div style={fadeIn}>
+      <div ref={ref2} className="team">
+        <animated.div style={fadeIn2}>
           <h1>02</h1>
           <h2>關於我們</h2>
           <p>
@@ -162,19 +189,26 @@ const Index = () => {
         </div>
       </div>
 
-      <div className="tech-section">
-        <h1>03</h1>
-        <h2>開發技術</h2>
-        {techData.map((tech, index) => (
-          <article key={index} className="tech-card">
-            <h3>{tech.title}</h3>
-            <ul>
-              {tech.items.map((item, idx) => (
-                <li key={idx}>{item}</li>
-              ))}
-            </ul>
-          </article>
-        ))}
+      <div ref={ref3} className="tech-section">
+        <animated.div style={fadeIn3}>
+          <h1>03</h1>
+          <h2>開發技術</h2>
+          {techData.map((tech, index) => (
+            <article key={index} className="tech-card">
+              <h3>{tech.title}</h3>
+              <ul>
+                {tech.items.map((item, idx) => (
+                  <li key={idx}>{item}</li>
+                ))}
+              </ul>
+            </article>
+          ))}
+        </animated.div>
+      </div>
+      <div className="button-container">
+        <NavLink to="/cat/login" activeClassName="active">
+          <button className="special-button">立即開始</button>
+        </NavLink>
       </div>
     </div>
   );

@@ -33,6 +33,7 @@
       p {
         font-size: 1rem;
         color: #555;
+        margin-top: 1rem;
       }
     }
 
@@ -197,6 +198,7 @@
       margin-bottom: 1.5rem;
       animation: slideIn 1s ease-in-out;
     }
+
     .tech-card {
       display: inline-block;
       background-color: #172243;
@@ -227,6 +229,25 @@
       margin-bottom: 0.5rem;
       font-size: 1rem;
       color: #71b9e9;
+    }
+  }
+  .button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .special-button {
+      font-size: 1.5rem;
+      border-radius: 8px;
+      margin: 2rem;
+      padding: 1rem;
+      background-color: #172243;
+      color: white;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+
+      &:hover {
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+      }
     }
   }
 }

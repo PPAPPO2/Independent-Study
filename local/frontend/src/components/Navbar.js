@@ -50,7 +50,7 @@ const Navbar = () => {
             </NavLink>
           </li>
           <li>
-            <NavLink to="/login" activeClassName="active">
+            <NavLink to="/cat/login" activeClassName="active">
               登入
             </NavLink>
           </li>
