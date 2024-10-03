@@ -10,7 +10,7 @@ class Command(BaseCommand):
     
     def handle(self, *args, **kwargs):
 
-        output_dir = os.path.join('cat/static/', 'P_Json')
+        output_dir = os.path.join('frontend/public/static/Standings', 'PlayerData')
         # 檢查資料夾是否存在，如果不存在則創建
         if not os.path.exists(output_dir):
             os.makedirs(output_dir)
