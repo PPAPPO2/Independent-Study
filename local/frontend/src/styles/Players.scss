@@ -93,6 +93,12 @@
     width: 85%;
     margin: auto;
     overflow-x: auto;
+    .no-data-message {
+      font-size: 4rem;
+      text-align: center;
+      color: #ccc;
+      margin: 3rem 0rem;
+    }
   }
   .datatable {
     width: 100%;

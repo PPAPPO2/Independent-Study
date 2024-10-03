@@ -286,34 +286,38 @@ const Players = () => {
         />
       </div>
       <div className="table-container">
-        {/* 分頁 & 表格 */}
-        <table className="datatable">
-          <thead>
-            <tr>
-              {Object.keys(columnMapping).map((header) => (
-                <th key={header} onClick={() => handleSort(header)}>
-                  {header}{" "}
-                  {sortColumn === header ? (
-                    isAscending ? (
-                      <span className="sort-arrow">▲</span>
-                    ) : (
-                      <span className="sort-arrow">▼</span>
-                    )
-                  ) : null}
-                </th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {currentItems.map((player, index) => (
-              <tr key={index}>
+        {/* 如果沒有資料，顯示提示訊息 */}
+        {filteredData.length === 0 ? (
+          <div className="no-data-message">查無資料</div>
+        ) : (
+          <table className="datatable">
+            <thead>
+              <tr>
                 {Object.keys(columnMapping).map((header) => (
-                  <td key={header}>{player[columnMapping[header]]}</td>
+                  <th key={header} onClick={() => handleSort(header)}>
+                    {header}{" "}
+                    {sortColumn === header ? (
+                      isAscending ? (
+                        <span className="sort-arrow">▲</span>
+                      ) : (
+                        <span className="sort-arrow">▼</span>
+                      )
+                    ) : null}
+                  </th>
                 ))}
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {currentItems.map((player, index) => (
+                <tr key={index}>
+                  {Object.keys(columnMapping).map((header) => (
+                    <td key={header}>{player[columnMapping[header]]}</td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
       </div>
       {/* 分頁控件 */}
       <div className="pagination">
