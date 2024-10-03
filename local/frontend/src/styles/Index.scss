@@ -1,4 +1,57 @@
 .home-container {
+  .index {
+    position: relative; /* 新增，確保 .button-container 可以相對於圖片定位 */
+    text-align: center; // 將內容置中
+    padding: 2rem 0; // 上下內邊距調整
+    height: auto; /* 高度自適應 */
+    overflow: hidden; /* 防止圖片過大超出容器 */
+    .index-image {
+      max-width: 90%; // 限制圖片寬度為容器的50%，讓圖片縮小
+      height: auto; // 確保圖片等比縮放
+      margin: 0 auto; // 使圖片居中
+    }
+    .index-line {
+      width: 90%; // 與圖片寬度一致
+      margin: 1rem auto; // 線條居中
+      border-top: 2px solid #ccc; // 加上細線
+    }
+    .button-container {
+      position: absolute; /* 新增，將按鈕容器設為絕對定位 */
+      top: 50%; /* 新增，垂直居中 */
+      left: 50%; /* 新增，水平居中 */
+      transform: translate(-50%, -50%); /* 新增，讓按鈕真正居中 */
+      z-index: 1; /* 新增，確保按鈕在圖片上層 */
+      .button1 {
+        font-size: 1.5rem;
+        border-radius: 8px;
+        margin: 0 6rem;
+        padding: 1rem;
+        background-color: #172243;
+        color: white;
+        cursor: pointer;
+        box-shadow: 0 4px 12px #172243;
+
+        &:hover {
+          box-shadow: 0 8px 16px #ffe700;
+        }
+      }
+      .button2 {
+        font-size: 1.5rem;
+        border-radius: 8px;
+        margin: 0 8rem;
+        padding: 1rem;
+        background-color: #ffe700;
+        color: white;
+        cursor: pointer;
+        box-shadow: 0 4px 12px #ffe700;
+
+        &:hover {
+          box-shadow: 0 8px 16px #172243;
+        }
+      }
+    }
+  }
+
   .content-box {
     display: flex;
     align-items: center;
@@ -13,7 +66,20 @@
     &:hover {
       box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     }
+    .button {
+      font-size: 1rem;
+      border-radius: 8px;
+      margin: 1rem 0rem;
+      padding: 0.5rem;
+      background-color: #172243;
+      color: white;
+      cursor: pointer;
+      box-shadow: 0 4px 2px #172243;
 
+      &:hover {
+        box-shadow: 0 4px 8px #172243;
+      }
+    }
     .content-image {
       margin: 1rem;
       width: 60%;
@@ -185,7 +251,7 @@
 
   .tech-section {
     text-align: center;
-    margin: 5rem 0rem 8rem 0rem;
+    margin-top: 5rem;
     h1 {
       color: #71b9e9;
       font-size: 2.5rem;
@@ -229,25 +295,6 @@
       margin-bottom: 0.5rem;
       font-size: 1rem;
       color: #71b9e9;
-    }
-  }
-  .button-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    .special-button {
-      font-size: 1.5rem;
-      border-radius: 8px;
-      margin: 2rem;
-      padding: 1rem;
-      background-color: #172243;
-      color: white;
-      cursor: pointer;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-
-      &:hover {
-        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-      }
     }
   }
 }

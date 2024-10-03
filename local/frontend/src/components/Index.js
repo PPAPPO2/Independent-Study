@@ -4,16 +4,24 @@ import { useSpring, animated } from "react-spring";
 import { useInView } from "react-intersection-observer"; // 引入 useInView
 import "../styles/Index.css";
 const Index = () => {
-  // 使用 useInView 來監控 section 是否進入視口
-  const [ref1, inView1] = useInView({ triggerOnce: true });
-  const [ref2, inView2] = useInView({ triggerOnce: true });
-  const [ref3, inView3] = useInView({ triggerOnce: true });
+  const [ref2, inView2] = useInView({ triggerOnce: false });
+  const [ref3, inView3] = useInView({ triggerOnce: false });
+  const [ref4, inView4] = useInView({ triggerOnce: false });
+  // 圖片的動畫：淡入 + 縮放
+  const imageSpring = useSpring({
+    opacity: 1,
+    transform: "scale(1)",
+    from: { opacity: 0, transform: "scale(0.8)" }, // 從縮小開始
+    config: { duration: 1000 }, // 動畫持續 1 秒
+  });
 
   // 當 section 進入視口時，才觸發動畫
   const fadeIn1 = useSpring({
-    opacity: inView1 ? 1 : 0,
-    transform: inView1 ? "translateY(0)" : "translateY(20px)",
-    config: { duration: 1000 },
+    opacity: 1,
+    transform: "translateY(0)",
+    from: { opacity: 0, transform: "translateY(20px)" }, // 從下方開始
+    delay: 1200, // 按鈕動畫延遲 1.2 秒開始
+    config: { duration: 1000 }, // 動畫持續 1 秒
   });
 
   const fadeIn2 = useSpring({
@@ -25,6 +33,11 @@ const Index = () => {
   const fadeIn3 = useSpring({
     opacity: inView3 ? 1 : 0,
     transform: inView3 ? "translateY(0)" : "translateY(20px)",
+    config: { duration: 1000 },
+  });
+  const fadeIn4 = useSpring({
+    opacity: inView4 ? 1 : 0,
+    transform: inView4 ? "translateY(0)" : "translateY(20px)",
     config: { duration: 1000 },
   });
 
@@ -92,9 +105,30 @@ const Index = () => {
 
   return (
     <div className="home-container">
-      {/* <div className="welcome">
-        <h1>hi</h1>
-      </div> */}
+      <div className="index">
+        <animated.img
+          src={"/images/icon/index.png"}
+          alt="index"
+          className="index-image"
+          style={imageSpring} // 加入圖片動畫效果
+        />
+        <div className="button-container">
+          <animated.div style={fadeIn1}>
+            <NavLink to="/cat/login" activeClassName="active">
+              <button className="button1">立即登入</button>
+            </NavLink>
+            <NavLink
+              to="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+              activeClassName="active"
+              target="_blank"
+            >
+              <button className="button2">前導影片</button>
+            </NavLink>
+          </animated.div>
+        </div>
+        <div className="index-line"></div>
+      </div>
+
       <div className="content-box left-to-right">
         <img
           src={"/images/icon/LeftToRight.png"}
@@ -106,6 +140,9 @@ const Index = () => {
           <p>歡迎，這裡將會解決你所遇到的問題</p>
           <p>提供更視覺化的數據分析</p>
           <p>還能夠預測下場比賽的勝負！</p>
+          <NavLink to="/cat/predict" activeClassName="active">
+            <button className="button">立即前往</button>
+          </NavLink>
         </div>
       </div>
       <div className="content-box right-to-left">
@@ -114,6 +151,9 @@ const Index = () => {
           <p>除了數據分析</p>
           <p>我們還將賽程整合於行事曆</p>
           <p>並且精選了每月的臺灣籃球大小事</p>
+          <NavLink to="/cat/schedule" activeClassName="active">
+            <button className="button">立即前往</button>
+          </NavLink>
         </div>
         <img
           src={"/images/icon/RightToLeft.png"}
@@ -121,10 +161,10 @@ const Index = () => {
           className="content-image"
         />
       </div>
-      <div ref={ref1} className="section">
-        <animated.div style={fadeIn1}>
+      <div ref={ref2} className="section">
+        <animated.div style={fadeIn2}>
           <h1>01</h1>
-          <h2>臺灣職籃網頁</h2>
+          <h2>臺籃北極星</h2>
 
           <div className="features">
             <div className="feature">
@@ -151,8 +191,8 @@ const Index = () => {
           </div>
         </animated.div>
       </div>
-      <div ref={ref2} className="team">
-        <animated.div style={fadeIn2}>
+      <div ref={ref3} className="team">
+        <animated.div style={fadeIn3}>
           <h1>02</h1>
           <h2>關於我們</h2>
           <p>
@@ -189,8 +229,8 @@ const Index = () => {
         </div>
       </div>
 
-      <div ref={ref3} className="tech-section">
-        <animated.div style={fadeIn3}>
+      <div ref={ref4} className="tech-section">
+        <animated.div style={fadeIn4}>
           <h1>03</h1>
           <h2>開發技術</h2>
           {techData.map((tech, index) => (
@@ -204,11 +244,6 @@ const Index = () => {
             </article>
           ))}
         </animated.div>
-      </div>
-      <div className="button-container">
-        <NavLink to="/cat/login" activeClassName="active">
-          <button className="special-button">立即開始</button>
-        </NavLink>
       </div>
     </div>
   );
