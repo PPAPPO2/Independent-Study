@@ -6,6 +6,7 @@ const Players = () => {
   const [pData, setPData] = useState([]);
   const [t1Data, setT1Data] = useState([]);
   const [selectedYear, setSelectedYear] = useState("23_24"); // 預設年份
+  const [selectedDataType, setSelectedDataType] = useState("regular"); // 新增：資料類型 (regular: 例行賽, playoff: 季後賽, final: 冠軍賽)
   const [combinedData, setCombinedData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
   const [teamOptions, setTeamOptions] = useState([]); // 動態更新的球隊選項
@@ -107,11 +108,21 @@ const Players = () => {
   useEffect(() => {
     const fetchData = async () => {
       let combinedDataArray = [];
-
+      let plgUrl = "";
+      let t1Url = "";
+      // 根據資料類型決定抓取的 URL
+      if (selectedDataType === "regular") {
+        plgUrl = `/static/Standings/PlayerData/P_Players_performance_${selectedYear}.json`;
+        t1Url = `/static/Standings/PlayerData/T1_Players_performance_${selectedYear}.json`;
+      } else if (selectedDataType === "playoff") {
+        plgUrl = `/static/Standings/PlayerData/P_Season_Players_Playoff_Performance_${selectedYear}.json`;
+        t1Url = `/static/Standings/PlayerData/T1_Season_Playoff_Players_Performance_${selectedYear}.json`;
+      } else if (selectedDataType === "final") {
+        plgUrl = `/static/Standings/PlayerData/P_Season_Players_Final_Performance_${selectedYear}.json`;
+        t1Url = `/static/Standings/PlayerData/T1_Season_Players_Final_Performance_${selectedYear}.json`;
+      }
       try {
-        const plgResponse = await fetch(
-          `/static/Standings/PlayerData/P_Players_performance_${selectedYear}.json`
-        );
+        const plgResponse = await fetch(plgUrl);
         if (plgResponse.ok) {
           const plgData = await plgResponse.json();
           combinedDataArray = [...combinedDataArray, ...plgData];
@@ -124,9 +135,7 @@ const Players = () => {
       }
 
       try {
-        const t1Response = await fetch(
-          `/static/Standings/PlayerData/T1_Players_performance_${selectedYear}.json`
-        );
+        const t1Response = await fetch(t1Url);
         if (t1Response.ok) {
           const t1Data = await t1Response.json();
           combinedDataArray = [...combinedDataArray, ...t1Data];
@@ -138,11 +147,11 @@ const Players = () => {
         );
       }
 
-      setCombinedData(combinedDataArray); // 更新合併後的資料
-      setFilteredData(combinedDataArray); // 初始化篩選後的資料
+      setCombinedData(combinedDataArray);
+      setFilteredData(combinedDataArray);
     };
     fetchData();
-  }, [selectedYear]);
+  }, [selectedYear, selectedDataType]);
 
   // 篩選資料
   useEffect(() => {
@@ -207,8 +216,23 @@ const Players = () => {
           ? "❰ PLG 20-21 League Roster ❱"
           : `❰ PLG & T1 ${selectedYear.replace("_", "-")} League Roster ❱`}
       </h2>
-      {/* 年份篩選 */}
+
       <div className="selector">
+        {/* 新增資料類型篩選器 */}
+        <select
+          id="data-type-select"
+          onChange={(e) => {
+            setSelectedDataType(e.target.value);
+            setCurrentPage(1);
+          }}
+          value={selectedDataType}
+        >
+          <option value="regular">例行賽</option>
+          <option value="playoff">季後賽</option>
+          <option value="final">冠軍賽</option>
+        </select>
+
+        {/* 年份篩選 */}
         <select
           id="year-select"
           onChange={(e) => {
