@@ -1,12 +1,9 @@
 @charset "UTF-8";
 .show-more-container .season-team-select {
   display: flex;
-  align-items: center;
-  margin: 2rem 0rem 1rem 3rem;
+  gap: 2rem; /* 讓篩選器之間保持間距 */
   padding: 0.5rem;
-}
-.show-more-container .season-team-select .season-select {
-  margin-right: 2rem;
+  margin: 2rem 0rem 1rem 3rem;
 }
 .show-more-container .season-team-select select {
   padding: 0.5rem 1rem;
@@ -37,11 +34,17 @@
   margin: auto;
   overflow-x: auto;
 }
-.show-more-container .showMoreTable {
+.show-more-container .table-container .no-data-message {
+  font-size: 4rem;
+  text-align: center;
+  color: #ccc;
+  margin: 3rem 0rem;
+}
+.show-more-container .table-container .showMoreTable {
   width: 100%;
   min-width: 800px;
 }
-.show-more-container .showMoreTable td {
+.show-more-container .table-container .showMoreTable td {
   justify-content: center;
   padding: 1rem 1.5rem;
   font-size: 1rem;
@@ -49,23 +52,23 @@
   white-space: normal;
   width: 150px;
 }
-.show-more-container .showMoreTable tr {
+.show-more-container .table-container .showMoreTable tr {
   text-align: center;
 }
-.show-more-container .showMoreTable th {
+.show-more-container .table-container .showMoreTable th {
   justify-content: center;
   padding: 1rem 0.25rem;
   font-size: 1rem;
 }
-.show-more-container .showMoreTable tbody tr:nth-child(odd) {
+.show-more-container .table-container .showMoreTable tbody tr:nth-child(odd) {
   background-color: #eee;
 }
-.show-more-container .showMoreTable thead {
+.show-more-container .table-container .showMoreTable thead {
   background-color: #172243;
   color: white;
 }
-.show-more-container .showMoreTable td:first-child,
-.show-more-container .showMoreTable th:first-child {
+.show-more-container .table-container .showMoreTable td:first-child,
+.show-more-container .table-container .showMoreTable th:first-child {
   color: #eee;
   width: 160px;
   min-width: 160px;

@@ -5,59 +5,68 @@ import "../styles/ShowMore.css";
 const staticUrl = "/static/Standings/TeamData/";
 
 const ShowMore = () => {
-  const [season, setSeason] = useState("2023-24"); //預設年分
-  const [selectedTeams, setSelectedTeams] = useState([]); //預設全選
-  const [data, setData] = useState([]);
+  const [season, setSeason] = useState("23-24"); // 預設年分
+  const [gameType, setGameType] = useState("regular"); // 預設資料類型：例行賽、季後賽或冠軍賽
+  const [selectedTeams, setSelectedTeams] = useState([]); // 預設全選
+  const [data, setData] = useState([]); // 預設為空陣列
   const [isAscending, setIsAscending] = useState(true);
   const [currentSortColumn, setCurrentSortColumn] = useState(null);
 
-  const teams = {
-    "2023-24": [
-      { id: 1, name: "臺北富邦勇士" },
-      { id: 2, name: "桃園璞園領航猿" },
-      { id: 3, name: "福爾摩沙夢想家" },
-      { id: 4, name: "新竹御頂攻城獅" },
-      { id: 5, name: "新北國王" },
-      { id: 6, name: "高雄17直播鋼鐵人" },
-      { id: 7, name: "新北中信特攻" },
-      { id: 8, name: "台啤永豐雲豹" },
-      { id: 9, name: "高雄全家海神" },
-      { id: 10, name: "臺北戰神" },
-      { id: 11, name: "臺南台鋼獵鷹" },
-    ],
-    "2022-23": [
-      { id: 1, name: "臺北富邦勇士" },
-      { id: 2, name: "桃園璞園領航猿" },
-      { id: 3, name: "福爾摩沙夢想家" },
-      { id: 19, name: "新竹攻城獅" },
-      { id: 5, name: "新北國王" },
-      { id: 6, name: "高雄17直播鋼鐵人" },
-      { id: 7, name: "新北中信特攻" },
-      { id: 11, name: "臺南台鋼獵鷹" },
-      { id: 9, name: "高雄全家海神" },
-      { id: 12, name: "臺中太陽" },
-      { id: 13, name: "桃園永豐雲豹" },
-      { id: 14, name: "台灣啤酒英熊" },
-    ],
-    "2021-22": [
-      { id: 1, name: "臺北富邦勇士" },
-      { id: 15, name: "桃園領航猿" },
-      { id: 17, name: "福爾摩沙台新夢想家" },
-      { id: 16, name: "新竹街口攻城獅" },
-      { id: 5, name: "新北國王" },
-      { id: 18, name: "高雄鋼鐵人" },
-      { id: 7, name: "新北中信特攻" },
-      { id: 11, name: "臺南台鋼獵鷹" },
-      { id: 9, name: "高雄全家海神" },
-      { id: 12, name: "臺中太陽" },
-      { id: 14, name: "台灣啤酒英熊" },
-    ],
-    "2020-21": [
-      { id: 1, name: "臺北富邦勇士" },
-      { id: 15, name: "桃園領航猿" },
-      { id: 17, name: "福爾摩沙台新夢想家" },
-      { id: 16, name: "新竹街口攻城獅" },
-    ],
+  // 統一管理球隊和資料類型的選項
+  const config = {
+    seasons: {
+      "23_24": [
+        { value: "臺北富邦勇士", label: "勇士" },
+        { value: "新北國王", label: "國王" },
+        { value: "高雄17直播鋼鐵人", label: "鋼鐵人" },
+        { value: "桃園璞園領航猿", label: "領航猿" },
+        { value: "福爾摩沙夢想家", label: "夢想家" },
+        { value: "新竹御頂攻城獅", label: "攻城獅" },
+        { value: "新北中信特攻", label: "特攻" },
+        { value: "台啤永豐雲豹", label: "雲豹" },
+        { value: "臺北戰神", label: "戰神" },
+        { value: "高雄全家海神", label: "海神" },
+        { value: "臺南台鋼獵鷹", label: "獵鷹" },
+      ],
+      "22_23": [
+        { value: "臺北富邦勇士", label: "勇士" },
+        { value: "桃園璞園領航猿", label: "領航猿" },
+        { value: "福爾摩沙夢想家", label: "夢想家" },
+        { value: "新竹攻城獅", label: "攻城獅" },
+        { value: "新北國王", label: "國王" },
+        { value: "高雄17直播鋼鐵人", label: "鋼鐵人" },
+        { value: "新北中信特攻", label: "特攻" },
+        { value: "臺南台鋼獵鷹", label: "獵鷹" },
+        { value: "臺中太陽", label: "太陽" },
+        { value: "高雄全家海神", label: "海神" },
+        { value: "台啤永豐雲豹", label: "雲豹" },
+        { value: "台灣啤酒英熊", label: "英熊" },
+      ],
+      "21_22": [
+        { value: "臺北富邦勇士", label: "勇士" },
+        { value: "桃園領航猿", label: "領航猿" },
+        { value: "福爾摩沙台新夢想家", label: "夢想家" },
+        { value: "新竹街口攻城獅", label: "攻城獅" },
+        { value: "新北國王", label: "國王" },
+        { value: "高雄鋼鐵人", label: "鋼鐵人" },
+        { value: "新北中信特攻", label: "特攻" },
+        { value: "台灣啤酒英熊", label: "英熊" },
+        { value: "臺中太陽", label: "太陽" },
+        { value: "高雄全家海神", label: "海神" },
+        { value: "臺南台鋼獵鷹", label: "獵鷹" },
+      ],
+      "20_21": [
+        { value: "臺北富邦勇士", label: "勇士" },
+        { value: "桃園領航猿", label: "領航猿" },
+        { value: "福爾摩沙台新夢想家", label: "夢想家" },
+        { value: "新竹街口攻城獅", label: "攻城獅" },
+      ],
+    },
+    dataTypes: {
+      regular: "Performance",
+      playoff: "Playoff_Performance",
+      final: "Final_Performance",
+    },
   };
 
   const columnMapping = {
@@ -84,54 +93,84 @@ const ShowMore = () => {
     失誤: "turnovers",
     犯規: "fouls",
   };
-
+  // 預設進入頁面時自動全選球隊
   useEffect(() => {
-    // 這裡只在組件加載時執行一次
-    const allTeams = teams[season].map((team) => team.id.toString());
-    setSelectedTeams(allTeams);
-    setIsAllSelected(true); // 設置全選狀態為 true // 初次進入時全選所有球隊
+    setSeason("23-24");
+    setGameType("regular");
+    setSelectedTeams(config.seasons["23_24"].map((team) => team.value));
   }, []);
-
+  // 抓取資料並更新表格
   useEffect(() => {
-    updateTable(); // 每次 selectedTeams 改變時更新表格
-  }, [selectedTeams]); // 依賴 selectedTeams 來自動更新表格
+    const fetchData = async () => {
+      let combinedDataArray = [];
+      let plgUrl = "";
+      let t1Url = "";
 
-  // 2. 修改 handleSeasonChange，自動全選球隊
-  const handleSeasonChange = (e) => {
-    const newSeason = e.target.value;
-    setSeason(newSeason);
-    // 自動全選當前年份的所有球隊
-    const allTeams = teams[newSeason].map((team) => team.id.toString());
-    setSelectedTeams(allTeams);
-    setIsAllSelected(true); // 設置全選狀態為 true
-  };
-  // 新增一個狀態來追蹤是否是全選狀態
-  const [isAllSelected, setIsAllSelected] = useState(false);
-  const handleTeamSelectChange = (selected) => {
-    if (selected && selected.some((team) => team.value === "all")) {
-      // 如果選擇了 "全選"，則選擇所有球隊
-      const allTeams = teams[season].map((team) => team.id.toString());
-      setSelectedTeams(allTeams);
-      setIsAllSelected(true); // 設置全選狀態為 true
-    } else {
-      setSelectedTeams(selected ? selected.map((team) => team.value) : []);
-      setIsAllSelected(false); // 設置全選取消態為 false
-    }
-  };
+      // 根據 gameType 和 season 決定 URL
+      if (gameType === "regular") {
+        plgUrl = `/static/Standings/TeamData/P_Season_Teams_Performance_${season.replace(
+          "-",
+          "_"
+        )}.json`;
+        t1Url = `/static/Standings/TeamData/T1_Season_Teams_Performance_${season.replace(
+          "-",
+          "_"
+        )}.json`;
+      } else if (gameType === "playoff") {
+        plgUrl = `/static/Standings/TeamData/P_Season_Teams_Playoff_Performance_${season.replace(
+          "-",
+          "_"
+        )}.json`;
+        t1Url = `/static/Standings/TeamData/T1_Season_Teams_Playoff_Performance_${season.replace(
+          "-",
+          "_"
+        )}.json`;
+      } else if (gameType === "final") {
+        plgUrl = `/static/Standings/TeamData/P_Season_Teams_Final_Performance_${season.replace(
+          "-",
+          "_"
+        )}.json`;
+        t1Url = `/static/Standings/TeamData/T1_Season_Teams_Final_Performance_${season.replace(
+          "-",
+          "_"
+        )}.json`;
+      }
 
-  const updateTable = () => {
-    const jsonUrl = `${staticUrl}${season}.json`;
-    fetch(jsonUrl)
-      .then((response) => response.json())
-      .then((data) => {
-        const filteredData = data.filter((teamData) =>
-          selectedTeams.includes(teamData.id.toString())
-        );
-        setData(filteredData);
-      })
-      .catch((error) => console.error("Error fetching data:", error));
-  };
+      // Fetch PLG 資料
+      try {
+        const plgResponse = await fetch(plgUrl);
+        if (plgResponse.ok) {
+          const plgData = await plgResponse.json();
+          combinedDataArray = [...combinedDataArray, ...plgData];
+        }
+      } catch (error) {
+        console.error(`Error fetching PLG data for ${season}:`, error);
+      }
 
+      // Fetch T1 資料
+      try {
+        const t1Response = await fetch(t1Url);
+        if (t1Response.ok) {
+          const t1Data = await t1Response.json();
+          combinedDataArray = [...combinedDataArray, ...t1Data];
+        }
+      } catch (error) {
+        console.error(`Error fetching T1 data for ${season}:`, error);
+      }
+
+      const filteredData = Array.isArray(combinedDataArray)
+        ? combinedDataArray.filter((teamData) =>
+            selectedTeams.includes(teamData.team)
+          )
+        : [];
+
+      setData(filteredData); // 更新資料
+    };
+
+    fetchData();
+  }, [season, gameType, selectedTeams]);
+
+  // 排序資料
   const sortTable = (column) => {
     setIsAscending((prev) => (currentSortColumn === column ? !prev : true));
     setCurrentSortColumn(column);
@@ -154,44 +193,68 @@ const ShowMore = () => {
     setData(sortedData);
   };
 
-  // 設定 teamOptions 的格式，供 react-select 使用
-  const teamOptions = [
-    { value: "all", label: "全選球隊" },
-    ...teams[season].map((team) => ({
-      value: team.id.toString(),
-      label: team.name,
-    })),
-  ];
-
   return (
     <div className="show-more-container">
       <h2>
-        {season === "2020-21"
+        {season === "20-21"
           ? "❰ PLG 20-21 Teams Stats ❱"
           : `❰ PLG & T1 ${season.replace("20", "")} Teams Stats ❱`}
       </h2>
       <div className="season-team-select">
+        {/* 賽事類型篩選器 */}
+        <select value={gameType} onChange={(e) => setGameType(e.target.value)}>
+          <option value="regular">例行賽</option>
+          <option value="playoff">季後賽</option>
+          <option value="final">冠軍賽</option>
+        </select>
+
         <select
           value={season}
-          onChange={handleSeasonChange}
-          className="season-select"
+          onChange={(e) => {
+            setSeason(e.target.value);
+            setSelectedTeams(
+              config.seasons[e.target.value.replace("-", "_")].map(
+                (team) => team.value
+              )
+            );
+          }}
         >
-          <option value="2023-24">2023-24</option>
-          <option value="2022-23">2022-23</option>
-          <option value="2021-22">2021-22</option>
-          <option value="2020-21">2020-21</option>
+          {Object.keys(config.seasons).map((seasonKey) => (
+            <option key={seasonKey} value={seasonKey.replace("_", "-")}>
+              {"20" + seasonKey.replace("_", "-")}
+            </option>
+          ))}
         </select>
 
         {/* 使用 react-select 來實現多選球隊功能 */}
         <Select
-          options={teamOptions}
+          options={[
+            { label: "全選球隊", value: "all" }, // 新增 "全選球隊" 選項
+            ...(config.seasons[season.replace("-", "_")] || []),
+          ]}
           isMulti
           value={
-            isAllSelected
-              ? [{ value: "all", label: "全選球隊" }] // 當全選時顯示「全選球隊」
-              : teamOptions.filter((team) => selectedTeams.includes(team.value))
+            selectedTeams.length ===
+            config.seasons[season.replace("-", "_")].length
+              ? [{ label: "全選球隊", value: "all" }]
+              : (config.seasons[season.replace("-", "_")] || []).filter(
+                  (team) => selectedTeams.includes(team.value)
+                )
           }
-          onChange={handleTeamSelectChange}
+          onChange={(selected) => {
+            if (selected && selected.some((team) => team.value === "all")) {
+              // 如果選擇了 "全選球隊"，全選所有球隊
+              setSelectedTeams(
+                config.seasons[season.replace("-", "_")].map(
+                  (team) => team.value
+                )
+              );
+            } else {
+              setSelectedTeams(
+                selected ? selected.map((team) => team.value) : []
+              );
+            }
+          }}
           placeholder="選擇球隊"
           className="team-select"
           classNamePrefix="react-select"
@@ -199,33 +262,38 @@ const ShowMore = () => {
       </div>
 
       <div className="table-container">
-        <table className="showMoreTable">
-          <thead>
-            <tr>
-              {Object.keys(columnMapping).map((key) => (
-                <th key={key} onClick={() => sortTable(columnMapping[key])}>
-                  {key}{" "}
-                  {currentSortColumn === columnMapping[key] ? (
-                    isAscending ? (
-                      <span className="sort-arrow">▲</span>
-                    ) : (
-                      <span className="sort-arrow">▼</span>
-                    )
-                  ) : null}
-                </th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {data.map((teamData, index) => (
-              <tr key={index}>
+        {/* 如果沒有資料，顯示提示訊息 */}
+        {data.length === 0 ? (
+          <div className="no-data-message">查無資料</div>
+        ) : (
+          <table className="showMoreTable">
+            <thead>
+              <tr>
                 {Object.keys(columnMapping).map((key) => (
-                  <td key={key}>{teamData[columnMapping[key]]}</td>
+                  <th key={key} onClick={() => sortTable(columnMapping[key])}>
+                    {key}{" "}
+                    {currentSortColumn === columnMapping[key] ? (
+                      isAscending ? (
+                        <span className="sort-arrow">▲</span>
+                      ) : (
+                        <span className="sort-arrow">▼</span>
+                      )
+                    ) : null}
+                  </th>
                 ))}
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {data.map((teamData, index) => (
+                <tr key={index}>
+                  {Object.keys(columnMapping).map((key) => (
+                    <td key={key}>{teamData[columnMapping[key]]}</td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}{" "}
       </div>
     </div>
   );

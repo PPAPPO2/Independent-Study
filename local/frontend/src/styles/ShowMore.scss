@@ -1,12 +1,9 @@
 .show-more-container {
   .season-team-select {
     display: flex;
-    align-items: center;
-    margin: 2rem 0rem 1rem 3rem;
+    gap: 2rem; /* 讓篩選器之間保持間距 */
     padding: 0.5rem;
-    .season-select {
-      margin-right: 2rem;
-    }
+    margin: 2rem 0rem 1rem 3rem;
     select {
       padding: 0.5rem 1rem;
       border: 1px solid #ccc;
@@ -36,52 +33,58 @@
     width: 85%;
     margin: auto;
     overflow-x: auto; // 設置水平捲動
-  }
-
-  .showMoreTable {
-    width: 100%;
-    min-width: 800px; // 設置最小寬度
-    //border-spacing: 0; 註解就會產生白線
-
-    td {
-      justify-content: center;
-      padding: 1rem 1.5rem;
-      font-size: 1rem;
-      word-wrap: break-word; // 允許文字換行
-      white-space: normal; // 讓文字正常換行
-      width: 150px; // 調整球隊名稱欄位的寬度
-    }
-
-    tr {
+    .no-data-message {
+      font-size: 4rem;
       text-align: center;
+      color: #ccc;
+      margin: 3rem 0rem;
     }
 
-    th {
-      justify-content: center;
-      padding: 1rem 0.25rem;
-      font-size: 1rem;
-    }
+    .showMoreTable {
+      width: 100%;
+      min-width: 800px; // 設置最小寬度
+      //border-spacing: 0; 註解就會產生白線
 
-    tbody tr:nth-child(odd) {
-      // 奇數列背景顏色
-      background-color: #eee;
-    }
+      td {
+        justify-content: center;
+        padding: 1rem 1.5rem;
+        font-size: 1rem;
+        word-wrap: break-word; // 允許文字換行
+        white-space: normal; // 讓文字正常換行
+        width: 150px; // 調整球隊名稱欄位的寬度
+      }
 
-    thead {
-      background-color: #172243;
-      color: white;
-    }
-    // 修改 "球隊" 欄位的寬度
-    td:first-child,
-    th:first-child {
-      color: #eee;
-      width: 160px; // 設定 "球隊" 欄位的寬度為200px，根據需要調整
-      min-width: 160px; // 確保即使表格重新渲染，寬度依然保持
-      max-width: 160px; // 確保即使表格重新渲染，寬度依然保持
-      position: sticky;
-      left: 0;
-      background-color: #172243; // 確保固定的欄位背景與其他欄位一致
-      //z-index: 1; // 確保固定的欄位在最上層
+      tr {
+        text-align: center;
+      }
+
+      th {
+        justify-content: center;
+        padding: 1rem 0.25rem;
+        font-size: 1rem;
+      }
+
+      tbody tr:nth-child(odd) {
+        // 奇數列背景顏色
+        background-color: #eee;
+      }
+
+      thead {
+        background-color: #172243;
+        color: white;
+      }
+      // 修改 "球隊" 欄位的寬度
+      td:first-child,
+      th:first-child {
+        color: #eee;
+        width: 160px; // 設定 "球隊" 欄位的寬度為200px，根據需要調整
+        min-width: 160px; // 確保即使表格重新渲染，寬度依然保持
+        max-width: 160px; // 確保即使表格重新渲染，寬度依然保持
+        position: sticky;
+        left: 0;
+        background-color: #172243; // 確保固定的欄位背景與其他欄位一致
+        //z-index: 1; // 確保固定的欄位在最上層
+      }
     }
   }
   h2 {
