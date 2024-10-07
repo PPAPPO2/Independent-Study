@@ -10,7 +10,7 @@ class Command(BaseCommand):
     
     def handle(self, *args, **kwargs):
 
-        output_dir = os.path.join('cat/static/', 'T1_Json')
+        output_dir = os.path.join('frontend/public/static/Standings', 'TeamData')
         # 檢查資料夾是否存在，如果不存在則創建
         if not os.path.exists(output_dir):
             os.makedirs(output_dir)
@@ -18,9 +18,9 @@ class Command(BaseCommand):
         # 定義需要轉換的表
         tables = [
             # T1 teams performance
-            #(T1_Season_teams_Performance_21_22, 'T1_teams_performance_21_22.json'),
-            #(T1_Season_teams_Performance_22_23, 'T1_teams_performance_22_23.json'),
-            #(T1_Season_teams_Performance_23_24, 'T1_teams_performance_23_24.json'),
+            (T1_Season_teams_Performance_21_22, 'T1_teams_performance_21_22.json'),
+            (T1_Season_teams_Performance_22_23, 'T1_teams_performance_22_23.json'),
+            (T1_Season_teams_Performance_23_24, 'T1_teams_performance_23_24.json'),
             # T1 players performance
             #(T1_Season_Players_Performance_21_22,'T1_Players_performance_21_22.json'),
             #(T1_Season_Players_Performance_22_23,'T1_Players_performance_22_23.json'),
@@ -29,10 +29,10 @@ class Command(BaseCommand):
             (T1_Season_Teams_Playoff_Performance_23_24,'T1_Season_Teams_Playoff_Performance_23_24.json'),
             (T1_Season_Teams_Final_Performance_22_23,'T1_Season_Teams_Final_Performance_22_23.json'),
             (T1_Season_Teams_Final_Performance_23_24,'T1_Season_Teams_Final_Performance_23_24.json'),
-            (T1_Season_Players_Final_Performance_22_23,'T1_Season_Players_Final_Performance_22_23.json'),
-            (T1_Season_Players_Final_Performance_23_24,'T1_Season_Players_Final_Performance_23_24.json'),
-            (T1_Season_Playoff_Players_Performance_22_23,'T1_Season_Playoff_Players_Performance_22_23.json'),
-            (T1_Season_Playoff_Players_Performance_23_24,'T1_Season_Playoff_Players_Performance_23_24.json')
+            #(T1_Season_Players_Final_Performance_22_23,'T1_Season_Players_Final_Performance_22_23.json'),
+            #(T1_Season_Players_Final_Performance_23_24,'T1_Season_Players_Final_Performance_23_24.json'),
+            #(T1_Season_Playoff_Players_Performance_22_23,'T1_Season_Playoff_Players_Performance_22_23.json'),
+            #(T1_Season_Playoff_Players_Performance_23_24,'T1_Season_Playoff_Players_Performance_23_24.json')
         ]
 
         for model, json_file_name in tables:

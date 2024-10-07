@@ -10,7 +10,7 @@ class Command(BaseCommand):
     
     def handle(self, *args, **kwargs):
 
-        output_dir = os.path.join('frontend/public/static/Standings', 'PlayerData')
+        output_dir = os.path.join('frontend/public/static/Standings', 'TeamData')
         # 檢查資料夾是否存在，如果不存在則創建
         if not os.path.exists(output_dir):
             os.makedirs(output_dir)
@@ -18,10 +18,10 @@ class Command(BaseCommand):
         # 定義需要轉換的表
         tables = [
             # P teams performance
-            #(P_Season_teams_Performance_20_21, 'P_teams_performance_20_21.json'),
-             #(P_Season_teams_Performance_21_22, 'P_teams_performance_21_22.json'),
-             #(P_Season_teams_Performance_22_23, 'P_teams_performance_22_23.json'),
-             #(P_Season_teams_Performance_23_24, 'P_teams_performance_23_24.json'),
+            (P_Season_teams_Performance_20_21, 'P_Season_teams_Performance_20_21.json'),
+            (P_Season_teams_Performance_21_22, 'P_Season_teams_Performance_21_22.json'),
+            (P_Season_teams_Performance_22_23, 'P_Season_teams_Performance_22_23.json'),
+            (P_Season_teams_Performance_23_24, 'P_Season_teams_Performance_23_24.json'),
             #P players performance
             #(P_Season_Players_Performance_20_21,'P_Players_performance_20_21.json'),
             #(P_Season_Players_Performance_21_22,'P_Players_performance_21_22.json'),
@@ -31,10 +31,10 @@ class Command(BaseCommand):
             (P_Season_Teams_Playoff_Performance_23_24,'P_Season_Teams_Playoff_Performance_23_24.json'),
             (P_Season_Teams_Final_Performance_22_23,'P_Season_Teams_Final_Performance_22_23.json'),
             (P_Season_Teams_Final_Performance_23_24,'P_Season_Teams_Final_Performance_23_24.json'),
-            (P_Season_Players_Final_Performance_22_23,'P_Season_Players_Final_Performance_22_23.json'),
-            (P_Season_Players_Final_Performance_23_24,'P_Season_Players_Final_Performance_23_24.json'),
-            (P_Season_Players_Palyoff_Performance_22_23,'P_Season_Players_Palyoff_Performance_22_23.json'),
-            (P_Season_Players_Playoff_Performance_23_24,'P_Season_Players_Playoff_Performance_23_24.json')
+            #(P_Season_Players_Final_Performance_22_23,'P_Season_Players_Final_Performance_22_23.json'),
+            #(P_Season_Players_Final_Performance_23_24,'P_Season_Players_Final_Performance_23_24.json'),
+            #(P_Season_Players_Palyoff_Performance_22_23,'P_Season_Players_Palyoff_Performance_22_23.json'),
+            #(P_Season_Players_Playoff_Performance_23_24,'P_Season_Players_Playoff_Performance_23_24.json')
             
         ]
 
