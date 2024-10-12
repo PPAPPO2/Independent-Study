@@ -67,12 +67,23 @@
   background-color: #172243;
   color: white;
 }
-.show-more-container .table-container .showMoreTable td:first-child,
 .show-more-container .table-container .showMoreTable th:first-child {
+  display: flex;
+  align-items: center;
   color: #eee;
-  width: 160px;
-  min-width: 160px;
-  max-width: 160px;
+  width: 235px;
+  min-width: 235px;
+  position: sticky;
+  left: 0;
+  background-color: #172243;
+}
+.show-more-container .table-container .showMoreTable td:first-child {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  color: #eee;
+  width: 235px;
+  min-width: 235px;
   position: sticky;
   left: 0;
   background-color: #172243;

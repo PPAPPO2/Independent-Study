@@ -21,6 +21,27 @@ const Players = () => {
   // 分頁相關
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
+  // 球隊名稱對應的圖片檔名
+  const teamLogoMapping = {
+    臺北富邦勇士: "臺北富邦勇士.png",
+    新北國王: "新北國王.png",
+    高雄17直播鋼鐵人: "高雄17直播鋼鐵人.png",
+    高雄鋼鐵人: "高雄17直播鋼鐵人.png",
+    桃園璞園領航猿: "桃園璞園領航猿.png",
+    桃園領航猿: "桃園璞園領航猿.png",
+    福爾摩沙夢想家: "福爾摩沙夢想家.png",
+    福爾摩沙台新夢想家: "福爾摩沙夢想家.png",
+    新竹御頂攻城獅: "新竹御頂攻城獅.png",
+    新竹街口攻城獅: "新竹御頂攻城獅.png",
+    新竹攻城獅: "新竹御頂攻城獅.png",
+    新北中信特攻: "新北中信特攻.png",
+    台啤永豐雲豹: "台啤永豐雲豹.png",
+    臺北戰神: "臺北戰神.png",
+    高雄全家海神: "高雄全家海神.png",
+    臺南台鋼獵鷹: "臺南台鋼獵鷹.png",
+    臺中太陽: "臺中太陽.png",
+    台灣啤酒英熊: "台灣啤酒英熊.png",
+  };
 
   const columnMapping = {
     球員: "player",
@@ -310,9 +331,37 @@ const Players = () => {
             <tbody>
               {currentItems.map((player, index) => (
                 <tr key={index}>
-                  {Object.keys(columnMapping).map((header) => (
-                    <td key={header}>{player[columnMapping[header]]}</td>
-                  ))}
+                  {Object.keys(columnMapping).map((header) => {
+                    if (header === "球隊") {
+                      // 如果是球隊欄位，加入圖片和文字
+                      return (
+                        <td key={header}>
+                          <div
+                            style={{ display: "flex", alignItems: "center" }}
+                          >
+                            {/* 圖片部分 */}
+                            <img
+                              src={`/images/icon/${
+                                teamLogoMapping[player[columnMapping[header]]]
+                              }`}
+                              alt={player[columnMapping[header]]}
+                              style={{
+                                width: "30px",
+                                height: "30px",
+                                marginRight: "10px",
+                              }}
+                            />
+                            {/* 球隊名稱 */}
+                            {player[columnMapping[header]]}
+                          </div>
+                        </td>
+                      );
+                    }
+                    // 保留其他欄位以及排序功能
+                    return (
+                      <td key={header}>{player[columnMapping[header]]}</td>
+                    );
+                  })}
                 </tr>
               ))}
             </tbody>
