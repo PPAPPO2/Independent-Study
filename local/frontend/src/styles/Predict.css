@@ -1,16 +1,22 @@
-div.predict body {
+@charset "UTF-8";
+.predict {
+  display: flex;
+  flex-direction: column;
+  min-height: 60vh; /* 確保頁面至少佔滿整個視窗高度 */
+}
+.predict body {
   font-family: Arial, sans-serif;
   background-color: #f0f0f0;
   margin: 0;
   padding: 0;
 }
-div.predict h1 {
+.predict h1 {
   color: #333;
   text-align: center;
   margin-bottom: 20px;
   margin-top: 2rem;
 }
-div.predict form {
+.predict form {
   width: 300px;
   margin: 0 auto;
   background: white;
@@ -18,13 +24,13 @@ div.predict form {
   border-radius: 8px;
   box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
 }
-div.predict form label {
+.predict form label {
   font-size: 16px;
   margin-bottom: 8px;
   display: inline-block;
   color: #555;
 }
-div.predict form select {
+.predict form select {
   width: 100%;
   padding: 10px;
   font-size: 16px;
@@ -33,7 +39,7 @@ div.predict form select {
   border-radius: 4px;
   box-sizing: border-box;
 }
-div.predict form button {
+.predict form button {
   width: 100%;
   padding: 12px;
   background-color: #007bff;
@@ -44,10 +50,10 @@ div.predict form button {
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
-div.predict form button:hover {
+.predict form button:hover {
   background-color: #0056b3;
 }
-div.predict p {
+.predict p {
   text-align: center;
   font-size: 18px;
   margin-top: 20px;

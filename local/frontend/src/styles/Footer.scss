@@ -3,7 +3,7 @@
   color: white;
   text-align: center;
   margin-top: 10rem;
-  position: relative;
+  position: relative; /* 讓 footer 固定 */
   bottom: 0;
   width: 100%;
   .footer-content h3 {
@@ -14,7 +14,6 @@
     font-size: 0.75rem;
     margin-top: 1rem;
     padding: 0.5rem;
-
     border-top: 1px solid rgba(255, 255, 255, 0.151); // 1px 寬的實線，顏色為黑色
   }
 }

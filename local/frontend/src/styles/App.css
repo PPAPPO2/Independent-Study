@@ -1,0 +1,11 @@
+/* 確保外層容器佔滿全頁面 */
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* 內容區域自動延展，footer 會保持在底部 */
+.main-content {
+  flex: 1;
+}
