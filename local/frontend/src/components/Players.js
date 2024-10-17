@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Select from "react-select"; // 引入 react-select
+import { useSpring, animated } from "react-spring";
 import "../styles/Players.css";
 
 const Players = () => {
@@ -10,13 +11,32 @@ const Players = () => {
   const [combinedData, setCombinedData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
   const [teamOptions, setTeamOptions] = useState([]); // 動態更新的球隊選項
-
+  const [animationTrigger, setAnimationTrigger] = useState(false);
   // 篩選條件
   const [searchTerm, setSearchTerm] = useState(""); // 搜尋條件
   const [selectedPosition, setSelectedPosition] = useState(""); // 位置
   const [selectedTeams, setSelectedTeams] = useState([]); // 複選球隊
   const [sortColumn, setSortColumn] = useState(""); // 排序欄位
   const [isAscending, setIsAscending] = useState(true); // 升序或降序
+  // 定義動畫效果，隨著資料變化觸發
+  const tableAnimation = useSpring({
+    opacity: animationTrigger ? 1 : 0.7, // 當動畫觸發器為 true，表格淡入
+    transform: animationTrigger ? "translateY(0)" : "translateY(0)", // 下滑動畫
+    config: { duration: 200 },
+  });
+  // 每次篩選條件或資料改變時重置動畫
+  useEffect(() => {
+    setAnimationTrigger(false); // 關閉動畫
+    setTimeout(() => {
+      setAnimationTrigger(true); // 啟動動畫
+    }, 350); // 設置一個短暫的延遲，重置動畫
+  }, [
+    selectedYear,
+    selectedDataType,
+    selectedPosition,
+    selectedTeams,
+    searchTerm,
+  ]);
 
   // 分頁相關
   const [currentPage, setCurrentPage] = useState(1);
@@ -311,61 +331,63 @@ const Players = () => {
         {filteredData.length === 0 ? (
           <div className="no-data-message">查無資料</div>
         ) : (
-          <table className="datatable">
-            <thead>
-              <tr>
-                {Object.keys(columnMapping).map((header) => (
-                  <th key={header} onClick={() => handleSort(header)}>
-                    {header}{" "}
-                    {sortColumn === header ? (
-                      isAscending ? (
-                        <span className="sort-arrow">▲</span>
-                      ) : (
-                        <span className="sort-arrow">▼</span>
-                      )
-                    ) : null}
-                  </th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {currentItems.map((player, index) => (
-                <tr key={index}>
-                  {Object.keys(columnMapping).map((header) => {
-                    if (header === "球隊") {
-                      // 如果是球隊欄位，加入圖片和文字
-                      return (
-                        <td key={header}>
-                          <div
-                            style={{ display: "flex", alignItems: "center" }}
-                          >
-                            {/* 圖片部分 */}
-                            <img
-                              src={`/images/icon/${
-                                teamLogoMapping[player[columnMapping[header]]]
-                              }`}
-                              alt={player[columnMapping[header]]}
-                              style={{
-                                width: "30px",
-                                height: "30px",
-                                marginRight: "10px",
-                              }}
-                            />
-                            {/* 球隊名稱 */}
-                            {player[columnMapping[header]]}
-                          </div>
-                        </td>
-                      );
-                    }
-                    // 保留其他欄位以及排序功能
-                    return (
-                      <td key={header}>{player[columnMapping[header]]}</td>
-                    );
-                  })}
+          <animated.div style={tableAnimation}>
+            <table className="datatable">
+              <thead>
+                <tr>
+                  {Object.keys(columnMapping).map((header) => (
+                    <th key={header} onClick={() => handleSort(header)}>
+                      {header}{" "}
+                      {sortColumn === header ? (
+                        isAscending ? (
+                          <span className="sort-arrow">▲</span>
+                        ) : (
+                          <span className="sort-arrow">▼</span>
+                        )
+                      ) : null}
+                    </th>
+                  ))}
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {currentItems.map((player, index) => (
+                  <tr key={index}>
+                    {Object.keys(columnMapping).map((header) => {
+                      if (header === "球隊") {
+                        // 如果是球隊欄位，加入圖片和文字
+                        return (
+                          <td key={header}>
+                            <div
+                              style={{ display: "flex", alignItems: "center" }}
+                            >
+                              {/* 圖片部分 */}
+                              <img
+                                src={`/images/icon/${
+                                  teamLogoMapping[player[columnMapping[header]]]
+                                }`}
+                                alt={player[columnMapping[header]]}
+                                style={{
+                                  width: "30px",
+                                  height: "30px",
+                                  marginRight: "10px",
+                                }}
+                              />
+                              {/* 球隊名稱 */}
+                              {player[columnMapping[header]]}
+                            </div>
+                          </td>
+                        );
+                      }
+                      // 保留其他欄位以及排序功能
+                      return (
+                        <td key={header}>{player[columnMapping[header]]}</td>
+                      );
+                    })}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </animated.div>
         )}
       </div>
       {/* 分頁控件 */}
