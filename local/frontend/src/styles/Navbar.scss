@@ -81,6 +81,8 @@ nav ul li a:hover {
   z-index: 1;
   border-radius: 10px;
   top: 100%;
+  left: 40%; // 讓選單從父元素的50%開始
+  transform: translateX(-50%); // 讓選單水平居中
   a {
     color: #172243;
     padding: 1rem;

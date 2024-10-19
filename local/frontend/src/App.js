@@ -9,6 +9,8 @@ import Players from "./components/Players";
 import News from "./components/News";
 import Schedule from "./components/Schedule";
 import Index from "./components/Index";
+import Rank from "./components/Rank";
+
 import "./styles/App.css";
 const App = () => {
   return (
@@ -24,6 +26,7 @@ const App = () => {
             <Route path="/cat/players" element={<Players />} />
             <Route path="/cat/news" element={<News />} />
             <Route path="/cat/schedule" element={<Schedule />} />
+            <Route path="/cat/rank" element={<Rank />} />
           </Routes>
         </div>
         <Footer />
