@@ -127,7 +127,7 @@ const Standings = () => {
 
   return (
     <div class="standings">
-      <h2 class="rankings">RANKINGS</h2>
+      <h2 class="rankings">Regular Season Standings</h2>
       <animated.div style={fadeIn1}>
         <h2 class="table-title">❰ PLG 例行賽 ❱</h2>
         {renderTable(plgStandings)}

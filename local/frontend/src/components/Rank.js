@@ -178,34 +178,74 @@ const Rank = () => {
   };
 
   // 卡片結構
-  const renderCard = (title, data, keyField, valueField, isTeam = false) => (
-    <div className="stat-card">
-      <h4>{title}</h4>
+  // 修改 renderCard 函數來顯示球員所屬的球隊 icon
+  const renderCard = (title, data, keyField, valueField, isTeam = false) => {
+    const getRankSuffix = (rank) => {
+      switch (rank) {
+        case 1:
+          return "1st";
+        case 2:
+          return "2nd";
+        case 3:
+          return "3rd";
+        case 4:
+          return "4th";
+        case 5:
+          return "5th";
+        default:
+          return `${rank}th`;
+      }
+    };
+
+    return (
       <animated.div style={cardAnimation}>
-        <ul>
-          {getTopFive(data, valueField).map((item, index) => (
-            <li key={index} className="stat-item">
-              <span>{index + 1}.</span>
-              <span>
-                {isTeam ? (
-                  <img
-                    src={`/images/icon/${getTeamLogo(item[keyField])}`}
-                    alt={item[keyField]}
-                    style={{ width: "30px", marginRight: "10px" }}
-                  />
-                ) : null}
-                {item[keyField]}
-              </span>
-              <span>{item[valueField]}</span>
-            </li>
-          ))}
-        </ul>
+        <div className="stat-card">
+          <div className="No1">
+            {/* 顯示卡片標題 */}
+            <h4>{title} </h4>
+            {isTeam && getTopFive(data, valueField)[0] && (
+              <img
+                src={`/images/icon/${getTeamLogo(
+                  getTopFive(data, valueField)[0][keyField]
+                )}`}
+                alt={getTopFive(data, valueField)[0][keyField]}
+              />
+            )}
+          </div>
+          <div className="card-content">
+            <ul className="ranking-list">
+              {getTopFive(data, valueField).map((item, index) => (
+                <li
+                  key={index}
+                  className={`stat-item ${index === 0 ? "first" : ""}`}
+                >
+                  <div className="rank-and-data">
+                    <span className="rank">{getRankSuffix(index + 1)}.</span>
+                    <span className="team-or-player">
+                      {/* 顯示球員所屬球隊或球隊名稱 */}
+                      <img
+                        src={`/images/icon/${getTeamLogo(
+                          item.team || item[keyField]
+                        )}`}
+                        alt={item[keyField]}
+                        className="team-logo"
+                      />
+                      {item[keyField]}
+                    </span>
+                  </div>
+                  <span className="value">{item[valueField]}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
       </animated.div>
-    </div>
-  );
+    );
+  };
 
   return (
-    <div className="stats-container">
+    <div className="rankings">
+      <h2>RANKINGS</h2>
       <div className="filter-section">
         {/* 選擇賽事類型 */}
         <select value={gameType} onChange={(e) => setGameType(e.target.value)}>
@@ -229,21 +269,90 @@ const Rank = () => {
         <div className="stats-sections">
           {/* 球隊數據卡片 */}
           <div className="team-stats">
-            <h3>球隊數據</h3>
+            <div className="Leaders">
+              <h3>Player Leaders</h3>
+              <h4>球員數據排行</h4>
+            </div>
             {renderCard("得分", teamData, "team", "points", true)}
+            {renderCard("投籃FG%", teamData, "team", "All_goals_pct", true)}
+            {renderCard(
+              "二分FG%",
+              teamData,
+              "team",
+              "field_goals_two_pct",
+              true
+            )}
+            {renderCard(
+              "三分命中",
+              teamData,
+              "team",
+              "field_goals_three_made",
+              true
+            )}
+            {renderCard(
+              "三分FG%",
+              teamData,
+              "team",
+              "field_goals_three_pct",
+              true
+            )}
+            {renderCard("罰球FG%", teamData, "team", "free_throws_pct", true)}
             {renderCard("籃板", teamData, "team", "rebounds", true)}
             {renderCard("助攻", teamData, "team", "assists", true)}
             {renderCard("抄截", teamData, "team", "steals", true)}
+            {renderCard("阻攻", teamData, "team", "blocks", true)}
+            {renderCard("失誤", teamData, "team", "turnovers", true)}
+            {renderCard("犯規", teamData, "team", "fouls", true)}
           </div>
 
           {/* 球員數據卡片 */}
           <div className="player-stats">
-            <h3>球員數據</h3>
-            {renderCard("得分", playerData, "player", "points")}
-            {renderCard("投籃FG%", playerData, "player", "All_goals_pct")}
-            {renderCard("籃板", playerData, "player", "rebounds")}
-            {renderCard("助攻", playerData, "player", "assists")}
-            {renderCard("抄截", playerData, "player", "steals")}
+            <div className="Leaders">
+              <h3>Team Leaders</h3>
+              <h4>球隊數據排行</h4>
+            </div>
+            {renderCard("得分", playerData, "player", "points", false)}
+            {renderCard(
+              "投籃FG%",
+              playerData,
+              "player",
+              "All_goals_pct",
+              false
+            )}
+            {renderCard(
+              "二分FG%",
+              playerData,
+              "player",
+              "field_goals_two_pct",
+              false
+            )}
+            {renderCard(
+              "三分命中",
+              playerData,
+              "player",
+              "field_goals_three_made",
+              false
+            )}
+            {renderCard(
+              "三分FG%",
+              playerData,
+              "player",
+              "field_goals_three_pct",
+              false
+            )}
+            {renderCard(
+              "罰球FG%",
+              playerData,
+              "player",
+              "free_throws_pct",
+              false
+            )}
+            {renderCard("籃板", playerData, "player", "rebounds", false)}
+            {renderCard("助攻", playerData, "player", "assists", false)}
+            {renderCard("抄截", playerData, "player", "steals", false)}
+            {renderCard("阻攻", playerData, "player", "blocks", false)}
+            {renderCard("失誤", playerData, "player", "turnovers", false)}
+            {renderCard("犯規", playerData, "player", "fouls", false)}
           </div>
         </div>
       )}

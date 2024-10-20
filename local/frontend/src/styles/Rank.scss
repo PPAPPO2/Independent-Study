@@ -1,0 +1,138 @@
+.rankings {
+  h2 {
+    background: #172243;
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    padding: 1rem;
+    font-size: 1.75rem;
+  }
+
+  // 篩選區域設置
+  .filter-section {
+    display: flex;
+    gap: 2rem; /* 讓篩選器之間保持間距 */
+    padding: 0.5rem;
+    margin: 2rem 0rem 1rem 3rem;
+    select {
+      padding: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 1.25rem;
+      background-color: #ffffff;
+      background-position: right 5px center;
+      width: 10%; //篩選器寬度保持一致
+    }
+  }
+
+  // 卡片區域
+  .stats-sections {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    width: 100%;
+    .Leaders {
+      margin: 1rem 0rem 2rem 0rem;
+      h3 {
+        background-color: #172243;
+        padding: 1rem;
+        font-size: 1.25rem;
+        color: #ffffff;
+        border-radius: 10px;
+        margin-bottom: 1rem;
+      }
+      h4 {
+        font-size: 1.25rem;
+        color: #333;
+        margin: 1rem 0rem 1rem 1rem;
+      }
+    }
+  }
+
+  // 卡片區域設置
+
+  .stat-card {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 1.5rem;
+    margin: 2rem;
+    width: 100%; // 卡片變寬
+    max-width: 600px; // 最大寬度
+    text-align: left;
+    display: flex; // 使用flexbox布局
+    // 第一名球隊圖片顯示在右半邊
+    .No1 {
+      margin-right: 3rem; // 讓圖片與數據保留間距
+      width: 150px;
+      height: 150px;
+      h4 {
+        white-space: nowrap; // 防止 h4 換行
+        padding: 1rem;
+        font-size: 1.75rem;
+        margin-bottom: 1rem;
+        color: #172243;
+      }
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .stat-item {
+      display: flex;
+      justify-content: space-between; // 讓數據和數值分布兩邊
+      align-items: center;
+      margin: 0.5rem 0;
+      font-size: 1.25rem;
+      color: #333;
+      min-height: 50px; // 統一每一行的高度
+      .rank-and-data {
+        display: flex;
+        align-items: center;
+        flex-grow: 1; // 保證這部分占據剩餘空間
+        .rank {
+          font-weight: bold;
+          color: #172243;
+          margin-right: 1rem;
+        }
+
+        .team-or-player {
+          display: flex;
+          align-items: center;
+          margin-right: 1rem;
+          .team-logo {
+            width: 40px;
+            height: 40px;
+            margin-right: 1rem;
+          }
+        }
+      }
+
+      .value {
+        font-weight: bold;
+        color: #172243;
+        margin-left: 1rem;
+        text-align: right;
+        flex-shrink: 0;
+        min-width: 60px;
+        white-space: nowrap;
+      }
+    }
+  }
+
+  .no-data-message {
+    font-size: 4rem;
+    text-align: center;
+    color: #ccc;
+    margin: 3rem 0rem;
+  }
+}
