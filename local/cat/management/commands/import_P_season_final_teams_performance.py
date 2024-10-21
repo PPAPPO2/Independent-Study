@@ -12,7 +12,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **kwargs):
         # 爬取JSON檔案的URL
-        year = '2023-24'
+        year = '2022-23'
         url = f'https://pleagueofficial.com/stat-team/{year}/4#record'
         headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36'}
 
@@ -40,7 +40,7 @@ class Command(BaseCommand):
         temp = json.loads(data)
 
         # 刪除現有的P_TeamStanding模型實例
-        P_Season_Teams_Final_Performance_23_24.objects.all().delete()
+        P_Season_Teams_Final_Performance_22_23.objects.all().delete()
 
         #創建一個P_TeamStandingxx_xx模型
         # 遍歷JSON數據
@@ -75,7 +75,7 @@ class Command(BaseCommand):
                 All_goals_pct = round(total_made / total_attempts, 2)
 
             #創建一個T1_TeamStanding模型實例
-            P_Season_Teams_Final_Performance_23_24.objects.create(
+            P_Season_Teams_Final_Performance_22_23.objects.create(
             team = extract_team_name(FINAL_data['球隊']),
 
             All_goals_made = round(FINAL_data["兩分命中"]+FINAL_data["三分命中"],1),
@@ -92,7 +92,7 @@ class Command(BaseCommand):
             #罰球數據
             free_throws_made = round(FINAL_data["罰球命中"],1),
             free_throws = round(FINAL_data["罰球出手"],1),
-            free_throws_pct = FINAL_data["罰球%"],
+            free_throws_pct = round(float(FINAL_data['罰球%'])/100,2),
             #其他數據
             points = round(FINAL_data["得分"],1),
             offensive_rebounds = round(FINAL_data["攻板"],1),

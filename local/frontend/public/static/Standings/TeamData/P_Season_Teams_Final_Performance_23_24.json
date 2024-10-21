@@ -1,6 +1,6 @@
 [
     {
-        "id": 1,
+        "id": 3,
         "team": "新北國王",
         "points": "87.00",
         "All_goals_made": "31.60",
@@ -14,7 +14,7 @@
         "field_goals_three_pct": "0.34",
         "free_throws_made": "12.00",
         "free_throws": "17.00",
-        "free_throws_pct": "70.59",
+        "free_throws_pct": "0.71",
         "offensive_rebounds": "10.60",
         "defensive_rebounds": "39.40",
         "rebounds": "50.00",
@@ -25,7 +25,7 @@
         "fouls": "24.20"
     },
     {
-        "id": 2,
+        "id": 4,
         "team": "桃園璞園領航猿",
         "points": "86.60",
         "All_goals_made": "29.80",
@@ -39,7 +39,7 @@
         "field_goals_three_pct": "0.28",
         "free_throws_made": "19.80",
         "free_throws": "26.80",
-        "free_throws_pct": "73.88",
+        "free_throws_pct": "0.74",
         "offensive_rebounds": "13.20",
         "defensive_rebounds": "38.40",
         "rebounds": "51.60",

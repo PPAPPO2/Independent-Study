@@ -1,6 +1,6 @@
 [
     {
-        "id": 1,
+        "id": 3,
         "team": "臺北富邦勇士",
         "points": "97.00",
         "All_goals_made": "37.50",
@@ -14,7 +14,7 @@
         "field_goals_three_pct": "0.28",
         "free_throws_made": "12.70",
         "free_throws": "17.00",
-        "free_throws_pct": "74.51",
+        "free_throws_pct": "0.75",
         "offensive_rebounds": "14.50",
         "defensive_rebounds": "35.30",
         "rebounds": "49.80",
@@ -25,7 +25,7 @@
         "fouls": "19.80"
     },
     {
-        "id": 2,
+        "id": 4,
         "team": "新北國王",
         "points": "96.00",
         "All_goals_made": "35.00",
@@ -39,7 +39,7 @@
         "field_goals_three_pct": "0.32",
         "free_throws_made": "15.50",
         "free_throws": "19.80",
-        "free_throws_pct": "78.15",
+        "free_throws_pct": "0.78",
         "offensive_rebounds": "12.80",
         "defensive_rebounds": "34.70",
         "rebounds": "47.50",

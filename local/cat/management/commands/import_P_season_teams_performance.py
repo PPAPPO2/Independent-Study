@@ -12,7 +12,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **kwargs):
         # 爬取JSON檔案的URL
-        year = '2020-21'
+        year = '2023-24'
         url = f'https://pleagueofficial.com/stat-team/{year}/2#record'
         headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36'}
 
@@ -40,7 +40,7 @@ class Command(BaseCommand):
         temp = json.loads(data)
 
         # 刪除現有的P_TeamStanding模型實例
-        P_Season_teams_Performance_20_21.objects.all().delete()
+        P_Season_teams_Performance_23_24.objects.all().delete()
 
         #創建一個P_TeamStandingxx_xx模型
         # 遍歷JSON數據
@@ -92,7 +92,7 @@ class Command(BaseCommand):
             #罰球數據
             free_throws_made = round(FINAL_data["罰球命中"],1),
             free_throws = round(FINAL_data["罰球出手"],1),
-            free_throws_pct = FINAL_data["罰球%"],
+            free_throws_pct = round(float(FINAL_data['罰球%'])/100,2),
             #其他數據
             points = round(FINAL_data["得分"],1),
             offensive_rebounds = round(FINAL_data["攻板"],1),
