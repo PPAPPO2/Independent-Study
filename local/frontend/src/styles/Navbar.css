@@ -79,6 +79,8 @@ nav ul li a:hover {
   z-index: 1;
   border-radius: 10px;
   top: 100%;
+  left: 40%;
+  transform: translateX(-50%);
 }
 .dropdown-content a {
   color: #172243;

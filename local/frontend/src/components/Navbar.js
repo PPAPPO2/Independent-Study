@@ -32,6 +32,7 @@ const Navbar = () => {
             <div className="dropdown-content">
               <NavLink to="/cat/showmore">球隊數據</NavLink>
               <NavLink to="/cat/players">球員數據</NavLink>
+              <NavLink to="/cat/rank">數據排行</NavLink>
             </div>
           </li>
           <li>

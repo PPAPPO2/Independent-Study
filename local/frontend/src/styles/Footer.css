@@ -1,9 +1,10 @@
+@charset "UTF-8";
 .footer {
   background-color: #172243;
   color: white;
   text-align: center;
   margin-top: 10rem;
-  position: relative;
+  position: relative; /* 讓 footer 固定 */
   bottom: 0;
   width: 100%;
 }

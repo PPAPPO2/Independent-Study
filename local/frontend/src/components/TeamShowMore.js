@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
+import { useSpring, animated } from "react-spring";
 import Select from "react-select";
 import "../styles/ShowMore.css";
-
-const staticUrl = "/static/Standings/TeamData/";
 
 const ShowMore = () => {
   const [season, setSeason] = useState("23-24"); // 預設年分
@@ -11,6 +10,21 @@ const ShowMore = () => {
   const [data, setData] = useState([]); // 預設為空陣列
   const [isAscending, setIsAscending] = useState(true);
   const [currentSortColumn, setCurrentSortColumn] = useState(null);
+  const [animationTrigger, setAnimationTrigger] = useState(false);
+
+  // 定義動畫效果，隨著資料變化觸發
+  const tableAnimation = useSpring({
+    opacity: animationTrigger ? 1 : 0.7, // 當動畫觸發器為 true，表格淡入
+    transform: animationTrigger ? "translateY(0)" : "translateY(0)", // 下滑動畫
+    config: { duration: 200 },
+  });
+  // 每次篩選條件或資料改變時重置動畫
+  useEffect(() => {
+    setAnimationTrigger(false); // 關閉動畫
+    setTimeout(() => {
+      setAnimationTrigger(true); // 啟動動畫
+    }, 350); // 設置一個短暫的延遲，重置動畫
+  }, [season, gameType, selectedTeams]);
 
   // 統一管理球隊和資料類型的選項
   const config = {
@@ -67,6 +81,27 @@ const ShowMore = () => {
       playoff: "Playoff_Performance",
       final: "Final_Performance",
     },
+  };
+  // 球隊名稱對應的圖片檔名
+  const teamLogoMapping = {
+    臺北富邦勇士: "臺北富邦勇士.png",
+    新北國王: "新北國王.png",
+    高雄17直播鋼鐵人: "高雄17直播鋼鐵人.png",
+    高雄鋼鐵人: "高雄17直播鋼鐵人.png",
+    桃園璞園領航猿: "桃園璞園領航猿.png",
+    桃園領航猿: "桃園璞園領航猿.png",
+    福爾摩沙夢想家: "福爾摩沙夢想家.png",
+    福爾摩沙台新夢想家: "福爾摩沙夢想家.png",
+    新竹御頂攻城獅: "新竹御頂攻城獅.png",
+    新竹街口攻城獅: "新竹御頂攻城獅.png",
+    新竹攻城獅: "新竹御頂攻城獅.png",
+    新北中信特攻: "新北中信特攻.png",
+    台啤永豐雲豹: "台啤永豐雲豹.png",
+    臺北戰神: "臺北戰神.png",
+    高雄全家海神: "高雄全家海神.png",
+    臺南台鋼獵鷹: "臺南台鋼獵鷹.png",
+    臺中太陽: "臺中太陽.png",
+    台灣啤酒英熊: "台灣啤酒英熊.png",
   };
 
   const columnMapping = {
@@ -200,6 +235,7 @@ const ShowMore = () => {
           ? "❰ PLG 20-21 Teams Stats ❱"
           : `❰ PLG & T1 ${season.replace("20", "")} Teams Stats ❱`}
       </h2>
+
       <div className="season-team-select">
         {/* 賽事類型篩選器 */}
         <select value={gameType} onChange={(e) => setGameType(e.target.value)}>
@@ -266,33 +302,58 @@ const ShowMore = () => {
         {data.length === 0 ? (
           <div className="no-data-message">查無資料</div>
         ) : (
-          <table className="showMoreTable">
-            <thead>
-              <tr>
-                {Object.keys(columnMapping).map((key) => (
-                  <th key={key} onClick={() => sortTable(columnMapping[key])}>
-                    {key}{" "}
-                    {currentSortColumn === columnMapping[key] ? (
-                      isAscending ? (
-                        <span className="sort-arrow">▲</span>
-                      ) : (
-                        <span className="sort-arrow">▼</span>
-                      )
-                    ) : null}
-                  </th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {data.map((teamData, index) => (
-                <tr key={index}>
+          <animated.div style={tableAnimation}>
+            <table className="showMoreTable">
+              <thead>
+                <tr>
                   {Object.keys(columnMapping).map((key) => (
-                    <td key={key}>{teamData[columnMapping[key]]}</td>
+                    <th key={key} onClick={() => sortTable(columnMapping[key])}>
+                      {key}{" "}
+                      {currentSortColumn === columnMapping[key] ? (
+                        isAscending ? (
+                          <span className="sort-arrow">▲</span>
+                        ) : (
+                          <span className="sort-arrow">▼</span>
+                        )
+                      ) : null}
+                    </th>
                   ))}
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {data.map((teamData, index) => (
+                  <tr key={index}>
+                    {Object.keys(columnMapping).map((key) => {
+                      if (key === "球隊") {
+                        // 如果是球隊欄位，加入Logo圖片
+                        return (
+                          <td key={key}>
+                            <img
+                              src={`/images/icon/${
+                                teamLogoMapping[teamData.team]
+                              }`}
+                              alt={teamData.team}
+                              style={{
+                                width: "30px",
+                                height: "30px",
+                                marginRight: "10px",
+                              }}
+                            />
+                            {teamData[columnMapping[key]]}
+                          </td>
+                        );
+                      } else {
+                        // 其他欄位保持不變
+                        return (
+                          <td key={key}>{teamData[columnMapping[key]]}</td>
+                        );
+                      }
+                    })}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </animated.div>
         )}{" "}
       </div>
     </div>

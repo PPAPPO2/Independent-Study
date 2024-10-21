@@ -12,11 +12,6 @@
   font-size: 1rem;
   background-color: #f8f8f8;
   background-position: right 5px center;
-  -webkit-appearance: none;
-     -moz-appearance: none;
-          appearance: none;
-  background-repeat: no-repeat;
-  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23333"><path d="M7 10l5 5 5-5z"/></svg>');
   width: 8%;
 }
 .Players .selector .react-select__placeholder {
@@ -129,10 +124,18 @@
   background-color: #172243;
   z-index: 1;
 }
-.Players .datatable td:nth-child(4),
+.Players .datatable td:nth-child(4) {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 235px;
+  min-width: 235px;
+}
 .Players .datatable th:nth-child(4) {
-  min-width: 160px;
-  max-width: 160px;
+  display: flex;
+  align-items: center;
+  width: 235px;
+  min-width: 235px;
 }
 .Players .datatable td:nth-child(6),
 .Players .datatable th:nth-child(6) {

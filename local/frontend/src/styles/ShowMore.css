@@ -12,11 +12,6 @@
   font-size: 1rem;
   background-color: #f8f8f8;
   background-position: right 5px center;
-  -webkit-appearance: none;
-     -moz-appearance: none;
-          appearance: none;
-  background-repeat: no-repeat;
-  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23333"><path d="M7 10l5 5 5-5z"/></svg>');
   width: 8%;
 }
 .show-more-container .season-team-select .react-select__placeholder {
@@ -67,12 +62,23 @@
   background-color: #172243;
   color: white;
 }
-.show-more-container .table-container .showMoreTable td:first-child,
 .show-more-container .table-container .showMoreTable th:first-child {
+  display: flex;
+  align-items: center;
   color: #eee;
-  width: 160px;
-  min-width: 160px;
-  max-width: 160px;
+  width: 235px;
+  min-width: 235px;
+  position: sticky;
+  left: 0;
+  background-color: #172243;
+}
+.show-more-container .table-container .showMoreTable td:first-child {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  color: #eee;
+  width: 235px;
+  min-width: 235px;
   position: sticky;
   left: 0;
   background-color: #172243;

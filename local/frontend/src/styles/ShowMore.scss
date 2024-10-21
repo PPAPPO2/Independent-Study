@@ -11,9 +11,6 @@
       font-size: 1rem;
       background-color: #f8f8f8;
       background-position: right 5px center;
-      appearance: none;
-      background-repeat: no-repeat;
-      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23333"><path d="M7 10l5 5 5-5z"/></svg>');
       width: 8%; //篩選器寬度保持一致
     }
     .react-select__placeholder {
@@ -74,16 +71,27 @@
         color: white;
       }
       // 修改 "球隊" 欄位的寬度
-      td:first-child,
+
       th:first-child {
+        display: flex;
+        align-items: center; // 將Logo和球隊名稱置於同一水平線上
         color: #eee;
-        width: 160px; // 設定 "球隊" 欄位的寬度為200px，根據需要調整
-        min-width: 160px; // 確保即使表格重新渲染，寬度依然保持
-        max-width: 160px; // 確保即使表格重新渲染，寬度依然保持
+        width: 235px; // 設定 "球隊" 欄位的寬度為200px，根據需要調整
+        min-width: 235px; // 確保即使表格重新渲染，寬度依然保持
         position: sticky;
         left: 0;
         background-color: #172243; // 確保固定的欄位背景與其他欄位一致
-        //z-index: 1; // 確保固定的欄位在最上層
+      }
+      td:first-child {
+        display: flex;
+        align-items: center; // 將Logo和球隊名稱置於同一水平線上
+        justify-content: flex-start; // 將內容靠左對齊
+        color: #eee;
+        width: 235px; // 設定 "球隊" 欄位的寬度為200px，根據需要調整
+        min-width: 235px; // 確保即使表格重新渲染，寬度依然保持
+        position: sticky;
+        left: 0;
+        background-color: #172243; // 確保固定的欄位背景與其他欄位一致
       }
     }
   }

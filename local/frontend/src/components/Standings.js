@@ -1,9 +1,25 @@
 import React, { useEffect, useState } from "react";
+import { useSpring, animated } from "react-spring";
+import { useInView } from "react-intersection-observer"; // 引入 useInView
 import "../styles/Standings.css";
 
 const Standings = () => {
   const [plgStandings, setPlgStandings] = useState([]);
   const [t1Standings, setT1Standings] = useState([]);
+  const [ref1, inView1] = useInView({ triggerOnce: false });
+  const [ref2, inView2] = useInView({ triggerOnce: false });
+  const fadeIn1 = useSpring({
+    opacity: 1,
+    transform: "translateY(0)",
+    from: { opacity: 0, transform: "translateY(20px)" }, // 從下方開始
+    delay: 500, // 按鈕動畫延遲 1 秒開始
+    config: { duration: 500 }, // 動畫持續 1 秒
+  });
+  const fadeIn2 = useSpring({
+    opacity: inView2 ? 1 : 0,
+    transform: inView2 ? "translateY(0)" : "translateY(20px)",
+    config: { duration: 500 },
+  });
 
   useEffect(() => {
     fetch("/static/Standings/P_TeamStanding23_24.json")
@@ -110,12 +126,17 @@ const Standings = () => {
   };
 
   return (
-    <div>
-      <h2 class="standings">RANKINGS</h2>
-      <h2 class="table-title">❰ PLG 例行賽 ❱</h2>
-      {renderTable(plgStandings)}
-      <h2 class="table-title">❰ T1 例行賽 ❱</h2>
-      {renderTable(t1Standings)}
+    <div class="standings">
+      <h2 class="rankings">Regular Season Standings</h2>
+      <animated.div style={fadeIn1}>
+        <h2 class="table-title">❰ PLG 例行賽 ❱</h2>
+        {renderTable(plgStandings)}
+      </animated.div>
+
+      <animated.div ref={ref2} style={fadeIn2}>
+        <h2 class="table-title">❰ T1 例行賽 ❱</h2>
+        {renderTable(t1Standings)}
+      </animated.div>
     </div>
   );
 };

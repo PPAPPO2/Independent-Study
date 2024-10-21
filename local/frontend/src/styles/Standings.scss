@@ -18,77 +18,78 @@ header {
     }
   }
 }
-
 .standings {
-  background: #172243;
-  margin: 0rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #ffffff;
-  padding: 1rem;
-  font-size: 1.75rem;
-}
-
-.table-title {
-  margin: 2rem;
-  display: flex;
-  justify-content: center;
-  color: #172243;
-  font-size: 2rem;
-}
-
-.table-body {
-  border-spacing: 0;
-  width: 80%;
-  margin: auto;
-  td.teams-name {
-    color: rgba(0, 0, 0, 0.726);
+  .rankings {
+    background: #172243;
+    margin: 0rem;
     display: flex;
     align-items: center;
-    justify-content: flex-start;
-    img.team-logo {
-      flex: 3 1 400px;
-      max-width: 20%;
-      height: auto;
-      vertical-align: middle;
-      margin-right: 2rem;
+    justify-content: center;
+    color: #ffffff;
+    padding: 1rem;
+    font-size: 1.75rem;
+  }
+
+  .table-title {
+    margin: 2rem;
+    display: flex;
+    justify-content: center;
+    color: #172243;
+    font-size: 2rem;
+  }
+
+  .table-body {
+    border-spacing: 0;
+    width: 80%;
+    margin: auto;
+    td.teams-name {
+      color: rgba(0, 0, 0, 0.726);
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      img.team-logo {
+        flex: 3 1 400px;
+        max-width: 20%;
+        height: auto;
+        vertical-align: middle;
+        margin-right: 2rem;
+      }
     }
   }
-}
 
-td {
-  justify-content: center;
-  padding: 1rem 3rem;
-  font-size: 1.25rem;
-}
-tr {
-  text-align: center;
-}
-th {
-  justify-content: center;
-  font-size: 1.5rem;
-  padding: 1.5rem 0rem;
-}
-table tbody tr:nth-child(odd) {
-  //奇數列背景顏色
-  background-color: #eee;
-}
-table thead {
-  background-color: #172243;
-  color: white;
-}
-//對四個角的要素做調整
-table thead th:first-child {
-  border-radius: 5px 0 0 0;
-}
-table thead th:last-child {
-  border-radius: 0 5px 0 0;
-}
-table tbody tr:last-child td:first-child {
-  border-radius: 0 0 0 5px;
-}
+  td {
+    justify-content: center;
+    padding: 1rem 3rem;
+    font-size: 1.25rem;
+  }
+  tr {
+    text-align: center;
+  }
+  th {
+    justify-content: center;
+    font-size: 1.5rem;
+    padding: 1.5rem 0rem;
+  }
+  table tbody tr:nth-child(odd) {
+    //奇數列背景顏色
+    background-color: #eee;
+  }
+  table thead {
+    background-color: #172243;
+    color: white;
+  }
+  //對四個角的要素做調整
+  table thead th:first-child {
+    border-radius: 5px 0 0 0;
+  }
+  table thead th:last-child {
+    border-radius: 0 5px 0 0;
+  }
+  table tbody tr:last-child td:first-child {
+    border-radius: 0 0 0 5px;
+  }
 
-table tbody tr:last-child td:last-child {
-  border-radius: 0 0 5px 0;
+  table tbody tr:last-child td:last-child {
+    border-radius: 0 0 5px 0;
+  }
 }
