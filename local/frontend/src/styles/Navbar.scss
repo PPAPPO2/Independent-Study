@@ -11,10 +11,7 @@
   font-family: "fontset";
   src: url(./GenSekiGothic-B.ttc);
 }
-header,
-body {
-  height: 100%;
-}
+
 // 定義漸層顏色變數
 $gradient-colors: #ffffff, #6dd5fa, #2980b9;
 
@@ -22,7 +19,8 @@ header {
   background: linear-gradient(to right, $gradient-colors);
   display: flex;
   align-items: center;
-  flex-wrap: wrap;
+  justify-content: space-between; // 使項目水平排列
+  flex-wrap: nowrap; // 禁止元素換行
   div.logo {
     display: flex;
     align-items: center;
@@ -42,17 +40,21 @@ header {
 }
 
 nav {
-  flex: 2 1 400px;
+  width: auto; // 不佔滿全寬
+  max-width: 1200px; // 限制 navbar 最大寬度
+  margin: 0 auto; // 使 navbar 居中
   ul {
     display: flex;
     list-style-type: none;
-    justify-content: space-around;
+    justify-content: space-between; // 平均分布項目
+    flex-wrap: nowrap; // 禁止換行
     li {
       a {
         padding-right: 2rem;
         color: hsl(225, 49%, 18%, 50%);
         text-decoration: none;
         font-size: 1.5rem;
+        white-space: nowrap; // 防止文字換行
       }
     }
   }
@@ -101,4 +103,43 @@ nav ul li a:hover {
 }
 .dropdown:hover .dropdown-content {
   display: block;
+}
+
+@media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    align-items: center;
+    padding: 0rem; // 縮小 header 的 padding 來減少高度
+    div.logo {
+      display: flex;
+      justify-content: center; // 讓 logo 置中對齊
+      align-items: center;
+      padding: 0; // 調整與 navbar 之間的間距
+      img.plg {
+        height: auto;
+        max-width: 30%; // 調整圖片大小，確保在小螢幕上不會過大
+        vertical-align: middle;
+      }
+      img.t1 {
+        height: auto;
+        max-width: 30%; // 調整圖片大小，確保在小螢幕上不會過大
+        vertical-align: middle;
+      }
+    }
+  }
+
+  nav {
+    width: 100%;
+    max-width: 100%; // 針對小螢幕，讓 navbar 佔滿螢幕寬度
+    ul {
+      flex-direction: column; // 選單項目垂直排列
+      align-items: center;
+      li {
+        margin-bottom: 0.5rem;
+        a {
+          font-size: 2rem;
+        }
+      }
+    }
+  }
 }

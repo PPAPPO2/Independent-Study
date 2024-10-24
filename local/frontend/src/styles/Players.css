@@ -6,16 +6,21 @@
   margin: 2rem 0rem 1rem 3rem;
 }
 .Players .selector select {
-  padding: 0.5rem 1rem;
+  padding: 0.5rem;
   border: 1px solid #ccc;
   border-radius: 4px;
   font-size: 1rem;
   background-color: #f8f8f8;
   background-position: right 5px center;
-  width: 8%;
+  width: 100%; /* 讓寬度初始佔滿父容器 */
+  min-width: 120px; /* 設置篩選器最小寬度 */
+  max-width: 150px; /* 設置篩選器最大寬度 */
+  transition: all 0.3s ease; /* 過渡效果讓調整更平滑 */
 }
 .Players .selector .react-select__placeholder {
   color: black; /* 設定選擇球隊的 placeholder 文字顏色為黑色 */
+  min-width: 120px; /* 設置 react-select 最小寬度 */
+  max-width: 150px; /* 設置 react-select 最大寬度 */
 }
 .Players .selector .react-select__control {
   background-color: #f8f8f8; /* 設定 placeholder 的背景顏色 */
@@ -41,7 +46,9 @@
   font-size: 1rem;
   border-radius: 4px;
   padding: 0.5rem;
-  width: 10%;
+  min-width: 120px; /* 設置篩選器最小寬度 */
+  max-width: 150px; /* 設置篩選器最大寬度 */
+  transition: all 0.3s ease; /* 過渡效果讓調整更平滑 */
 }
 .Players .pagination {
   display: flex;
@@ -142,4 +149,48 @@
   width: 130px;
   min-width: 130px;
   max-width: 130px;
+}
+@media (max-width: 1200px) {
+  .Players .selector select,
+  .Players .react-select__control {
+    width: 20%; /* 在較大的螢幕下調整篩選器寬度 */
+  }
+}
+@media (max-width: 768px) {
+  .Players .selector {
+    flex-direction: column; /* 在小螢幕上垂直排列篩選器 */
+    margin: 1rem 0rem;
+  }
+  .Players .selector select,
+  .Players .selector .react-select__control {
+    width: 100%; /* 在小螢幕上讓篩選器佔滿寬度 */
+  }
+  .Players .table-container {
+    width: 100%; /* 在小螢幕上讓表格佔滿寬度 */
+  }
+  .Players td {
+    font-size: 0.9rem;
+    padding: 0.5rem;
+  }
+  .Players th {
+    font-size: 1rem;
+  }
+  .Players h2 {
+    font-size: 1.5rem;
+  }
+}
+@media (max-width: 480px) {
+  .Players .selector select,
+  .Players .react-select__control {
+    width: 100%; /* 手機螢幕上篩選器全寬 */
+  }
+  .Players td {
+    font-size: 0.8rem;
+  }
+  .Players th {
+    font-size: 0.9rem;
+  }
+  .Players h2 {
+    font-size: 1.2rem;
+  }
 }/*# sourceMappingURL=Players.css.map */

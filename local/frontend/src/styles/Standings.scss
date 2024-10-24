@@ -1,23 +1,3 @@
-// 定義漸層顏色變數
-$gradient-colors: #ffffff, #6dd5fa, #2980b9;
-
-header {
-  background: linear-gradient(to right, $gradient-colors);
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  div.logo {
-    display: flex;
-    align-items: center;
-    flex: 3 1 400px;
-    padding: 0.75rem 1rem;
-    img.plg {
-      max-width: 12%;
-      height: auto;
-      vertical-align: middle;
-    }
-  }
-}
 .standings {
   .rankings {
     background: #172243;
@@ -28,6 +8,7 @@ header {
     color: #ffffff;
     padding: 1rem;
     font-size: 1.75rem;
+    text-align: center;
   }
 
   .table-title {
@@ -36,30 +17,33 @@ header {
     justify-content: center;
     color: #172243;
     font-size: 2rem;
+    text-align: center;
   }
 
   .table-body {
     border-spacing: 0;
     width: 80%;
     margin: auto;
+
     td.teams-name {
       color: rgba(0, 0, 0, 0.726);
       display: flex;
       align-items: center;
       justify-content: flex-start;
+
       img.team-logo {
         flex: 3 1 400px;
-        max-width: 20%;
+        max-width: 50px; // 固定最大寬度，避免圖片過大
         height: auto;
         vertical-align: middle;
-        margin-right: 2rem;
+        margin-right: 1rem;
       }
     }
   }
 
   td {
     justify-content: center;
-    padding: 1rem 3rem;
+    padding: 0.5rem 1.5rem; // 調整 padding
     font-size: 1.25rem;
   }
   tr {
@@ -78,6 +62,7 @@ header {
     background-color: #172243;
     color: white;
   }
+
   //對四個角的要素做調整
   table thead th:first-child {
     border-radius: 5px 0 0 0;
@@ -91,5 +76,66 @@ header {
 
   table tbody tr:last-child td:last-child {
     border-radius: 0 0 5px 0;
+  }
+}
+
+// RWD 調整
+@media (max-width: 768px) {
+  .standings {
+    .table-body {
+      width: 100%; // 在小螢幕時佔滿寬度
+      td.teams-name {
+        img.team-logo {
+          max-width: 40px; // 在小螢幕時縮小圖片
+        }
+      }
+    }
+
+    td {
+      font-size: 1rem; // 在小螢幕時縮小字體
+      padding: 0.5rem 1rem; // 調整 padding
+    }
+
+    th {
+      font-size: 1.2rem; // 縮小標題字體
+    }
+
+    .rankings {
+      font-size: 1.5rem; // 縮小標題字體
+    }
+
+    .table-title {
+      font-size: 1.75rem; // 縮小表格標題字體
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .standings {
+    .table-body {
+      width: 100%;
+      td.teams-name {
+        img.team-logo {
+          max-width: 30px; // 手機等極小螢幕時進一步縮小圖片
+        }
+      }
+    }
+
+    td {
+      font-size: 0.9rem; // 進一步縮小字體
+      padding: 0.3rem 0.5rem; // 調整 padding 使得表格更緊湊
+    }
+
+    th {
+      font-size: 1rem;
+    }
+
+    .rankings {
+      font-size: 1.2rem;
+    }
+
+    .table-title {
+      font-size: 1.5rem;
+    }
   }
 }

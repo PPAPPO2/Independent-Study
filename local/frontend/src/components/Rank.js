@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Select from "react-select";
 import { useSpring, animated } from "react-spring";
 import "../styles/Rank.css";
 
@@ -26,10 +25,10 @@ const teamLogoMapping = {
 };
 
 const Rank = () => {
-  const [season, setSeason] = useState("23-24"); // 預設球季
+  const [season, setSeason] = useState("23_24"); // 預設球季
   const [gameType, setGameType] = useState("regular"); // 預設賽事類型
-  const [teamData, setTeamData] = useState([]); // 球隊數據
-  const [playerData, setPlayerData] = useState([]); // 球員數據
+  const [combinedTeamData, setCombinedTeamData] = useState([]); // 球隊數據
+  const [combinedPlayerData, setCombinedPlayerData] = useState([]); // 球員數據
   const [animationTrigger, setAnimationTrigger] = useState(false); // 動畫觸發
   const [noData, setNoData] = useState(false); // 查無資料
 
@@ -42,7 +41,7 @@ const Rank = () => {
 
   // 檢查選擇的年份與賽事類型是否有資料
   useEffect(() => {
-    if (["20-21", "21-22"].includes(season) && gameType !== "regular") {
+    if (["20_21", "21_22"].includes(season) && gameType !== "regular") {
       setNoData(true);
     } else {
       setNoData(false);
@@ -55,14 +54,13 @@ const Rank = () => {
     setTimeout(() => {
       setAnimationTrigger(true);
     }, 350);
-  }, [season, gameType, teamData, playerData]);
+  }, [season, gameType, combinedTeamData, combinedPlayerData]);
 
   // 當球季或賽事類型改變時抓取數據
   useEffect(() => {
     if (noData) {
-      // 如果查無資料，則不發出請求
-      setTeamData([]);
-      setPlayerData([]);
+      setCombinedTeamData([]);
+      setCombinedPlayerData([]);
       return;
     }
 
@@ -71,95 +69,78 @@ const Rank = () => {
       let t1TeamUrl = "";
       let plgPlayerUrl = "";
       let t1PlayerUrl = "";
+      let combinedTeamDataArray = [];
+      let combinedPlayerDataArray = [];
 
       // 根據選擇決定 URL
       if (gameType === "regular") {
-        plgTeamUrl = `/static/Standings/TeamData/P_Season_Teams_Performance_${season.replace(
-          "-",
-          "_"
-        )}.json`;
-        t1TeamUrl = `/static/Standings/TeamData/T1_Season_Teams_Performance_${season.replace(
-          "-",
-          "_"
-        )}.json`;
-
-        plgPlayerUrl = `/static/Standings/PlayerData/P_Players_performance_${season.replace(
-          "-",
-          "_"
-        )}.json`;
-        t1PlayerUrl = `/static/Standings/PlayerData/T1_Players_performance_${season.replace(
-          "-",
-          "_"
-        )}.json`;
+        plgTeamUrl = `/static/Standings/TeamData/P_Season_Teams_Performance_${season}.json`;
+        t1TeamUrl = `/static/Standings/TeamData/T1_Season_Teams_Performance_${season}.json`;
+        plgPlayerUrl = `/static/Standings/PlayerData/P_Players_performance_${season}.json`;
+        t1PlayerUrl = `/static/Standings/PlayerData/T1_Players_performance_${season}.json`;
       } else if (gameType === "playoff") {
-        plgTeamUrl = `/static/Standings/TeamData/P_Season_Teams_Playoff_Performance_${season.replace(
-          "-",
-          "_"
-        )}.json`;
-        t1TeamUrl = `/static/Standings/TeamData/T1_Season_Teams_Playoff_Performance_${season.replace(
-          "-",
-          "_"
-        )}.json`;
-
-        plgPlayerUrl = `/static/Standings/PlayerData/P_Season_Players_Playoff_Performance_${season.replace(
-          "-",
-          "_"
-        )}.json`;
-        t1PlayerUrl = `/static/Standings/PlayerData/T1_Season_Players_Playoff_Performance_${season.replace(
-          "-",
-          "_"
-        )}.json`;
+        plgTeamUrl = `/static/Standings/TeamData/P_Season_Teams_Playoff_Performance_${season}.json`;
+        t1TeamUrl = `/static/Standings/TeamData/T1_Season_Teams_Playoff_Performance_${season}.json`;
+        plgPlayerUrl = `/static/Standings/PlayerData/P_Season_Players_Playoff_Performance_${season}.json`;
+        t1PlayerUrl = `/static/Standings/PlayerData/T1_Season_Playoff_Players_Performance_${season}.json`;
       } else if (gameType === "final") {
-        plgTeamUrl = `/static/Standings/TeamData/P_Season_Teams_Final_Performance_${season.replace(
-          "-",
-          "_"
-        )}.json`;
-        t1TeamUrl = `/static/Standings/TeamData/T1_Season_Teams_Final_Performance_${season.replace(
-          "-",
-          "_"
-        )}.json`;
-
-        plgPlayerUrl = `/static/Standings/PlayerData/P_Season_Players_Final_Performance_${season.replace(
-          "-",
-          "_"
-        )}.json`;
-        t1PlayerUrl = `/static/Standings/PlayerData/T1_Season_Players_Final_Performance_${season.replace(
-          "-",
-          "_"
-        )}.json`;
+        plgTeamUrl = `/static/Standings/TeamData/P_Season_Teams_Final_Performance_${season}.json`;
+        t1TeamUrl = `/static/Standings/TeamData/T1_Season_Teams_Final_Performance_${season}.json`;
+        plgPlayerUrl = `/static/Standings/PlayerData/P_Season_Players_Final_Performance_${season}.json`;
+        t1PlayerUrl = `/static/Standings/PlayerData/T1_Season_Players_Final_Performance_${season}.json`;
       }
 
-      // Fetch PLG 和 T1 資料
+      // Fetch PLG 資料
       try {
-        const [
-          plgTeamResponse,
-          t1TeamResponse,
-          plgPlayerResponse,
-          t1PlayerResponse,
-        ] = await Promise.all([
-          fetch(plgTeamUrl),
-          fetch(t1TeamUrl),
-          fetch(plgPlayerUrl),
-          fetch(t1PlayerUrl),
-        ]);
-
-        const plgTeamData = plgTeamResponse.ok
-          ? await plgTeamResponse.json()
-          : [];
-        const t1TeamData = t1TeamResponse.ok ? await t1TeamResponse.json() : [];
-        const plgPlayerData = plgPlayerResponse.ok
-          ? await plgPlayerResponse.json()
-          : [];
-        const t1PlayerData = t1PlayerResponse.ok
-          ? await t1PlayerResponse.json()
-          : [];
-
-        // 合併兩聯盟數據
-        setTeamData([...plgTeamData, ...t1TeamData]);
-        setPlayerData([...plgPlayerData, ...t1PlayerData]);
+        const plgTeamResponse = await fetch(plgTeamUrl);
+        if (plgTeamResponse.ok) {
+          const plgTeamData = await plgTeamResponse.json();
+          combinedTeamDataArray = [...combinedTeamDataArray, ...plgTeamData];
+        }
       } catch (error) {
-        console.error("Error fetching data:", error);
+        console.error(`Error fetching PLG team data for ${season}:`, error);
       }
+
+      try {
+        const plgPlayerResponse = await fetch(plgPlayerUrl);
+        if (plgPlayerResponse.ok) {
+          const plgPlayerData = await plgPlayerResponse.json();
+          combinedPlayerDataArray = [
+            ...combinedPlayerDataArray,
+            ...plgPlayerData,
+          ];
+        }
+      } catch (error) {
+        console.error(`Error fetching PLG player data for ${season}:`, error);
+      }
+
+      // Fetch T1 資料
+      try {
+        const t1TeamResponse = await fetch(t1TeamUrl);
+        if (t1TeamResponse.ok) {
+          const t1TeamData = await t1TeamResponse.json();
+          combinedTeamDataArray = [...combinedTeamDataArray, ...t1TeamData];
+        }
+      } catch (error) {
+        console.warn(`No T1 team data for ${season}.`);
+      }
+
+      try {
+        const t1PlayerResponse = await fetch(t1PlayerUrl);
+        if (t1PlayerResponse.ok) {
+          const t1PlayerData = await t1PlayerResponse.json();
+          combinedPlayerDataArray = [
+            ...combinedPlayerDataArray,
+            ...t1PlayerData,
+          ];
+        }
+      } catch (error) {
+        console.warn(`No T1 player data for ${season}.`);
+      }
+
+      // 更新資料
+      setCombinedTeamData(combinedTeamDataArray);
+      setCombinedPlayerData(combinedPlayerDataArray);
     };
 
     fetchData();
@@ -171,6 +152,14 @@ const Rank = () => {
       .sort((a, b) => b[key] - a[key]) // 依據key進行排序
       .slice(0, 5); // 取前五名
   };
+  // 過濾場均上場時間超過 10 分鐘的球員 且出賽超過10場
+  const filterPlayersByMinutes = (data) => {
+    return data.filter(
+      (player) =>
+        player.minutes > "00:10:00" && // 確保時間格式正確
+        player.game_played > 10 // 直接比較數字
+    );
+  };
 
   // 使用 teamLogoMapping 顯示球隊圖片
   const getTeamLogo = (teamName) => {
@@ -178,7 +167,6 @@ const Rank = () => {
   };
 
   // 卡片結構
-  // 修改 renderCard 函數來顯示球員所屬的球隊 icon
   const renderCard = (title, data, keyField, valueField, isTeam = false) => {
     const getRankSuffix = (rank) => {
       switch (rank) {
@@ -222,7 +210,6 @@ const Rank = () => {
                   <div className="rank-and-data">
                     <span className="rank">{getRankSuffix(index + 1)}.</span>
                     <span className="team-or-player">
-                      {/* 顯示球員所屬球隊或球隊名稱 */}
                       <img
                         src={`/images/icon/${getTeamLogo(
                           item.team || item[keyField]
@@ -245,7 +232,7 @@ const Rank = () => {
 
   return (
     <div className="rankings">
-      <h2>RANKINGS</h2>
+      <h2>Season Leaders</h2>
       <div className="filter-section">
         {/* 選擇賽事類型 */}
         <select value={gameType} onChange={(e) => setGameType(e.target.value)}>
@@ -256,10 +243,10 @@ const Rank = () => {
 
         {/* 選擇球季 */}
         <select value={season} onChange={(e) => setSeason(e.target.value)}>
-          <option value="23-24">2023-24</option>
-          <option value="22-23">2022-23</option>
-          <option value="21-22">2021-22</option>
-          <option value="20-21">2020-21</option>
+          <option value="23_24">2023-24</option>
+          <option value="22_23">2022-23</option>
+          <option value="21_22">2021-22</option>
+          <option value="20_21">2020-21</option>
         </select>
       </div>
 
@@ -270,89 +257,130 @@ const Rank = () => {
           {/* 球隊數據卡片 */}
           <div className="team-stats">
             <div className="Leaders">
-              <h3>Player Leaders</h3>
-              <h4>球員數據排行</h4>
+              <h3>Team Leaders</h3>
+              <h4>球隊數據排行</h4>
             </div>
-            {renderCard("得分", teamData, "team", "points", true)}
-            {renderCard("投籃FG%", teamData, "team", "All_goals_pct", true)}
+            {renderCard("得分", combinedTeamData, "team", "points", true)}
+
             {renderCard(
               "二分FG%",
-              teamData,
+              combinedTeamData,
               "team",
               "field_goals_two_pct",
               true
             )}
             {renderCard(
               "三分命中",
-              teamData,
+              combinedTeamData,
               "team",
               "field_goals_three_made",
               true
             )}
             {renderCard(
               "三分FG%",
-              teamData,
+              combinedTeamData,
               "team",
               "field_goals_three_pct",
               true
             )}
-            {renderCard("罰球FG%", teamData, "team", "free_throws_pct", true)}
-            {renderCard("籃板", teamData, "team", "rebounds", true)}
-            {renderCard("助攻", teamData, "team", "assists", true)}
-            {renderCard("抄截", teamData, "team", "steals", true)}
-            {renderCard("阻攻", teamData, "team", "blocks", true)}
-            {renderCard("失誤", teamData, "team", "turnovers", true)}
-            {renderCard("犯規", teamData, "team", "fouls", true)}
+            {renderCard(
+              "罰球FG%",
+              combinedTeamData,
+              "team",
+              "free_throws_pct",
+              true
+            )}
+            {renderCard("籃板", combinedTeamData, "team", "rebounds", true)}
+            {renderCard("助攻", combinedTeamData, "team", "assists", true)}
+            {renderCard("抄截", combinedTeamData, "team", "steals", true)}
+            {renderCard("阻攻", combinedTeamData, "team", "blocks", true)}
+            {renderCard("失誤", combinedTeamData, "team", "turnovers", true)}
+            {renderCard("犯規", combinedTeamData, "team", "fouls", true)}
           </div>
 
           {/* 球員數據卡片 */}
           <div className="player-stats">
             <div className="Leaders">
-              <h3>Team Leaders</h3>
-              <h4>球隊數據排行</h4>
+              <h3>Player Leaders</h3>
+              <h4>球員數據排行 </h4>
             </div>
-            {renderCard("得分", playerData, "player", "points", false)}
             {renderCard(
-              "投籃FG%",
-              playerData,
+              "得分",
+              filterPlayersByMinutes(combinedPlayerData),
               "player",
-              "All_goals_pct",
+              "points",
               false
             )}
             {renderCard(
               "二分FG%",
-              playerData,
+              filterPlayersByMinutes(combinedPlayerData),
               "player",
               "field_goals_two_pct",
               false
             )}
             {renderCard(
               "三分命中",
-              playerData,
+              filterPlayersByMinutes(combinedPlayerData),
               "player",
               "field_goals_three_made",
               false
             )}
             {renderCard(
               "三分FG%",
-              playerData,
+              filterPlayersByMinutes(combinedPlayerData),
               "player",
               "field_goals_three_pct",
               false
             )}
             {renderCard(
               "罰球FG%",
-              playerData,
+              filterPlayersByMinutes(combinedPlayerData),
               "player",
               "free_throws_pct",
               false
             )}
-            {renderCard("籃板", playerData, "player", "rebounds", false)}
-            {renderCard("助攻", playerData, "player", "assists", false)}
-            {renderCard("抄截", playerData, "player", "steals", false)}
-            {renderCard("阻攻", playerData, "player", "blocks", false)}
-            {renderCard("失誤", playerData, "player", "turnovers", false)}
-            {renderCard("犯規", playerData, "player", "fouls", false)}
+            {renderCard(
+              "籃板",
+              filterPlayersByMinutes(combinedPlayerData),
+              "player",
+              "rebounds",
+              false
+            )}
+            {renderCard(
+              "助攻",
+              filterPlayersByMinutes(combinedPlayerData),
+              "player",
+              "assists",
+              false
+            )}
+            {renderCard(
+              "抄截",
+              filterPlayersByMinutes(combinedPlayerData),
+              "player",
+              "steals",
+              false
+            )}
+            {renderCard(
+              "阻攻",
+              filterPlayersByMinutes(combinedPlayerData),
+              "player",
+              "blocks",
+              false
+            )}
+            {renderCard(
+              "失誤",
+              filterPlayersByMinutes(combinedPlayerData),
+              "player",
+              "turnovers",
+              false
+            )}
+            {renderCard(
+              "犯規",
+              filterPlayersByMinutes(combinedPlayerData),
+              "player",
+              "fouls",
+              false
+            )}
           </div>
         </div>
       )}

@@ -5,16 +5,21 @@
     padding: 0.5rem;
     margin: 2rem 0rem 1rem 3rem;
     select {
-      padding: 0.5rem 1rem;
+      padding: 0.5rem;
       border: 1px solid #ccc;
       border-radius: 4px;
       font-size: 1rem;
       background-color: #f8f8f8;
       background-position: right 5px center;
-      width: 8%; //篩選器寬度保持一致
+      width: 100%; /* 讓寬度初始佔滿父容器 */
+      min-width: 120px; /* 設置篩選器最小寬度 */
+      max-width: 150px; /* 設置篩選器最大寬度 */
+      transition: all 0.3s ease; /* 過渡效果讓調整更平滑 */
     }
     .react-select__placeholder {
       color: black; /* 設定選擇球隊的 placeholder 文字顏色為黑色 */
+      min-width: 120px; /* 設置 react-select 最小寬度 */
+      max-width: 150px; /* 設置 react-select 最大寬度 */
     }
     .react-select__control {
       background-color: #f8f8f8; /* 設定 placeholder 的背景顏色 */
@@ -107,5 +112,63 @@
     margin-left: 5px;
     color: white;
     font-size: 10px;
+  }
+
+  @media (max-width: 1200px) {
+    .season-team-select select {
+      width: 15%; /* 在較大的螢幕下調整篩選器寬度 */
+    }
+  }
+
+  @media (max-width: 768px) {
+    .season-team-select {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1rem;
+      margin-left: 0;
+
+      select {
+        width: 100%; /* 在小螢幕上讓篩選器佔滿寬度 */
+      }
+
+      .team-select {
+        width: 100%; /* 同樣調整 react-select 寬度 */
+      }
+    }
+
+    .table-container {
+      width: 100%;
+    }
+
+    td {
+      font-size: 0.9rem;
+      padding: 0.5rem;
+    }
+
+    th {
+      font-size: 1rem;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .season-team-select select {
+      width: 100%; /* 手機螢幕上篩選器全寬 */
+    }
+
+    td {
+      font-size: 0.8rem;
+    }
+
+    th {
+      font-size: 0.9rem;
+    }
+
+    h2 {
+      font-size: 1.2rem;
+    }
   }
 }

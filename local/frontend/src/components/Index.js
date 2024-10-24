@@ -77,7 +77,7 @@ const Index = () => {
   const teamMembers = [
     {
       image: "01.png",
-      name: "會祥豪",
+      name: "曾祥豪",
       description: "後端、資料庫設計、模型訓練",
       experience: "想不通", //心得
     },
