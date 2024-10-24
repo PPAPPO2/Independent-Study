@@ -100,7 +100,6 @@
   color: white;
   font-size: 10px;
 }
-
 @media (max-width: 1200px) {
   .show-more-container .season-team-select select {
     width: 15%; /* 在較大的螢幕下調整篩選器寬度 */

@@ -113,17 +113,14 @@
     color: white;
     font-size: 10px;
   }
-}
 
-@media (max-width: 1200px) {
-  .show-more-container {
+  @media (max-width: 1200px) {
     .season-team-select select {
       width: 15%; /* 在較大的螢幕下調整篩選器寬度 */
     }
   }
-}
-@media (max-width: 768px) {
-  .show-more-container {
+
+  @media (max-width: 768px) {
     .season-team-select {
       flex-direction: column;
       align-items: flex-start;
@@ -156,9 +153,8 @@
       font-size: 1.5rem;
     }
   }
-}
-@media (max-width: 480px) {
-  .show-more-container {
+
+  @media (max-width: 480px) {
     .season-team-select select {
       width: 100%; /* 手機螢幕上篩選器全寬 */
     }
