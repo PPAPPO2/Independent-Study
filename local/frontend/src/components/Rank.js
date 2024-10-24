@@ -232,7 +232,7 @@ const Rank = () => {
 
   return (
     <div className="rankings">
-      <h2>RANKINGS</h2>
+      <h2>Season Leaders</h2>
       <div className="filter-section">
         {/* 選擇賽事類型 */}
         <select value={gameType} onChange={(e) => setGameType(e.target.value)}>
