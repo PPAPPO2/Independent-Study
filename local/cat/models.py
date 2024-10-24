@@ -98,9 +98,6 @@ class T1_TeamStanding20_21(TeamStandingModel):
 class P_Season_Players_Performance_22_23(Season_Players_Performance):
 
     pass
-
-
-
 class P_Season_Players_Performance_21_22(Season_Players_Performance):
 
     pass
@@ -110,6 +107,9 @@ class P_Season_Players_Performance_20_21(Season_Players_Performance):
 
     pass
 class P_Season_Players_Performance_23_24(Season_Players_Performance):
+
+    pass
+class P_Season_Players_Performance_24_25(Season_Players_Performance):
 
     pass
 
@@ -160,7 +160,8 @@ class T1_Season_teams_Performance_22_23(Season_teams_Performance):
 class T1_Season_teams_Performance_21_22(Season_teams_Performance):
     pass
 
-
+class P_Season_teams_Performance_24_25(Season_teams_Performance):
+    pass
 class P_Season_teams_Performance_23_24(Season_teams_Performance):
     pass
 class P_Season_teams_Performance_22_23(Season_teams_Performance):
@@ -216,4 +217,11 @@ class P_Season_Teams_Playoff_Performance_23_24(Season_teams_Performance):
 class P_Season_Teams_Final_Performance_22_23(Season_teams_Performance):
     pass
 class P_Season_Teams_Final_Performance_23_24(Season_teams_Performance):
+    pass
+
+class TPBL_Season_Teams_Final_Performance_24_25(Season_teams_Performance):
+    pass
+class TPBL_Season_Teams_Performance_24_25(Season_teams_Performance):
+    pass
+class TPBL_Season_Players_Performance_24_25(Season_Players_Performance):
     pass
