@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import JsonResponse
 from rest_framework import serializers, viewsets
-from .models import Schedule
+from .models import Schedule, ScheduleT
 
 def index(request):
     return render(request, "index.html")
@@ -13,4 +13,8 @@ class ScheduleSerializer(serializers.ModelSerializer):
 
 class ScheduleViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Schedule.objects.all()
+    serializer_class = ScheduleSerializer
+
+class ScheduleTViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = ScheduleT.objects.all()
     serializer_class = ScheduleSerializer

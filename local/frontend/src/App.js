@@ -25,7 +25,7 @@ const App = () => {
             <Route path="/cat/predict" element={<PredictResult />} />
             <Route path="/cat/players" element={<Players />} />
             <Route path="/cat/news" element={<News />} />
-            <Route path="/cat/schedule" element={<Schedule />} />
+            <Route path="/cat/schedule/" element={<Schedule />} />
             <Route path="/cat/rank" element={<Rank />} />
           </Routes>
         </div>

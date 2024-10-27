@@ -36,7 +36,7 @@ const Navbar = () => {
             </div>
           </li>
           <li>
-            <NavLink to="/cat/schedule" activeClassName="active">
+            <NavLink to="/cat/schedule/" activeClassName="active">
               賽程
             </NavLink>
           </li>

@@ -3,10 +3,14 @@ import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import axios from "axios";
 import "../styles/Schedule.css";
+import plgLogo from "../logo/plg.png";
+import t1Logo from "../logo/tpbl.png";
+
 
 const Schedule = () => {
   const [currentTitle, setCurrentTitle] = useState(""); // 儲存標題
   const [events, setEvents] = useState([]); // 儲存賽程事件
+  const [selectedLeague, setSelectedLeague] = useState("聯盟一"); // 當前選擇的聯盟
 
   let calendarApi;
 
@@ -19,21 +23,23 @@ const Schedule = () => {
         return `/images/icon/福爾摩沙夢想家.png`;
       case "新北國王":
         return `/images/icon/新北國王.png`;
-      case "新竹御頂攻城獅":
+      case "新竹御嵿攻城獅":
         return `/images/icon/新竹御頂攻城獅.png`;
       case "臺北富邦勇士":
         return `/images/icon/臺北富邦勇士.png`;
       case "高雄17直播鋼鐵人":
+      case "高雄鋼鐵人":
         return `/images/icon/高雄17直播鋼鐵人.png`;
       case "新北中信特攻":
         return `/images/icon/新北中信特攻.png`;
-      case "台啤永豐雲豹":
+      case "桃園台啤永豐雲豹":
         return `/images/icon/台啤永豐雲豹.png`;
       case "高雄全家海神":
         return `/images/icon/高雄全家海神.png`;
-      case "臺北戰神":
+      case "臺北台新戰神":
         return `/images/icon/臺北戰神.png`;
       case "臺南台鋼獵鷹":
+      case "台鋼獵鷹":  
         return `/images/icon/臺南台鋼獵鷹.png`;
       default:
         return "";
@@ -41,9 +47,15 @@ const Schedule = () => {
   };
 
   useEffect(() => {
+
+    const url =
+      selectedLeague === "聯盟一"
+        ? "http://localhost:8000/cat/schedulesP/"
+        : "http://localhost:8000/cat/schedulesT/";
+
     // 獲取後端數據
     axios
-      .get("http://localhost:8000/cat/schedules/")
+      .get(url)
       .then((response) => {
         // 將數據轉換為 FullCalendar 可用的格式
         const formattedEvents = response.data.map((item) => ({
@@ -59,7 +71,7 @@ const Schedule = () => {
       .catch((error) => {
         console.error("Error fetching schedule data:", error);
       });
-  }, []);
+  }, [selectedLeague]);
 
   return (
     <>
@@ -73,6 +85,29 @@ const Schedule = () => {
           〉
         </span>{" "}
         {/* 下一個月按鈕 */}
+      </div>
+
+      <div className="tabs">
+          {/* 聯盟一頁籤 */}
+          <span
+            className={`tab ${selectedLeague === "聯盟一" ? "active" : ""}`}
+            onClick={() => {
+              console.log("Switching to P. LEAGUE+");
+              setSelectedLeague("聯盟一");
+            }}
+          >
+            <img src={plgLogo} alt="PLG Logo" className="plg_Sche" />
+          </span>
+          {/* 聯盟二頁籤 */}
+          <span
+            className={`tab ${selectedLeague === "聯盟二" ? "active" : ""}`}
+            onClick={() => {
+              console.log("Switching to TPBL");
+              setSelectedLeague("聯盟二");
+            }}
+          >
+            <img src={t1Logo} alt="T1 Logo" className="t1_Sche" />
+          </span>
       </div>
 
       <div className="calendar-container">
@@ -114,7 +149,20 @@ const Schedule = () => {
             const timeString = `${hours}:${minutes}`; // 格式化為 HH:MM
 
             return(
-            <div>
+            <div style={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              justifyContent: 'center',
+              textAlign: 'center',
+              // padding: '10px'
+            }}>
+            <div style={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                // marginBottom: '10px'
+              }}> {/* 置中 LOGO */}
               <img
                 src={getTeamIcon(eventInfo.event.extendedProps.team_home)}
                 alt={eventInfo.event.extendedProps.team_home}
@@ -126,9 +174,10 @@ const Schedule = () => {
                 style={{ width: "50px", height: "50px", marginLeft: "10px" }}
               />
               <br />
-              <b>{timeString}</b>
+              </div>
+              <b style={{ display: 'block', margin: '0 0' }}>{timeString}</b>
               <br />
-              <b>{eventInfo.event.extendedProps.location}</b>
+              <b style={{ display: 'block', margin: '0 0' }}>{eventInfo.event.extendedProps.location}</b>
             </div>
           )}}
           ref={(calendar) => {
