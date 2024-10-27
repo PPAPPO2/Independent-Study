@@ -167,18 +167,14 @@
       max-width: 130px;
     }
   }
-}
 
-@media (max-width: 1200px) {
-  .Players {
+  @media (max-width: 1200px) {
     .selector select,
     .react-select__control {
       width: 20%; /* 在較大的螢幕下調整篩選器寬度 */
     }
   }
-}
-@media (max-width: 768px) {
-  .Players {
+  @media (max-width: 768px) {
     .selector {
       flex-direction: column; /* 在小螢幕上垂直排列篩選器 */
       margin: 1rem 0rem;
@@ -205,9 +201,8 @@
       font-size: 1.5rem;
     }
   }
-}
-@media (max-width: 480px) {
-  .Players {
+
+  @media (max-width: 480px) {
     .selector select,
     .react-select__control {
       width: 100%; /* 手機螢幕上篩選器全寬 */

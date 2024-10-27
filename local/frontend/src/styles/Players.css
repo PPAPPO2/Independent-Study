@@ -150,7 +150,6 @@
   min-width: 130px;
   max-width: 130px;
 }
-
 @media (max-width: 1200px) {
   .Players .selector select,
   .Players .react-select__control {
