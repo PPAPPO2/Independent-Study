@@ -14,10 +14,12 @@ const teamLogoMapping = {
   福爾摩沙台新夢想家: "福爾摩沙夢想家.png",
   新竹御頂攻城獅: "新竹御頂攻城獅.png",
   新竹街口攻城獅: "新竹御頂攻城獅.png",
+  新竹御嵿攻城獅: "新竹御頂攻城獅.png",
   新竹攻城獅: "新竹御頂攻城獅.png",
   新北中信特攻: "新北中信特攻.png",
   台啤永豐雲豹: "台啤永豐雲豹.png",
   臺北戰神: "臺北戰神.png",
+  臺北台新戰神: "臺北戰神.png",
   高雄全家海神: "高雄全家海神.png",
   臺南台鋼獵鷹: "臺南台鋼獵鷹.png",
   臺中太陽: "臺中太陽.png",
@@ -25,7 +27,7 @@ const teamLogoMapping = {
 };
 
 const Rank = () => {
-  const [season, setSeason] = useState("23_24"); // 預設球季
+  const [season, setSeason] = useState("24_25"); // 預設球季
   const [gameType, setGameType] = useState("regular"); // 預設賽事類型
   const [combinedTeamData, setCombinedTeamData] = useState([]); // 球隊數據
   const [combinedPlayerData, setCombinedPlayerData] = useState([]); // 球員數據
@@ -41,7 +43,10 @@ const Rank = () => {
 
   // 檢查選擇的年份與賽事類型是否有資料
   useEffect(() => {
-    if (["20_21", "21_22"].includes(season) && gameType !== "regular") {
+    if (
+      ["20_21", "21_22", "24_25"].includes(season) &&
+      gameType !== "regular"
+    ) {
       setNoData(true);
     } else {
       setNoData(false);
@@ -157,7 +162,7 @@ const Rank = () => {
     return data.filter(
       (player) =>
         player.minutes > "00:10:00" && // 確保時間格式正確
-        player.game_played > 10 // 直接比較數字
+        player.game_played > 1 // 直接比較數字
     );
   };
 
@@ -243,6 +248,7 @@ const Rank = () => {
 
         {/* 選擇球季 */}
         <select value={season} onChange={(e) => setSeason(e.target.value)}>
+          <option value="24_25">2024-25</option>
           <option value="23_24">2023-24</option>
           <option value="22_23">2022-23</option>
           <option value="21_22">2021-22</option>

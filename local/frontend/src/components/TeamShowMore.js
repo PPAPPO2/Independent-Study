@@ -4,7 +4,7 @@ import Select from "react-select";
 import "../styles/ShowMore.css";
 
 const ShowMore = () => {
-  const [season, setSeason] = useState("23-24"); // 預設年分
+  const [season, setSeason] = useState("24-25"); // 預設年分
   const [gameType, setGameType] = useState("regular"); // 預設資料類型：例行賽、季後賽或冠軍賽
   const [selectedTeams, setSelectedTeams] = useState([]); // 預設全選
   const [data, setData] = useState([]); // 預設為空陣列
@@ -29,6 +29,19 @@ const ShowMore = () => {
   // 統一管理球隊和資料類型的選項
   const config = {
     seasons: {
+      "24_25": [
+        { value: "臺北富邦勇士", label: "勇士" },
+        { value: "新北國王", label: "國王" },
+        { value: "高雄17直播鋼鐵人", label: "鋼鐵人" },
+        { value: "桃園璞園領航猿", label: "領航猿" },
+        { value: "福爾摩沙夢想家", label: "夢想家" },
+        { value: "新竹御嵿攻城獅", label: "攻城獅" },
+        { value: "新北中信特攻", label: "特攻" },
+        { value: "台啤永豐雲豹", label: "雲豹" },
+        { value: "臺北台新戰神", label: "戰神" },
+        { value: "高雄全家海神", label: "海神" },
+        { value: "臺南台鋼獵鷹", label: "獵鷹" },
+      ],
       "23_24": [
         { value: "臺北富邦勇士", label: "勇士" },
         { value: "新北國王", label: "國王" },
@@ -94,10 +107,12 @@ const ShowMore = () => {
     福爾摩沙台新夢想家: "福爾摩沙夢想家.png",
     新竹御頂攻城獅: "新竹御頂攻城獅.png",
     新竹街口攻城獅: "新竹御頂攻城獅.png",
+    新竹御嵿攻城獅: "新竹御頂攻城獅.png",
     新竹攻城獅: "新竹御頂攻城獅.png",
     新北中信特攻: "新北中信特攻.png",
     台啤永豐雲豹: "台啤永豐雲豹.png",
     臺北戰神: "臺北戰神.png",
+    臺北台新戰神: "臺北戰神.png",
     高雄全家海神: "高雄全家海神.png",
     臺南台鋼獵鷹: "臺南台鋼獵鷹.png",
     臺中太陽: "臺中太陽.png",
@@ -130,9 +145,9 @@ const ShowMore = () => {
   };
   // 預設進入頁面時自動全選球隊
   useEffect(() => {
-    setSeason("23-24");
+    setSeason("24-25");
     setGameType("regular");
-    setSelectedTeams(config.seasons["23_24"].map((team) => team.value));
+    setSelectedTeams(config.seasons["24_25"].map((team) => team.value));
   }, []);
   // 抓取資料並更新表格
   useEffect(() => {
