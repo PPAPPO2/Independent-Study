@@ -23,7 +23,10 @@
       font-size: 1.25rem;
       background-color: #ffffff;
       background-position: right 5px center;
-      width: 10%; //篩選器寬度保持一致
+      width: 100%; /* 讓寬度初始佔滿父容器 */
+      min-width: 120px; /* 設置篩選器最小寬度 */
+      max-width: 150px; /* 設置篩選器最大寬度 */
+      transition: all 0.3s ease; /* 過渡效果讓調整更平滑 */
     }
   }
 
@@ -155,5 +158,29 @@
     text-align: center;
     color: #ccc;
     margin: 3rem 0rem;
+  }
+  @media (max-width: 768px) {
+    h2 {
+      font-size: 1.5rem;
+      padding: 0.75rem;
+    }
+
+    .filter-section {
+      flex-direction: column;
+      gap: 1rem;
+      margin: 1rem 1rem;
+      select {
+        width: 100%;
+      }
+    }
+
+    .stats-sections {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .stat-card {
+      max-width: 90%;
+    }
   }
 }

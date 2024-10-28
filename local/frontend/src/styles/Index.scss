@@ -3,7 +3,6 @@
     position: relative; /* 新增，確保 .button-container 可以相對於圖片定位 */
     text-align: center; // 將內容置中
     padding: 2rem 0; // 上下內邊距調整
-    height: auto; /* 高度自適應 */
     overflow: hidden; /* 防止圖片過大超出容器 */
     .index-image {
       max-width: 90%; // 限制圖片寬度為容器的50%，讓圖片縮小
@@ -21,33 +20,63 @@
       left: 50%; /* 新增，水平居中 */
       transform: translate(-50%, -50%); /* 新增，讓按鈕真正居中 */
       z-index: 1; /* 新增，確保按鈕在圖片上層 */
-      .button1 {
-        font-size: 1.5rem;
-        border-radius: 8px;
-        margin: 0 6rem;
-        padding: 1rem;
-        background-color: #172243;
-        color: white;
-        cursor: pointer;
-        box-shadow: 0 4px 12px #172243;
-
-        &:hover {
-          box-shadow: 0 8px 16px #ffe700;
-        }
-      }
+      display: flex;
+      flex-direction: row; // 水平排列
+      .button1,
       .button2 {
         font-size: 1.5rem;
         border-radius: 8px;
-        margin: 0 8rem;
         padding: 1rem;
-        background-color: #ffe700;
-        color: white;
         cursor: pointer;
-        box-shadow: 0 4px 12px #ffe700;
+        width: 150px;
+        text-align: center;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 
         &:hover {
-          box-shadow: 0 8px 16px #172243;
+          box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
         }
+      }
+
+      .button1 {
+        background-color: #172243;
+        color: white;
+      }
+
+      .button2 {
+        background-color: #ffe700;
+        color: white;
+      }
+    }
+
+    // 在大螢幕下（1200px 以上）增加按鈕間距
+    @media (min-width: 1200px) {
+      .button1 {
+        margin-right: 10rem; // 加大間距，避免放大後重疊
+      }
+      .button2 {
+        margin-left: 10rem;
+      }
+    }
+
+    // 在小螢幕（768px 以下）縮小按鈕間距
+    @media (max-width: 768px) {
+      .button1 {
+        margin-right: 1rem;
+      }
+      .button2 {
+        margin-left: 1rem;
+      }
+    }
+
+    // 當視窗極小（500px 以下）或極大（1600px 以上）時，改為垂直堆疊
+    @media (max-width: 500px), (min-width: 1600px) {
+      flex-direction: column;
+      .button1 {
+        margin-right: 5rem;
+        margin-bottom: 1.5rem; // 垂直間距
+      }
+      .button2 {
+        margin-left: 5rem;
       }
     }
   }
@@ -60,7 +89,8 @@
     border-radius: 15px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     margin: 5rem 5rem;
-    width: 60%;
+    width: 80%;
+    max-width: 1000px; // 設定最大寬度
     overflow: hidden;
     transition: all 0.5s ease;
     &:hover {
@@ -81,11 +111,11 @@
       }
     }
     .content-image {
-      margin: 1rem;
-      width: 60%;
+      max-width: 50%; // 保證圖片不會過大
       height: auto;
       border-radius: 10px;
       transition: transform 0.5s ease;
+      margin: 1rem; // 增加圖片和文字間距
     }
 
     .content-text {
