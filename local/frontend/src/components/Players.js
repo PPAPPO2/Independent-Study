@@ -102,7 +102,7 @@ const Players = () => {
       "24_25": [
         { value: "臺北富邦勇士", label: "勇士" },
         { value: "新北國王", label: "國王" },
-        { value: "高雄17直播鋼鐵人", label: "鋼鐵人" },
+        { value: "高雄鋼鐵人", label: "鋼鐵人" },
         { value: "桃園璞園領航猿", label: "領航猿" },
         { value: "福爾摩沙夢想家", label: "夢想家" },
         { value: "新竹御嵿攻城獅", label: "攻城獅" },
