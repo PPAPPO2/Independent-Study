@@ -8,7 +8,7 @@ class Command(BaseCommand):
     help = 'Fetch and import average stats of team standings from TPBL API'
 
     def handle(self, *args, **kwargs):
-        url = 'https://api.tpbl.basketball/api/divisions/2/games/teams/stats'
+        url = 'https://api.tpbl.basketball/api/games/stats/teams?division_id=2'
         headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36'}
 
         response = requests.get(url, headers=headers)
