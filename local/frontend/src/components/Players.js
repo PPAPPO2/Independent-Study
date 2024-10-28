@@ -6,7 +6,7 @@ import "../styles/Players.css";
 const Players = () => {
   const [pData, setPData] = useState([]);
   const [t1Data, setT1Data] = useState([]);
-  const [selectedYear, setSelectedYear] = useState("23_24"); // 預設年份
+  const [selectedYear, setSelectedYear] = useState("24_25"); // 預設年份
   const [selectedDataType, setSelectedDataType] = useState("regular"); // 新增：資料類型 (regular: 例行賽, playoff: 季後賽, final: 冠軍賽)
   const [combinedData, setCombinedData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
@@ -53,10 +53,12 @@ const Players = () => {
     福爾摩沙台新夢想家: "福爾摩沙夢想家.png",
     新竹御頂攻城獅: "新竹御頂攻城獅.png",
     新竹街口攻城獅: "新竹御頂攻城獅.png",
+    新竹御嵿攻城獅: "新竹御頂攻城獅.png",
     新竹攻城獅: "新竹御頂攻城獅.png",
     新北中信特攻: "新北中信特攻.png",
     台啤永豐雲豹: "台啤永豐雲豹.png",
     臺北戰神: "臺北戰神.png",
+    臺北台新戰神: "臺北戰神.png",
     高雄全家海神: "高雄全家海神.png",
     臺南台鋼獵鷹: "臺南台鋼獵鷹.png",
     臺中太陽: "臺中太陽.png",
@@ -96,6 +98,19 @@ const Players = () => {
   // 根據年份更新球隊選項
   useEffect(() => {
     const teamOptionsByYear = {
+      "24_25": [
+        { value: "臺北富邦勇士", label: "勇士" },
+        { value: "新北國王", label: "國王" },
+        { value: "高雄17直播鋼鐵人", label: "鋼鐵人" },
+        { value: "桃園璞園領航猿", label: "領航猿" },
+        { value: "福爾摩沙夢想家", label: "夢想家" },
+        { value: "新竹御嵿攻城獅", label: "攻城獅" },
+        { value: "新北中信特攻", label: "特攻" },
+        { value: "台啤永豐雲豹", label: "雲豹" },
+        { value: "臺北台新戰神", label: "戰神" },
+        { value: "高雄全家海神", label: "海神" },
+        { value: "臺南台鋼獵鷹", label: "獵鷹" },
+      ],
       "23_24": [
         { value: "臺北富邦勇士", label: "勇士" },
         { value: "新北國王", label: "國王" },
@@ -282,6 +297,7 @@ const Players = () => {
           }}
           value={selectedYear}
         >
+          <option value="24_25">2024-25</option>
           <option value="23_24">2023-24</option>
           <option value="22_23">2022-23</option>
           <option value="21_22">2021-22</option>
