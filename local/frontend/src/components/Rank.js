@@ -18,12 +18,16 @@ const teamLogoMapping = {
   新竹攻城獅: "新竹御頂攻城獅.png",
   新北中信特攻: "新北中信特攻.png",
   台啤永豐雲豹: "台啤永豐雲豹.png",
+  桃園台啤永豐雲豹: "台啤永豐雲豹.png",
   臺北戰神: "臺北戰神.png",
   臺北台新戰神: "臺北戰神.png",
   高雄全家海神: "高雄全家海神.png",
   臺南台鋼獵鷹: "臺南台鋼獵鷹.png",
   臺中太陽: "臺中太陽.png",
   台灣啤酒英熊: "台灣啤酒英熊.png",
+};
+const getPlayerImage = (playerName) => {
+  return `/images/players/${playerName}.png`;
 };
 
 const Rank = () => {
@@ -162,7 +166,7 @@ const Rank = () => {
     return data.filter(
       (player) =>
         player.minutes > "00:10:00" && // 確保時間格式正確
-        player.game_played > 1 // 直接比較數字
+        player.game_played > 0 // 直接比較數字
     );
   };
 
@@ -194,15 +198,37 @@ const Rank = () => {
       <animated.div style={cardAnimation}>
         <div className="stat-card">
           <div className="No1">
-            {/* 顯示卡片標題 */}
-            <h4>{title} </h4>
-            {isTeam && getTopFive(data, valueField)[0] && (
-              <img
-                src={`/images/icon/${getTeamLogo(
-                  getTopFive(data, valueField)[0][keyField]
-                )}`}
-                alt={getTopFive(data, valueField)[0][keyField]}
-              />
+            <h4>{title}</h4>
+            {getTopFive(data, valueField)[0] && (
+              <>
+                <img
+                  src={
+                    isTeam
+                      ? `/images/icon/${getTeamLogo(
+                          getTopFive(data, valueField)[0][keyField]
+                        )}`
+                      : getPlayerImage(
+                          getTopFive(data, valueField)[0][keyField]
+                        )
+                  }
+                  alt={getTopFive(data, valueField)[0][keyField]}
+                  className="player-image"
+                />
+                {!isTeam && (
+                  <div className="team-info">
+                    <img
+                      src={`/images/icon/${getTeamLogo(
+                        getTopFive(data, valueField)[0].team
+                      )}`}
+                      alt={getTopFive(data, valueField)[0].team}
+                      className="team-icon"
+                    />
+                    <span className="team-name">
+                      {getTopFive(data, valueField)[0].team}
+                    </span>
+                  </div>
+                )}
+              </>
             )}
           </div>
           <div className="card-content">
@@ -216,9 +242,13 @@ const Rank = () => {
                     <span className="rank">{getRankSuffix(index + 1)}.</span>
                     <span className="team-or-player">
                       <img
-                        src={`/images/icon/${getTeamLogo(
-                          item.team || item[keyField]
-                        )}`}
+                        src={
+                          isTeam
+                            ? `/images/icon/${getTeamLogo(
+                                item.team || item[keyField]
+                              )}`
+                            : getPlayerImage(item[keyField])
+                        }
                         alt={item[keyField]}
                         className="team-logo"
                       />
@@ -269,7 +299,7 @@ const Rank = () => {
             {renderCard("得分", combinedTeamData, "team", "points", true)}
 
             {renderCard(
-              "二分FG%",
+              "二分FG",
               combinedTeamData,
               "team",
               "field_goals_two_pct",
@@ -283,14 +313,14 @@ const Rank = () => {
               true
             )}
             {renderCard(
-              "三分FG%",
+              "三分FG",
               combinedTeamData,
               "team",
               "field_goals_three_pct",
               true
             )}
             {renderCard(
-              "罰球FG%",
+              "罰球FG",
               combinedTeamData,
               "team",
               "free_throws_pct",
@@ -318,7 +348,7 @@ const Rank = () => {
               false
             )}
             {renderCard(
-              "二分FG%",
+              "二分FG",
               filterPlayersByMinutes(combinedPlayerData),
               "player",
               "field_goals_two_pct",
@@ -332,14 +362,14 @@ const Rank = () => {
               false
             )}
             {renderCard(
-              "三分FG%",
+              "三分FG",
               filterPlayersByMinutes(combinedPlayerData),
               "player",
               "field_goals_three_pct",
               false
             )}
             {renderCard(
-              "罰球FG%",
+              "罰球FG",
               filterPlayersByMinutes(combinedPlayerData),
               "player",
               "free_throws_pct",
