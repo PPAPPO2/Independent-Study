@@ -173,7 +173,7 @@
   cursor: pointer;
   font-size: 1.25rem;
   font-weight: bold;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 1 ); /* 加上陰影效果 */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* 加上陰影效果 */
   transition: all 0.3s ease; /* 添加過渡效果 */
 }
 
@@ -181,14 +181,14 @@
   /*background-color: #80c2ff;  按下時的顏色 */
   transform: translateY(-10px);
   color: white;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 1); /* 活動按鈕的陰影更深 */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 活動按鈕的陰影更深 */
   /*transform: translateY(0px);  按下時不移動 */
 }
 
 .tab:hover {
   background-color: #80c2ff;
   color: white;
-  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2); /* 滑鼠懸停時加深陰影 */
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 1); /* 滑鼠懸停時加深陰影 */
   transform: translateY(-2px); /* 當滑鼠懸停時向上移動一點 */
 }
 
