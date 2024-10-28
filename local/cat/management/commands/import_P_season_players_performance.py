@@ -1,28 +1,33 @@
-# standings/management/commands/import_standings.py
 import requests
 from bs4 import BeautifulSoup
 from django.core.management.base import BaseCommand
-from cat.models import P_Season_Players_Performance_20_21, P_Season_Players_Performance_21_22, P_Season_Players_Performance_22_23, P_Season_Players_Performance_23_24
+from cat.models import P_Season_Players_Performance_24_25
 from datetime import datetime
-from decimal import Decimal
 import pandas as pd
 import json
 from django.db import connection
+
 class Command(BaseCommand):
-    
+    help = 'Fetch and import player statistics from P League+ for season 2024-25'
+
     def handle(self, *args, **kwargs):
-        year = '2020-21'
+        # 爬取資料的年份和網址
+        year = '2024-25'
         url = f'https://pleagueofficial.com/stat-player/{year}/2#record'
         headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36'}
 
         # 發送GET請求並獲取響應
         response = requests.get(url, headers=headers)
+        if response.status_code != 200:
+            self.stdout.write(self.style.ERROR(f"Failed to fetch data: {response.status_code}"))
+            return
+
+        # 使用BeautifulSoup解析HTML
         soup = BeautifulSoup(response.text, "html.parser")
         datas = soup.find("table", {'id': 'main-table'})
 
+        # 提取表頭和數據行
         header = [th.get_text(strip=True) for th in datas.find('thead').find_all('th')]
-
-        # 獲取表格內容
         rows = []
         for tr in datas.find('tbody').find_all('tr'):
             cells = [td.get_text(strip=True) for td in tr.find_all('td')]
@@ -30,78 +35,83 @@ class Command(BaseCommand):
             row = [team_name] + cells
             rows.append(row)
 
+        # 將數據轉換為DataFrame
         df = pd.DataFrame(rows, columns=header)
 
-        # 將 DataFrame 轉換為 JSON 並存檔
+        # 將DataFrame轉換為JSON格式
         data = df.to_json(orient='records', force_ascii=False)
-        # print(data)
-        # 將響應內容從JSON格式轉換為Python字典
         temp = json.loads(data)
-        # 清空現有數據
-        P_Season_Players_Performance_20_21.objects.all().delete()
 
+        # 刪除現有數據
+        P_Season_Players_Performance_24_25.objects.all().delete()
+
+        # 將百分比和數字格式轉換為浮點數
         def convert_to_float(data):
             for key, value in data.items():
                 try:
                     data[key] = float(value.replace('%', '').replace(',', ''))
-                except ValueError:
+                except (ValueError, AttributeError):
                     pass
             return data
+
         temp = [convert_to_float(item) for item in temp]
 
+        # 解析分鐘數為時間格式
         def get_time(time_str):
             try:
-                temp = datetime.strptime(time_str, "%M:%S").time()
+                # 嘗試直接將 MM:SS 格式解析
+                return datetime.strptime(time_str, "%M:%S").time()
             except ValueError:
-                temp = time_str+'00'
-                temp = datetime.strptime(temp, '%M:%S').time()
-            return temp
-        with connection.cursor() as cursor:
-            cursor.execute("DELETE FROM sqlite_sequence WHERE name = 'cat_p_season_players_performance_20_21';")
-# 遍歷JSON數據
-        for rosters in temp:
-            # 計算總命中數和總出手數
-            total_made = rosters["兩分命中"] + rosters["三分出手"]
-            total_attempts = rosters["兩分出手"] + rosters["三分出手"]
-            
-            # 防止除零錯誤
-            if total_attempts == 0:
-                All_goals_pct = 0
-            else:
-                All_goals_pct = round(total_made / total_attempts, 2)
+                try:
+                    # 如果 MM:SS 解析失敗，嘗試將時間補足為 HH:MM:SS 格式
+                    return datetime.strptime("00:" + time_str, "%H:%M:%S").time()
+                except ValueError:
+                    # 若解析失敗，返回預設值 "00:00:00"
+                    return datetime.strptime("00:00:00", "%H:%M:%S").time()
 
-            # 創建一個T1_Season_Players_Performance模型實例
-            P_Season_Players_Performance_20_21.objects.create(
-                player=rosters["球員"],
-                jersey=rosters["背號"],
-                team=rosters["球隊"],
-                points=round(rosters["得分"], 1),
-                game_played = rosters["出賽次數"],
-                minutes = get_time(rosters["時間 (分)"]),
+
+        # 重設自增ID列
+        with connection.cursor() as cursor:
+            cursor.execute("DELETE FROM sqlite_sequence WHERE name = 'cat_p_season_players_performance_24_25';")
+
+        # 遍歷JSON數據並儲存至資料庫
+        for rosters in temp:
+            total_made = rosters.get("兩分命中", 0) + rosters.get("三分命中", 0)
+            total_attempts = rosters.get("兩分出手", 0) + rosters.get("三分出手", 0)
+            All_goals_pct = round(total_made / total_attempts, 2) if total_attempts > 0 else 0
+
+            # 建立資料庫記錄
+            P_Season_Players_Performance_24_25.objects.create(
+                player=rosters.get("球員", ""),
+                jersey=int(rosters.get("背號", 0)),
+                team=rosters.get("球隊", ""),
+                points=round(rosters.get("得分", 0), 1),
+                game_played=rosters.get("出賽次數", 0),
+                minutes=get_time(rosters.get("時間 (分)", "00:00")),
                 All_goals_made=round(total_made, 1),
                 All_goals=round(total_attempts, 1),
                 All_goals_pct=All_goals_pct,
                 # 兩分球數據
-                field_goals_two_made=round(rosters["兩分命中"], 1),
-                field_goals_two=round(rosters["兩分出手"] + rosters["兩分命中"], 1),
-                field_goals_two_pct = round(float(rosters['兩分%']) / 100, 2),
+                field_goals_two_made=round(rosters.get("兩分命中", 0), 1),
+                field_goals_two=round(rosters.get("兩分出手", 0) + rosters.get("兩分命中", 0), 1),
+                field_goals_two_pct=round(float(rosters.get('兩分%', 0)) / 100, 2),
                 # 三分球數據
-                field_goals_three_made=round(rosters["三分命中"], 1),
-                field_goals_three=round(rosters["三分出手"] + rosters["三分命中"], 1),
-                field_goals_three_pct=round(float(rosters['三分%'])/100,2),
+                field_goals_three_made=round(rosters.get("三分命中", 0), 1),
+                field_goals_three=round(rosters.get("三分出手", 0) + rosters.get("三分命中", 0), 1),
+                field_goals_three_pct=round(float(rosters.get('三分%', 0)) / 100, 2),
                 # 罰球數據
-                free_throws_made=round(rosters["罰球命中"], 1),
-                free_throws=round(rosters["罰球出手"] + rosters["罰球命中"], 1),
-                free_throws_pct=round(float(rosters['罰球%'])/100,2),
+                free_throws_made=round(rosters.get("罰球命中", 0), 1),
+                free_throws=round(rosters.get("罰球出手", 0) + rosters.get("罰球命中", 0), 1),
+                free_throws_pct=round(float(rosters.get('罰球%', 0)) / 100, 2),
                 # 其他數據
-                offensive_rebounds=round(rosters["攻板"], 1),
-                defensive_rebounds=round(rosters["防板"], 1),
-                rebounds=round(rosters["籃板"], 1),
-                assists=round(rosters["助攻"], 1),
-                steals=round(rosters["抄截"], 1),
-                blocks=round(rosters["阻攻"], 1),
-                turnovers=round(rosters["失誤"], 1),
-                fouls=round(rosters["犯規"], 1),
+                offensive_rebounds=round(rosters.get("攻板", 0), 1),
+                defensive_rebounds=round(rosters.get("防板", 0), 1),
+                rebounds=round(rosters.get("籃板", 0), 1),
+                assists=round(rosters.get("助攻", 0), 1),
+                steals=round(rosters.get("抄截", 0), 1),
+                blocks=round(rosters.get("阻攻", 0), 1),
+                turnovers=round(rosters.get("失誤", 0), 1),
+                fouls=round(rosters.get("犯規", 0), 1),
             )
 
-        self.stdout.write(self.style.SUCCESS(f'Successfully fetched and imported team standings from P in {year}'))
+        self.stdout.write(self.style.SUCCESS(f'Successfully fetched and imported player statistics from P League+ for {year}'))
