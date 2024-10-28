@@ -3,7 +3,6 @@
   position: relative; /* 新增，確保 .button-container 可以相對於圖片定位 */
   text-align: center;
   padding: 2rem 0;
-  height: auto; /* 高度自適應 */
   overflow: hidden; /* 防止圖片過大超出容器 */
 }
 .home-container .index .index-image {
@@ -22,32 +21,58 @@
   left: 50%; /* 新增，水平居中 */
   transform: translate(-50%, -50%); /* 新增，讓按鈕真正居中 */
   z-index: 1; /* 新增，確保按鈕在圖片上層 */
+  display: flex;
+  flex-direction: row;
 }
-.home-container .index .button-container .button1 {
-  font-size: 1.5rem;
-  border-radius: 8px;
-  margin: 0 6rem;
-  padding: 1rem;
-  background-color: #172243;
-  color: white;
-  cursor: pointer;
-  box-shadow: 0 4px 12px #172243;
-}
-.home-container .index .button-container .button1:hover {
-  box-shadow: 0 8px 16px #ffe700;
-}
+.home-container .index .button-container .button1,
 .home-container .index .button-container .button2 {
   font-size: 1.5rem;
   border-radius: 8px;
-  margin: 0 8rem;
   padding: 1rem;
+  cursor: pointer;
+  width: 150px;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+.home-container .index .button-container .button1:hover,
+.home-container .index .button-container .button2:hover {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+}
+.home-container .index .button-container .button1 {
+  background-color: #172243;
+  color: white;
+}
+.home-container .index .button-container .button2 {
   background-color: #ffe700;
   color: white;
-  cursor: pointer;
-  box-shadow: 0 4px 12px #ffe700;
 }
-.home-container .index .button-container .button2:hover {
-  box-shadow: 0 8px 16px #172243;
+@media (min-width: 1200px) {
+  .home-container .index .button1 {
+    margin-right: 10rem;
+  }
+  .home-container .index .button2 {
+    margin-left: 10rem;
+  }
+}
+@media (max-width: 768px) {
+  .home-container .index .button1 {
+    margin-right: 1rem;
+  }
+  .home-container .index .button2 {
+    margin-left: 1rem;
+  }
+}
+@media (max-width: 500px), (min-width: 1600px) {
+  .home-container .index {
+    flex-direction: column;
+  }
+  .home-container .index .button1 {
+    margin-right: 5rem;
+    margin-bottom: 1.5rem;
+  }
+  .home-container .index .button2 {
+    margin-left: 5rem;
+  }
 }
 .home-container .content-box {
   display: flex;
@@ -57,7 +82,8 @@
   border-radius: 15px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   margin: 5rem 5rem;
-  width: 60%;
+  width: 80%;
+  max-width: 1000px;
   overflow: hidden;
   transition: all 0.5s ease;
 }
@@ -78,11 +104,11 @@
   box-shadow: 0 4px 8px #172243;
 }
 .home-container .content-box .content-image {
-  margin: 1rem;
-  width: 60%;
+  max-width: 50%;
   height: auto;
   border-radius: 10px;
   transition: transform 0.5s ease;
+  margin: 1rem;
 }
 .home-container .content-box .content-text {
   text-align: left;
