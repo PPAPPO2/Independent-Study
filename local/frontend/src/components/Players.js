@@ -160,7 +160,12 @@ const Players = () => {
     };
     setTeamOptions(teamOptionsByYear[selectedYear] || []); // 根據年份設置選項
   }, [selectedYear]);
-
+  // 根據球員名稱取得大頭照圖片
+  // 根據球員名稱取得大頭照圖片
+  const getPlayerImage = (playerName) => {
+    // 使用相對於 public 的路徑
+    return `/images/players/${playerName}.png`;
+  };
   useEffect(() => {
     const fetchData = async () => {
       let combinedDataArray = [];
@@ -369,7 +374,34 @@ const Players = () => {
                 {currentItems.map((player, index) => (
                   <tr key={index}>
                     {Object.keys(columnMapping).map((header) => {
-                      if (header === "球隊") {
+                      if (header === "球員") {
+                        // 如果是球員欄位，加入大頭照和文字
+                        return (
+                          <td key={header}>
+                            <div
+                              style={{ display: "flex", alignItems: "center" }}
+                            >
+                              {/* 圖片部分 */}
+                              <img
+                                src={getPlayerImage(
+                                  player[columnMapping[header]]
+                                )}
+                                alt={player[columnMapping[header]]}
+                                onError={(e) => {
+                                  e.target.src = "/images/players/default.png";
+                                }} // 如果圖片加載失敗，使用 default.png
+                                style={{
+                                  width: "40px",
+                                  height: "40px",
+                                  marginRight: "10px",
+                                }}
+                              />
+                              {/* 球員姓名 */}
+                              {player[columnMapping[header]]}
+                            </div>
+                          </td>
+                        );
+                      } else if (header === "球隊") {
                         // 如果是球隊欄位，加入圖片和文字
                         return (
                           <td key={header}>
@@ -388,6 +420,7 @@ const Players = () => {
                                   marginRight: "10px",
                                 }}
                               />
+
                               {/* 球隊名稱 */}
                               {player[columnMapping[header]]}
                             </div>
