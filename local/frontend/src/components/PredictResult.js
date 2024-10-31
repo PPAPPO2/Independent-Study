@@ -1,79 +1,242 @@
 import React, { useState } from "react";
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  RadialLinearScale,
+  ArcElement,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend,
+} from "chart.js";
+import { Bar, Line, Radar, Pie } from "react-chartjs-2";
+import {
+  Box,
+  Card,
+  CardContent,
+  Typography,
+  Container,
+  Grid2,
+  FormControl,
+  Select,
+  MenuItem,
+} from "@mui/material";
 import "../styles/Predict.css";
 
-function PredictWinProbability() {
-  const [team1, setTeam1] = useState("新北國王");
-  const [team2, setTeam2] = useState("桃園璞園領航猿");
-  const [result, setResult] = useState("點擊上方按鈕以預測勝率");
+// 註冊必要的圖表元件
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  RadialLinearScale,
+  ArcElement,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend
+);
+
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  RadialLinearScale,
+  ArcElement,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend
+);
+
+const Dashboard = () => {
+  const [selectedTeams, setSelectedTeams] = useState({
+    teamA: "臺北富邦勇士",
+    teamB: "新北國王",
+  });
 
   const teams = [
-    "新北國王",
-    "桃園璞園領航猿",
     "臺北富邦勇士",
+    "新北國王",
+    "高雄鋼鐵人",
+    "桃園璞園領航猿",
     "福爾摩沙夢想家",
     "新竹御頂攻城獅",
-    "高雄17直播鋼鐵人",
+    "新北中信特攻",
+    "台啤永豐雲豹",
+    "臺北戰神",
+    "高雄全家海神",
+    "臺南台鋼獵鷹",
   ];
 
-  const handlePredict = () => {
-    fetch(`/mlServer/predict/?team1=${team1}&team2=${team2}`)
-      .then((response) => response.json())
-      .then((data) => {
-        setResult(`主隊 ${team1} 的勝率為：${data.win_probability}`);
-      })
-      .catch((error) => {
-        setResult("預測失敗，請稍後重試。");
-      });
+  const data = {
+    labels: ["得分", "籃板", "助攻", "抄截", "阻攻"],
+    datasets: [
+      {
+        label: selectedTeams.teamA,
+        data: [84, 55, 20, 11, 6],
+        backgroundColor: "rgba(54, 162, 235, 0.6)",
+      },
+      {
+        label: selectedTeams.teamB,
+        data: [91, 65, 21, 7, 4],
+        backgroundColor: "rgba(255, 99, 132, 0.6)",
+      },
+    ],
   };
 
-  const handleTeam1Change = (e) => {
-    const selectedTeam = e.target.value;
-    setTeam1(selectedTeam);
-
-    // 如果選擇的主隊與當前客隊相同，則重置客隊
-    if (selectedTeam === team2) {
-      setTeam2(teams.find((team) => team !== selectedTeam));
-    }
+  const options = {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: "top",
+      },
+    },
   };
 
   return (
-    <div class="predict">
-      <h1>比賽勝率預測</h1>
-      <form>
-        <label htmlFor="team1">選擇主隊:</label>
-        <select id="team1" value={team1} onChange={handleTeam1Change}>
-          {teams.map((team) => (
-            <option key={team} value={team}>
-              {team}
-            </option>
-          ))}
-        </select>
-        <br />
+    <Box className="dashboard-background">
+      <Container>
+        <Grid2 container spacing={3}>
+          {/* 比較選單區域 */}
+          <Grid2 item xs={12}>
+            <Box sx={{ display: "flex", gap: 2 }}>
+              <FormControl fullWidth sx={{ minWidth: 200 }}>
+                <Select
+                  value={selectedTeams.teamA}
+                  onChange={(e) =>
+                    setSelectedTeams((prev) => ({
+                      ...prev,
+                      teamA: e.target.value,
+                    }))
+                  }
+                >
+                  {teams.map((team) => (
+                    <MenuItem key={team} value={team}>
+                      {team}
+                    </MenuItem>
+                  ))}
+                </Select>
+                <Grid2 item xs={12} md={4}>
+                  <Card>
+                    <CardContent>
+                      <Typography variant="h6" component="div">
+                        平均得分
+                      </Typography>
+                      <Typography variant="h4" color="text.secondary">
+                        84
+                      </Typography>
+                    </CardContent>
+                  </Card>
+                </Grid2>
+              </FormControl>
+              <FormControl fullWidth sx={{ minWidth: 200 }}>
+                <Select
+                  value={selectedTeams.teamB}
+                  onChange={(e) =>
+                    setSelectedTeams((prev) => ({
+                      ...prev,
+                      teamB: e.target.value,
+                    }))
+                  }
+                >
+                  {teams.map((team) => (
+                    <MenuItem key={team} value={team}>
+                      {team}
+                    </MenuItem>
+                  ))}
+                </Select>
+                <Grid2 item xs={12} md={4}>
+                  <Card>
+                    <CardContent>
+                      <Typography variant="h6" component="div">
+                        平均得分
+                      </Typography>
+                      <Typography variant="h4" color="text.secondary">
+                        92
+                      </Typography>
+                    </CardContent>
+                  </Card>
+                </Grid2>
+              </FormControl>
+            </Box>
+          </Grid2>
 
-        <label htmlFor="team2">選擇客隊:</label>
-        <select
-          id="team2"
-          value={team2}
-          onChange={(e) => setTeam2(e.target.value)}
-        >
-          {teams
-            .filter((team) => team !== team1)
-            .map((team) => (
-              <option key={team} value={team}>
-                {team}
-              </option>
-            ))}
-        </select>
-        <br />
+          {/* 數據卡片區域 */}
 
-        <button type="button" onClick={handlePredict}>
-          預測勝率
-        </button>
-      </form>
+          {/* 圖表區域 */}
+          <Grid2 item xs={12}>
+            <Card>
+              <CardContent>
+                <Typography variant="h6" gutterBottom>
+                  隊伍數據比較
+                </Typography>
+                <Bar data={data} options={options} />
+              </CardContent>
+            </Card>
+          </Grid2>
+          {/* 折線圖區域 */}
+          <Grid2 item xs={12}>
+            <Card>
+              <CardContent>
+                <Typography variant="h6" gutterBottom>
+                  隊伍數據折線圖
+                </Typography>
+                <Line data={data} options={options} />
+              </CardContent>
+            </Card>
+          </Grid2>
 
-      <p>{result}</p>
-    </div>
+          {/* 雷達圖區域 */}
+          <Grid2 item xs={12}>
+            <Card>
+              <CardContent>
+                <Typography variant="h6" gutterBottom>
+                  隊伍數據雷達圖
+                </Typography>
+                <Radar data={data} options={options} />
+              </CardContent>
+            </Card>
+          </Grid2>
+
+          {/* 圓餅圖區域 */}
+          <Grid2 item xs={12}>
+            <Card>
+              <CardContent>
+                <Typography variant="h6" gutterBottom>
+                  隊伍數據圓餅圖
+                </Typography>
+                <Pie
+                  data={{
+                    labels: data.labels,
+                    datasets: [
+                      {
+                        label: "隊伍數據分佈",
+                        data: data.datasets[0].data,
+                        backgroundColor: [
+                          "rgba(54, 162, 235, 0.6)",
+                          "rgba(255, 99, 132, 0.6)",
+                          "rgba(255, 205, 86, 0.6)",
+                          "rgba(75, 192, 192, 0.6)",
+                          "rgba(153, 102, 255, 0.6)",
+                        ],
+                        hoverOffset: 4,
+                      },
+                    ],
+                  }}
+                  options={options}
+                />
+              </CardContent>
+            </Card>
+          </Grid2>
+        </Grid2>
+      </Container>
+    </Box>
   );
-}
+};
 
-export default PredictWinProbability;
+export default Dashboard;
