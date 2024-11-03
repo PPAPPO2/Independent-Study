@@ -118,8 +118,45 @@ const News = () => {
         url: "https://www.youtube.com/watch?v=Hf4xqzMPQlE",
         img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSnym2cMZKqOx21FV8Zzq2oK0KrlI4vUI4Qtg&s",
       },
+      {
+        id: 7,
+        title: "華裔球員金德偉 沒工作簽證遭台灣禁賽3年",
+        url: "https://tw.news.yahoo.com/%E7%B1%83%E7%90%83-%E8%8F%AF%E8%A3%94%E7%90%83%E5%93%A1%E9%87%91%E5%BE%B7%E5%81%89%E6%B2%92%E5%B7%A5%E4%BD%9C%E7%B1%A4%E6%89%93%E7%90%83%E9%81%AD%E5%8F%B0%E7%81%A3%E7%A6%81%E8%B3%BD3%E5%B9%B4-%E9%9B%B2%E8%B1%B9gm%E8%A7%A3%E9%87%8B%E5%8E%9F%E5%9B%A0-120500005.html",
+        img: "https://s.yimg.com/ny/api/res/1.2/i8dhrpXFuLTUT2OEle5uYw--/YXBwaWQ9aGlnaGxhbmRlcjt3PTk2MDtoPTU0MDtjZj13ZWJw/https://media.zenfs.com/ko/setn.com.tw/0a91c31167f0a6f9cb0de22de9a77e6b",
+      },
+      {
+        id: 8,
+        title: "高雄鋼鐵人 開幕週前進高雄海音館",
+        url: "https://sports.ltn.com.tw/news/breakingnews/4846592",
+        img: "https://img.ltn.com.tw/Upload/sports/page/800/2024/10/30/phphO3mOb.jpg",
+      },
+      {
+        id: 9,
+        title: "東超領航猿 21分痛宰KBL亞軍音速彈",
+        url: "https://www.instagram.com/p/DBd3izwznGp/",
+        img: "https://cdn2.ettoday.net/images/7707/e7707265.png",
+      },
     ],
-    11: [],
+    11: [
+      {
+        id: 1,
+        title: "test",
+        url: "https://sports.ltn.com.tw/news/breakingnews/4850519",
+        img: "https://img.ltn.com.tw/Upload/sports/page/800/2024/11/02/phpukdwlv.jpg",
+      },
+      {
+        id: 2,
+        title: "test",
+        url: "https://www.instagram.com/p/DAsXCRfzhVL/?img_index=1",
+        img: "https://upload.wikimedia.org/wikipedia/zh/4/46/P._LEAGUE%2B.png",
+      },
+      {
+        id: 3,
+        title: "test",
+        url: "https://tw.sports.yahoo.com/news/%E5%B0%B1%E8%AA%AA%E4%BA%86%E4%B8%BB%E6%88%B0%E5%A0%B4%E5%9C%A8%E7%B6%B2%E8%B7%AF-plg%E5%89%A94%E9%9A%8A%E6%B2%92%E5%9C%A8%E6%80%95-%E7%86%B1%E8%BA%AB%E8%B3%BD%E7%B7%9A%E4%B8%8A%E8%A7%80%E7%9C%8B%E6%95%B8%E6%B5%B7%E6%94%BEtpbl-095605122.html",
+        img: "https://img.ltn.com.tw/Upload/sports/page/800/2024/10/13/4829449_1.jpg",
+      },
+    ],
   };
   // 點擊「上一個月」的邏輯
   const handlePreviousMonth = () => {

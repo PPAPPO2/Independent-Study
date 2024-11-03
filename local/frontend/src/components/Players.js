@@ -397,6 +397,7 @@ const Players = () => {
                                   marginRight: "10px",
                                   objectFit: "cover", // 圖片填滿容器並保持比例
                                   borderRadius: "50%", // 圖片變成圓形
+                                  backgroundColor: "white",
                                 }}
                               />
                               {/* 球員姓名 */}
