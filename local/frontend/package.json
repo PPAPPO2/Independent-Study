@@ -28,7 +28,7 @@
   },
   "scripts": {
     "start": "concurrently \"npm run react-start\" \"npm run django-start\"",
-    "react-start": "react-scripts start",
+    "react-start": "react-scripts start --open http://localhost:3000/cat",
     "django-start": "cd .. && nodemon --exec python manage.py runserver",
     "build": "webpack --config webpack.config.js",
     "test": "react-scripts test",
