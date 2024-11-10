@@ -14,7 +14,7 @@
   cursor: pointer;
   margin: 0 20px;
   font-size: 2rem;
-  color: white;
+  color: #ffffff;
 }
 .top-bar .arrow:hover {
   color: #2980b9;
@@ -26,15 +26,23 @@
   min-width: 60%;
   margin: 0 auto;
 }
+.calendar-container.fade-in {
+  opacity: 1;
+  transition: opacity 0.3s ease-in;
+}
+.calendar-container.fade-out {
+  opacity: 0;
+  transition: opacity 0.3s ease-out;
+}
 .calendar-container .fc-col-header-cell {
   background-color: #002d62;
   color: #ffffff;
   font-weight: bold;
   text-align: center;
 }
-.calendar-container .fc-col-header-cell-cushion {
+.calendar-container .fc-col-header-cell .fc-col-header-cell-cushion {
   font-size: 1.25rem;
-  margin: 1rem 0rem;
+  margin: 1rem 0;
   color: #ffffff !important;
 }
 .calendar-container .fc-toolbar-title {
@@ -75,87 +83,7 @@
   align-items: center !important;
   margin-bottom: 5px !important;
   width: 100% !important;
-}/*# sourceMappingURL=Schedule.css.map */
-
-.top-bar {
-  background-color: #172243;
-  color: #ffffff;
-  text-align: center;
-  padding: 1rem;
-  font-size: 1.75rem;
-  font-weight: bold;
-  margin-bottom: 1.5rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
-.top-bar .arrow {
-  cursor: pointer;
-  margin: 0 20px;
-  font-size: 2rem;
-  color: white;
-}
-.top-bar .arrow:hover {
-  color: #2980b9;
-  transition: 1s;
-}
-
-.calendar-container {
-  width: 80%;
-  min-width: 60%;
-  margin: 0 auto;
-}
-.calendar-container .fc-col-header-cell {
-  background-color: #002d62;
-  color: #ffffff;
-  font-weight: bold;
-  text-align: center;
-}
-.calendar-container .fc-col-header-cell-cushion {
-  font-size: 1.25rem;
-  margin: 1rem 0rem;
-  color: #ffffff !important;
-}
-.calendar-container .fc-toolbar-title {
-  font-size: 1.8rem;
-  font-weight: bold;
-  color: #002d62;
-  display: inline-block;
-  margin: 0 10px;
-}
-.calendar-container .fc-button {
-  background-color: transparent !important;
-  border: none !important;
-  font-size: 1.8em !important;
-  color: #002d62 !important;
-  padding: 0 10px;
-}
-.calendar-container .fc-button:hover {
-  color: #80c2ff !important;
-}
-.calendar-container .fc-toolbar {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.calendar-container .fc-daygrid-day {
-  background-color: #ffffff;
-}
-.calendar-container .fc-daygrid-day-events {
-  display: flex !important;
-  flex-direction: column !important;
-  justify-content: center !important;
-  align-items: center !important;
-  height: 100% !important;
-}
-.calendar-container .fc-event {
-  display: flex !important;
-  justify-content: center !important;
-  align-items: center !important;
-  margin-bottom: 5px !important;
-  width: 100% !important;
-  
-}/*# sourceMappingURL=Schedule.css.map */
 
 .tabs {
   display: flex;
@@ -173,41 +101,23 @@
   cursor: pointer;
   font-size: 1.25rem;
   font-weight: bold;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* 加上陰影效果 */
-  transition: all 0.3s ease; /* 添加過渡效果 */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
 }
-
 .tab.active {
-  /*background-color: #80c2ff;  按下時的顏色 */
   transform: translateY(-10px);
   color: white;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 活動按鈕的陰影更深 */
-  /*transform: translateY(0px);  按下時不移動 */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
-
 .tab:hover {
   background-color: #80c2ff;
   color: white;
-  box-shadow: 0 6px 10px rgba(0, 0, 0, 1); /* 滑鼠懸停時加深陰影 */
-  transform: translateY(-2px); /* 當滑鼠懸停時向上移動一點 */
+  box-shadow: 0 6px 10px rgb(0, 0, 0);
+  transform: translateY(-2px);
 }
 
-
-.plg_Sche {
-  width: 50px; 
-  height: 50px; 
-}
-
+.plg_Sche,
 .t1_Sche {
-  width: 50px; 
-  height: 50px; 
-}
-.calendar-container.fade-in {
-  opacity: 1;
-  transition: opacity 0.3s ease-in;
-}
-
-.calendar-container.fade-out {
-  opacity: 0;
-  transition: opacity 0.3s ease-out;
-}
+  width: 50px;
+  height: 50px;
+}/*# sourceMappingURL=Schedule.css.map */
