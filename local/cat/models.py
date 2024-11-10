@@ -77,7 +77,11 @@ class P_TeamStanding22_23(TeamStandingModel):
 class P_TeamStanding23_24(TeamStandingModel):
     pass
 
+class P_TeamStanding24_25(TeamStandingModel):
+    pass
 
+class T1_TeamSteanding24_25(TeamStandingModel):
+    pass
 class T1_TeamStanding23_24(TeamStandingModel):
     pass
 
