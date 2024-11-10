@@ -22,7 +22,7 @@ const Standings = () => {
   });
 
   useEffect(() => {
-    fetch("/static/Standings/P_TeamStanding23_24.json")
+    fetch("/static/Standings/P_TeamStanding24_25.json")
       .then((response) => {
         console.log("PLG fetch response status:", response.status);
         if (!response.ok) {
@@ -31,12 +31,20 @@ const Standings = () => {
         return response.json();
       })
       .then((data) => {
-        console.log("PLG Data:", data);
-        setPlgStandings(data);
+        // 更新球隊名稱
+        const updatedData = data.map((team) => {
+          const updatedTeamName =
+            teamNameMapping[team.team_name] || team.team_name;
+          return {
+            ...team,
+            team_name: updatedTeamName,
+          };
+        });
+        setPlgStandings(updatedData);
       })
       .catch((error) => console.error("Error fetching PLG data:", error));
 
-    fetch("/static/Standings/T1_TeamStanding23_24.json")
+    fetch("/static/Standings/T1_TeamStanding24_25.json")
       .then((response) => {
         console.log("T1 fetch response status:", response.status);
         if (!response.ok) {
@@ -50,36 +58,32 @@ const Standings = () => {
       })
       .catch((error) => console.error("Error fetching T1 data:", error));
   }, []);
-
-  const getTeamIcon = (teamName) => {
-    switch (teamName) {
-      case "桃園璞園領航猿":
-        return `/images/icon/桃園璞園領航猿.png`;
-      case "福爾摩沙夢想家":
-        return `/images/icon/福爾摩沙夢想家.png`;
-      case "新北國王":
-        return `/images/icon/新北國王.png`;
-      case "新竹御頂攻城獅":
-        return `/images/icon/新竹御頂攻城獅.png`;
-      case "臺北富邦勇士":
-        return `/images/icon/臺北富邦勇士.png`;
-      case "高雄17直播鋼鐵人":
-        return `/images/icon/高雄17直播鋼鐵人.png`;
-      case "新北中信特攻":
-        return `/images/icon/新北中信特攻.png`;
-      case "台啤永豐雲豹":
-        return `/images/icon/台啤永豐雲豹.png`;
-      case "高雄全家海神":
-        return `/images/icon/高雄全家海神.png`;
-      case "臺北戰神":
-        return `/images/icon/臺北戰神.png`;
-      case "臺南台鋼獵鷹":
-        return `/images/icon/臺南台鋼獵鷹.png`;
-      default:
-        return "";
-    }
+  //因Json匯出p的資料為簡寫所以使用map對應
+  const teamNameMapping = {
+    勇士: "臺北富邦勇士",
+    領航猿: "桃園璞園領航猿",
+    鋼鐵人: "高雄鋼鐵人",
+    獵鷹: "臺南台鋼獵鷹",
   };
 
+  // 球隊名稱對應的圖片檔名
+  const teamLogoMapping = {
+    臺北富邦勇士: "臺北富邦勇士.png",
+    新北國王: "新北國王.png",
+    高雄鋼鐵人: "高雄17直播鋼鐵人.png",
+    桃園璞園領航猿: "桃園璞園領航猿.png",
+    福爾摩沙夢想家: "福爾摩沙夢想家.png",
+    新竹御嵿攻城獅: "新竹御頂攻城獅.png",
+    新北中信特攻: "新北中信特攻.png",
+    桃園台啤永豐雲豹: "台啤永豐雲豹.png",
+    臺北台新戰神: "臺北戰神.png",
+    高雄全家海神: "高雄全家海神.png",
+    臺南台鋼獵鷹: "臺南台鋼獵鷹.png",
+  };
+  const getTeamIcon = (teamName) => {
+    const logoFileName = teamLogoMapping[teamName];
+    return logoFileName ? `/images/icon/${logoFileName}` : "";
+  };
   const renderTable = (data) => {
     if (!data || data.length === 0) {
       return <p>無資料顯示</p>;
@@ -127,7 +131,7 @@ const Standings = () => {
 
   return (
     <div class="standings">
-      <h2 class="rankings">Regular Season Standings</h2>
+      <h2 class="rankings">2024-25 Regular Season Standings</h2>
       <animated.div style={fadeIn1}>
         <h2 class="table-title">❰ PLG 例行賽 ❱</h2>
         {renderTable(plgStandings)}

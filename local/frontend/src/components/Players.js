@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import Select from "react-select"; // 引入 react-select
 import { useSpring, animated } from "react-spring";
 import "../styles/Players.css";
@@ -17,7 +17,13 @@ const Players = () => {
   const [selectedPosition, setSelectedPosition] = useState(""); // 位置
   const [selectedTeams, setSelectedTeams] = useState([]); // 複選球隊
   const [sortColumn, setSortColumn] = useState(""); // 排序欄位
-  const [isAscending, setIsAscending] = useState(true); // 升序或降序
+  const [isAscending, setIsAscending] = useState(false); // 升序或降序
+  const isInitialLoad = useRef(true);
+  const resetSortState = () => {
+    setSortColumn(""); // 重置排序欄位
+    setIsAscending(false); // 重置為降序
+  };
+
   // 定義動畫效果，隨著資料變化觸發
   const tableAnimation = useSpring({
     opacity: animationTrigger ? 1 : 0.7, // 當動畫觸發器為 true，表格淡入
@@ -242,9 +248,11 @@ const Players = () => {
   }, [selectedPosition, selectedTeams, combinedData, searchTerm]);
 
   // 排序資料
-  const handleSort = (column) => {
+  const handleSort = (column, defaultAscending = false) => {
+    if (filteredData.length === 0) return; // 若沒有資料則直接返回
     const sortedData = [...filteredData];
     const isNumber = !isNaN(sortedData[0]?.[columnMapping[column]]);
+    const ascending = sortColumn === column ? !isAscending : defaultAscending;
 
     sortedData.sort((a, b) => {
       if (isNumber) {
@@ -258,9 +266,16 @@ const Players = () => {
     });
 
     setFilteredData(sortedData);
-    setIsAscending(!isAscending); // 切換升序/降序
+    setIsAscending(ascending); // 切換升序/降序
     setSortColumn(column);
   };
+  useEffect(() => {
+    // 只有在第一次資料載入時進行排序
+    if (isInitialLoad.current && filteredData.length > 0) {
+      handleSort("得分", false);
+      isInitialLoad.current = false; // 更新為已經初始化過
+    }
+  }, [filteredData]);
 
   // 分頁處理
   const indexOfLastItem = currentPage * itemsPerPage;
@@ -286,6 +301,7 @@ const Players = () => {
           onChange={(e) => {
             setSelectedDataType(e.target.value);
             setCurrentPage(1);
+            resetSortState(); // 重置排序狀態
           }}
           value={selectedDataType}
         >
@@ -300,6 +316,7 @@ const Players = () => {
           onChange={(e) => {
             setSelectedYear(e.target.value);
             setCurrentPage(1);
+            resetSortState(); // 重置排序狀態
           }}
           value={selectedYear}
         >
@@ -315,6 +332,7 @@ const Players = () => {
           onChange={(e) => {
             setSelectedPosition(e.target.value);
             setCurrentPage(1); // 每當選擇位置時，重置頁數到第一頁
+            resetSortState(); // 重置排序狀態
           }}
           value={selectedPosition}
         >
@@ -332,6 +350,7 @@ const Players = () => {
           onChange={(selected) => {
             setSelectedTeams(selected || []);
             setCurrentPage(1); //每當選擇球隊時，重置頁數到第一頁
+            resetSortState(); // 重置排序狀態
           }}
           placeholder="選擇球隊"
           className="team-select"

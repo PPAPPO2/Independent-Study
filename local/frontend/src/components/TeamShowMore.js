@@ -11,6 +11,10 @@ const ShowMore = () => {
   const [isAscending, setIsAscending] = useState(true);
   const [currentSortColumn, setCurrentSortColumn] = useState(null);
   const [animationTrigger, setAnimationTrigger] = useState(false);
+  const resetSortState = () => {
+    setCurrentSortColumn(null);
+    setIsAscending(true);
+  };
 
   // 定義動畫效果，隨著資料變化觸發
   const tableAnimation = useSpring({
@@ -254,7 +258,13 @@ const ShowMore = () => {
 
       <div className="season-team-select">
         {/* 賽事類型篩選器 */}
-        <select value={gameType} onChange={(e) => setGameType(e.target.value)}>
+        <select
+          value={gameType}
+          onChange={(e) => {
+            setGameType(e.target.value);
+            resetSortState(); // 重置排序狀態
+          }}
+        >
           <option value="regular">例行賽</option>
           <option value="playoff">季後賽</option>
           <option value="final">冠軍賽</option>
@@ -269,6 +279,7 @@ const ShowMore = () => {
                 (team) => team.value
               )
             );
+            resetSortState(); // 重置排序狀態
           }}
         >
           {Object.keys(config.seasons).map((seasonKey) => (
@@ -306,6 +317,7 @@ const ShowMore = () => {
                 selected ? selected.map((team) => team.value) : []
               );
             }
+            resetSortState(); // 重置排序狀態
           }}
           placeholder="選擇球隊"
           className="team-select"
