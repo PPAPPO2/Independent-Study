@@ -27,7 +27,9 @@ const teamLogoMapping = {
   台灣啤酒英熊: "台灣啤酒英熊.png",
 };
 const getPlayerImage = (playerName) => {
-  return `/images/players/${playerName}.png`;
+  const playerImagePath = `/images/players/${playerName}.png`;
+  // 檢查圖片是否存在，若不存在則返回預設圖片
+  return playerImagePath ? playerImagePath : "/images/players/default.png";
 };
 
 const Rank = () => {
@@ -213,6 +215,9 @@ const Rank = () => {
                   }
                   alt={getTopFive(data, valueField)[0][keyField]}
                   className="player-image"
+                  onError={(e) => {
+                    e.target.src = "/images/players/default.png"; // 若載入失敗，使用預設圖
+                  }}
                 />
                 {!isTeam && (
                   <div className="team-info">
@@ -251,6 +256,9 @@ const Rank = () => {
                         }
                         alt={item[keyField]}
                         className="team-logo"
+                        onError={(e) => {
+                          e.target.src = "/images/players/default.png"; // 若載入失敗，使用預設圖
+                        }}
                       />
                       {item[keyField]}
                     </span>

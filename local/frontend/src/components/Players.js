@@ -375,7 +375,7 @@ const Players = () => {
                 {currentItems.map((player, index) => (
                   <tr key={index}>
                     {Object.keys(columnMapping).map((header) => {
-                      if (header === "球員") {
+                      if (header === "球員" && selectedYear === "24_25") {
                         // 如果是球員欄位，加入大頭照和文字
                         return (
                           <td key={header}>
@@ -392,9 +392,12 @@ const Players = () => {
                                   e.target.src = "/images/players/default.png";
                                 }} // 如果圖片加載失敗，使用 default.png
                                 style={{
-                                  width: "40px",
-                                  height: "40px",
+                                  width: "35px",
+                                  height: "35px",
                                   marginRight: "10px",
+                                  objectFit: "cover", // 圖片填滿容器並保持比例
+                                  borderRadius: "50%", // 圖片變成圓形
+                                  backgroundColor: "white",
                                 }}
                               />
                               {/* 球員姓名 */}
@@ -442,6 +445,13 @@ const Players = () => {
       </div>
       {/* 分頁控件 */}
       <div className="pagination">
+        {/* 最前頁 */}
+        <button
+          onClick={() => handlePageChange(1)}
+          disabled={currentPage === 1} // 禁用最前頁按鈕，如果已在第一頁
+        >
+          {"◀◀"}
+        </button>
         {/* 上一頁 */}
         <button
           onClick={() => handlePageChange(currentPage - 1)}
@@ -474,6 +484,13 @@ const Players = () => {
           disabled={currentPage === totalPages} // 禁用下一頁按鈕，如果已在最後一頁
         >
           {"▶"}
+        </button>
+        {/* 最後頁 */}
+        <button
+          onClick={() => handlePageChange(totalPages)}
+          disabled={currentPage === totalPages} // 禁用最後頁按鈕，如果已在最後一頁
+        >
+          {"▶▶"}
         </button>
       </div>
     </div>
