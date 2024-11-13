@@ -93,7 +93,7 @@ export const radarOptions = {
   },
   elements: {
     line: {
-      fill: true  // 添加這行
+      borderWidth: 3,  // 添加這行
     }
   },
   plugins: {

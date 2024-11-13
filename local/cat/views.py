@@ -18,3 +18,4 @@ class ScheduleViewSet(viewsets.ReadOnlyModelViewSet):
 class ScheduleTViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = ScheduleT.objects.all()
     serializer_class = ScheduleSerializer
+    
