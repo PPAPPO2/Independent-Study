@@ -33,7 +33,8 @@ class Command(BaseCommand):
                 )
                 wins = team_data['score_won_matches']
                 losses = team_data['score_lost_matches']
-                pct = f"{team_data['score_ratio']:.3f}"
+                pct_count = team_data['score_won_matches'] / (team_data['score_won_matches'] + team_data['score_lost_matches'])
+                pct =  f"{pct_count * 100:.0f}%"
                 games_behind = team_data.get('games_behind', '0')
                 streaks = team_data.get('streaks', '-')
 
