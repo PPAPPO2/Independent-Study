@@ -25,7 +25,7 @@ class Command(BaseCommand):
             #(T1_Season_Teams_Playoff_Performance_23_24,'T1_Season_Teams_Playoff_Performance_23_24.json'),
             #(T1_Season_Teams_Final_Performance_22_23,'T1_Season_Teams_Final_Performance_22_23.json'),
             #(T1_Season_Teams_Final_Performance_23_24,'T1_Season_Teams_Final_Performance_23_24.json'),
-            #(TPBL_Season_Teams_Performance_24_25,'T1_Season_Teams_performance_24_25.json'),
+            (TPBL_Season_Teams_Performance_24_25,'T1_Season_Teams_performance_24_25.json'),
             #(P_Season_teams_Performance_20_21, 'P_Season_teams_Performance_20_21.json'),
             #(P_Season_teams_Performance_21_22, 'P_Season_teams_Performance_21_22.json'),
             #(P_Season_teams_Performance_22_23, 'P_Season_teams_Performance_22_23.json'),
