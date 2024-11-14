@@ -6,7 +6,6 @@ import "../styles/Schedule.css";
 import plgLogo from "../logo/plg.png";
 import t1Logo from "../logo/tpbl.png";
 
-
 const Schedule = () => {
   const [currentTitle, setCurrentTitle] = useState(""); // 儲存標題
   const [events, setEvents] = useState([]); // 儲存賽程事件
@@ -39,7 +38,7 @@ const Schedule = () => {
       case "臺北台新戰神":
         return `/images/icon/臺北戰神.png`;
       case "臺南台鋼獵鷹":
-      case "台鋼獵鷹":  
+      case "台鋼獵鷹":
         return `/images/icon/臺南台鋼獵鷹.png`;
       default:
         return "";
@@ -47,7 +46,6 @@ const Schedule = () => {
   };
 
   useEffect(() => {
-
     const url =
       selectedLeague === "聯盟一"
         ? "http://localhost:8000/cat/schedulesP/"
@@ -74,7 +72,7 @@ const Schedule = () => {
   }, [selectedLeague]);
 
   return (
-    <>
+    <div className="Schedule">
       <div className="top-bar">
         <span className="arrow" onClick={() => calendarApi?.prev()}>
           〈
@@ -88,26 +86,26 @@ const Schedule = () => {
       </div>
 
       <div className="tabs">
-          {/* 聯盟一頁籤 */}
-          <span
-            className={`tab ${selectedLeague === "聯盟一" ? "active" : ""}`}
-            onClick={() => {
-              console.log("Switching to P. LEAGUE+");
-              setSelectedLeague("聯盟一");
-            }}
-          >
-            <img src={plgLogo} alt="PLG Logo" className="plg_Sche" />
-          </span>
-          {/* 聯盟二頁籤 */}
-          <span
-            className={`tab ${selectedLeague === "聯盟二" ? "active" : ""}`}
-            onClick={() => {
-              console.log("Switching to TPBL");
-              setSelectedLeague("聯盟二");
-            }}
-          >
-            <img src={t1Logo} alt="T1 Logo" className="t1_Sche" />
-          </span>
+        {/* 聯盟一頁籤 */}
+        <span
+          className={`tab ${selectedLeague === "聯盟一" ? "active" : ""}`}
+          onClick={() => {
+            console.log("Switching to P. LEAGUE+");
+            setSelectedLeague("聯盟一");
+          }}
+        >
+          <img src={plgLogo} alt="PLG Logo" className="plg_Sche" />
+        </span>
+        {/* 聯盟二頁籤 */}
+        <span
+          className={`tab ${selectedLeague === "聯盟二" ? "active" : ""}`}
+          onClick={() => {
+            console.log("Switching to TPBL");
+            setSelectedLeague("聯盟二");
+          }}
+        >
+          <img src={t1Logo} alt="T1 Logo" className="t1_Sche" />
+        </span>
       </div>
 
       <div className="calendar-container">
@@ -148,44 +146,57 @@ const Schedule = () => {
             const minutes = gameTime.getMinutes().toString().padStart(2, "0");
             const timeString = `${hours}:${minutes}`; // 格式化為 HH:MM
 
-            return(
-            <div style={{
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              justifyContent: 'center',
-              textAlign: 'center',
-              // padding: '10px'
-            }}>
-            <div style={{
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                // marginBottom: '10px'
-              }}> {/* 置中 LOGO */}
-              <img
-                src={getTeamIcon(eventInfo.event.extendedProps.team_home)}
-                alt={eventInfo.event.extendedProps.team_home}
-                style={{ width: "50px", height: "50px" }}
-              />
-              <img
-                src={getTeamIcon(eventInfo.event.extendedProps.team_away)}
-                alt={eventInfo.event.extendedProps.team_away}
-                style={{ width: "50px", height: "50px", marginLeft: "10px" }}
-              />
-              <br />
+            return (
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  textAlign: "center",
+                  // padding: '10px'
+                }}
+              >
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    // marginBottom: '10px'
+                  }}
+                >
+                  {" "}
+                  {/* 置中 LOGO */}
+                  <img
+                    src={getTeamIcon(eventInfo.event.extendedProps.team_home)}
+                    alt={eventInfo.event.extendedProps.team_home}
+                    style={{ width: "50px", height: "50px" }}
+                  />
+                  <img
+                    src={getTeamIcon(eventInfo.event.extendedProps.team_away)}
+                    alt={eventInfo.event.extendedProps.team_away}
+                    style={{
+                      width: "50px",
+                      height: "50px",
+                      marginLeft: "10px",
+                    }}
+                  />
+                  <br />
+                </div>
+                <b style={{ display: "block", margin: "0 0" }}>{timeString}</b>
+                <br />
+                <b style={{ display: "block", margin: "0 0" }}>
+                  {eventInfo.event.extendedProps.location}
+                </b>
               </div>
-              <b style={{ display: 'block', margin: '0 0' }}>{timeString}</b>
-              <br />
-              <b style={{ display: 'block', margin: '0 0' }}>{eventInfo.event.extendedProps.location}</b>
-            </div>
-          )}}
+            );
+          }}
           ref={(calendar) => {
             calendarApi = calendar?.getApi(); // 取得 FullCalendar API，方便控制上下月份切換
           }}
         />
       </div>
-    </>
+    </div>
   );
 };
 

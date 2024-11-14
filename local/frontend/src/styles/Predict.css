@@ -1,18 +1,13 @@
-/* Predict.css */
+@charset "UTF-8";
+/* Predict.scss */
 .dashboard-background {
-  min-height: auto;
+  min-height: 100vh; /* 讓頁面最少填滿 100% 的視窗高度 */
   position: relative;
-  background: radial-gradient(
-      circle at center,
-      rgba(54, 162, 235, 0.2) 0%,
-      rgba(255, 255, 255, 1) 70%
-  );
+  background: radial-gradient(circle at center, rgba(54, 162, 235, 0.2) 0%, rgb(255, 255, 255) 70%);
   padding: 2rem;
 }
-
-/* 可選：添加模糊光暈效果 */
 .dashboard-background::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 50%;
   left: 50%;
@@ -25,9 +20,7 @@
   z-index: 0;
   pointer-events: none;
 }
-
-/* 確保內容在光暈效果上層 */
 .dashboard-background > * {
   position: relative;
   z-index: 1;
-}
+}/*# sourceMappingURL=Predict.css.map */
