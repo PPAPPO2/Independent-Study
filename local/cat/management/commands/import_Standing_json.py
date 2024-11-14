@@ -18,7 +18,7 @@ class Command(BaseCommand):
         # 定義需要轉換的表
         tables = [
             (P_TeamStanding24_25,'P_TeamStanding24_25.json')
-            ,(T1_TeamStanding24_25,'T1_TeamSteanding24_25.json')
+            ,(T1_TeamStanding24_25,'T1_TeamStanding24_25.json')
             
         ]
 
