@@ -1,33 +1,33 @@
-/* Predict.scss */
-.dashboard-background {
-  min-height: 100vh; /* 讓頁面最少填滿 100% 的視窗高度 */
-  position: relative;
-  background: radial-gradient(
-    circle at center,
-    rgba(54, 162, 235, 0.2) 0%,
-    rgba(255, 255, 255, 1) 70%
-  );
-  padding: 2rem;
-
-  // 可選：添加模糊光暈效果
-  &::before {
-    content: "";
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 30vw;
-    height: 30vw;
-    background: rgba(159, 202, 230, 0.2);
-    filter: blur(100px);
-    border-radius: 50%;
-    z-index: 0;
-    pointer-events: none;
-  }
-
-  // 確保內容在光暈效果上層
-  > * {
+.Predict {
+  .dashboard-background {
+    min-height: 100vh; /* 讓頁面最少填滿 100% 的視窗高度 */
     position: relative;
-    z-index: 1;
+    background: radial-gradient(
+      circle at center,
+      rgba(54, 162, 235, 0.2) 0%,
+      rgba(255, 255, 255, 1) 70%
+    );
+    padding: 5rem 2rem 5rem 2rem; //上右下左
+    // 可選：添加模糊光暈效果
+    &::before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 30vw;
+      height: 30vw;
+      background: rgba(159, 202, 230, 0.2);
+      filter: blur(100px);
+      border-radius: 50%;
+      //z-index: 0;
+      pointer-events: none;
+    }
+
+    // 確保內容在光暈效果上層
+    > * {
+      position: relative;
+      //z-index: 1;
+    }
   }
 }

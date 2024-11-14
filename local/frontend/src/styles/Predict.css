@@ -1,12 +1,11 @@
 @charset "UTF-8";
-/* Predict.scss */
-.dashboard-background {
+.Predict .dashboard-background {
   min-height: 100vh; /* 讓頁面最少填滿 100% 的視窗高度 */
   position: relative;
   background: radial-gradient(circle at center, rgba(54, 162, 235, 0.2) 0%, rgb(255, 255, 255) 70%);
-  padding: 2rem;
+  padding: 5rem 2rem 5rem 2rem;
 }
-.dashboard-background::before {
+.Predict .dashboard-background::before {
   content: "";
   position: absolute;
   top: 50%;
@@ -17,10 +16,8 @@
   background: rgba(159, 202, 230, 0.2);
   filter: blur(100px);
   border-radius: 50%;
-  z-index: 0;
   pointer-events: none;
 }
-.dashboard-background > * {
+.Predict .dashboard-background > * {
   position: relative;
-  z-index: 1;
 }/*# sourceMappingURL=Predict.css.map */
