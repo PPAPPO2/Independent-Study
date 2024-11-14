@@ -141,6 +141,7 @@ const Dashboard = () => {
       {
         label: selectedTeams.teamA,
         data: [20.3, 45, 30.2, 9.3, 4.0],
+        fill: true,
         borderColor: "rgba(54, 162, 235, 1)",
         pointBackgroundColor: "rgba(54, 162, 235, 0.8)",
         pointBorderColor: "rgba(54, 162, 235, 1)",

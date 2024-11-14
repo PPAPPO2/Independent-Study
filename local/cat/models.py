@@ -241,3 +241,82 @@ class TPBL_Season_Teams_Performance_24_25(Season_teams_Performance):
     pass
 class TPBL_Season_Players_Performance_24_25(Season_Players_Performance):
     pass
+
+
+class AllPlayerData(models.Model):
+    # 球員每場比賽數據
+    gameID = models.CharField(max_length=100, verbose_name="比賽場次")
+    game_time = models.CharField(max_length=50, verbose_name="比賽時間")
+
+    name = models.CharField(max_length=100, verbose_name="球員姓名")
+    jersey = models.CharField(max_length=10, verbose_name="球衣號碼")
+
+    points = models.IntegerField(verbose_name="得分")
+    positive = models.IntegerField(verbose_name="正負值")
+    starter = models.BooleanField(verbose_name="是否為先發")
+    turnover = models.IntegerField(verbose_name="失誤")
+    ast = models.IntegerField(verbose_name="助攻")
+    blk = models.IntegerField(verbose_name="阻攻")
+    stl = models.IntegerField(verbose_name="抄截")
+    reb = models.IntegerField(verbose_name="籃板")
+    reb_d = models.IntegerField(verbose_name="防守籃板")
+    reb_o = models.IntegerField(verbose_name="進攻籃板")
+    eff = models.FloatField(verbose_name="效率值")
+    efgp = models.FloatField(verbose_name="有效命中率")
+    tsp = models.FloatField(verbose_name="真實命中率")
+    mins = models.CharField(max_length=10, verbose_name="上場時間")
+
+    two = models.IntegerField(verbose_name="兩分球命中")
+    two_m_two = models.IntegerField(verbose_name="兩分球出手")
+    twop = models.FloatField(verbose_name="兩分球命中率")
+    two_m = models.IntegerField(verbose_name="兩分球總得分")
+
+    trey = models.IntegerField(verbose_name="三分球命中")
+    trey_m_trey = models.IntegerField(verbose_name="三分球出手")
+    treyp = models.FloatField(verbose_name="三分球命中率")
+    trey_m = models.IntegerField(verbose_name="三分球總得分")
+
+    ft = models.IntegerField(verbose_name="罰球命中")
+    ft_m_ft = models.IntegerField(verbose_name="罰球出手")
+    ftp = models.FloatField(verbose_name="罰球命中率")
+    ft_m = models.IntegerField(verbose_name="罰球總得分")
+
+    pfoul = models.IntegerField(verbose_name="犯規")
+
+    team = models.CharField(max_length=50, verbose_name="球隊代碼")
+    team_name = models.CharField(max_length=100, verbose_name="球隊名稱")
+    team_home = models.CharField(max_length=100, verbose_name="主場球隊")
+    team_away = models.CharField(max_length=100, verbose_name="客場球隊")
+
+    class Meta:
+        verbose_name = "球員統計資料"
+        verbose_name_plural = "球員統計資料"
+
+    def __str__(self):
+        return f"{self.date} - {self.name} ({self.team_name})"
+    
+class GameStats(models.Model):
+    game_id = models.CharField(max_length=100, verbose_name="比賽場次")
+    team_name = models.CharField(max_length=100, verbose_name="球隊名稱")
+    is_home = models.BooleanField(default=False, verbose_name="是否為主場")
+    two_m = models.IntegerField(verbose_name="兩分球命中")
+    two = models.IntegerField(verbose_name="兩分球出手")
+    twop = models.FloatField(verbose_name="兩分球命中率")
+    trey_m = models.IntegerField(verbose_name="三分球命中")
+    trey = models.IntegerField(verbose_name="三分球出手")
+    treyp = models.FloatField(verbose_name="三分球命中率")
+    ft_m = models.IntegerField(verbose_name="罰球命中")
+    ft = models.IntegerField(verbose_name="罰球出手")
+    ftp = models.FloatField(verbose_name="罰球命中率")
+    points = models.IntegerField(verbose_name="得分")
+    reb = models.IntegerField(verbose_name="籃板")
+    reb_o = models.IntegerField(verbose_name="進攻籃板")
+    reb_d = models.IntegerField(verbose_name="防守籃板")
+    ast = models.IntegerField(verbose_name="助攻")
+    stl = models.IntegerField(verbose_name="抄截")
+    blk = models.IntegerField(verbose_name="阻攻")
+    turnover = models.IntegerField(verbose_name="失誤")
+    pfoul = models.IntegerField(verbose_name="犯規")
+
+    def __str__(self):
+        return f"{self.game_id} - {self.team_name}"
