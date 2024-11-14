@@ -1,6 +1,6 @@
 import requests
 from django.core.management.base import BaseCommand
-from cat.models import T1_TeamSteanding24_25
+from cat.models import T1_TeamStanding23_24,T1_TeamStanding24_25
 
 class Command(BaseCommand):
     help = 'Fetch and import team standings from T1 League API'
@@ -20,7 +20,7 @@ class Command(BaseCommand):
         standings_data = response.json()
 
         # 清空現有數據
-        T1_TeamSteanding24_25.objects.all().delete()
+        T1_TeamStanding24_25.objects.all().delete()
 
         # 遍歷 API 回傳的每支球隊資料
         for team_data in standings_data:
@@ -29,7 +29,7 @@ class Command(BaseCommand):
                 team_name = team_data['team']['name']
                 rank = team_data['rank']
                 games_played = (
-                    team_data['won_score'] + team_data['lost_score']
+                    team_data['score_won_matches'] + team_data['score_lost_matches']
                 )
                 wins = team_data['score_won_matches']
                 losses = team_data['score_lost_matches']
@@ -38,7 +38,7 @@ class Command(BaseCommand):
                 streaks = team_data.get('streaks', '-')
 
                 # 儲存至資料庫
-                T1_TeamSteanding24_25.objects.create(
+                T1_TeamStanding24_25.objects.create(
                     rank=rank,
                     team_name=team_name,
                     games_played=games_played,
