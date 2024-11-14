@@ -384,6 +384,7 @@ const Dashboard = () => {
   // #endregion
 
   return (
+<<<<<<< HEAD
     <Box className="dashboard-background">
       <Container>
         <Grid2 container spacing={3}>
@@ -422,6 +423,23 @@ const Dashboard = () => {
                   <Select
                     value={selectedTeams.teamA}
                     onChange={(e) =>
+=======
+    <div className="Predict">
+      <Box className="dashboard-background">
+        <Container>
+          <Grid2 container spacing={3}>
+            {/* 比較選單區域 */}
+            <Grid2 item xs={12}>
+              <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+                <FormControl
+                  fullWidth
+                  sx={{ minWidth: 200, marginBottom: 0.000001 }}
+                >
+                  <Select
+                    value={selectedTeams.teamA}
+                    onChange={(e) =>
+                      /* 選隊伍A */
+>>>>>>> 17bdd2a535006f3ee606103721c0db7c11bee1bd
                       setSelectedTeams((prev) => ({
                         ...prev,
                         teamA: e.target.value,
@@ -435,6 +453,7 @@ const Dashboard = () => {
                     ))}
                   </Select>
                 </FormControl>
+<<<<<<< HEAD
               </Box>
 
               {/* 第二隊選擇區域 */}
@@ -465,10 +484,17 @@ const Dashboard = () => {
                     客場
                   </Button>
                 </ButtonGroup>
+=======
+
+>>>>>>> 17bdd2a535006f3ee606103721c0db7c11bee1bd
                 <FormControl fullWidth sx={{ minWidth: 200 }}>
                   <Select
                     value={selectedTeams.teamB}
                     onChange={(e) =>
+<<<<<<< HEAD
+=======
+                      /* 選隊伍B */
+>>>>>>> 17bdd2a535006f3ee606103721c0db7c11bee1bd
                       setSelectedTeams((prev) => ({
                         ...prev,
                         teamB: e.target.value,
@@ -483,6 +509,7 @@ const Dashboard = () => {
                   </Select>
                 </FormControl>
               </Box>
+<<<<<<< HEAD
             </Box>
           </Grid2>
           {/* 並排的圖表區域 */}
@@ -511,13 +538,44 @@ const Dashboard = () => {
                               font: {
                                 size: 12,
                                 // weight: "bold",
+=======
+            </Grid2>
+            {/* 並排的圖表區域 */}
+            <Grid2 container item spacing={3}>
+              {/* 得分比較圖表 */}
+              <Grid2 item xs={12} md={6}>
+                <Card sx={cardStyle}>
+                  <CardContent>
+                    <Typography variant="h100" gutterBottom sx={titleStyle}>
+                      近五場比賽得分走勢
+                    </Typography>
+                    <Box sx={chartContainerStyle}>
+                      <Line
+                        data={lineScoreTrendData}
+                        options={{
+                          ...commonChartOptions,
+                          plugins: {
+                            ...commonChartOptions.plugins,
+                            legend: {
+                              display: true,
+                              position: "top", // 設置圖例在上方
+                              labels: {
+                                usePointStyle: true, // 使用點狀圖例
+                                boxWidth: 20,
+                                padding: 15,
+                                font: {
+                                  size: 12,
+                                  // weight: "bold",
+                                },
+                                color: "#333", // 圖例文字顏色
+                                borderRadius: 5, // 增加邊框圓角
+                                borderColor: "rgba(0, 0, 0, 0.1)", // 圖例邊框顏色
+                                borderWidth: 2, // 圖例邊框寬度
+>>>>>>> 17bdd2a535006f3ee606103721c0db7c11bee1bd
                               },
-                              color: "#333", // 圖例文字顏色
-                              borderRadius: 5, // 增加邊框圓角
-                              borderColor: "rgba(0, 0, 0, 0.1)", // 圖例邊框顏色
-                              borderWidth: 2, // 圖例邊框寬度
                             },
                           },
+<<<<<<< HEAD
                         },
                       }}
                     />
@@ -595,65 +653,144 @@ const Dashboard = () => {
                     />
                     <Typography variant="h6" gutterBottom>
                       近五場平均數據
+=======
+                        }}
+                      />
+                    </Box>
+                  </CardContent>
+                </Card>
+              </Grid2>
+              {/* 命中率比較圖表 */}
+              <Grid2 item xs={12} md={6}>
+                <Card sx={cardStyle}>
+                  <CardContent>
+                    <Typography variant="h100" gutterBottom sx={titleStyle}>
+                      命中率比較雷達圖
+>>>>>>> 17bdd2a535006f3ee606103721c0db7c11bee1bd
                     </Typography>
-                    <ul style={{ listStyle: "none", padding: 0 }}>
-                      <li>得分: {playerAData.stats.scores}</li>
-                      <li>籃板: {playerAData.stats.rebounds}</li>
-                      <li>助攻: {playerAData.stats.assists}</li>
-                      <li>抄截: {playerAData.stats.steals}</li>
-                      <li>阻攻: {playerAData.stats.blocks}</li>
-                    </ul>
-                  </Box>
-                </CardContent>
-              </Card>
+                    <Box sx={chartContainerStyle}>
+                      <Radar
+                        data={shootingPercentageData}
+                        options={radarOptions}
+                      />
+                    </Box>
+                  </CardContent>
+                </Card>
+              </Grid2>
             </Grid2>
-
-            {/* Key Player B */}
-            <Grid2 item xs={12} md={6}>
-              <Card sx={{ boxShadow: 3, borderRadius: 3, padding: 2 }}>
-                <CardContent>
-                  <Typography
-                    variant="h100"
-                    gutterBottom
-                    sx={{ fontWeight: "bold", textAlign: "center" }}
-                  >
-                    Key Player: {playerBData.name} ({selectedTeams.teamB})
-                  </Typography>
-                  <Box
-                    sx={{
-                      display: "flex",
-                      flexDirection: "column",
-                      alignItems: "center",
-                    }}
-                  >
-                    <img
-                      src={playerBData.photo}
-                      alt={playerBData.name}
-                      style={{
-                        width: "150px",
-                        height: "200px",
-                        borderRadius: "10px",
-                        marginBottom: "10px",
-                      }}
-                    />
-                    <Typography variant="h6" gutterBottom>
-                      近五場平均數據
+            {/* 雷達圖 */}
+            <Card sx={{ boxShadow: 3, borderRadius: 3, padding: 2 }}>
+              <CardContent>
+                <Typography
+                  variant="h100"
+                  gutterBottom
+                  sx={{ fontWeight: "bold", textAlign: "center" }}
+                >
+                  傳統數據比較雷達圖
+                </Typography>
+                <Box
+                  sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                    marginBottom: 2,
+                  }}
+                ></Box>
+                <Box sx={{ height: "300px" }}>
+                  <Radar data={radarData} options={radarOptions} />
+                </Box>
+              </CardContent>
+            </Card>
+            <Grid2 container item spacing={3}>
+              {/* Key Player A */}
+              <Grid2 item xs={12} md={6}>
+                <Card sx={{ boxShadow: 3, borderRadius: 3, padding: 2 }}>
+                  <CardContent>
+                    <Typography
+                      variant="h100"
+                      gutterBottom
+                      sx={{ fontWeight: "bold", textAlign: "center" }}
+                    >
+                      Key Player: {playerAData.name} ({selectedTeams.teamA})
                     </Typography>
-                    <ul style={{ listStyle: "none", padding: 0 }}>
-                      <li>得分: {playerBData.stats.scores}</li>
-                      <li>籃板: {playerBData.stats.rebounds}</li>
-                      <li>助攻: {playerBData.stats.assists}</li>
-                      <li>抄截: {playerBData.stats.steals}</li>
-                      <li>阻攻: {playerBData.stats.blocks}</li>
-                    </ul>
-                  </Box>
-                </CardContent>
-              </Card>
+                    <Box
+                      sx={{
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "center",
+                      }}
+                    >
+                      <img
+                        src={playerAData.photo}
+                        alt={playerAData.name}
+                        style={{
+                          width: "150px",
+                          height: "200px",
+                          borderRadius: "10px",
+                          marginBottom: "10px",
+                        }}
+                      />
+                      <Typography variant="h6" gutterBottom>
+                        近五場平均數據
+                      </Typography>
+                      <ul style={{ listStyle: "none", padding: 0 }}>
+                        <li>得分: {playerAData.stats.scores}</li>
+                        <li>籃板: {playerAData.stats.rebounds}</li>
+                        <li>助攻: {playerAData.stats.assists}</li>
+                        <li>抄截: {playerAData.stats.steals}</li>
+                        <li>阻攻: {playerAData.stats.blocks}</li>
+                      </ul>
+                    </Box>
+                  </CardContent>
+                </Card>
+              </Grid2>
+
+              {/* Key Player B */}
+              <Grid2 item xs={12} md={6}>
+                <Card sx={{ boxShadow: 3, borderRadius: 3, padding: 2 }}>
+                  <CardContent>
+                    <Typography
+                      variant="h100"
+                      gutterBottom
+                      sx={{ fontWeight: "bold", textAlign: "center" }}
+                    >
+                      Key Player: {playerBData.name} ({selectedTeams.teamB})
+                    </Typography>
+                    <Box
+                      sx={{
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "center",
+                      }}
+                    >
+                      <img
+                        src={playerBData.photo}
+                        alt={playerBData.name}
+                        style={{
+                          width: "150px",
+                          height: "200px",
+                          borderRadius: "10px",
+                          marginBottom: "10px",
+                        }}
+                      />
+                      <Typography variant="h6" gutterBottom>
+                        近五場平均數據
+                      </Typography>
+                      <ul style={{ listStyle: "none", padding: 0 }}>
+                        <li>得分: {playerBData.stats.scores}</li>
+                        <li>籃板: {playerBData.stats.rebounds}</li>
+                        <li>助攻: {playerBData.stats.assists}</li>
+                        <li>抄截: {playerBData.stats.steals}</li>
+                        <li>阻攻: {playerBData.stats.blocks}</li>
+                      </ul>
+                    </Box>
+                  </CardContent>
+                </Card>
+              </Grid2>
             </Grid2>
           </Grid2>
-        </Grid2>
-      </Container>
-    </Box>
+        </Container>
+      </Box>
+    </div>
   );
 };
 

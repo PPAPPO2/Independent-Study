@@ -6,146 +6,148 @@ $text-color: #ffffff;
 $hover-color: #2980b9;
 $active-color: #f73a3a;
 $shadow-color: rgba(0, 0, 0, 0.2);
-
-// Top Bar 樣式
-.top-bar {
-  background-color: $background-color;
-  color: $text-color;
-  text-align: center;
-  padding: 1rem;
-  font-size: 1.75rem;
-  font-weight: bold;
-  margin-bottom: 1.5rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  .arrow {
-    cursor: pointer;
-    margin: 0 20px;
-    font-size: 2rem;
+.Schedule {
+  margin-bottom: 5rem;
+  // Top Bar 樣式
+  .top-bar {
+    background-color: $background-color;
     color: $text-color;
-
-    &:hover {
-      color: $hover-color;
-      transition: 1s;
-    }
-  }
-}
-
-// Calendar Container 樣式
-.calendar-container {
-  width: 80%;
-  min-width: 60%;
-  margin: 0 auto;
-
-  &.fade-in {
-    opacity: 1;
-    transition: opacity 0.3s ease-in;
-  }
-
-  &.fade-out {
-    opacity: 0;
-    transition: opacity 0.3s ease-out;
-  }
-
-  .fc-col-header-cell {
-    background-color: $primary-color;
-    color: $text-color;
-    font-weight: bold;
     text-align: center;
-
-    .fc-col-header-cell-cushion {
-      font-size: 1.25rem;
-      margin: 1rem 0;
-      color: $text-color !important;
-    }
-  }
-
-  .fc-toolbar-title {
-    font-size: 1.8rem;
+    padding: 1rem;
+    font-size: 1.75rem;
     font-weight: bold;
-    color: $primary-color;
-    display: inline-block;
-    margin: 0 10px;
-  }
-
-  .fc-button {
-    background-color: transparent !important;
-    border: none !important;
-    font-size: 1.8em !important;
-    color: $primary-color !important;
-    padding: 0 10px;
-
-    &:hover {
-      color: $secondary-color !important;
-    }
-  }
-
-  .fc-toolbar {
+    margin-bottom: 1.5rem;
     display: flex;
     justify-content: center;
     align-items: center;
+    .arrow {
+      cursor: pointer;
+      margin: 0 20px;
+      font-size: 2rem;
+      color: $text-color;
+
+      &:hover {
+        color: $hover-color;
+        transition: 1s;
+      }
+    }
   }
 
-  .fc-daygrid-day {
-    background-color: #ffffff;
+  // Calendar Container 樣式
+  .calendar-container {
+    width: 80%;
+    min-width: 60%;
+    margin: 0 auto;
+
+    &.fade-in {
+      opacity: 1;
+      transition: opacity 0.3s ease-in;
+    }
+
+    &.fade-out {
+      opacity: 0;
+      transition: opacity 0.3s ease-out;
+    }
+
+    .fc-col-header-cell {
+      background-color: $primary-color;
+      color: $text-color;
+      font-weight: bold;
+      text-align: center;
+
+      .fc-col-header-cell-cushion {
+        font-size: 1.25rem;
+        margin: 1rem 0;
+        color: $text-color !important;
+      }
+    }
+
+    .fc-toolbar-title {
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: $primary-color;
+      display: inline-block;
+      margin: 0 10px;
+    }
+
+    .fc-button {
+      background-color: transparent !important;
+      border: none !important;
+      font-size: 1.8em !important;
+      color: $primary-color !important;
+      padding: 0 10px;
+
+      &:hover {
+        color: $secondary-color !important;
+      }
+    }
+
+    .fc-toolbar {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .fc-daygrid-day {
+      background-color: #ffffff;
+    }
+
+    .fc-daygrid-day-events {
+      display: flex !important;
+      flex-direction: column !important;
+      justify-content: center !important;
+      align-items: center !important;
+      height: 100% !important;
+    }
+
+    .fc-event {
+      display: flex !important;
+      justify-content: center !important;
+      align-items: center !important;
+      margin-bottom: 5px !important;
+      width: 100% !important;
+    }
   }
 
-  .fc-daygrid-day-events {
-    display: flex !important;
-    flex-direction: column !important;
-    justify-content: center !important;
-    align-items: center !important;
-    height: 100% !important;
+  // Tabs 樣式
+  .tabs {
+    display: flex;
+    justify-content: left;
+    align-items: left;
+    flex-grow: 1;
+    margin-left: 2rem;
   }
 
-  .fc-event {
-    display: flex !important;
-    justify-content: center !important;
-    align-items: center !important;
-    margin-bottom: 5px !important;
-    width: 100% !important;
-  }
-}
+  .tab {
+    padding: 10px 20px;
+    margin: 0 10px;
+    background-color: white;
+    color: $active-color;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.25rem;
+    font-weight: bold;
+    box-shadow: 0 4px 6px $shadow-color;
+    transition: all 0.3s ease;
 
-// Tabs 樣式
-.tabs {
-  display: flex;
-  justify-content: left;
-  align-items: left;
-  flex-grow: 1;
-}
+    &.active {
+      transform: translateY(-10px);
+      color: white;
+      box-shadow: 0 4px 8px $shadow-color;
+    }
 
-.tab {
-  padding: 10px 20px;
-  margin: 0 10px;
-  background-color: white;
-  color: $active-color;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 1.25rem;
-  font-weight: bold;
-  box-shadow: 0 4px 6px $shadow-color;
-  transition: all 0.3s ease;
-
-  &.active {
-    transform: translateY(-10px);
-    color: white;
-    box-shadow: 0 4px 8px $shadow-color;
+    &:hover {
+      background-color: $secondary-color;
+      color: white;
+      box-shadow: 0 6px 10px rgba(0, 0, 0, 1);
+      transform: translateY(-2px);
+    }
   }
 
-  &:hover {
-    background-color: $secondary-color;
-    color: white;
-    box-shadow: 0 6px 10px rgba(0, 0, 0, 1);
-    transform: translateY(-2px);
+  // Schedule Icons 樣式
+  .plg_Sche,
+  .t1_Sche {
+    width: 50px;
+    height: 50px;
   }
-}
-
-// Schedule Icons 樣式
-.plg_Sche,
-.t1_Sche {
-  width: 50px;
-  height: 50px;
 }

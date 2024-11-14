@@ -2,7 +2,7 @@ import json
 import os
 from django.conf import settings  # 導入 settings
 from django.core.management.base import BaseCommand
-from cat.models import T1_TeamSteanding24_25,P_TeamStanding24_25,P_Season_Teams_Playoff_Performance_22_23,P_Season_Teams_Playoff_Performance_23_24,P_Season_Teams_Final_Performance_23_24,P_Season_Teams_Final_Performance_22_23,P_Season_Players_Palyoff_Performance_22_23, P_Season_Players_Playoff_Performance_23_24,P_Season_Players_Final_Performance_22_23, P_Season_Players_Final_Performance_23_24,P_Season_teams_Performance_20_21,P_Season_teams_Performance_21_22, P_Season_teams_Performance_22_23, P_Season_teams_Performance_23_24,P_Season_Players_Performance_20_21,P_Season_Players_Performance_21_22, P_Season_Players_Performance_22_23, P_Season_Players_Performance_23_24
+from cat.models import T1_TeamStanding24_25,P_TeamStanding24_25,P_Season_Teams_Playoff_Performance_22_23,P_Season_Teams_Playoff_Performance_23_24,P_Season_Teams_Final_Performance_23_24,P_Season_Teams_Final_Performance_22_23,P_Season_Players_Palyoff_Performance_22_23, P_Season_Players_Playoff_Performance_23_24,P_Season_Players_Final_Performance_22_23, P_Season_Players_Final_Performance_23_24,P_Season_teams_Performance_20_21,P_Season_teams_Performance_21_22, P_Season_teams_Performance_22_23, P_Season_teams_Performance_23_24,P_Season_Players_Performance_20_21,P_Season_Players_Performance_21_22, P_Season_Players_Performance_22_23, P_Season_Players_Performance_23_24
 from datetime import time
 from decimal import Decimal
 
@@ -18,7 +18,7 @@ class Command(BaseCommand):
         # 定義需要轉換的表
         tables = [
             (P_TeamStanding24_25,'P_TeamStanding24_25.json')
-            ,(T1_TeamSteanding24_25,'T1_TeamSteanding24_25.json')
+            ,(T1_TeamStanding24_25,'T1_TeamStanding24_25.json')
             
         ]
 

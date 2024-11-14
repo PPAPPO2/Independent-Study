@@ -1,4 +1,7 @@
 @charset "UTF-8";
+.Players {
+  margin-bottom: 5rem;
+}
 .Players .selector {
   display: flex;
   gap: 2rem; /* 讓篩選器之間保持間距 */

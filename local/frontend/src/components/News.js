@@ -140,21 +140,39 @@ const News = () => {
     11: [
       {
         id: 1,
-        title: "test",
-        url: "https://sports.ltn.com.tw/news/breakingnews/4850519",
-        img: "https://img.ltn.com.tw/Upload/sports/page/800/2024/11/02/phpukdwlv.jpg",
+        title: "亞洲盃資格賽 中華隊名單出爐",
+        url: "https://tw.sports.yahoo.com/news/%E4%BA%9E%E6%B4%B2%E7%9B%83%E8%B3%87%E6%A0%BC%E8%B3%BD-%E8%BF%91%E5%B9%B4%E6%9C%80%E5%BC%B7%E4%B8%AD%E8%8F%AF%E9%9A%8A%E5%87%BA%E6%93%8A-%E9%98%BF%E5%B7%B4%E8%A5%BF-%E7%9B%B4%E6%83%B3%E8%A6%81%E7%9C%8B%E5%88%B0%E7%9A%84%E9%99%A3%E5%AE%B9-074549389.html",
+        img: "https://s.yimg.com/ny/api/res/1.2/sGvbDp0TPY2pEz0u.j9r0g--/YXBwaWQ9aGlnaGxhbmRlcjt3PTk2MDtoPTcyMDtjZj13ZWJw/https://media.zenfs.com/zh-tw/tsna.com.tw/acfe727231c1fa1cbd67672ee567b3e8",
       },
       {
         id: 2,
-        title: "test",
-        url: "https://www.instagram.com/p/DAsXCRfzhVL/?img_index=1",
-        img: "https://upload.wikimedia.org/wikipedia/zh/4/46/P._LEAGUE%2B.png",
+        title: "丁聖儒 TPBL元年第一位大三元",
+        url: "https://www.instagram.com/p/DCOs7b7TrMY/?img_index=1",
+        img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRT9jjJ2VJ9SZy6j9F1V65VcKOkxCF-Fk6ZfvBukdKy6gXQ8Ih1jvPAcCTS75Kpy2IUOM&usqp=CAU",
       },
       {
         id: 3,
-        title: "test",
-        url: "https://tw.sports.yahoo.com/news/%E5%B0%B1%E8%AA%AA%E4%BA%86%E4%B8%BB%E6%88%B0%E5%A0%B4%E5%9C%A8%E7%B6%B2%E8%B7%AF-plg%E5%89%A94%E9%9A%8A%E6%B2%92%E5%9C%A8%E6%80%95-%E7%86%B1%E8%BA%AB%E8%B3%BD%E7%B7%9A%E4%B8%8A%E8%A7%80%E7%9C%8B%E6%95%B8%E6%B5%B7%E6%94%BEtpbl-095605122.html",
-        img: "https://img.ltn.com.tw/Upload/sports/page/800/2024/10/13/4829449_1.jpg",
+        title: "牧倫斯 出賽僅一場就遭到釋出",
+        url: "https://udn.com/news/story/7002/8338657",
+        img: "https://pgw.udn.com.tw/gw/photo.php?u=https://uc.udn.com.tw/photo/2024/11/05/realtime/30845895.jpg&x=0&y=0&sw=0&sh=0&sl=W&fw=800&exp=3600&w=930&nt=1",
+      },
+      {
+        id: 4,
+        title: "東超領航猿 16分擊敗PBA生力啤酒人",
+        url: "https://www.instagram.com/p/DCT5tyCT_LK/",
+        img: "https://cdn.ftvnews.com.tw/manasystem/FileData/News/4e1a55f0-a4e2-462f-a52b-46194e217903.jpg",
+      },
+      {
+        id: 5,
+        title: "艾賽亞 大三元仍無法帶領鋼鐵人取勝",
+        url: "https://www.instagram.com/p/DCRq4-4Tu01/?img_index=4",
+        img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwVFU_0LarHJEoK65cklLPA0SGjafCVZaUxQ&s",
+      },
+      {
+        id: 6,
+        title: "陳范柏彥 開季火燙場均攻下18分",
+        url: "https://sports.ettoday.net/news/2853755",
+        img: "https://cdn2.ettoday.net/images/7945/d7945088.jpg",
       },
     ],
   };

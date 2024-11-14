@@ -1,4 +1,7 @@
 @charset "UTF-8";
+.rankings {
+  margin-bottom: 5rem;
+}
 .rankings h2 {
   background: #172243;
   margin-bottom: 2rem;

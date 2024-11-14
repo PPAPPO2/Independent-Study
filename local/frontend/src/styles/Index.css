@@ -1,4 +1,7 @@
 @charset "UTF-8";
+.home-container {
+  margin-bottom: 5rem;
+}
 .home-container .index {
   position: relative; /* 新增，確保 .button-container 可以相對於圖片定位 */
   text-align: center;
