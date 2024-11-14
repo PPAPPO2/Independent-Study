@@ -1,4 +1,7 @@
-.top-bar {
+.Schedule {
+  margin-bottom: 5rem;
+}
+.Schedule .top-bar {
   background-color: #172243;
   color: #ffffff;
   text-align: center;
@@ -10,89 +13,87 @@
   justify-content: center;
   align-items: center;
 }
-.top-bar .arrow {
+.Schedule .top-bar .arrow {
   cursor: pointer;
   margin: 0 20px;
   font-size: 2rem;
   color: #ffffff;
 }
-.top-bar .arrow:hover {
+.Schedule .top-bar .arrow:hover {
   color: #2980b9;
   transition: 1s;
 }
-
-.calendar-container {
+.Schedule .calendar-container {
   width: 80%;
   min-width: 60%;
   margin: 0 auto;
 }
-.calendar-container.fade-in {
+.Schedule .calendar-container.fade-in {
   opacity: 1;
   transition: opacity 0.3s ease-in;
 }
-.calendar-container.fade-out {
+.Schedule .calendar-container.fade-out {
   opacity: 0;
   transition: opacity 0.3s ease-out;
 }
-.calendar-container .fc-col-header-cell {
+.Schedule .calendar-container .fc-col-header-cell {
   background-color: #002d62;
   color: #ffffff;
   font-weight: bold;
   text-align: center;
 }
-.calendar-container .fc-col-header-cell .fc-col-header-cell-cushion {
+.Schedule .calendar-container .fc-col-header-cell .fc-col-header-cell-cushion {
   font-size: 1.25rem;
   margin: 1rem 0;
   color: #ffffff !important;
 }
-.calendar-container .fc-toolbar-title {
+.Schedule .calendar-container .fc-toolbar-title {
   font-size: 1.8rem;
   font-weight: bold;
   color: #002d62;
   display: inline-block;
   margin: 0 10px;
 }
-.calendar-container .fc-button {
+.Schedule .calendar-container .fc-button {
   background-color: transparent !important;
   border: none !important;
   font-size: 1.8em !important;
   color: #002d62 !important;
   padding: 0 10px;
 }
-.calendar-container .fc-button:hover {
+.Schedule .calendar-container .fc-button:hover {
   color: #80c2ff !important;
 }
-.calendar-container .fc-toolbar {
+.Schedule .calendar-container .fc-toolbar {
   display: flex;
   justify-content: center;
   align-items: center;
 }
-.calendar-container .fc-daygrid-day {
+.Schedule .calendar-container .fc-daygrid-day {
   background-color: #ffffff;
 }
-.calendar-container .fc-daygrid-day-events {
+.Schedule .calendar-container .fc-daygrid-day-events {
   display: flex !important;
   flex-direction: column !important;
   justify-content: center !important;
   align-items: center !important;
   height: 100% !important;
 }
-.calendar-container .fc-event {
+.Schedule .calendar-container .fc-event {
   display: flex !important;
   justify-content: center !important;
   align-items: center !important;
   margin-bottom: 5px !important;
   width: 100% !important;
 }
-
-.tabs {
+.Schedule .tabs {
   display: flex;
   justify-content: left;
   align-items: left;
   flex-grow: 1;
+  margin-left: 2rem;
 }
-
-.tab {
+.Schedule .tab {
   padding: 10px 20px;
   margin: 0 10px;
   background-color: white;
@@ -104,20 +105,19 @@
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
   transition: all 0.3s ease;
 }
-.tab.active {
+.Schedule .tab.active {
   transform: translateY(-10px);
   color: white;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
-.tab:hover {
+.Schedule .tab:hover {
   background-color: #80c2ff;
   color: white;
   box-shadow: 0 6px 10px rgb(0, 0, 0);
   transform: translateY(-2px);
 }
-
-.plg_Sche,
-.t1_Sche {
+.Schedule .plg_Sche,
+.Schedule .t1_Sche {
   width: 50px;
   height: 50px;
 }/*# sourceMappingURL=Schedule.css.map */
