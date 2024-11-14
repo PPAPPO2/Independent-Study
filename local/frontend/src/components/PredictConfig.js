@@ -4,9 +4,9 @@
 export const cardStyle = {
   boxShadow: 3,
   borderRadius: 3,
-  backgroundColor: "#f5f5f5",
+  // backgroundColor: "#f5f5f5",
   margin: "14px 0",
-  height: "85%", // 確保兩張卡片高度一致
+  height: "92%", // 確保兩張卡片高度一致
 };
 // 定義共用的圖表容器樣式
 export const chartContainerStyle = {
@@ -40,7 +40,7 @@ export const commonChartOptions = {
     y: {
       beginAtZero: true,
       grid: {
-        color: "rgba(0, 0, 0, 0.05)",
+        color: "rgba(0, 0, 0, 0)",
       },
       ticks: {
         font: {
