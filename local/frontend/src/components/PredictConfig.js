@@ -10,7 +10,7 @@ export const cardStyle = {
 };
 // 定義共用的圖表容器樣式
 export const chartContainerStyle = {
-  height: "250px",
+  height: "300px",
   padding: "16px",
   display: "flex",
   justifyContent: "center",
