@@ -1,6 +1,10 @@
 [
     {
+<<<<<<< HEAD
+        "id": 33,
+=======
         "id": 37,
+>>>>>>> 9d092e00bb1aa0bb46a9cbf66aabe2056bbecc01
         "rank": 1,
         "team_name": "領航猿",
         "games_played": 4,
@@ -11,35 +15,59 @@
         "wins_losses_streak": "101.8"
     },
     {
+<<<<<<< HEAD
+        "id": 34,
+=======
         "id": 38,
+>>>>>>> 9d092e00bb1aa0bb46a9cbf66aabe2056bbecc01
         "rank": 2,
         "team_name": "勇士",
         "games_played": 6,
         "wins": 3,
         "losses": 3,
+<<<<<<< HEAD
+        "pct": "50%",
+=======
         "pct": "0.5",
+>>>>>>> 9d092e00bb1aa0bb46a9cbf66aabe2056bbecc01
         "games_behind": "1",
         "wins_losses_streak": "99.7"
     },
     {
+<<<<<<< HEAD
+        "id": 35,
+=======
         "id": 39,
+>>>>>>> 9d092e00bb1aa0bb46a9cbf66aabe2056bbecc01
         "rank": 2,
         "team_name": "獵鷹",
         "games_played": 2,
         "wins": 1,
         "losses": 1,
+<<<<<<< HEAD
+        "pct": "50%",
+=======
         "pct": "0.5",
+>>>>>>> 9d092e00bb1aa0bb46a9cbf66aabe2056bbecc01
         "games_behind": "1",
         "wins_losses_streak": "95.5"
     },
     {
+<<<<<<< HEAD
+        "id": 36,
+=======
         "id": 40,
+>>>>>>> 9d092e00bb1aa0bb46a9cbf66aabe2056bbecc01
         "rank": 3,
         "team_name": "鋼鐵人",
         "games_played": 2,
         "wins": 0,
         "losses": 2,
+<<<<<<< HEAD
+        "pct": "0%",
+=======
         "pct": "0.0",
+>>>>>>> 9d092e00bb1aa0bb46a9cbf66aabe2056bbecc01
         "games_behind": "2",
         "wins_losses_streak": "98"
     }
