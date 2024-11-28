@@ -23,6 +23,7 @@ const teamLogoMapping = {
   臺北台新戰神: "臺北戰神.png",
   高雄全家海神: "高雄全家海神.png",
   臺南台鋼獵鷹: "臺南台鋼獵鷹.png",
+  台鋼獵鷹: "臺南台鋼獵鷹.png",
   臺中太陽: "臺中太陽.png",
   台灣啤酒英熊: "台灣啤酒英熊.png",
 };
@@ -168,7 +169,7 @@ const Rank = () => {
     return data.filter(
       (player) =>
         player.minutes > "00:10:00" && // 確保時間格式正確
-        player.game_played > 0 // 直接比較數字
+        player.game_played > 3 // 直接比較數字
     );
   };
 
