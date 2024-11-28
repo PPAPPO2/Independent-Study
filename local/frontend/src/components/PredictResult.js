@@ -28,6 +28,7 @@ import {
   ButtonGroup,
   Button,
 } from "@mui/material";
+import { Warning, CheckCircle } from "@mui/icons-material";
 import "../styles/Predict.css";
 import {
   cardStyle,
@@ -59,7 +60,7 @@ const Dashboard = () => {
   });
 
   const [selectedTeams, setSelectedTeams] = useState({
-    teamA: "臺北富邦勇士",
+    teamA: "桃園璞園領航猿",
     teamB: "新北國王",
   });
   const [stats, setStats] = useState({ homeTeam: [], awayTeam: [] });
@@ -275,29 +276,29 @@ const Dashboard = () => {
           ],
         });
         // 計算助攻失誤比的函數
-      const calculateAssistTurnoverRatio = (games) => {
-        const recentGames = games.slice(0, 5);
-        const ratios = recentGames.map((game) => {
-          if (game.turnover === 0 || !game.turnover) return 0;
-          return (game.ast / game.turnover);
-        });
-        const sum = ratios.reduce((acc, ratio) => acc + ratio, 0);
-        return Number((sum / ratios.length).toFixed(2));
-      };
+        const calculateAssistTurnoverRatio = (games) => {
+          const recentGames = games.slice(0, 5);
+          const ratios = recentGames.map((game) => {
+            if (game.turnover === 0 || !game.turnover) return 0;
+            return game.ast / game.turnover;
+          });
+          const sum = ratios.reduce((acc, ratio) => acc + ratio, 0);
+          return Number((sum / ratios.length).toFixed(2));
+        };
 
-      // 根據主客場狀態決定數據分配
-      let teamAData, teamBData;
-      if (teamType.teamA === "home") {
-        teamAData = sortedHomeTeam;
-        teamBData = sortedAwayTeam;
-      } else {
-        teamAData = sortedAwayTeam;
-        teamBData = sortedHomeTeam;
-      }
+        // 根據主客場狀態決定數據分配
+        let teamAData, teamBData;
+        if (teamType.teamA === "home") {
+          teamAData = sortedHomeTeam;
+          teamBData = sortedAwayTeam;
+        } else {
+          teamAData = sortedAwayTeam;
+          teamBData = sortedHomeTeam;
+        }
 
-      // 計算並更新兩隊的助攻失誤比
-      const teamARatio = calculateAssistTurnoverRatio(teamAData);
-      const teamBRatio = calculateAssistTurnoverRatio(teamBData);
+        // 計算並更新兩隊的助攻失誤比
+        const teamARatio = calculateAssistTurnoverRatio(teamAData);
+        const teamBRatio = calculateAssistTurnoverRatio(teamBData);
 
         // 更新儀表板的數值
         setTeamAValue(teamARatio);
@@ -430,15 +431,25 @@ const Dashboard = () => {
   // #endregion
 
   return (
+    <div className="Predict">
     <Box className="dashboard-background">
-      <Container>
-        <Grid2 container spacing={3}>
+      <Container
+      maxWidth="lg"  // 設定最大寬度 
+      sx={{
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',     // 水平置中
+      justifyContent: 'center', // 垂直置中
+      minHeight: '100vh',       // 佔滿整個視窗高度
+      padding: '20px 0'         // 上下增加一些空間
+    }}>
+        <Grid2 container spacing={3} sx={{ justifyContent: 'center' }}>
           {/* 比較選單區域 */}
-          <Grid2 item xs={12}>
+          <Grid2 item xs={12} >
             <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
               {/* 第一隊選擇區域 */}
-              <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
-                <ButtonGroup variant="contained" sx={{ minWidth: 200 }}>
+              <Box sx={{ display: "flex", alignItems: "top", gap: 2 }}>
+                <ButtonGroup variant="contained" sx={{ minWidth: 200, height: '56px' }}>
                   <Button
                     onClick={() => handleTeamTypeChange("teamA", "home")}
                     sx={{
@@ -481,11 +492,40 @@ const Dashboard = () => {
                     ))}
                   </Select>
                 </FormControl>
+                <Card
+                  sx={{
+                    boxShadow: 3,
+                    borderRadius: 3,
+                    margin: "14px 0",
+                    minWidth: 200, // 設置最小寬度
+                  }}
+                >
+                  <CardContent>
+                    <Typography
+                      variant="h6"
+                      sx={{
+                        textAlign: "center",
+                        marginBottom: 1,
+                      }}
+                    >
+                      預測比分
+                    </Typography>
+                    <Typography
+                      variant="h3"
+                      sx={{
+                        textAlign: "center",
+                        fontWeight: "bold",
+                      }}
+                    >
+                      93分
+                    </Typography>
+                  </CardContent>
+                </Card>
               </Box>
 
               {/* 第二隊選擇區域 */}
-              <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
-                <ButtonGroup variant="contained" sx={{ minWidth: 200 }}>
+              <Box sx={{ display: "flex", alignItems: "top", gap: 2 }}>
+                <ButtonGroup variant="contained" sx={{ minWidth: 200, height: '56px' }}>
                   <Button
                     onClick={() => handleTeamTypeChange("teamB", "home")}
                     sx={{
@@ -528,9 +568,69 @@ const Dashboard = () => {
                     ))}
                   </Select>
                 </FormControl>
+                <Card
+                  sx={{
+                    boxShadow: 3,
+                    borderRadius: 3,
+                    margin: "14px 0",
+                    minWidth: 200, // 設置最小寬度
+                  }}
+                >
+                  <CardContent>
+                    <Typography
+                      variant="h6"
+                      sx={{
+                        textAlign: "center",
+                        marginBottom: 1,
+                      }}
+                    >
+                      預測比分
+                    </Typography>
+                    <Typography
+                      variant="h3"
+                      sx={{
+                        textAlign: "center",
+                        fontWeight: "bold",
+                      }}
+                    >
+                      93分
+                    </Typography>
+                  </CardContent>
+                </Card>
               </Box>
             </Box>
           </Grid2>
+          <Card
+            sx={{
+              boxShadow: 3,
+              height: "85%",
+              borderRadius: 3,
+              margin: "14px 0",
+              position: "relative",
+            }}
+          >
+            <CardContent>
+              <Typography variant="h100" gutterBottom sx={titleStyle}>
+                {selectedTeams.teamA} VS. {selectedTeams.teamB}
+              </Typography>
+              <Doughnut data={createGaugeData(teamAValue)} options={options} />
+              {/* 顯示中心數字 */}
+              <Typography
+                style={{
+                  position: "absolute",
+                  top: "68%",
+                  left: "50%",
+                  transform: "translate(-50%, -50%)",
+                  textAlign: "center",
+                  fontSize: "50px",
+                  fontWeight: "bold",
+                  color: teamAValue < 1.5 ? "#ff4d4d" : "#4bc0c0",
+                }}
+              >
+                {teamAValue.toFixed(2)}
+              </Typography>
+            </CardContent>
+          </Card>
           {/* 並排的圖表區域 */}
           <Grid2 container item spacing={3}>
             {/* 得分比較圖表 */}
@@ -615,7 +715,31 @@ const Dashboard = () => {
                 margin: "14px 0",
                 position: "relative",
               }}
+              title="助攻失誤比 = 平均助攻數 / 平均失誤數，數值越高代表球隊控球能力越好"
             >
+              {teamAValue < 1.5 ? (
+                <Warning
+                  sx={{
+                    position: "absolute",
+                    top: "10px",
+                    right: "10px",
+                    color: teamAValue < 1.2 ? "#ff4d4d" : "#ffcc00", // 小於 1.2 紅色，1.2-1.5 黃色
+                    fontSize: "24px",
+                    zIndex: 1,
+                  }}
+                />
+              ) : (
+                <CheckCircle
+                  sx={{
+                    position: "absolute",
+                    top: "10px",
+                    right: "10px",
+                    color: "#4bc0c0", // 綠色勾勾
+                    fontSize: "24px",
+                    zIndex: 1,
+                  }}
+                />
+              )}
               <CardContent>
                 <Typography variant="h100" gutterBottom sx={titleStyle}>
                   {selectedTeams.teamA} 失誤助攻比
@@ -651,7 +775,31 @@ const Dashboard = () => {
                 margin: "14px 0",
                 position: "relative",
               }}
+              title="助攻失誤比 = 平均助攻數 / 平均失誤數，數值越高代表球隊控球能力越好"
             >
+              {teamBValue < 1.5 ? (
+                <Warning
+                  sx={{
+                    position: "absolute",
+                    top: "10px",
+                    right: "10px",
+                    color: teamBValue < 1.2 ? "#ff4d4d" : "#ffcc00", // 小於 1.2 紅色，1.2-1.5 黃色
+                    fontSize: "24px",
+                    zIndex: 1,
+                  }}
+                />
+              ) : (
+                <CheckCircle
+                  sx={{
+                    position: "absolute",
+                    top: "10px",
+                    right: "10px",
+                    color: "#4bc0c0", // 綠色勾勾
+                    fontSize: "24px",
+                    zIndex: 1,
+                  }}
+                />
+              )}
               <CardContent>
                 <Typography variant="h100" gutterBottom sx={titleStyle}>
                   {selectedTeams.teamB} 失誤助攻比
@@ -681,6 +829,7 @@ const Dashboard = () => {
         </Grid2>
       </Container>
     </Box>
+    </div>
   );
 };
 
