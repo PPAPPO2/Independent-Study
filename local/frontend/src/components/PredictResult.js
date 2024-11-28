@@ -1,5 +1,6 @@
 // 引入必要的 React 和圖表相關套件
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo, useCallback } from "react";
+
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -13,7 +14,7 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
-import { Bar, Line, Radar, Pie } from "react-chartjs-2";
+import { Bar, Line, Radar, Pie, Doughnut } from "react-chartjs-2";
 import {
   Box,
   Card,
@@ -27,6 +28,7 @@ import {
   ButtonGroup,
   Button,
 } from "@mui/material";
+import { Warning, CheckCircle } from "@mui/icons-material";
 import "../styles/Predict.css";
 import {
   cardStyle,
@@ -34,10 +36,6 @@ import {
   chartContainerStyle,
   radarOptions,
   commonChartOptions,
-  radarData,
-  scoreComparisonData,
-  shootingPercentageData,
-  transparentize,
 } from "./PredictConfig.js";
 
 // 註冊必要的圖表元件
@@ -62,7 +60,7 @@ const Dashboard = () => {
   });
 
   const [selectedTeams, setSelectedTeams] = useState({
-    teamA: "臺北富邦勇士",
+    teamA: "桃園璞園領航猿",
     teamB: "新北國王",
   });
   const [stats, setStats] = useState({ homeTeam: [], awayTeam: [] });
@@ -97,12 +95,12 @@ const Dashboard = () => {
         teamType.teamA === "home" ? selectedTeams.teamA : selectedTeams.teamB;
       const awayTeam =
         teamType.teamA === "home" ? selectedTeams.teamB : selectedTeams.teamA;
-  
+
       if (!homeTeam || !awayTeam) {
         console.error("未選擇完整的主客隊伍");
         return;
       }
-  
+
       try {
         // API 請求
         const response = await fetch(
@@ -111,16 +109,20 @@ const Dashboard = () => {
           )}&awayTeam=${encodeURIComponent(awayTeam)}`
         );
         const data = await response.json();
-  
+
         if (!response.ok) {
           console.error("API 回傳錯誤：", data.error);
           return;
         }
-  
+
         // 排序數據，根據 game_id 降序
-        const sortedHomeTeam = data.homeTeam.sort((b, a) => b.game_id - a.game_id);
-        const sortedAwayTeam = data.awayTeam.sort((b, a) => b.game_id - a.game_id);
-  
+        const sortedHomeTeam = data.homeTeam.sort(
+          (b, a) => b.game_id - a.game_id
+        );
+        const sortedAwayTeam = data.awayTeam.sort(
+          (b, a) => b.game_id - a.game_id
+        );
+
         // 計算最近五場平均值函數
         const calculateAverage = (data, key) => {
           const validValues = data
@@ -128,26 +130,32 @@ const Dashboard = () => {
             .map((game) => game[key])
             .filter((v) => v !== null && v !== undefined);
           const sum = validValues.reduce((acc, value) => acc + value, 0);
-          return validValues.length > 0 ? (sum / validValues.length).toFixed(2) : 0;
+          return validValues.length > 0
+            ? (sum / validValues.length).toFixed(2)
+            : 0;
         };
-  
+
         // 取得最近五場的得分
-        const homeTeamScores = sortedHomeTeam.slice(0, 5).map((game) => game.points || 0);
-        const awayTeamScores = sortedAwayTeam.slice(0, 5).map((game) => game.points || 0);
-  
+        const homeTeamScores = sortedHomeTeam
+          .slice(0, 5)
+          .map((game) => game.points || 0);
+        const awayTeamScores = sortedAwayTeam
+          .slice(0, 5)
+          .map((game) => game.points || 0);
+
         // 計算命中率數據
         const homeTeamShootingData = [
           calculateAverage(sortedHomeTeam, "treyp"),
           calculateAverage(sortedHomeTeam, "twop"),
           calculateAverage(sortedHomeTeam, "ftp"),
         ];
-  
+
         const awayTeamShootingData = [
           calculateAverage(sortedAwayTeam, "treyp"),
           calculateAverage(sortedAwayTeam, "twop"),
           calculateAverage(sortedAwayTeam, "ftp"),
         ];
-  
+
         // 提取雷達圖數據
         const homeTeamRadarData = [
           calculateAverage(sortedHomeTeam, "reb_o"),
@@ -156,7 +164,7 @@ const Dashboard = () => {
           calculateAverage(sortedHomeTeam, "stl"),
           calculateAverage(sortedHomeTeam, "blk"),
         ];
-  
+
         const awayTeamRadarData = [
           calculateAverage(sortedAwayTeam, "reb_o"),
           calculateAverage(sortedAwayTeam, "reb_d"),
@@ -164,17 +172,25 @@ const Dashboard = () => {
           calculateAverage(sortedAwayTeam, "stl"),
           calculateAverage(sortedAwayTeam, "blk"),
         ];
-  
+
         // 動態設定顏色
         const homeTeamColor =
-          teamType.teamA === "home" ? "rgba(54, 162, 235, 1)" : "rgba(255, 105, 180, 1)";
+          teamType.teamA === "home"
+            ? "rgba(54, 162, 235, 1)"
+            : "rgba(255, 105, 180, 1)";
         const homeTeamPointColor =
-          teamType.teamA === "home" ? "rgba(54, 162, 235, 0.8)" : "rgba(255, 105, 180, 0.8)";
+          teamType.teamA === "home"
+            ? "rgba(54, 162, 235, 0.8)"
+            : "rgba(255, 105, 180, 0.8)";
         const awayTeamColor =
-          teamType.teamB === "home" ? "rgba(54, 162, 235, 1)" : "rgba(255, 105, 180, 1)";
+          teamType.teamB === "home"
+            ? "rgba(54, 162, 235, 1)"
+            : "rgba(255, 105, 180, 1)";
         const awayTeamPointColor =
-          teamType.teamB === "home" ? "rgba(54, 162, 235, 0.8)" : "rgba(255, 105, 180, 0.8)";
-  
+          teamType.teamB === "home"
+            ? "rgba(54, 162, 235, 0.8)"
+            : "rgba(255, 105, 180, 0.8)";
+
         // 更新得分折線圖數據
         setLineScoreTrendData({
           labels: ["近5場", "近4場", "近3場", "近2場", "近1場"],
@@ -203,7 +219,7 @@ const Dashboard = () => {
             },
           ],
         });
-  
+
         // 更新命中率雷達圖數據
         setShootingPercentageData({
           labels: ["三分命中率", "兩分命中率", "罰球命中率"],
@@ -232,7 +248,7 @@ const Dashboard = () => {
             },
           ],
         });
-  
+
         // 更新傳統數據雷達圖
         setRadarData({
           labels: ["進攻籃板", "防守籃板", "助攻", "抄截", "阻攻"],
@@ -259,17 +275,73 @@ const Dashboard = () => {
             },
           ],
         });
+        // 計算助攻失誤比的函數
+        const calculateAssistTurnoverRatio = (games) => {
+          const recentGames = games.slice(0, 5);
+          const ratios = recentGames.map((game) => {
+            if (game.turnover === 0 || !game.turnover) return 0;
+            return game.ast / game.turnover;
+          });
+          const sum = ratios.reduce((acc, ratio) => acc + ratio, 0);
+          return Number((sum / ratios.length).toFixed(2));
+        };
+
+        // 根據主客場狀態決定數據分配
+        let teamAData, teamBData;
+        if (teamType.teamA === "home") {
+          teamAData = sortedHomeTeam;
+          teamBData = sortedAwayTeam;
+        } else {
+          teamAData = sortedAwayTeam;
+          teamBData = sortedHomeTeam;
+        }
+
+        // 計算並更新兩隊的助攻失誤比
+        const teamARatio = calculateAssistTurnoverRatio(teamAData);
+        const teamBRatio = calculateAssistTurnoverRatio(teamBData);
+
+        // 更新儀表板的數值
+        setTeamAValue(teamARatio);
+        setTeamBValue(teamBRatio);
       } catch (error) {
         console.error("API 請求失敗：", error);
       }
     };
-  
+
     fetchData();
   }, [selectedTeams, teamType]);
-  
-  
 
-  // 初始化 lineScoreTrendData 狀態
+  // 建立兩個獨立的儀表圖數據函數
+  const createGaugeData = (value) => {
+    const gaugeColor = value < 1.5 ? "#ff4d4d" : "#4bc0c0";
+    return {
+      datasets: [
+        {
+          data: [value, 3 - value], // 動態計算剩餘部分
+          backgroundColor: [gaugeColor, "#e0e0e0"],
+          borderWidth: 0,
+          cutout: "80%",
+        },
+      ],
+    };
+  };
+
+  // 儀表圖選項配置
+  const options = {
+    plugins: {
+      tooltip: { enabled: false }, // 禁用滑鼠提示
+    },
+    rotation: -90, // 開始角度
+    circumference: 180, // 顯示半圓
+    cutout: "80%", // 中心空洞比例
+  };
+
+  // #region 助攻失誤比
+  const [teamAValue, setTeamAValue] = useState(0);
+  const [teamBValue, setTeamBValue] = useState(0);
+  // #endregion
+
+  // #region 近五場得分數據
   const [lineScoreTrendData, setLineScoreTrendData] = useState({
     labels: ["近1場", "近2場", "近3場", "近4場", "近5場"],
     datasets: [
@@ -297,6 +369,7 @@ const Dashboard = () => {
       },
     ],
   });
+  // #endregion
 
   // #region 命中率數據
   const [shootingPercentageData, setShootingPercentageData] = useState({
@@ -357,42 +430,26 @@ const Dashboard = () => {
   });
   // #endregion
 
-  // #region keypalyer
-  const playerAData = {
-    name: "林書豪",
-    // photo: "/images/player-photo.png", // 照片路徑
-    stats: {
-      scores: [30],
-      rebounds: [10],
-      assists: [5],
-      steals: [2],
-      blocks: [1],
-    },
-  };
-
-  const playerBData = {
-    name: "阿國",
-    photo: "/images/player-photo.png", // 照片路徑
-    stats: {
-      scores: [30],
-      rebounds: [10],
-      assists: [5],
-      steals: [2],
-      blocks: [1],
-    },
-  };
-  // #endregion
-
   return (
+    <div className="Predict">
     <Box className="dashboard-background">
-      <Container>
-        <Grid2 container spacing={3}>
+      <Container
+      maxWidth="lg"  // 設定最大寬度 
+      sx={{
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',     // 水平置中
+      justifyContent: 'center', // 垂直置中
+      minHeight: '100vh',       // 佔滿整個視窗高度
+      padding: '20px 0'         // 上下增加一些空間
+    }}>
+        <Grid2 container spacing={3} sx={{ justifyContent: 'center' }}>
           {/* 比較選單區域 */}
-          <Grid2 item xs={12}>
+          <Grid2 item xs={12} >
             <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
               {/* 第一隊選擇區域 */}
-              <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
-                <ButtonGroup variant="contained" sx={{ minWidth: 200 }}>
+              <Box sx={{ display: "flex", alignItems: "top", gap: 2 }}>
+                <ButtonGroup variant="contained" sx={{ minWidth: 200, height: '56px' }}>
                   <Button
                     onClick={() => handleTeamTypeChange("teamA", "home")}
                     sx={{
@@ -435,11 +492,40 @@ const Dashboard = () => {
                     ))}
                   </Select>
                 </FormControl>
+                <Card
+                  sx={{
+                    boxShadow: 3,
+                    borderRadius: 3,
+                    margin: "14px 0",
+                    minWidth: 200, // 設置最小寬度
+                  }}
+                >
+                  <CardContent>
+                    <Typography
+                      variant="h6"
+                      sx={{
+                        textAlign: "center",
+                        marginBottom: 1,
+                      }}
+                    >
+                      預測比分
+                    </Typography>
+                    <Typography
+                      variant="h3"
+                      sx={{
+                        textAlign: "center",
+                        fontWeight: "bold",
+                      }}
+                    >
+                      93分
+                    </Typography>
+                  </CardContent>
+                </Card>
               </Box>
 
               {/* 第二隊選擇區域 */}
-              <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
-                <ButtonGroup variant="contained" sx={{ minWidth: 200 }}>
+              <Box sx={{ display: "flex", alignItems: "top", gap: 2 }}>
+                <ButtonGroup variant="contained" sx={{ minWidth: 200, height: '56px' }}>
                   <Button
                     onClick={() => handleTeamTypeChange("teamB", "home")}
                     sx={{
@@ -482,178 +568,268 @@ const Dashboard = () => {
                     ))}
                   </Select>
                 </FormControl>
+                <Card
+                  sx={{
+                    boxShadow: 3,
+                    borderRadius: 3,
+                    margin: "14px 0",
+                    minWidth: 200, // 設置最小寬度
+                  }}
+                >
+                  <CardContent>
+                    <Typography
+                      variant="h6"
+                      sx={{
+                        textAlign: "center",
+                        marginBottom: 1,
+                      }}
+                    >
+                      預測比分
+                    </Typography>
+                    <Typography
+                      variant="h3"
+                      sx={{
+                        textAlign: "center",
+                        fontWeight: "bold",
+                      }}
+                    >
+                      93分
+                    </Typography>
+                  </CardContent>
+                </Card>
               </Box>
             </Box>
           </Grid2>
+          <Card
+            sx={{
+              boxShadow: 3,
+              height: "85%",
+              borderRadius: 3,
+              margin: "14px 0",
+              position: "relative",
+            }}
+          >
+            <CardContent>
+              <Typography variant="h100" gutterBottom sx={titleStyle}>
+                {selectedTeams.teamA} VS. {selectedTeams.teamB}
+              </Typography>
+              <Doughnut data={createGaugeData(teamAValue)} options={options} />
+              {/* 顯示中心數字 */}
+              <Typography
+                style={{
+                  position: "absolute",
+                  top: "68%",
+                  left: "50%",
+                  transform: "translate(-50%, -50%)",
+                  textAlign: "center",
+                  fontSize: "50px",
+                  fontWeight: "bold",
+                  color: teamAValue < 1.5 ? "#ff4d4d" : "#4bc0c0",
+                }}
+              >
+                {teamAValue.toFixed(2)}
+              </Typography>
+            </CardContent>
+          </Card>
           {/* 並排的圖表區域 */}
           <Grid2 container item spacing={3}>
             {/* 得分比較圖表 */}
-            <Grid2 item xs={12} md={6}>
-              <Card sx={cardStyle}>
-                <CardContent>
-                  <Typography variant="h100" gutterBottom sx={titleStyle}>
-                    近五場比賽得分走勢
-                  </Typography>
-                  <Box sx={chartContainerStyle}>
-                    <Line
-                      data={lineScoreTrendData}
-                      options={{
-                        ...commonChartOptions,
-                        plugins: {
-                          ...commonChartOptions.plugins,
-                          legend: {
-                            display: true,
-                            position: "top", // 設置圖例在上方
-                            labels: {
-                              usePointStyle: true, // 使用點狀圖例
-                              boxWidth: 20,
-                              padding: 15,
-                              font: {
-                                size: 12,
-                                // weight: "bold",
-                              },
-                              color: "#333", // 圖例文字顏色
-                              borderRadius: 5, // 增加邊框圓角
-                              borderColor: "rgba(0, 0, 0, 0.1)", // 圖例邊框顏色
-                              borderWidth: 2, // 圖例邊框寬度
+
+            <Card sx={cardStyle}>
+              <CardContent>
+                <Typography variant="h100" gutterBottom sx={titleStyle}>
+                  近五場比賽得分走勢
+                </Typography>
+                <Box sx={chartContainerStyle}>
+                  <Line
+                    data={lineScoreTrendData}
+                    options={{
+                      ...commonChartOptions,
+                      plugins: {
+                        ...commonChartOptions.plugins,
+                        legend: {
+                          display: true,
+                          position: "top", // 設置圖例在上方
+                          labels: {
+                            usePointStyle: true, // 使用點狀圖例
+                            boxWidth: 20,
+                            padding: 15,
+                            font: {
+                              size: 12,
+                              // weight: "bold",
                             },
+                            color: "#333", // 圖例文字顏色
+                            borderRadius: 5, // 增加邊框圓角
+                            borderColor: "rgba(0, 0, 0, 0.1)", // 圖例邊框顏色
+                            borderWidth: 2, // 圖例邊框寬度
                           },
                         },
-                      }}
-                    />
-                  </Box>
-                </CardContent>
-              </Card>
-            </Grid2>
-            {/* 命中率比較圖表 */}
-            <Grid2 item xs={12} md={6}>
-              <Card sx={cardStyle}>
-                <CardContent>
-                  <Typography variant="h100" gutterBottom sx={titleStyle}>
-                  近五場命中率比較
-                  </Typography>
-                  <Box sx={chartContainerStyle}>
-                    <Radar
-                      data={shootingPercentageData}
-                      options={radarOptions}
-                    />
-                  </Box>
-                </CardContent>
-              </Card>
-            </Grid2>
-          </Grid2>
-          {/* 雷達圖 */}
-          <Card sx={cardStyle}>
-            <CardContent>
-              <Typography
-                variant="h100"
-                gutterBottom
-                sx={titleStyle}
-              >
-                近五場傳統數據比較
-              </Typography>
-              <Box
-                sx={{
-                  display: "flex",
-                  justifyContent: "center",
-                  marginBottom: 2,
-                }}
-              ></Box>
-              <Box sx={{ height: "300px" }}>
-                <Radar data={radarData} options={radarOptions} />
-              </Box>
-            </CardContent>
-          </Card>
-          <Grid2 container item spacing={3}>
-            {/* Key Player A */}
-            <Grid2 item xs={12} md={6}>
-              <Card sx={{ boxShadow: 3, borderRadius: 3, padding: 2 }}>
-                <CardContent>
-                  <Typography
-                    variant="h100"
-                    gutterBottom
-                    sx={{ fontWeight: "bold", textAlign: "center" }}
-                  >
-                    Key Player: {playerAData.name} ({selectedTeams.teamA})
-                  </Typography>
-                  <Box
-                    sx={{
-                      display: "flex",
-                      flexDirection: "column",
-                      alignItems: "center",
+                      },
                     }}
-                  >
-                    <img
-                      src={playerAData.photo}
-                      alt={playerAData.name}
-                      style={{
-                        width: "150px",
-                        height: "200px",
-                        borderRadius: "10px",
-                        marginBottom: "10px",
-                      }}
-                    />
-                    <Typography variant="h6" gutterBottom>
-                      近五場平均數據
-                    </Typography>
-                    <ul style={{ listStyle: "none", padding: 0 }}>
-                      <li>得分: {playerAData.stats.scores}</li>
-                      <li>籃板: {playerAData.stats.rebounds}</li>
-                      <li>助攻: {playerAData.stats.assists}</li>
-                      <li>抄截: {playerAData.stats.steals}</li>
-                      <li>阻攻: {playerAData.stats.blocks}</li>
-                    </ul>
-                  </Box>
-                </CardContent>
-              </Card>
-            </Grid2>
+                  />
+                </Box>
+              </CardContent>
+            </Card>
 
-            {/* Key Player B */}
-            <Grid2 item xs={12} md={6}>
-              <Card sx={{ boxShadow: 3, borderRadius: 3, padding: 2 }}>
-                <CardContent>
-                  <Typography
-                    variant="h100"
-                    gutterBottom
-                    sx={{ fontWeight: "bold", textAlign: "center" }}
-                  >
-                    Key Player: {playerBData.name} ({selectedTeams.teamB})
-                  </Typography>
-                  <Box
-                    sx={{
-                      display: "flex",
-                      flexDirection: "column",
-                      alignItems: "center",
-                    }}
-                  >
-                    <img
-                      src={playerBData.photo}
-                      alt={playerBData.name}
-                      style={{
-                        width: "150px",
-                        height: "200px",
-                        borderRadius: "10px",
-                        marginBottom: "10px",
-                      }}
-                    />
-                    <Typography variant="h6" gutterBottom>
-                      近五場平均數據
-                    </Typography>
-                    <ul style={{ listStyle: "none", padding: 0 }}>
-                      <li>得分: {playerBData.stats.scores}</li>
-                      <li>籃板: {playerBData.stats.rebounds}</li>
-                      <li>助攻: {playerBData.stats.assists}</li>
-                      <li>抄截: {playerBData.stats.steals}</li>
-                      <li>阻攻: {playerBData.stats.blocks}</li>
-                    </ul>
-                  </Box>
-                </CardContent>
-              </Card>
-            </Grid2>
+            {/* 命中率比較圖表 */}
+
+            <Card sx={cardStyle}>
+              <CardContent>
+                <Typography variant="h100" gutterBottom sx={titleStyle}>
+                  近五場命中率比較
+                </Typography>
+                <Box sx={chartContainerStyle}>
+                  <Radar data={shootingPercentageData} options={radarOptions} />
+                </Box>
+              </CardContent>
+            </Card>
+
+            {/* 雷達圖 */}
+            <Card sx={cardStyle}>
+              <CardContent>
+                <Typography variant="h100" gutterBottom sx={titleStyle}>
+                  近五場傳統數據比較
+                </Typography>
+                <Box sx={chartContainerStyle}>
+                  <Radar data={radarData} options={radarOptions} />
+                </Box>
+              </CardContent>
+            </Card>
           </Grid2>
+
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              gap: 3,
+              width: "100%",
+            }}
+          >
+            {/* 第一個卡片 */}
+            <Card
+              sx={{
+                boxShadow: 3,
+                height: "85%",
+                borderRadius: 3,
+                margin: "14px 0",
+                position: "relative",
+              }}
+              title="助攻失誤比 = 平均助攻數 / 平均失誤數，數值越高代表球隊控球能力越好"
+            >
+              {teamAValue < 1.5 ? (
+                <Warning
+                  sx={{
+                    position: "absolute",
+                    top: "10px",
+                    right: "10px",
+                    color: teamAValue < 1.2 ? "#ff4d4d" : "#ffcc00", // 小於 1.2 紅色，1.2-1.5 黃色
+                    fontSize: "24px",
+                    zIndex: 1,
+                  }}
+                />
+              ) : (
+                <CheckCircle
+                  sx={{
+                    position: "absolute",
+                    top: "10px",
+                    right: "10px",
+                    color: "#4bc0c0", // 綠色勾勾
+                    fontSize: "24px",
+                    zIndex: 1,
+                  }}
+                />
+              )}
+              <CardContent>
+                <Typography variant="h100" gutterBottom sx={titleStyle}>
+                  {selectedTeams.teamA} 失誤助攻比
+                </Typography>
+                <Doughnut
+                  data={createGaugeData(teamAValue)}
+                  options={options}
+                />
+                {/* 顯示中心數字 */}
+                <Typography
+                  style={{
+                    position: "absolute",
+                    top: "68%",
+                    left: "50%",
+                    transform: "translate(-50%, -50%)",
+                    textAlign: "center",
+                    fontSize: "50px",
+                    fontWeight: "bold",
+                    color: teamAValue < 1.5 ? "#ff4d4d" : "#4bc0c0",
+                  }}
+                >
+                  {teamAValue.toFixed(2)}
+                </Typography>
+              </CardContent>
+            </Card>
+
+            {/* 第二個卡片 */}
+            <Card
+              sx={{
+                boxShadow: 3,
+                height: "85%",
+                borderRadius: 3,
+                margin: "14px 0",
+                position: "relative",
+              }}
+              title="助攻失誤比 = 平均助攻數 / 平均失誤數，數值越高代表球隊控球能力越好"
+            >
+              {teamBValue < 1.5 ? (
+                <Warning
+                  sx={{
+                    position: "absolute",
+                    top: "10px",
+                    right: "10px",
+                    color: teamBValue < 1.2 ? "#ff4d4d" : "#ffcc00", // 小於 1.2 紅色，1.2-1.5 黃色
+                    fontSize: "24px",
+                    zIndex: 1,
+                  }}
+                />
+              ) : (
+                <CheckCircle
+                  sx={{
+                    position: "absolute",
+                    top: "10px",
+                    right: "10px",
+                    color: "#4bc0c0", // 綠色勾勾
+                    fontSize: "24px",
+                    zIndex: 1,
+                  }}
+                />
+              )}
+              <CardContent>
+                <Typography variant="h100" gutterBottom sx={titleStyle}>
+                  {selectedTeams.teamB} 失誤助攻比
+                </Typography>
+                <Doughnut
+                  data={createGaugeData(teamBValue)}
+                  options={options}
+                />
+                {/* 顯示中心數字 */}
+                <Typography
+                  style={{
+                    position: "absolute",
+                    top: "68%",
+                    left: "50%",
+                    transform: "translate(-50%, -50%)",
+                    textAlign: "center",
+                    fontSize: "50px",
+                    fontWeight: "bold",
+                    color: teamBValue < 1.5 ? "#ff4d4d" : "#4bc0c0",
+                  }}
+                >
+                  {teamBValue.toFixed(2)}
+                </Typography>
+              </CardContent>
+            </Card>
+          </Box>
         </Grid2>
       </Container>
     </Box>
+    </div>
   );
 };
 
