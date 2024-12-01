@@ -6,6 +6,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .models import GameStats
 from .serializers import GameStatsSerializer
+from .Ml.api.main import train_model
 
 def index(request):
     return render(request, "index.html")
@@ -46,3 +47,28 @@ def get_home_away_stats(request):
         "homeTeam": list(home_stats),
         "awayTeam": list(away_stats),
     })
+
+@api_view(['GET'])
+def predict(request):
+    try:
+        home_team = request.GET.get('homeTeam')
+        away_team = request.GET.get('awayTeam')
+        is_home_team = request.GET.get('is_home_team')
+
+        # 檢查參數是否完整
+        if not home_team or not away_team or is_home_team is None:
+            return Response({"error": "請提供 homeTeam、awayTeam 和 is_home_team 參數"}, status=400)
+
+        # 使用模型進行預測
+        prediction = train_model(home_team, away_team, is_home_team)
+
+        return Response({
+            'status': 'success',
+            'prediction': prediction
+        })
+    except Exception as e:
+        # 記錄詳細的錯誤資訊
+        return Response({
+            'status': 'error',
+            'message': 'Internal Server Error'
+        }, status=500)

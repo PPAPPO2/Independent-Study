@@ -103,6 +103,37 @@ const Dashboard = () => {
 
       try {
         // API 請求
+        const winRateresponse = await fetch(
+          `http://127.0.0.1:8000/cat/api/model/?homeTeam=${encodeURIComponent(
+            homeTeam
+          )}&awayTeam=${encodeURIComponent(
+            awayTeam
+          )}&is_home_team=${encodeURIComponent(homeTeam)}`
+        );
+        const winRatedata = await winRateresponse.json();
+        console.log("勝率：", winRatedata);
+        if (!winRateresponse.ok) {
+          console.error("API 回傳錯誤：", winRatedata.error);
+          return;
+        }
+
+        // 更新勝率數據
+        const homeTeamWinRate =
+          parseFloat(winRatedata.prediction.team1_win_prob) * 100;
+        const awayTeamWinRate =
+          parseFloat(winRatedata.prediction.team2_win_prob) * 100;
+        setWinRateData([homeTeamWinRate, awayTeamWinRate]);
+
+        const homeScoreMax = winRatedata.prediction.team1_score_range.max;
+        sethomeScoreMax([homeScoreMax]);
+        const homeScoreMin = winRatedata.prediction.team1_score_range.min;
+        sethomeScoreMin([homeScoreMin]);
+        const awayScoreMax = winRatedata.prediction.team2_score_range.max;
+        setawayScoreMax([awayScoreMax]);
+        const awayScoreMin = winRatedata.prediction.team2_score_range.min;
+        setawayScoreMin([awayScoreMin]);
+
+        // #region 數據 API 請求
         const response = await fetch(
           `http://127.0.0.1:8000/cat/api/home-away-stats/?homeTeam=${encodeURIComponent(
             homeTeam
@@ -311,17 +342,14 @@ const Dashboard = () => {
     fetchData();
   }, [selectedTeams, teamType]);
 
-  // 建立兩個獨立的儀表圖數據函數
+  // #region 勝率圖
   const createGaugeData = (value) => {
-    const value1 = value[0];
-    const value2 = value[1];
-    const home = value < 1.5 ? "#ff4d4d" : "#4bc0c0";
-    const away = value < 1.5 ? "#ff4d4d" : "#4bc0c0";
+    const gaugeColor = value < 1.5 ? "#ff4d4d" : "#4bc0c0";
     return {
       datasets: [
         {
-          data: [value1, value2], // 動態計算剩餘部分
-          backgroundColor: [home, away],
+          data: [value, 3 - value], // 動態計算剩餘部分
+          backgroundColor: [gaugeColor, "#e0e0e0"],
           borderWidth: 0,
           cutout: "80%",
         },
@@ -338,31 +366,43 @@ const Dashboard = () => {
     circumference: 180, // 顯示半圓
     cutout: "80%", // 中心空洞比例
   };
+  // #endregion
 
-  // 球隊勝率圓餅圖的數據
-  const winRateChartData = {
-    labels: [`${selectedTeams.teamA} 勝率`, `${selectedTeams.teamB} 勝率`],
-    datasets: [
-      {
-        data: [45, 65], // 模擬的勝率數據：teamA 65%, teamB 55%
-        backgroundColor: [
-          teamType.teamA === "home" ? "rgb(54, 162, 235)" : "rgb(255, 99, 132)", // 主場藍色，客場粉色
-          teamType.teamB === "home" ? "rgb(54, 162, 235)" : "rgb(255, 99, 132)", // 主場藍色，客場粉色
-        ],
-        borderColor: "white",
-        borderWidth: 2,
-      },
-    ],
+  //#region 勝率圓餅圖的選項設定 & 數據
+  const winRateChart = (teamType, selectedTeams, values) => {
+    // 獲取各隊伍的顏色
+    const getTeamColor = (isHome) => ({
+      backgroundColor: isHome
+        ? "rgba(54, 162, 235, 0.8)"
+        : "rgba(255, 99, 132, 0.8)",
+      borderColor: isHome ? "rgba(54, 162, 235, 1)" : "rgba(255, 99, 132, 1)",
+    });
+
+    // 根據主客場狀態設定顏色
+    const teamAColors = getTeamColor(teamType.teamA === "home");
+    const teamBColors = getTeamColor(teamType.teamB === "home");
+
+    return {
+      labels: [selectedTeams.teamA, selectedTeams.teamB],
+      datasets: [
+        {
+          data: values,
+          backgroundColor: [
+            teamAColors.backgroundColor,
+            teamBColors.backgroundColor,
+          ],
+          borderColor: [teamAColors.borderColor, teamBColors.borderColor],
+          borderWidth: 0,
+        },
+      ],
+    };
   };
 
-  //#region 勝率圓餅圖的選項設定
   const winRateOptions = {
-    responsive: true,
     plugins: {
-      legend: {
-        display: false, // 隱藏默認圖例
-      },
       tooltip: {
+        enabled: false, // 如果想顯示 Tooltip，但避免遮擋，啟用即可
+        position: "nearest", // 跟隨滑鼠的最近位置顯示 Tooltip
         callbacks: {
           label: (context) => {
             return `${context.label}: ${context.raw}%`;
@@ -370,13 +410,23 @@ const Dashboard = () => {
         },
       },
     },
-    cutout: "50%", // 設置中心空心大小
+    rotation: 180, // 開始角度
+    circumference: 360, // 顯示完整圓餅
+    cutout: "70%", // 中心空洞比例
   };
+  const [winratedata, setWinRateData] = useState([50, 50]);
   // #endregion
 
   // #region 助攻失誤比
   const [teamAValue, setTeamAValue] = useState(0);
   const [teamBValue, setTeamBValue] = useState(0);
+  // #endregion
+
+  // #region 預測得分
+  const [homeScoreMax, sethomeScoreMax] = useState(0);
+  const [homeScoreMin, sethomeScoreMin] = useState(0);
+  const [awayScoreMax, setawayScoreMax] = useState(0);
+  const [awayScoreMin, setawayScoreMin] = useState(0);
   // #endregion
 
   // #region 近五場得分數據
@@ -555,13 +605,13 @@ const Dashboard = () => {
                         預測比分
                       </Typography>
                       <Typography
-                        variant="h3"
+                        variant="h6"
                         sx={{
                           textAlign: "center",
                           fontWeight: "bold",
                         }}
                       >
-                        93分
+                      {homeScoreMin}~{homeScoreMax}分
                       </Typography>
                     </CardContent>
                   </Card>
@@ -636,13 +686,13 @@ const Dashboard = () => {
                         預測比分
                       </Typography>
                       <Typography
-                        variant="h3"
+                        variant="h6"
                         sx={{
                           textAlign: "center",
                           fontWeight: "bold",
                         }}
                       >
-                        93分
+                      {awayScoreMin}~{awayScoreMax}分
                       </Typography>
                     </CardContent>
                   </Card>
@@ -651,39 +701,71 @@ const Dashboard = () => {
             </Grid2>
 
             <Card
-                sx={{
-                  boxShadow: 3,
-                  height: "85%",
-                  borderRadius: 3,
-                  margin: "14px 0",
-                  position: "relative",
-                }}
-              >
-                <CardContent>
-                  <Typography variant="h100" gutterBottom sx={titleStyle}>
+              sx={{
+                boxShadow: 3,
+                height: "85%",
+                borderRadius: 3,
+                margin: "14px 0",
+                position: "relative",
+              }}
+            >
+              <CardContent>
+                <Typography variant="h100" gutterBottom sx={titleStyle}>
                   {selectedTeams.teamA} vs. {selectedTeams.teamB}
-                  </Typography>
+                </Typography>
+                <Box sx={chartContainerStyle}>
                   <Doughnut
-                    data={createGaugeData(winRateChartData)}
+                    data={winRateChart(teamType, selectedTeams, winratedata)}
                     options={winRateOptions}
                   />
-                  {/* 顯示中心數字 */}
+                  {/* VS 文字使用絕對定位 */}
                   <Typography
-                    style={{
+                    sx={{
                       position: "absolute",
-                      top: "68%",
+                      top: "55%",
                       left: "50%",
                       transform: "translate(-50%, -50%)",
                       textAlign: "center",
-                      fontSize: "50px",
+                      fontSize: "30px",
                       fontWeight: "bold",
-                      color: teamBValue < 1.5 ? "#ff4d4d" : "#4bc0c0",
+                      zIndex: 1,
+                      display: "flex",
+                      alignItems: "center",
+                      gap: 1,
                     }}
                   >
-                    {teamBValue.toFixed(2)}
+                    <span
+                      style={{
+                        color:
+                          teamType.teamA === "home"
+                            ? "rgba(54, 162, 235, 1)"
+                            : "rgba(255, 99, 132, 1)",
+                      }}
+                    >
+                      {winratedata[0]}
+                    </span>
+                    <span
+                      style={{
+                        color: "#666", // 中間的 vs 使用中性的灰色
+                        fontSize: "24px", // vs 稍微小一點
+                      }}
+                    >
+                      vs
+                    </span>
+                    <span
+                      style={{
+                        color:
+                          teamType.teamB === "home"
+                            ? "rgba(54, 162, 235, 1)"
+                            : "rgba(255, 99, 132, 1)",
+                      }}
+                    >
+                      {winratedata[1]}
+                    </span>
                   </Typography>
-                </CardContent>
-              </Card>
+                </Box>
+              </CardContent>
+            </Card>
 
             {/* 並排的圖表區域 */}
             <Grid2 container item spacing={3}>
