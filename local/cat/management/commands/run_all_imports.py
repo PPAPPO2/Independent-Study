@@ -14,7 +14,7 @@ class Command(BaseCommand):
             'import_TPBL_season_players_performance_AUTO',
             'import_TPBL_season_teams_performance_AUTO',
             'import_T1_standings_AUTO',
-            'import_player_AUTO_AUTO',
+            'import_player_AUTO',
             'import_Standing_json_AUTO',
             'import_team_AUTO',
 
