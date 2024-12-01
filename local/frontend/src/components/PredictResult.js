@@ -313,12 +313,15 @@ const Dashboard = () => {
 
   // 建立兩個獨立的儀表圖數據函數
   const createGaugeData = (value) => {
-    const gaugeColor = value < 1.5 ? "#ff4d4d" : "#4bc0c0";
+    const value1 = value[0];
+    const value2 = value[1];
+    const home = value < 1.5 ? "#ff4d4d" : "#4bc0c0";
+    const away = value < 1.5 ? "#ff4d4d" : "#4bc0c0";
     return {
       datasets: [
         {
-          data: [value, 3 - value], // 動態計算剩餘部分
-          backgroundColor: [gaugeColor, "#e0e0e0"],
+          data: [value1, value2], // 動態計算剩餘部分
+          backgroundColor: [home, away],
           borderWidth: 0,
           cutout: "80%",
         },
