@@ -5,7 +5,8 @@ import axios from "axios";
 import "../styles/Schedule.css";
 import plgLogo from "../logo/plg.png";
 import t1Logo from "../logo/tpbl.png";
-
+import { useSpring, animated } from "react-spring";
+import { useInView } from "react-intersection-observer"; // 引入 useInView
 const Schedule = () => {
   const [currentTitle, setCurrentTitle] = useState(""); // 儲存標題
   const [events, setEvents] = useState([]); // 儲存賽程事件
@@ -70,7 +71,20 @@ const Schedule = () => {
         console.error("Error fetching schedule data:", error);
       });
   }, [selectedLeague]);
-
+  const [ref1, inView1] = useInView({ triggerOnce: false });
+  const fadeIn1 = useSpring({
+    from: {
+      opacity: 0,
+      transform: "translateY(20px)",
+    },
+    to: {
+      opacity: 1,
+      transform: "translateY(0px)",
+    },
+    config: { duration: 500 },
+    reset: selectedLeague === "聯盟一" || selectedLeague === "聯盟二", // 使用聯盟切換來觸發動畫
+    key: selectedLeague, // 使用聯盟作為 key 而不是 currentTitle
+  });
   return (
     <div className="Schedule">
       <div className="top-bar">
@@ -107,95 +121,98 @@ const Schedule = () => {
           <img src={t1Logo} alt="T1 Logo" className="t1_Sche" />
         </span>
       </div>
+      <animated.div style={fadeIn1}>
+        <div className="calendar-container">
+          <FullCalendar
+            plugins={[dayGridPlugin]}
+            initialView="dayGridMonth"
+            events={events} // 這裡是賽程資料
+            // aspectRatio={2.5}
+            height="auto"
+            headerToolbar={{
+              left: "",
+              center: "",
+              right: "",
+            }}
+            dayHeaderContent={(args) => {
+              const weekdays = [
+                "星期日",
+                "星期一",
+                "星期二",
+                "星期三",
+                "星期四",
+                "星期五",
+                "星期六",
+              ];
+              return weekdays[args.date.getUTCDay()];
+            }}
+            titleFormat={(args) => {
+              const year = args.date.year;
+              const month = String(args.date.month + 1).padStart(2, "0");
+              const formattedTitle = `${year}.${month}`;
+              setCurrentTitle(formattedTitle); // 更新橫條的標題
+              return ""; // 不顯示內建的日曆標題
+            }}
+            // 修改這裡的 eventContent 來顯示 LOGO 和場地信息
+            eventContent={(eventInfo) => {
+              const gameTime = new Date(eventInfo.event.start);
+              const hours = gameTime.getHours().toString().padStart(2, "0");
+              const minutes = gameTime.getMinutes().toString().padStart(2, "0");
+              const timeString = `${hours}:${minutes}`; // 格式化為 HH:MM
 
-      <div className="calendar-container">
-        <FullCalendar
-          plugins={[dayGridPlugin]}
-          initialView="dayGridMonth"
-          events={events} // 這裡是賽程資料
-          // aspectRatio={2.5}
-          height="auto"
-          headerToolbar={{
-            left: "",
-            center: "",
-            right: "",
-          }}
-          dayHeaderContent={(args) => {
-            const weekdays = [
-              "星期日",
-              "星期一",
-              "星期二",
-              "星期三",
-              "星期四",
-              "星期五",
-              "星期六",
-            ];
-            return weekdays[args.date.getUTCDay()];
-          }}
-          titleFormat={(args) => {
-            const year = args.date.year;
-            const month = String(args.date.month + 1).padStart(2, "0");
-            const formattedTitle = `${year}.${month}`;
-            setCurrentTitle(formattedTitle); // 更新橫條的標題
-            return ""; // 不顯示內建的日曆標題
-          }}
-          // 修改這裡的 eventContent 來顯示 LOGO 和場地信息
-          eventContent={(eventInfo) => {
-            const gameTime = new Date(eventInfo.event.start);
-            const hours = gameTime.getHours().toString().padStart(2, "0");
-            const minutes = gameTime.getMinutes().toString().padStart(2, "0");
-            const timeString = `${hours}:${minutes}`; // 格式化為 HH:MM
-
-            return (
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  textAlign: "center",
-                  // padding: '10px'
-                }}
-              >
+              return (
                 <div
                   style={{
                     display: "flex",
-                    justifyContent: "center",
+                    flexDirection: "column",
                     alignItems: "center",
-                    // marginBottom: '10px'
+                    justifyContent: "center",
+                    textAlign: "center",
+                    // padding: '10px'
                   }}
                 >
-                  {" "}
-                  {/* 置中 LOGO */}
-                  <img
-                    src={getTeamIcon(eventInfo.event.extendedProps.team_home)}
-                    alt={eventInfo.event.extendedProps.team_home}
-                    style={{ width: "50px", height: "50px" }}
-                  />
-                  <img
-                    src={getTeamIcon(eventInfo.event.extendedProps.team_away)}
-                    alt={eventInfo.event.extendedProps.team_away}
+                  <div
                     style={{
-                      width: "50px",
-                      height: "50px",
-                      marginLeft: "10px",
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      // marginBottom: '10px'
                     }}
-                  />
+                  >
+                    {" "}
+                    {/* 置中 LOGO */}
+                    <img
+                      src={getTeamIcon(eventInfo.event.extendedProps.team_home)}
+                      alt={eventInfo.event.extendedProps.team_home}
+                      style={{ width: "50px", height: "50px" }}
+                    />
+                    <img
+                      src={getTeamIcon(eventInfo.event.extendedProps.team_away)}
+                      alt={eventInfo.event.extendedProps.team_away}
+                      style={{
+                        width: "50px",
+                        height: "50px",
+                        marginLeft: "10px",
+                      }}
+                    />
+                    <br />
+                  </div>
+                  <b style={{ display: "block", margin: "0 0" }}>
+                    {timeString}
+                  </b>
                   <br />
+                  <b style={{ display: "block", margin: "0 0" }}>
+                    {eventInfo.event.extendedProps.location}
+                  </b>
                 </div>
-                <b style={{ display: "block", margin: "0 0" }}>{timeString}</b>
-                <br />
-                <b style={{ display: "block", margin: "0 0" }}>
-                  {eventInfo.event.extendedProps.location}
-                </b>
-              </div>
-            );
-          }}
-          ref={(calendar) => {
-            calendarApi = calendar?.getApi(); // 取得 FullCalendar API，方便控制上下月份切換
-          }}
-        />
-      </div>
+              );
+            }}
+            ref={(calendar) => {
+              calendarApi = calendar?.getApi(); // 取得 FullCalendar API，方便控制上下月份切換
+            }}
+          />
+        </div>
+      </animated.div>
     </div>
   );
 };

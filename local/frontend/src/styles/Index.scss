@@ -273,7 +273,7 @@
         opacity: 0; /* 初始化時隱藏 */
         transition: opacity 0.3s ease;
         width: 300px; /* 固定寬度 */
-        height: 300px; /* 固定高度 */
+        height: 400px; /* 固定高度 */
         display: flex;
         overflow: hidden; /* 如果文字過多，隱藏超出的部分 */
       }

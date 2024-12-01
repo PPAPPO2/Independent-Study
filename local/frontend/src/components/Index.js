@@ -76,31 +76,33 @@ const Index = () => {
 
   const teamMembers = [
     {
-      image: "01.png",
+      image: "曾祥豪.png",
       name: "曾祥豪",
-      description: "後端、資料庫設計、模型訓練",
+      description: "後端、資料庫設計、機器學習",
       experience: "想不通", //心得
     },
     {
-      image: "03.png",
+      image: "蕭丞恩.png",
       name: "蕭丞恩",
       description: "前端設計、網站動畫、簡報製作",
       experience: "想吃飯",
     },
     {
-      image: "02.png",
+      image: "紀信毅.png",
       name: "紀信毅",
-      description: "後端、資料庫設計、模型訓練",
+      description: "後端、資料庫設計、機器學習",
       experience: "還在想",
     },
   ];
   const techData = [
-    { title: "後端", items: ["Django", "SQL Lite", , "Python", "GPT-4"] },
+    {
+      title: "後端",
+      items: ["Django", "MySQL", "Random Forest", "Python"],
+    },
     {
       title: "前端",
       items: ["React", "SCSS", "CSS"],
     },
-    { title: "test1", items: ["還在想"] },
   ];
 
   return (
@@ -115,7 +117,7 @@ const Index = () => {
         <div className="button-container">
           <animated.div style={fadeIn1}>
             <NavLink to="/cat/login" activeClassName="active">
-              <button className="button1">立即登入</button>
+              <button className="button1">立即開始</button>
             </NavLink>
             <NavLink
               to="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
