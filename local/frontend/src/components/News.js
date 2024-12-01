@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import "../styles/News.css";
-
+import { useSpring, animated } from "react-spring";
+import { useInView } from "react-intersection-observer"; // 引入 useInView
 const News = () => {
-  const [currentMonth, setCurrentMonth] = useState(9); // 預設為9月
+  const [currentMonth, setCurrentMonth] = useState(11); // 預設為9月
 
   const newsData = {
     9: [
@@ -174,6 +175,24 @@ const News = () => {
         url: "https://sports.ettoday.net/news/2853755",
         img: "https://cdn2.ettoday.net/images/7945/d7945088.jpg",
       },
+      {
+        id: 7,
+        title: "亞洲盃資格賽 中華隊大勝香港",
+        url: "https://tw.sports.yahoo.com/news/%E4%BA%9E%E6%B4%B2%E7%9B%83%E8%B3%87%E6%A0%BC%E8%B3%BD-%E5%BA%A6%E9%A0%98%E5%85%88%E9%81%9440%E5%88%86-%E4%B8%AD%E8%8F%AF%E9%9A%8A85%E6%AF%9455%E8%A1%80%E6%B4%97%E9%A6%99%E6%B8%AF%E6%90%B6%E4%B8%8B%E9%A6%96%E5%8B%9D-125358552.html",
+        img: "https://s.yimg.com/ny/api/res/1.2/qd55AKs3kdoVCySsv3LatA--/YXBwaWQ9aGlnaGxhbmRlcjt3PTk2MDtoPTY2OTtjZj13ZWJw/https://media.zenfs.com/ko/video.videoland.com/2f651a2e9e2ee532c6586ef2a00a97e7",
+      },
+      {
+        id: 8,
+        title: "亞洲盃資格賽 中華隊不敵紐西蘭",
+        url: "https://tw.sports.yahoo.com/news/%E4%BA%9E%E6%B4%B2%E7%9B%83%E8%B3%87%E6%A0%BC%E8%B3%BD-%E4%B8%AD%E8%8F%AF%E7%94%B7%E7%B1%83%E5%AE%A2%E5%A0%B4%E5%8A%9B%E6%8B%9A%E7%B4%90%E8%A5%BF%E8%98%AD%E8%90%BD%E6%95%97-%E6%98%8E%E5%B9%B42%E6%9C%88%E4%B8%BB%E5%A0%B4%E8%BF%8E%E6%88%B0%E8%8F%B2%E5%BE%8B%E8%B3%93-081655562.html",
+        img: "https://s.yimg.com/ny/api/res/1.2/zjp..GlOOb28Gra7fWhpMQ--/YXBwaWQ9aGlnaGxhbmRlcjt3PTk2MDtoPTY0MDtjZj13ZWJw/https://media.zenfs.com/ko/video.videoland.com/41049db22307c630ed3560509da1ec69",
+      },
+      {
+        id: 9,
+        title: "日本職籃B聯盟明星賽 台灣3人入選",
+        url: "https://tw.news.yahoo.com/%E6%97%A5%E6%9C%AC%E8%81%B7%E7%B1%83b%E8%81%AF%E7%9B%9F%E6%98%8E%E6%98%9F%E8%B3%BD-%E9%98%BF%E5%B7%B4%E8%A5%BF%E7%AD%89%E5%8F%B0%E5%B0%873%E4%BA%BA%E9%83%BD%E5%85%A5%E9%81%B8-021539655.html",
+        img: "https://media.zenfs.com/zh-tw/taisounds_com_380/ed833b65e9cca064fd19b0cd971688bd",
+      },
     ],
   };
   // 點擊「上一個月」的邏輯
@@ -189,7 +208,16 @@ const News = () => {
       setCurrentMonth(currentMonth + 1);
     }
   };
-
+  const [ref1, inView1] = useInView({ triggerOnce: false });
+  const fadeIn1 = useSpring({
+    opacity: 1,
+    transform: "translateY(0)",
+    from: { opacity: 0, transform: "translateY(20px)" }, // 從下方開始
+    //delay: 500, // 按鈕動畫延遲 1 秒開始
+    config: { duration: 500 }, // 動畫持續 1 秒
+    reset: true, // 每次 key 改變時重置動畫
+    key: currentMonth, // 使用 currentMonth 作為 key，這樣月份改變時會觸發動畫
+  });
   return (
     <div className="news-container">
       {/* 月份選擇器 */}
@@ -200,27 +228,29 @@ const News = () => {
           <span onClick={handleNextMonth}>▶</span>
         ) : null}
       </div>
-      {/* 無資料顯示 */}
-      {newsData[currentMonth].length === 0 ? (
-        <div className="news-empty">資料尚未更新</div>
-      ) : (
-        <div className="news-grid">
-          {newsData[currentMonth].map((link) => (
-            <a
-              href={link.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              key={link.id}
-              className="news-card"
-            >
-              <div className="news-image">
-                <img src={link.img} alt={link.title} />
-              </div>
-              <div className="news-title">{link.title}</div>
-            </a>
-          ))}
-        </div>
-      )}
+      <animated.div style={fadeIn1}>
+        {/* 無資料顯示 */}
+        {newsData[currentMonth].length === 0 ? (
+          <div className="news-empty">資料尚未更新</div>
+        ) : (
+          <div className="news-grid">
+            {newsData[currentMonth].map((link) => (
+              <a
+                href={link.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                key={link.id}
+                className="news-card"
+              >
+                <div className="news-image">
+                  <img src={link.img} alt={link.title} />
+                </div>
+                <div className="news-title">{link.title}</div>
+              </a>
+            ))}
+          </div>
+        )}
+      </animated.div>
     </div>
   );
 };

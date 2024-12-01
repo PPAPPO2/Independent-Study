@@ -1,6 +1,7 @@
 @charset "UTF-8";
 .news-container {
   margin-bottom: 5rem;
+  width: 100%;
   display: flex;
   justify-content: center; /* 使九宮格居中 */
   align-items: center;
@@ -42,8 +43,10 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 20px; /* 格子之間的間距 */
-  width: 80%; /* 容器寬度 */
-  max-width: 1200px; /* 設定最大寬度 */
+  width: 90%;
+  max-width: 1200px;
+  padding: 0 20px;
+  margin: 0 auto;
 }
 .news-container .news-grid .news-card {
   display: flex;
