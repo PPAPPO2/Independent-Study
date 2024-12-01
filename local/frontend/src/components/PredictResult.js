@@ -118,10 +118,12 @@ const Dashboard = () => {
         }
 
         // 更新勝率數據
-        const homeTeamWinRate =
-          parseFloat(winRatedata.prediction.team1_win_prob) * 100;
-        const awayTeamWinRate =
-          parseFloat(winRatedata.prediction.team2_win_prob) * 100;
+        const homeTeamWinRate = Math.round(
+          parseFloat(winRatedata.prediction.team1_win_prob) * 100
+        );
+        const awayTeamWinRate = Math.round(
+          parseFloat(winRatedata.prediction.team2_win_prob) * 100
+        );
         setWinRateData([homeTeamWinRate, awayTeamWinRate]);
 
         const homeScoreMax = winRatedata.prediction.team1_score_range.max;
@@ -611,7 +613,7 @@ const Dashboard = () => {
                           fontWeight: "bold",
                         }}
                       >
-                      {homeScoreMin}~{homeScoreMax}分
+                        {homeScoreMin}~{homeScoreMax}分
                       </Typography>
                     </CardContent>
                   </Card>
@@ -692,7 +694,7 @@ const Dashboard = () => {
                           fontWeight: "bold",
                         }}
                       >
-                      {awayScoreMin}~{awayScoreMax}分
+                        {awayScoreMin}~{awayScoreMax}分
                       </Typography>
                     </CardContent>
                   </Card>
