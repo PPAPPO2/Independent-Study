@@ -6,7 +6,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .models import GameStats
 from .serializers import GameStatsSerializer
-from .Ml.api.main import train_model
+from .Model.api.main import train_model
 
 def index(request):
     return render(request, "index.html")
