@@ -116,7 +116,7 @@ const Index = () => {
         />
         <div className="button-container">
           <animated.div style={fadeIn1}>
-            <NavLink to="/cat/login" activeClassName="active">
+            <NavLink to="/cat/predict" activeClassName="active">
               <button className="button1">立即開始</button>
             </NavLink>
             <NavLink

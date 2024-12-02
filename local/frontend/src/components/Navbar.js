@@ -47,12 +47,7 @@ const Navbar = () => {
           </li>
           <li>
             <NavLink to="/cat/predict/" activeClassName="active">
-              預測
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to="/cat/login" activeClassName="active">
-              登入
+              數據儀錶板
             </NavLink>
           </li>
         </ul>
