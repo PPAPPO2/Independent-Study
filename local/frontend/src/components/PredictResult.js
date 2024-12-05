@@ -346,7 +346,8 @@ const Dashboard = () => {
 
   // #region 勝率圖
   const createGaugeData = (value) => {
-    const gaugeColor = value < 1.5 ? value > 1.2 ? "#ffcc00": "#ff4d4d": "#4bc0c0";
+    const gaugeColor =
+      value < 1.5 ? (value > 1.2 ? "#ffcc00" : "#ff4d4d") : "#4bc0c0";
     return {
       datasets: [
         {
@@ -613,7 +614,9 @@ const Dashboard = () => {
                           fontWeight: "bold",
                         }}
                       >
-                        {homeScoreMin}~{homeScoreMax}分
+                        {teamType.teamA === "home"
+                          ? `${homeScoreMin}~${homeScoreMax}分`
+                          : `${awayScoreMin}~${awayScoreMax}分`}
                       </Typography>
                     </CardContent>
                   </Card>
@@ -694,7 +697,9 @@ const Dashboard = () => {
                           fontWeight: "bold",
                         }}
                       >
-                        {awayScoreMin}~{awayScoreMax}分
+                        {teamType.teamB === "home"
+                          ? `${homeScoreMin}~${homeScoreMax}分`
+                          : `${awayScoreMin}~${awayScoreMax}分`}
                       </Typography>
                     </CardContent>
                   </Card>
@@ -899,7 +904,12 @@ const Dashboard = () => {
                       textAlign: "center",
                       fontSize: "50px",
                       fontWeight: "bold",
-                      color: teamAValue < 1.5 ? teamAValue > 1.2 ? "#ffcc00": "#ff4d4d": "#4bc0c0",
+                      color:
+                        teamAValue < 1.5
+                          ? teamAValue > 1.2
+                            ? "#ffcc00"
+                            : "#ff4d4d"
+                          : "#4bc0c0",
                     }}
                   >
                     {teamAValue.toFixed(2)}
@@ -959,7 +969,12 @@ const Dashboard = () => {
                       textAlign: "center",
                       fontSize: "50px",
                       fontWeight: "bold",
-                      color: teamBValue < 1.5 ? teamBValue > 1.2 ? "#ffcc00": "#ff4d4d": "#4bc0c0",
+                      color:
+                        teamBValue < 1.5
+                          ? teamBValue > 1.2
+                            ? "#ffcc00"
+                            : "#ff4d4d"
+                          : "#4bc0c0",
                     }}
                   >
                     {teamBValue.toFixed(2)}
