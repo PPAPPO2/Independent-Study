@@ -1,6 +1,7 @@
 // 引入必要的 React 和圖表相關套件
 import React, { useState, useEffect, useMemo, useCallback } from "react";
-
+import { useSpring, animated } from "react-spring";
+import { useInView } from "react-intersection-observer"; // 引入 useInView
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -521,470 +522,496 @@ const Dashboard = () => {
   });
   // #endregion
 
+  //動畫
+  const [ref1, inView1] = useInView({ triggerOnce: false });
+  const fadeIn1 = useSpring({
+    from: {
+      opacity: 0,
+      transform: "translateY(20px)",
+    },
+    to: {
+      opacity: 1,
+      transform: "translateY(0px)",
+    },
+    config: { duration: 500 },
+    // reset: selectedLeague === "聯盟一" || selectedLeague === "聯盟二", // 使用聯盟切換來觸發動畫
+    // key: selectedLeague, // 使用聯盟作為 key 而不是 currentTitle
+  });
   return (
     <div className="Predict">
-      <Box className="dashboard-background">
-        <Container
-          maxWidth="lg" // 設定最大寬度
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center", // 水平置中
-            justifyContent: "center", // 垂直置中
-            minHeight: "100vh", // 佔滿整個視窗高度
-            // padding: "2px 0", // 上下增加一些空間
-          }}
-        >
-          <Grid2 container spacing={3} sx={{ justifyContent: "center" }}>
-            {/* 比較選單區域 */}
-            <Grid2 item xs={12}>
-              <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
-                {/* 第一隊選擇區域 */}
-                <Box sx={{ display: "flex", alignItems: "top", gap: 2 }}>
-                  <ButtonGroup
-                    variant="contained"
-                    sx={{ minWidth: 200, height: "56px" }}
-                  >
-                    <Button
-                      onClick={() => handleTeamTypeChange("teamA", "home")}
-                      sx={{
-                        flex: 1,
-                        bgcolor:
-                          teamType.teamA === "home"
-                            ? "primary.main"
-                            : "#e0e0e0",
-                        color: teamType.teamA === "home" ? "#fff" : "#333", // 文字顏色調整
-                      }}
-                    >
-                      主場
-                    </Button>
-                    <Button
-                      onClick={() => handleTeamTypeChange("teamA", "away")}
-                      sx={{
-                        flex: 1,
-                        bgcolor:
-                          teamType.teamA === "away"
-                            ? "rgba(255, 99, 132, 0.8)"
-                            : "#e0e0e0",
-                        color: teamType.teamA === "away" ? "#fff" : "#333", // 文字顏色調整
-                      }}
-                    >
-                      客場
-                    </Button>
-                  </ButtonGroup>
-                  <FormControl fullWidth sx={{ minWidth: 200 }}>
-                    <Select
-                      value={selectedTeams.teamA}
-                      onChange={(e) =>
-                        setSelectedTeams((prev) => ({
-                          ...prev,
-                          teamA: e.target.value,
-                        }))
-                      }
-                    >
-                      {teams.map((team) => (
-                        <MenuItem key={team} value={team}>
-                          {team}
-                        </MenuItem>
-                      ))}
-                    </Select>
-                  </FormControl>
-                  <Card
+      <animated.div style={fadeIn1}>
+        <Box className="dashboard-background">
+          <Container
+            maxWidth="lg" // 設定最大寬度
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center", // 水平置中
+              justifyContent: "center", // 垂直置中
+              minHeight: "100vh", // 佔滿整個視窗高度
+              // padding: "2px 0", // 上下增加一些空間
+            }}
+          >
+            <Grid2 container spacing={3} sx={{ justifyContent: "center" }}>
+              <Grid2 container item spacing={3}>
+                {/* 比較選單區域 */}
+                <Grid2 item xs={6}>
+                  <Box
                     sx={{
-                      boxShadow: 3,
-                      borderRadius: 3,
-                      margin: "14px 0",
-                      minWidth: 200, // 設置最小寬度
-                    }}
-                  >
-                    <CardContent>
-                      <Typography
-                        variant="h6"
-                        sx={{
-                          textAlign: "center",
-                          marginBottom: 1,
-                        }}
-                      >
-                        預測比分
-                      </Typography>
-                      <Typography
-                        variant="h6"
-                        sx={{
-                          textAlign: "center",
-                          fontWeight: "bold",
-                        }}
-                      >
-                        {teamType.teamA === "home"
-                          ? `${homeScoreMin}~${homeScoreMax}分`
-                          : `${awayScoreMin}~${awayScoreMax}分`}
-                      </Typography>
-                    </CardContent>
-                  </Card>
-                </Box>
-
-                {/* 第二隊選擇區域 */}
-                <Box sx={{ display: "flex", alignItems: "top", gap: 2 }}>
-                  <ButtonGroup
-                    variant="contained"
-                    sx={{ minWidth: 200, height: "56px" }}
-                  >
-                    <Button
-                      onClick={() => handleTeamTypeChange("teamB", "home")}
-                      sx={{
-                        flex: 1,
-                        bgcolor:
-                          teamType.teamB === "home"
-                            ? "primary.main"
-                            : "#e0e0e0",
-                        color: teamType.teamB === "home" ? "#fff" : "#333", // 文字顏色調整
-                      }}
-                    >
-                      主場
-                    </Button>
-                    <Button
-                      onClick={() => handleTeamTypeChange("teamB", "away")}
-                      sx={{
-                        flex: 1,
-                        bgcolor:
-                          teamType.teamB === "away"
-                            ? "rgba(255, 99, 132, 0.8)"
-                            : "#e0e0e0",
-                        color: teamType.teamB === "away" ? "#fff" : "#333", // 文字顏色調整
-                      }}
-                    >
-                      客場
-                    </Button>
-                  </ButtonGroup>
-                  <FormControl fullWidth sx={{ minWidth: 200 }}>
-                    <Select
-                      value={selectedTeams.teamB}
-                      onChange={(e) =>
-                        setSelectedTeams((prev) => ({
-                          ...prev,
-                          teamB: e.target.value,
-                        }))
-                      }
-                    >
-                      {teams.map((team) => (
-                        <MenuItem key={team} value={team}>
-                          {team}
-                        </MenuItem>
-                      ))}
-                    </Select>
-                  </FormControl>
-                  <Card
-                    sx={{
-                      boxShadow: 3,
-                      borderRadius: 3,
-                      margin: "14px 0",
-                      minWidth: 200, // 設置最小寬度
-                    }}
-                  >
-                    <CardContent>
-                      <Typography
-                        variant="h6"
-                        sx={{
-                          textAlign: "center",
-                          marginBottom: 1,
-                        }}
-                      >
-                        預測比分
-                      </Typography>
-                      <Typography
-                        variant="h6"
-                        sx={{
-                          textAlign: "center",
-                          fontWeight: "bold",
-                        }}
-                      >
-                        {teamType.teamB === "home"
-                          ? `${homeScoreMin}~${homeScoreMax}分`
-                          : `${awayScoreMin}~${awayScoreMax}分`}
-                      </Typography>
-                    </CardContent>
-                  </Card>
-                </Box>
-              </Box>
-            </Grid2>
-
-            <Card
-              sx={{
-                boxShadow: 3,
-                height: "85%",
-                borderRadius: 3,
-                margin: "14px 0",
-                position: "relative",
-              }}
-            >
-              <CardContent>
-                <Typography variant="h100" gutterBottom sx={titleStyle}>
-                  {selectedTeams.teamA} vs. {selectedTeams.teamB}
-                </Typography>
-                <Box sx={chartContainerStyle}>
-                  <Doughnut
-                    data={winRateChart(teamType, selectedTeams, winratedata)}
-                    options={winRateOptions}
-                  />
-                  {/* VS 文字使用絕對定位 */}
-                  <Typography
-                    sx={{
-                      position: "absolute",
-                      top: "55%",
-                      left: "50%",
-                      transform: "translate(-50%, -50%)",
-                      textAlign: "center",
-                      fontSize: "30px",
-                      fontWeight: "bold",
-                      zIndex: 1,
                       display: "flex",
-                      alignItems: "center",
-                      gap: 1,
+                      flexDirection: "column",
+                      gap: 2,
+                      height: "100%", // 確保高度與右側相同
+                      justifyContent: "center", // 垂直置中
                     }}
                   >
-                    <span
-                      style={{
-                        color:
-                          teamType.teamA === "home"
-                            ? "rgba(54, 162, 235, 1)"
-                            : "rgba(255, 99, 132, 1)",
-                      }}
-                    >
-                      {winratedata[0]}
-                    </span>
-                    <span
-                      style={{
-                        color: "#666", // 中間的 vs 使用中性的灰色
-                        fontSize: "24px", // vs 稍微小一點
-                      }}
-                    >
-                      vs
-                    </span>
-                    <span
-                      style={{
-                        color:
-                          teamType.teamB === "home"
-                            ? "rgba(54, 162, 235, 1)"
-                            : "rgba(255, 99, 132, 1)",
-                      }}
-                    >
-                      {winratedata[1]}
-                    </span>
-                  </Typography>
-                </Box>
-              </CardContent>
-            </Card>
+                    {/* 第一隊選擇區域 */}
+                    <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
+                      <ButtonGroup
+                        variant="contained"
+                        sx={{ minWidth: 200, height: "56px" }}
+                      >
+                        <Button
+                          onClick={() => handleTeamTypeChange("teamA", "home")}
+                          sx={{
+                            flex: 1,
+                            bgcolor:
+                              teamType.teamA === "home"
+                                ? "primary.main"
+                                : "#e0e0e0",
+                            color: teamType.teamA === "home" ? "#fff" : "#333", // 文字顏色調整
+                          }}
+                        >
+                          主場
+                        </Button>
+                        <Button
+                          onClick={() => handleTeamTypeChange("teamA", "away")}
+                          sx={{
+                            flex: 1,
+                            bgcolor:
+                              teamType.teamA === "away"
+                                ? "rgba(255, 99, 132, 0.8)"
+                                : "#e0e0e0",
+                            color: teamType.teamA === "away" ? "#fff" : "#333", // 文字顏色調整
+                          }}
+                        >
+                          客場
+                        </Button>
+                      </ButtonGroup>
+                      <FormControl fullWidth sx={{ minWidth: 200 }}>
+                        <Select
+                          value={selectedTeams.teamA}
+                          onChange={(e) =>
+                            setSelectedTeams((prev) => ({
+                              ...prev,
+                              teamA: e.target.value,
+                            }))
+                          }
+                        >
+                          {teams.map((team) => (
+                            <MenuItem key={team} value={team}>
+                              {team}
+                            </MenuItem>
+                          ))}
+                        </Select>
+                      </FormControl>
+                      <Card
+                        sx={{
+                          boxShadow: 3,
+                          borderRadius: 3,
+                          margin: "14px 0",
+                          minWidth: 200, // 設置最小寬度
+                        }}
+                      >
+                        <CardContent>
+                          <Typography
+                            variant="h6"
+                            sx={{
+                              textAlign: "center",
+                              marginBottom: 1,
+                            }}
+                          >
+                            預測比分
+                          </Typography>
+                          <Typography
+                            variant="h6"
+                            sx={{
+                              textAlign: "center",
+                              fontWeight: "bold",
+                            }}
+                          >
+                            {teamType.teamA === "home"
+                              ? `${homeScoreMin}~${homeScoreMax}分`
+                              : `${awayScoreMin}~${awayScoreMax}分`}
+                          </Typography>
+                        </CardContent>
+                      </Card>
+                    </Box>
 
-            {/* 並排的圖表區域 */}
-            <Grid2 container item spacing={3}>
-              {/* 得分比較圖表 */}
-
-              <Card sx={cardStyle}>
+                    {/* 第二隊選擇區域 */}
+                    <Box sx={{ display: "flex", alignItems: "top", gap: 2 }}>
+                      <ButtonGroup
+                        variant="contained"
+                        sx={{ minWidth: 200, height: "56px" }}
+                      >
+                        <Button
+                          onClick={() => handleTeamTypeChange("teamB", "home")}
+                          sx={{
+                            flex: 1,
+                            bgcolor:
+                              teamType.teamB === "home"
+                                ? "primary.main"
+                                : "#e0e0e0",
+                            color: teamType.teamB === "home" ? "#fff" : "#333", // 文字顏色調整
+                          }}
+                        >
+                          主場
+                        </Button>
+                        <Button
+                          onClick={() => handleTeamTypeChange("teamB", "away")}
+                          sx={{
+                            flex: 1,
+                            bgcolor:
+                              teamType.teamB === "away"
+                                ? "rgba(255, 99, 132, 0.8)"
+                                : "#e0e0e0",
+                            color: teamType.teamB === "away" ? "#fff" : "#333", // 文字顏色調整
+                          }}
+                        >
+                          客場
+                        </Button>
+                      </ButtonGroup>
+                      <FormControl fullWidth sx={{ minWidth: 200 }}>
+                        <Select
+                          value={selectedTeams.teamB}
+                          onChange={(e) =>
+                            setSelectedTeams((prev) => ({
+                              ...prev,
+                              teamB: e.target.value,
+                            }))
+                          }
+                        >
+                          {teams.map((team) => (
+                            <MenuItem key={team} value={team}>
+                              {team}
+                            </MenuItem>
+                          ))}
+                        </Select>
+                      </FormControl>
+                      <Card
+                        sx={{
+                          boxShadow: 3,
+                          borderRadius: 3,
+                          margin: "14px 0",
+                          minWidth: 200, // 設置最小寬度
+                        }}
+                      >
+                        <CardContent>
+                          <Typography
+                            variant="h6"
+                            sx={{
+                              textAlign: "center",
+                              marginBottom: 1,
+                            }}
+                          >
+                            預測比分
+                          </Typography>
+                          <Typography
+                            variant="h6"
+                            sx={{
+                              textAlign: "center",
+                              fontWeight: "bold",
+                            }}
+                          >
+                            {teamType.teamB === "home"
+                              ? `${homeScoreMin}~${homeScoreMax}分`
+                              : `${awayScoreMin}~${awayScoreMax}分`}
+                          </Typography>
+                        </CardContent>
+                      </Card>
+                    </Box>
+                  </Box>
+                </Grid2>
+              </Grid2>
+              <Card
+                sx={{
+                  boxShadow: 3,
+                  height: "85%",
+                  borderRadius: 3,
+                  margin: "14px 0",
+                  position: "relative",
+                }}
+              >
                 <CardContent>
                   <Typography variant="h100" gutterBottom sx={titleStyle}>
-                    近五場比賽得分走勢
+                    {selectedTeams.teamA} vs. {selectedTeams.teamB}
                   </Typography>
                   <Box sx={chartContainerStyle}>
-                    <Line
-                      data={lineScoreTrendData}
-                      options={{
-                        ...commonChartOptions,
-                        plugins: {
-                          ...commonChartOptions.plugins,
-                          legend: {
-                            display: true,
-                            position: "top", // 設置圖例在上方
-                            labels: {
-                              usePointStyle: true, // 使用點狀圖例
-                              boxWidth: 20,
-                              padding: 15,
-                              font: {
-                                size: 12,
-                                // weight: "bold",
+                    <Doughnut
+                      data={winRateChart(teamType, selectedTeams, winratedata)}
+                      options={winRateOptions}
+                    />
+                    {/* VS 文字使用絕對定位 */}
+                    <Typography
+                      sx={{
+                        position: "absolute",
+                        top: "55%",
+                        left: "50%",
+                        transform: "translate(-50%, -50%)",
+                        textAlign: "center",
+                        fontSize: "30px",
+                        fontWeight: "bold",
+                        zIndex: 1,
+                        display: "flex",
+                        alignItems: "center",
+                        gap: 1,
+                      }}
+                    >
+                      <span
+                        style={{
+                          color:
+                            teamType.teamA === "home"
+                              ? "rgba(54, 162, 235, 1)"
+                              : "rgba(255, 99, 132, 1)",
+                        }}
+                      >
+                        {winratedata[0]}
+                      </span>
+                      <span
+                        style={{
+                          color: "#666", // 中間的 vs 使用中性的灰色
+                          fontSize: "24px", // vs 稍微小一點
+                        }}
+                      >
+                        vs
+                      </span>
+                      <span
+                        style={{
+                          color:
+                            teamType.teamB === "home"
+                              ? "rgba(54, 162, 235, 1)"
+                              : "rgba(255, 99, 132, 1)",
+                        }}
+                      >
+                        {winratedata[1]}
+                      </span>
+                    </Typography>
+                  </Box>
+                </CardContent>
+              </Card>
+
+              {/* 並排的圖表區域 */}
+              <Grid2 container item spacing={3}>
+                {/* 得分比較圖表 */}
+
+                <Card sx={cardStyle}>
+                  <CardContent>
+                    <Typography variant="h100" gutterBottom sx={titleStyle}>
+                      近五場比賽得分走勢
+                    </Typography>
+                    <Box sx={chartContainerStyle}>
+                      <Line
+                        data={lineScoreTrendData}
+                        options={{
+                          ...commonChartOptions,
+                          plugins: {
+                            ...commonChartOptions.plugins,
+                            legend: {
+                              display: true,
+                              position: "top", // 設置圖例在上方
+                              labels: {
+                                usePointStyle: true, // 使用點狀圖例
+                                boxWidth: 20,
+                                padding: 15,
+                                font: {
+                                  size: 12,
+                                  // weight: "bold",
+                                },
+                                color: "#333", // 圖例文字顏色
+                                borderRadius: 5, // 增加邊框圓角
+                                borderColor: "rgba(0, 0, 0, 0.1)", // 圖例邊框顏色
+                                borderWidth: 2, // 圖例邊框寬度
                               },
-                              color: "#333", // 圖例文字顏色
-                              borderRadius: 5, // 增加邊框圓角
-                              borderColor: "rgba(0, 0, 0, 0.1)", // 圖例邊框顏色
-                              borderWidth: 2, // 圖例邊框寬度
                             },
                           },
-                        },
+                        }}
+                      />
+                    </Box>
+                  </CardContent>
+                </Card>
+
+                {/* 命中率比較圖表 */}
+
+                <Card sx={cardStyle}>
+                  <CardContent>
+                    <Typography variant="h100" gutterBottom sx={titleStyle}>
+                      近五場命中率比較
+                    </Typography>
+                    <Box sx={chartContainerStyle}>
+                      <Radar
+                        data={shootingPercentageData}
+                        options={radarOptions}
+                      />
+                    </Box>
+                  </CardContent>
+                </Card>
+
+                {/* 雷達圖 */}
+                <Card sx={cardStyle}>
+                  <CardContent>
+                    <Typography variant="h100" gutterBottom sx={titleStyle}>
+                      近五場傳統數據比較
+                    </Typography>
+                    <Box sx={chartContainerStyle}>
+                      <Radar data={radarData} options={radarOptions} />
+                    </Box>
+                  </CardContent>
+                </Card>
+              </Grid2>
+
+              <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  gap: 3,
+                  width: "100%",
+                }}
+              >
+                {/* 第一個卡片 */}
+                <Card
+                  sx={{
+                    boxShadow: 3,
+                    height: "85%",
+                    borderRadius: 3,
+                    margin: "14px 0",
+                    position: "relative",
+                  }}
+                  title="助攻失誤比 = 平均助攻數 / 平均失誤數，數值越高代表球隊控球能力越好"
+                >
+                  {teamAValue < 1.5 ? (
+                    <Warning
+                      sx={{
+                        position: "absolute",
+                        top: "10px",
+                        right: "10px",
+                        color: teamAValue < 1.2 ? "#ff4d4d" : "#ffcc00", // 小於 1.2 紅色，1.2-1.5 黃色
+                        fontSize: "24px",
+                        zIndex: 1,
                       }}
                     />
-                  </Box>
-                </CardContent>
-              </Card>
-
-              {/* 命中率比較圖表 */}
-
-              <Card sx={cardStyle}>
-                <CardContent>
-                  <Typography variant="h100" gutterBottom sx={titleStyle}>
-                    近五場命中率比較
-                  </Typography>
-                  <Box sx={chartContainerStyle}>
-                    <Radar
-                      data={shootingPercentageData}
-                      options={radarOptions}
+                  ) : (
+                    <CheckCircle
+                      sx={{
+                        position: "absolute",
+                        top: "10px",
+                        right: "10px",
+                        color: "#4bc0c0", // 綠色勾勾
+                        fontSize: "24px",
+                        zIndex: 1,
+                      }}
                     />
-                  </Box>
-                </CardContent>
-              </Card>
+                  )}
+                  <CardContent>
+                    <Typography variant="h100" gutterBottom sx={titleStyle}>
+                      {selectedTeams.teamA} 失誤助攻比
+                    </Typography>
+                    <Doughnut
+                      data={createGaugeData(teamAValue)}
+                      options={options}
+                    />
+                    {/* 顯示中心數字 */}
+                    <Typography
+                      style={{
+                        position: "absolute",
+                        top: "68%",
+                        left: "50%",
+                        transform: "translate(-50%, -50%)",
+                        textAlign: "center",
+                        fontSize: "50px",
+                        fontWeight: "bold",
+                        color:
+                          teamAValue < 1.5
+                            ? teamAValue > 1.2
+                              ? "#ffcc00"
+                              : "#ff4d4d"
+                            : "#4bc0c0",
+                      }}
+                    >
+                      {teamAValue.toFixed(2)}
+                    </Typography>
+                  </CardContent>
+                </Card>
 
-              {/* 雷達圖 */}
-              <Card sx={cardStyle}>
-                <CardContent>
-                  <Typography variant="h100" gutterBottom sx={titleStyle}>
-                    近五場傳統數據比較
-                  </Typography>
-                  <Box sx={chartContainerStyle}>
-                    <Radar data={radarData} options={radarOptions} />
-                  </Box>
-                </CardContent>
-              </Card>
+                {/* 第二個卡片 */}
+                <Card
+                  sx={{
+                    boxShadow: 3,
+                    height: "85%",
+                    borderRadius: 3,
+                    margin: "14px 0",
+                    position: "relative",
+                  }}
+                  title="助攻失誤比 = 平均助攻數 / 平均失誤數，數值越高代表球隊控球能力越好"
+                >
+                  {teamBValue < 1.5 ? (
+                    <Warning
+                      sx={{
+                        position: "absolute",
+                        top: "10px",
+                        right: "10px",
+                        color: teamBValue < 1.2 ? "#ff4d4d" : "#ffcc00", // 小於 1.2 紅色，1.2-1.5 黃色
+                        fontSize: "24px",
+                        zIndex: 1,
+                      }}
+                    />
+                  ) : (
+                    <CheckCircle
+                      sx={{
+                        position: "absolute",
+                        top: "10px",
+                        right: "10px",
+                        color: "#4bc0c0", // 綠色勾勾
+                        fontSize: "24px",
+                        zIndex: 1,
+                      }}
+                    />
+                  )}
+                  <CardContent>
+                    <Typography variant="h100" gutterBottom sx={titleStyle}>
+                      {selectedTeams.teamB} 失誤助攻比
+                    </Typography>
+                    <Doughnut
+                      data={createGaugeData(teamBValue)}
+                      options={options}
+                    />
+                    {/* 顯示中心數字 */}
+                    <Typography
+                      style={{
+                        position: "absolute",
+                        top: "68%",
+                        left: "50%",
+                        transform: "translate(-50%, -50%)",
+                        textAlign: "center",
+                        fontSize: "50px",
+                        fontWeight: "bold",
+                        color:
+                          teamBValue < 1.5
+                            ? teamBValue > 1.2
+                              ? "#ffcc00"
+                              : "#ff4d4d"
+                            : "#4bc0c0",
+                      }}
+                    >
+                      {teamBValue.toFixed(2)}
+                    </Typography>
+                  </CardContent>
+                </Card>
+              </Box>
             </Grid2>
-
-            <Box
-              sx={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                gap: 3,
-                width: "100%",
-              }}
-            >
-              {/* 第一個卡片 */}
-              <Card
-                sx={{
-                  boxShadow: 3,
-                  height: "85%",
-                  borderRadius: 3,
-                  margin: "14px 0",
-                  position: "relative",
-                }}
-                title="助攻失誤比 = 平均助攻數 / 平均失誤數，數值越高代表球隊控球能力越好"
-              >
-                {teamAValue < 1.5 ? (
-                  <Warning
-                    sx={{
-                      position: "absolute",
-                      top: "10px",
-                      right: "10px",
-                      color: teamAValue < 1.2 ? "#ff4d4d" : "#ffcc00", // 小於 1.2 紅色，1.2-1.5 黃色
-                      fontSize: "24px",
-                      zIndex: 1,
-                    }}
-                  />
-                ) : (
-                  <CheckCircle
-                    sx={{
-                      position: "absolute",
-                      top: "10px",
-                      right: "10px",
-                      color: "#4bc0c0", // 綠色勾勾
-                      fontSize: "24px",
-                      zIndex: 1,
-                    }}
-                  />
-                )}
-                <CardContent>
-                  <Typography variant="h100" gutterBottom sx={titleStyle}>
-                    {selectedTeams.teamA} 失誤助攻比
-                  </Typography>
-                  <Doughnut
-                    data={createGaugeData(teamAValue)}
-                    options={options}
-                  />
-                  {/* 顯示中心數字 */}
-                  <Typography
-                    style={{
-                      position: "absolute",
-                      top: "68%",
-                      left: "50%",
-                      transform: "translate(-50%, -50%)",
-                      textAlign: "center",
-                      fontSize: "50px",
-                      fontWeight: "bold",
-                      color:
-                        teamAValue < 1.5
-                          ? teamAValue > 1.2
-                            ? "#ffcc00"
-                            : "#ff4d4d"
-                          : "#4bc0c0",
-                    }}
-                  >
-                    {teamAValue.toFixed(2)}
-                  </Typography>
-                </CardContent>
-              </Card>
-
-              {/* 第二個卡片 */}
-              <Card
-                sx={{
-                  boxShadow: 3,
-                  height: "85%",
-                  borderRadius: 3,
-                  margin: "14px 0",
-                  position: "relative",
-                }}
-                title="助攻失誤比 = 平均助攻數 / 平均失誤數，數值越高代表球隊控球能力越好"
-              >
-                {teamBValue < 1.5 ? (
-                  <Warning
-                    sx={{
-                      position: "absolute",
-                      top: "10px",
-                      right: "10px",
-                      color: teamBValue < 1.2 ? "#ff4d4d" : "#ffcc00", // 小於 1.2 紅色，1.2-1.5 黃色
-                      fontSize: "24px",
-                      zIndex: 1,
-                    }}
-                  />
-                ) : (
-                  <CheckCircle
-                    sx={{
-                      position: "absolute",
-                      top: "10px",
-                      right: "10px",
-                      color: "#4bc0c0", // 綠色勾勾
-                      fontSize: "24px",
-                      zIndex: 1,
-                    }}
-                  />
-                )}
-                <CardContent>
-                  <Typography variant="h100" gutterBottom sx={titleStyle}>
-                    {selectedTeams.teamB} 失誤助攻比
-                  </Typography>
-                  <Doughnut
-                    data={createGaugeData(teamBValue)}
-                    options={options}
-                  />
-                  {/* 顯示中心數字 */}
-                  <Typography
-                    style={{
-                      position: "absolute",
-                      top: "68%",
-                      left: "50%",
-                      transform: "translate(-50%, -50%)",
-                      textAlign: "center",
-                      fontSize: "50px",
-                      fontWeight: "bold",
-                      color:
-                        teamBValue < 1.5
-                          ? teamBValue > 1.2
-                            ? "#ffcc00"
-                            : "#ff4d4d"
-                          : "#4bc0c0",
-                    }}
-                  >
-                    {teamBValue.toFixed(2)}
-                  </Typography>
-                </CardContent>
-              </Card>
-            </Box>
-          </Grid2>
-        </Container>
-      </Box>
+          </Container>
+        </Box>
+      </animated.div>
     </div>
   );
 };
