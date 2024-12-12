@@ -775,7 +775,7 @@ const Dashboard = () => {
                               : "rgba(255, 99, 132, 1)",
                         }}
                       >
-                        {teamType.teamA === "home" ? winratedata[0] : winratedata[1]}
+                        {winratedata[0]}
                       </span>
                       <span
                         style={{
@@ -793,7 +793,7 @@ const Dashboard = () => {
                               : "rgba(255, 99, 132, 1)",
                         }}
                       >
-                        {teamType.teamB === "home" ? winratedata[0] : winratedata[1]}
+                        {winratedata[1]}
                       </span>
                     </Typography>
                   </Box>
