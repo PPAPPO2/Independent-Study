@@ -17,6 +17,10 @@ class Command(BaseCommand):
             'import_player_AUTO',
             'import_Standing_json_AUTO',
             'import_team_AUTO',
+            't',
+            'p_single_data',
+            'P_Schedule',
+            'copy'
 
         ]
 

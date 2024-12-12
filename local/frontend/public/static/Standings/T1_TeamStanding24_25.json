@@ -1,79 +1,79 @@
 [
     {
-        "id": 57,
+        "id": 71,
         "rank": 1,
-        "team_name": "福爾摩沙夢想家",
-        "games_played": 7,
-        "wins": 5,
+        "team_name": "新北國王",
+        "games_played": 8,
+        "wins": 6,
         "losses": 2,
-        "pct": "71%",
+        "pct": "75%",
         "games_behind": "0",
-        "wins_losses_streak": "L1"
+        "wins_losses_streak": "W3"
     },
     {
-        "id": 58,
+        "id": 72,
         "rank": 2,
-        "team_name": "新北國王",
-        "games_played": 6,
-        "wins": 4,
-        "losses": 2,
+        "team_name": "福爾摩沙夢想家",
+        "games_played": 9,
+        "wins": 6,
+        "losses": 3,
         "pct": "67%",
         "games_behind": "0.5",
         "wins_losses_streak": "W1"
     },
     {
-        "id": 59,
+        "id": 73,
         "rank": 3,
         "team_name": "高雄全家海神",
         "games_played": 7,
         "wins": 4,
         "losses": 3,
         "pct": "57%",
-        "games_behind": "1",
-        "wins_losses_streak": "W1"
-    },
-    {
-        "id": 60,
-        "rank": 4,
-        "team_name": "桃園台啤永豐雲豹",
-        "games_played": 6,
-        "wins": 3,
-        "losses": 3,
-        "pct": "50%",
         "games_behind": "1.5",
         "wins_losses_streak": "W1"
     },
     {
-        "id": 61,
-        "rank": 5,
+        "id": 74,
+        "rank": 4,
         "team_name": "新北中信特攻",
+        "games_played": 9,
+        "wins": 4,
+        "losses": 5,
+        "pct": "44%",
+        "games_behind": "2.5",
+        "wins_losses_streak": "L1"
+    },
+    {
+        "id": 75,
+        "rank": 5,
+        "team_name": "臺北台新戰神",
         "games_played": 7,
         "wins": 3,
         "losses": 4,
         "pct": "43%",
-        "games_behind": "2",
-        "wins_losses_streak": "L1"
-    },
-    {
-        "id": 62,
-        "rank": 6,
-        "team_name": "臺北台新戰神",
-        "games_played": 6,
-        "wins": 2,
-        "losses": 4,
-        "pct": "33%",
         "games_behind": "2.5",
-        "wins_losses_streak": "W2"
+        "wins_losses_streak": "W3"
     },
     {
-        "id": 63,
+        "id": 76,
+        "rank": 6,
+        "team_name": "桃園台啤永豐雲豹",
+        "games_played": 8,
+        "wins": 3,
+        "losses": 5,
+        "pct": "38%",
+        "games_behind": "3",
+        "wins_losses_streak": "L2"
+    },
+    {
+        "id": 77,
         "rank": 7,
         "team_name": "新竹御嵿攻城獅",
-        "games_played": 7,
+        "games_played": 8,
         "wins": 2,
-        "losses": 5,
-        "pct": "29%",
-        "games_behind": "3",
-        "wins_losses_streak": "L3"
+        "losses": 6,
+        "pct": "25%",
+        "games_behind": "4",
+        "wins_losses_streak": "L4"
     }
 ]
