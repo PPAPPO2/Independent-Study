@@ -126,7 +126,7 @@ const Dashboard = () => {
           parseFloat(winRatedata.prediction.team2_win_prob) * 100
         );
         setWinRateData([homeTeamWinRate, awayTeamWinRate]);
-
+        // setHomeWinRateData([homeTeamWinRate])
         const homeScoreMax = winRatedata.prediction.team1_score_range.max;
         sethomeScoreMax([homeScoreMax]);
         const homeScoreMin = winRatedata.prediction.team1_score_range.min;
@@ -378,19 +378,23 @@ const Dashboard = () => {
     const getTeamColor = (isHome) => ({
       backgroundColor: isHome
         ? "rgba(54, 162, 235, 0.8)"
-        : "rgba(255, 99, 132, 0.8)",
+        : "rgba(255, 99, 132, 1)",
       borderColor: isHome ? "rgba(54, 162, 235, 1)" : "rgba(255, 99, 132, 1)",
     });
 
     // 根據主客場狀態設定顏色
     const teamAColors = getTeamColor(teamType.teamA === "home");
     const teamBColors = getTeamColor(teamType.teamB === "home");
-
+    // 重要：調整數據順序以匹配顏色
+    const reorderedData =
+      teamType.teamA === "home"
+        ? values // 如果 teamA 是主場，交換順序
+        : [values[1], values[0]]; // 如果 teamA 是客場，保持原順序
     return {
       labels: [selectedTeams.teamA, selectedTeams.teamB],
       datasets: [
         {
-          data: values,
+          data: reorderedData,
           backgroundColor: [
             teamAColors.backgroundColor,
             teamBColors.backgroundColor,
@@ -405,18 +409,49 @@ const Dashboard = () => {
   const winRateOptions = {
     plugins: {
       tooltip: {
-        enabled: false, // 如果想顯示 Tooltip，但避免遮擋，啟用即可
-        position: "nearest", // 跟隨滑鼠的最近位置顯示 Tooltip
+        enabled: false,
+        position: "nearest",
         callbacks: {
           label: (context) => {
             return `${context.label}: ${context.raw}%`;
           },
         },
       },
+      legend: {
+        position: "top",
+        align: "center",
+        labels: {
+          boxWidth: 20,
+          padding: 15,
+          font: {
+            size: 12,
+          },
+          // 添加以下設定避免換行
+          textAlign: "left",
+          color: "#333",
+          generateLabels: (chart) => {
+            const datasets = chart.data.datasets;
+            const labels = chart.data.labels;
+            return labels.map((label, i) => ({
+              text: label,
+              fillStyle: datasets[0].backgroundColor[i],
+              hidden: false,
+              lineCap: "butt",
+              lineDash: [],
+              lineDashOffset: 0,
+              lineJoin: "miter",
+              strokeStyle: datasets[0].borderColor[i],
+              pointStyle: "rect",
+              lineWidth: 1,
+              boxWidth: 20,
+            }));
+          },
+        },
+      },
     },
-    rotation: 180, // 開始角度
-    circumference: 360, // 顯示完整圓餅
-    cutout: "70%", // 中心空洞比例
+    rotation: 180,
+    circumference: 360,
+    cutout: "70%",
   };
   const [winratedata, setWinRateData] = useState([50, 50]);
   // #endregion
@@ -775,7 +810,9 @@ const Dashboard = () => {
                               : "rgba(255, 99, 132, 1)",
                         }}
                       >
-                        {winratedata[0]}
+                        {teamType.teamA === "home"
+                          ? winratedata[0]
+                          : winratedata[1]}
                       </span>
                       <span
                         style={{
@@ -793,7 +830,9 @@ const Dashboard = () => {
                               : "rgba(255, 99, 132, 1)",
                         }}
                       >
-                        {winratedata[1]}
+                        {teamType.teamB === "home"
+                          ? winratedata[0]
+                          : winratedata[1]}
                       </span>
                     </Typography>
                   </Box>
