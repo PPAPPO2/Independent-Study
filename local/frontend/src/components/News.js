@@ -3,7 +3,7 @@ import "../styles/News.css";
 import { useSpring, animated } from "react-spring";
 import { useInView } from "react-intersection-observer"; // 引入 useInView
 const News = () => {
-  const [currentMonth, setCurrentMonth] = useState(11); // 預設為9月
+  const [currentMonth, setCurrentMonth] = useState(12); // 預設為9月
 
   const newsData = {
     9: [
@@ -192,6 +192,44 @@ const News = () => {
         title: "日本職籃B聯盟明星賽 台灣3人入選",
         url: "https://tw.news.yahoo.com/%E6%97%A5%E6%9C%AC%E8%81%B7%E7%B1%83b%E8%81%AF%E7%9B%9F%E6%98%8E%E6%98%9F%E8%B3%BD-%E9%98%BF%E5%B7%B4%E8%A5%BF%E7%AD%89%E5%8F%B0%E5%B0%873%E4%BA%BA%E9%83%BD%E5%85%A5%E9%81%B8-021539655.html",
         img: "https://media.zenfs.com/zh-tw/taisounds_com_380/ed833b65e9cca064fd19b0cd971688bd",
+      },
+    ],
+    12: [
+      {
+        id: 1,
+        title: "戰神、海神 洋將傷兵頻傳",
+        url: "https://udn.com/news/story/7003/8429340",
+        img: "https://scontent.ftpe8-1.fna.fbcdn.net/v/t39.30808-6/470514533_890432616628789_2544444996429811397_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=833d8c&_nc_ohc=HEbLolfAolEQ7kNvgFlRsel&_nc_zt=23&_nc_ht=scontent.ftpe8-1.fna&_nc_gid=AVIJIFv36sxfxneU29-5OSB&oh=00_AYCAIr_ZIMrLHRT9DCxQ7li-ZH2FwO35mFjVM3-8ufeTYA&oe=6769A17F",
+      },
+      {
+        id: 2,
+        title: "海神隊魂 磚塊人離隊",
+        url: "https://sports.ltn.com.tw/news/breakingnews/4897851",
+        img: "https://cdntwrunning.biji.co/1600_61e0f6780abfbfc202b5b335bc89ffc0.jpg",
+      },
+      {
+        id: 3,
+        title: "馬建豪 轟下生涯新高26分",
+        url: "https://sports.ltn.com.tw/news/breakingnews/4894495",
+        img: "https://scontent.ftpe8-1.fna.fbcdn.net/v/t39.30808-6/470232151_1114885703971195_558521071914591464_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=127cfc&_nc_ohc=-jzR2u5G2sUQ7kNvgFiKtLZ&_nc_zt=23&_nc_ht=scontent.ftpe8-1.fna&_nc_gid=A1qRA6_VbKOKUAA-T5xri9k&oh=00_AYC3SLhoYlZBHWSVONPtmsp7vAC28mojG39lUGx9XZNzqg&oe=6769A53D",
+      },
+      {
+        id: 4,
+        title: "攻城獅 開季換帥重整士氣",
+        url: "https://sports.ettoday.net/news/2875280",
+        img: "https://cdn2.ettoday.net/images/8001/d8001393.jpg",
+      },
+      {
+        id: 5,
+        title: "空氣狀元郎 阿拉薩遭下放SBL",
+        url: "https://tw.sports.yahoo.com/news/tpbl-%E5%89%8Dplg%E7%8B%80%E5%85%83%E9%98%BF%E6%8B%89%E8%96%A9%E9%81%AD%E4%B8%8B%E6%94%BEsbl-%E9%9B%B2%E8%B1%B9%E5%B0%87%E6%A5%8A%E7%9B%9B%E7%A1%AF%E7%A7%9F%E5%80%9F%E7%B5%A6%E6%9F%8F%E5%8A%9B%E5%8A%9B-114236188.html",
+        img: "https://s.yimg.com/ny/api/res/1.2/czhxew2yzkTRO3I7sU0P5w--/YXBwaWQ9aGlnaGxhbmRlcjt3PTk2MDtoPTEyMDA7Y2Y9d2VicA--/https://media.zenfs.com/ko/video.videoland.com/031c2cf4b85d44c15f03b05fc6b08b9b",
+      },
+      {
+        id: 6,
+        title: "領航猿 盧峻翔奪單周最佳球員",
+        url: "https://sports.ettoday.net/news/2875272",
+        img: "https://cdn2.ettoday.net/images/8001/d8001376.png",
       },
     ],
   };

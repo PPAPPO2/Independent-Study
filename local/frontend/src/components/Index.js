@@ -20,7 +20,7 @@ const Index = () => {
     opacity: 1,
     transform: "translateY(0)",
     from: { opacity: 0, transform: "translateY(20px)" }, // 從下方開始
-    delay: 1200, // 按鈕動畫延遲 1.2 秒開始
+    delay: 2000, // 按鈕動畫延遲 1.2 秒開始
     config: { duration: 1000 }, // 動畫持續 1 秒
   });
 
@@ -42,56 +42,53 @@ const Index = () => {
   });
 
   // 追蹤每個圖片的 hover 狀態
-  const [hoveredImage, setHoveredImage] = useState(null);
+  // const [hoveredImage, setHoveredImage] = useState(null);
 
-  // 單獨定義每個圖片和文字的動畫
-  const imageFadeStyles = [
-    useSpring({
-      opacity: hoveredImage === 0 ? 0 : 1,
-      config: { duration: 500 },
-    }),
-    useSpring({
-      opacity: hoveredImage === 1 ? 0 : 1,
-      config: { duration: 500 },
-    }),
-    useSpring({
-      opacity: hoveredImage === 2 ? 0 : 1,
-      config: { duration: 500 },
-    }),
-  ];
-  const textFadeStyles = [
-    useSpring({
-      opacity: hoveredImage === 0 ? 1 : 0,
-      config: { duration: 500 },
-    }),
-    useSpring({
-      opacity: hoveredImage === 1 ? 1 : 0,
-      config: { duration: 500 },
-    }),
-    useSpring({
-      opacity: hoveredImage === 2 ? 1 : 0,
-      config: { duration: 500 },
-    }),
-  ];
+  // // 單獨定義每個圖片和文字的動畫
+  // const imageFadeStyles = [
+  //   useSpring({
+  //     opacity: hoveredImage === 0 ? 0 : 1,
+  //     config: { duration: 500 },
+  //   }),
+  //   useSpring({
+  //     opacity: hoveredImage === 1 ? 0 : 1,
+  //     config: { duration: 500 },
+  //   }),
+  //   useSpring({
+  //     opacity: hoveredImage === 2 ? 0 : 1,
+  //     config: { duration: 500 },
+  //   }),
+  // ];
+  // const textFadeStyles = [
+  //   useSpring({
+  //     opacity: hoveredImage === 0 ? 1 : 0,
+  //     config: { duration: 500 },
+  //   }),
+  //   useSpring({
+  //     opacity: hoveredImage === 1 ? 1 : 0,
+  //     config: { duration: 500 },
+  //   }),
+  //   useSpring({
+  //     opacity: hoveredImage === 2 ? 1 : 0,
+  //     config: { duration: 500 },
+  //   }),
+  // ];
 
   const teamMembers = [
     {
       image: "曾祥豪.png",
       name: "曾祥豪",
-      description: "後端、資料庫設計、機器學習",
-      experience: "想不通", //心得
+      description: "後端撰寫、資料蒐集、機器學習\n自動化腳本設計、撰寫",
     },
     {
       image: "蕭丞恩.png",
       name: "蕭丞恩",
-      description: "前端設計、網站動畫、簡報製作",
-      experience: "想吃飯",
+      description: "前端設計、撰寫\n簡報設計、影片製作、海報製作",
     },
     {
       image: "紀信毅.png",
       name: "紀信毅",
-      description: "後端、資料庫設計、機器學習",
-      experience: "還在想",
+      description: "前、後端撰寫\n資料蒐集、機器學習\n專題報告書製作",
     },
   ];
   const techData = [
@@ -120,7 +117,7 @@ const Index = () => {
               <button className="button1">立即開始</button>
             </NavLink>
             <NavLink
-              to="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+              to="https://www.youtube.com/watch?v=LUcwweNSRQw"
               activeClassName="active"
               target="_blank"
             >
@@ -207,25 +204,18 @@ const Index = () => {
             <div
               key={index}
               className="image-container"
-              onMouseEnter={() => setHoveredImage(index)}
-              onMouseLeave={() => setHoveredImage(null)}
+              // onMouseEnter={() => setHoveredImage(index)}
+              // onMouseLeave={() => setHoveredImage(null)}
             >
               {/* 使用外部計算好的 styles */}
-              <animated.img
+              <img
                 src={`/images/icon/${member.image}`}
                 alt={member.name}
                 className="image"
-                style={imageFadeStyles[index]}
               />
               <h3>{member.name}</h3>
-              <p>{member.description}</p>
+              <p style={{ whiteSpace: "pre-line" }}>{member.description}</p>
               {/* 動態控制文字的顯示 */}
-              <animated.div
-                style={textFadeStyles[index]}
-                className="hover-text"
-              >
-                <p>{member.experience}</p>
-              </animated.div>
             </div>
           ))}
         </div>
