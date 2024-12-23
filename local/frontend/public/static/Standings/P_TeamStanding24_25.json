@@ -1,46 +1,46 @@
 [
     {
-        "id": 81,
+        "id": 85,
         "rank": 1,
         "team_name": "領航猿",
-        "games_played": 6,
-        "wins": 5,
-        "losses": 1,
-        "pct": "83%",
+        "games_played": 11,
+        "wins": 8,
+        "losses": 3,
+        "pct": "73%",
         "games_behind": "0",
-        "wins_losses_streak": "W2"
+        "wins_losses_streak": "L1"
     },
     {
-        "id": 82,
+        "id": 86,
         "rank": 2,
         "team_name": "勇士",
-        "games_played": 7,
-        "wins": 4,
-        "losses": 3,
-        "pct": "57%",
-        "games_behind": "1.5",
-        "wins_losses_streak": "W2"
-    },
-    {
-        "id": 83,
-        "rank": 3,
-        "team_name": "獵鷹",
-        "games_played": 5,
-        "wins": 2,
-        "losses": 3,
-        "pct": "40%",
-        "games_behind": "2.5",
+        "games_played": 9,
+        "wins": 5,
+        "losses": 4,
+        "pct": "56%",
+        "games_behind": "2",
         "wins_losses_streak": "W1"
     },
     {
-        "id": 84,
+        "id": 87,
+        "rank": 3,
+        "team_name": "獵鷹",
+        "games_played": 6,
+        "wins": 3,
+        "losses": 3,
+        "pct": "50%",
+        "games_behind": "2.5",
+        "wins_losses_streak": "W2"
+    },
+    {
+        "id": 88,
         "rank": 4,
         "team_name": "鋼鐵人",
-        "games_played": 4,
+        "games_played": 6,
         "wins": 0,
-        "losses": 4,
+        "losses": 6,
         "pct": "0%",
-        "games_behind": "4",
-        "wins_losses_streak": "L4"
+        "games_behind": "5.5",
+        "wins_losses_streak": "L6"
     }
 ]

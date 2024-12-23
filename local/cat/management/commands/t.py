@@ -133,7 +133,7 @@ class Command(BaseCommand):
                 if home_data is None or away_data is None:
                     return False
 
-                output_path = os.path.join(output_directory, 'p_currentgame.csv')
+                output_path = os.path.join(output_directory, 't_currentgame.csv')
                 
                 with open(output_path, 'a', encoding='utf-8-sig') as f:
                     f.write(home_data + '\n')
