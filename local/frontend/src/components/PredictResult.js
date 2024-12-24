@@ -348,7 +348,7 @@ const Dashboard = () => {
   // #region 勝率圖
   const createGaugeData = (value) => {
     const gaugeColor =
-      value < 1.5 ? (value > 1.2 ? "#ffcc00" : "#ff4d4d") : "#4bc0c0";
+      value < 1.5 ? (value > 1.19 ? "#ffcc00" : "#ff4d4d") : "#4bc0c0";
     return {
       datasets: [
         {
@@ -934,7 +934,7 @@ const Dashboard = () => {
                         position: "absolute",
                         top: "10px",
                         right: "10px",
-                        color: teamAValue < 1.2 ? "#ff4d4d" : "#ffcc00", // 小於 1.2 紅色，1.2-1.5 黃色
+                        color: teamAValue < 1.19 ? "#ff4d4d" : "#ffcc00", // 小於 1.2 紅色，1.2-1.5 黃色
                         fontSize: "24px",
                         zIndex: 1,
                       }}
@@ -971,7 +971,7 @@ const Dashboard = () => {
                         fontWeight: "bold",
                         color:
                           teamAValue < 1.5
-                            ? teamAValue > 1.2
+                            ? teamAValue > 1.19
                               ? "#ffcc00"
                               : "#ff4d4d"
                             : "#4bc0c0",
@@ -999,7 +999,7 @@ const Dashboard = () => {
                         position: "absolute",
                         top: "10px",
                         right: "10px",
-                        color: teamBValue < 1.2 ? "#ff4d4d" : "#ffcc00", // 小於 1.2 紅色，1.2-1.5 黃色
+                        color: teamBValue < 1.19 ? "#ff4d4d" : "#ffcc00", // 小於 1.2 紅色，1.2-1.5 黃色
                         fontSize: "24px",
                         zIndex: 1,
                       }}
@@ -1036,7 +1036,7 @@ const Dashboard = () => {
                         fontWeight: "bold",
                         color:
                           teamBValue < 1.5
-                            ? teamBValue > 1.2
+                            ? teamBValue > 1.19
                               ? "#ffcc00"
                               : "#ff4d4d"
                             : "#4bc0c0",
