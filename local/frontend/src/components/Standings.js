@@ -138,7 +138,7 @@ const Standings = () => {
       </animated.div>
 
       <animated.div ref={ref2} style={fadeIn2}>
-        <h2 class="table-title">❰ T1 例行賽 ❱</h2>
+        <h2 class="table-title">❰ TPBL 例行賽 ❱</h2>
         {renderTable(t1Standings)}
       </animated.div>
     </div>

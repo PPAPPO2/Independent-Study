@@ -199,7 +199,7 @@ const News = () => {
         id: 1,
         title: "戰神、海神 洋將傷兵頻傳",
         url: "https://udn.com/news/story/7003/8429340",
-        img: "https://scontent.ftpe8-1.fna.fbcdn.net/v/t39.30808-6/470514533_890432616628789_2544444996429811397_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=833d8c&_nc_ohc=HEbLolfAolEQ7kNvgFlRsel&_nc_zt=23&_nc_ht=scontent.ftpe8-1.fna&_nc_gid=AVIJIFv36sxfxneU29-5OSB&oh=00_AYCAIr_ZIMrLHRT9DCxQ7li-ZH2FwO35mFjVM3-8ufeTYA&oe=6769A17F",
+        img: "https://img.ltn.com.tw/Upload/sports/page/800/2024/12/17/4896255_1.jpg",
       },
       {
         id: 2,
@@ -211,7 +211,7 @@ const News = () => {
         id: 3,
         title: "馬建豪 轟下生涯新高26分",
         url: "https://sports.ltn.com.tw/news/breakingnews/4894495",
-        img: "https://scontent.ftpe8-1.fna.fbcdn.net/v/t39.30808-6/470232151_1114885703971195_558521071914591464_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=127cfc&_nc_ohc=-jzR2u5G2sUQ7kNvgFiKtLZ&_nc_zt=23&_nc_ht=scontent.ftpe8-1.fna&_nc_gid=A1qRA6_VbKOKUAA-T5xri9k&oh=00_AYC3SLhoYlZBHWSVONPtmsp7vAC28mojG39lUGx9XZNzqg&oe=6769A53D",
+        img: "https://img.ltn.com.tw/Upload/sports/page/800/2024/12/15/php8N3ZPE.jpg",
       },
       {
         id: 4,
