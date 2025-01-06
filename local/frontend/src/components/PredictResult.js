@@ -68,11 +68,11 @@ const Dashboard = () => {
 
   // 定義所有可選擇的隊伍
   const teams = [
-    "臺北富邦勇士",
     "新北國王",
+    "福爾摩沙夢想家",
+    "臺北富邦勇士",
     "高雄鋼鐵人",
     "桃園璞園領航猿",
-    "福爾摩沙夢想家",
     "新竹御嵿攻城獅",
     "新北中信特攻",
     "台啤永豐雲豹",
@@ -953,7 +953,7 @@ const Dashboard = () => {
                   )}
                   <CardContent>
                     <Typography variant="h100" gutterBottom sx={titleStyle}>
-                      {selectedTeams.teamA} 失誤助攻比
+                      {selectedTeams.teamA} 助攻失誤比
                     </Typography>
                     <Doughnut
                       data={createGaugeData(teamAValue)}
@@ -1018,7 +1018,7 @@ const Dashboard = () => {
                   )}
                   <CardContent>
                     <Typography variant="h100" gutterBottom sx={titleStyle}>
-                      {selectedTeams.teamB} 失誤助攻比
+                      {selectedTeams.teamB} 助攻失誤比
                     </Typography>
                     <Doughnut
                       data={createGaugeData(teamBValue)}
