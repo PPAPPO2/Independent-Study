@@ -1,6 +1,6 @@
 [
     {
-        "id": 89,
+        "id": 93,
         "rank": 1,
         "team_name": "領航猿",
         "games_played": 13,
@@ -11,7 +11,7 @@
         "wins_losses_streak": "W2"
     },
     {
-        "id": 90,
+        "id": 94,
         "rank": 2,
         "team_name": "獵鷹",
         "games_played": 7,
@@ -22,7 +22,7 @@
         "wins_losses_streak": "W3"
     },
     {
-        "id": 91,
+        "id": 95,
         "rank": 3,
         "team_name": "勇士",
         "games_played": 12,
@@ -33,7 +33,7 @@
         "wins_losses_streak": "L3"
     },
     {
-        "id": 92,
+        "id": 96,
         "rank": 4,
         "team_name": "鋼鐵人",
         "games_played": 8,

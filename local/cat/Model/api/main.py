@@ -460,7 +460,9 @@ def train_model(team1, team2, is_home_team):
                       0.15 * team1_recent_win_rate +
                       0.15 * team1_point_diff_norm)
 
-
+    team2_win_prob = (0.7 * ml_team2_win_prob + 
+                      0.15 * team2_recent_win_rate +
+                      0.15 * team2_point_diff_norm)
 
     home_advantage = 1.05
     if is_home_team == team1_name:
